@@ -1,0 +1,7 @@
+{
+  "name": "infinityCard",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
