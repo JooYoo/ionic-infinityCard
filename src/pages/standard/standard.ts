@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the StandardPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { CardServiceProvider } from '../../providers/card-service/card-service';
 
 @Component({
   selector: 'page-standard',
@@ -14,7 +8,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class StandardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  testString: string
+
+  constructor(cardService:CardServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
+
+    this.testString = cardService.cardBags[0].title
   }
 
   ionViewDidLoad() {
