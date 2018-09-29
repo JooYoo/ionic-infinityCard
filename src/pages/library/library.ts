@@ -72,14 +72,8 @@ export class LibraryPage {
     ]
   }
 
-  // openNavDetailsPage(item) {
-  //   this.nav.push(CardsPage, { item: item });
-  // }
-
-  openNavDetailsPage() {
-    this.nav.push(CardsPage);
+  openNavDetailsPage(item) {
+    this.nav.push(CardsPage, { itemInfo: item });
   }
-
- 
 
 }
