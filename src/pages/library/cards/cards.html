@@ -6,21 +6,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  
-  <!-- <ion-icon [name]="'logo-' + item.icon" [ngStyle]="{'color': item.color}"></ion-icon>
-  {{ item.description }} -->
-
-  <ion-list>
-    <ion-item *ngFor="let card of item.cards">
-      
-      <h2>{{card.textCn}}</h2>
-      <p>{{card.textDe}}</p>
-      <ion-note item-end>{{card.date}}</ion-note>
-    </ion-item>
+<ion-content>
+  <ion-list (click)="openModal(card)"  *ngFor="let card of item.cards" > 
+    <a ion-item >
+        <h2>{{card.textCn}}</h2>
+        <p>{{card.textDe}}</p>
+        <ion-note item-end>{{card.date}}</ion-note>
+    </a>
   </ion-list>
-
-
-
-
 </ion-content>

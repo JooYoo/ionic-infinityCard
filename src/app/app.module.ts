@@ -16,6 +16,7 @@ import { CubePage } from '../pages/cube/cube';
 import { InfinityPage } from '../pages/infinity/infinity';
 import { CardServiceProvider } from '../providers/card-service/card-service';
 import { CardsPage } from '../pages/library/cards/cards';
+import { CardsDetailPage } from '../pages/library/cards/cards-detail/cards-detail';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { CardsPage } from '../pages/library/cards/cards';
     StandardPage,
     LibraryPage,
     CardsPage,
+    CardsDetailPage,
     CubePage,
     InfinityPage,
     SettingsPage,
@@ -41,6 +43,7 @@ import { CardsPage } from '../pages/library/cards/cards';
     LibraryPage,
     CubePage,
     CardsPage,
+    CardsDetailPage,
     InfinityPage,
     SettingsPage,
     TabsPage
