@@ -2,7 +2,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Library</ion-title>
+    <ion-title >Library</ion-title>
+    <ion-buttons end>
+      <button id="addBtn" (click)="openCardBagDetailPage()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -17,12 +22,12 @@
     </button>
   </ion-list>
 
-  <ion-fab right bottom>
+  <!-- <ion-fab right bottom>
     <button ion-fab color="light" 
             (click)="openCardBagDetailPage()"
             style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);">
             <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 
 </ion-content>
