@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
+import { CardBagDetailPage } from './card-bag-detail/card-bag-detail';
 
 @Component({
   selector: 'page-library',
@@ -76,8 +77,11 @@ export class LibraryPage {
     // ]
   }
 
-  openNavDetailsPage(item) {
+  openCardDetailPage(item) {
     this.nav.push(CardsPage, { itemInfo: item });
   }
 
+  openCardBagDetailPage(){
+    this.nav.push(CardBagDetailPage)
+  }
 }
