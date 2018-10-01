@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagDetailPage } from './card-bag-detail/card-bag-detail';
@@ -15,7 +15,7 @@ export class LibraryPage {
 
   items = [];
 
-  constructor(public nav: NavController, cardService: CardServiceProvider) {
+  constructor(public nav: NavController, cardService: CardServiceProvider, public modalControl:ModalController) {
 
     this.items = cardService.cardBags
 
@@ -82,6 +82,8 @@ export class LibraryPage {
   }
 
   openCardBagDetailPage(){
-    this.nav.push(CardBagDetailPage)
+   const modal = this.modalControl.create(CardBagDetailPage)
+   modal.present()
+    
   }
 }

@@ -14,10 +14,8 @@ export class CardsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.item = navParams.get('itemInfo')
   }
-
   
   openModal(card) {
-  
     let modal = this.modalCtrl.create(CardsDetailPage,{cardInfo:card});
     modal.present();
   }
