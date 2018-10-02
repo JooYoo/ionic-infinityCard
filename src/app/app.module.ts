@@ -16,8 +16,8 @@ import { CubePage } from '../pages/cube/cube';
 import { InfinityPage } from '../pages/infinity/infinity';
 import { CardServiceProvider } from '../providers/card-service/card-service';
 import { CardsPage } from '../pages/library/cards/cards';
-import { CardsDetailPage } from '../pages/library/cards/cards-detail/cards-detail';
 import { CardBagDetailPage } from '../pages/library/card-bag-detail/card-bag-detail';
+import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { CardBagDetailPage } from '../pages/library/card-bag-detail/card-bag-det
     LibraryPage,
     CardBagDetailPage,
     CardsPage,
-    CardsDetailPage,
+    CardEditPage,
     CubePage,
     InfinityPage,
     SettingsPage,
@@ -46,7 +46,7 @@ import { CardBagDetailPage } from '../pages/library/card-bag-detail/card-bag-det
     CardBagDetailPage,
     CubePage,
     CardsPage,
-    CardsDetailPage,
+    CardEditPage,
     InfinityPage,
     SettingsPage,
     TabsPage

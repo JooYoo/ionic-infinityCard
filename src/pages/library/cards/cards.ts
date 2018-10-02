@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { CardsDetailPage } from './cards-detail/cards-detail';
+import { CardEditPage } from './card-edit/card-edit';
 
 
 @Component({
@@ -14,9 +14,9 @@ export class CardsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     this.item = navParams.get('itemInfo')
   }
-  
+
   openModal(card) {
-    let modal = this.modalCtrl.create(CardsDetailPage,{cardInfo:card});
+    let modal = this.modalCtrl.create(CardEditPage, { cardInfo: card });
     modal.present();
   }
 
