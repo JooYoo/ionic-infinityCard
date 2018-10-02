@@ -14,12 +14,22 @@
 
 <ion-content>
   <ion-list>
-      <ion-item>
-       
-        <h2>{{card.textCn}}</h2>
-        <p>{{card.textDe}}</p>
-       <ion-note>{{card.status}}</ion-note>
-      </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Chinese</ion-label>
+      <ion-input placeholder="{{card.textCn}}"clearInput></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Deutsch</ion-label>
+      <ion-input placeholder="{{card.textDe}}" clearInput></ion-input>
+     
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary" stacked>Latest Status</ion-label>
+        <ion-badge item-end>{{cardStatus}}</ion-badge>
+    </ion-item> 
 
   </ion-list>
 </ion-content>
