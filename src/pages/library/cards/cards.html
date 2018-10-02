@@ -7,11 +7,34 @@
 </ion-header>
 
 <ion-content>
-  <ion-list (click)="openModal(card)"  *ngFor="let card of item.cards" > 
-    <a ion-item >
-        <h2>{{card.textCn}}</h2>
-        <p>{{card.textDe}}</p>
-        <ion-note item-end>{{card.date}}</ion-note>
+  <ion-list (click)="openModal(card)" *ngFor="let card of item.cards">
+    <ion-item-sliding ></ion-item-sliding>
+    <a ion-item>
+      <h2>{{card.textCn}}</h2>
+      <p>{{card.textDe}}</p>
+      <ion-note item-end>{{card.date}}</ion-note>
     </a>
+
   </ion-list>
+
+
+
+ 
 </ion-content>
+
+
+
+<!-- <ion-item-sliding *ngFor="let card of item.cards">
+
+    <button ion-item>
+      <h2>{{card.textCn}}</h2>
+      <p>{{card.textDe}}</p>
+      <ion-note item-end>{{card.date}}</ion-note>
+    </button>
+    <ion-item-options side="left">
+      <button ion-button color="light">
+        <ion-icon name="build"></ion-icon>
+      </button>
+    </ion-item-options>
+
+  </ion-item-sliding> -->
