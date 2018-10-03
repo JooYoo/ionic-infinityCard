@@ -14,16 +14,16 @@
 
   <ion-searchbar></ion-searchbar>
 
-  <ion-list>
+  <ion-list no-lines style="border: none;">
     <ion-item-sliding *ngFor="let item of items">
-      <button ion-item icon-start  (click)="openCardsPage(item)">
+      <button ion-item icon-start (click)="openCardsPage(item)">
         <h2>{{ item.titleCn }}</h2>
         <p>{{item.titleDe}}</p>
       </button>
-      <ion-item-options side="left" >
+      <ion-item-options side="left">
         <button ion-button color="light" (click)="openCardBagEditPage(item)">
           <ion-icon name="build"></ion-icon>
-          eidt
+          &nbsp;&nbsp;edit&nbsp;&nbsp;
         </button>
         <button ion-button color="danger">
           <ion-icon name="trash"></ion-icon>
