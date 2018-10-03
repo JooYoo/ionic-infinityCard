@@ -18,6 +18,8 @@ import { CardServiceProvider } from '../providers/card-service/card-service';
 import { CardsPage } from '../pages/library/cards/cards';
 import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
 import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
+import { CardAddPage } from '../pages/library/cards/card-add/card-add';
+
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
     CardBagAddPage,
     CardsPage,
     CardEditPage,
+    CardAddPage,
     CubePage,
     InfinityPage,
     SettingsPage,
@@ -47,6 +50,7 @@ import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
     CubePage,
     CardsPage,
     CardEditPage,
+    CardAddPage,
     InfinityPage,
     SettingsPage,
     TabsPage

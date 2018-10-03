@@ -1,8 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      {{ item.title }}
-    </ion-title>
+    <ion-title>{{ item.title }}</ion-title>
+    <ion-buttons end>
+        <button id="addBtn" (click)="openAddModal()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +20,7 @@
         <ion-note item-end>{{card.date}}</ion-note>
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="light" (click)="openModal(card)">
+        <button ion-button color="light" (click)="openEditModal(card)">
           <ion-icon name="build"></ion-icon>
           edit
         </button>

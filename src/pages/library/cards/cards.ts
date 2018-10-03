@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CardEditPage } from './card-edit/card-edit';
+import { CardAddPage } from './card-add/card-add';
 
 
 @Component({
@@ -15,9 +16,14 @@ export class CardsPage {
     this.item = navParams.get('itemInfo')
   }
 
-  openModal(card) {
-    let modal = this.modalCtrl.create(CardEditPage, { cardInfo: card });
-    modal.present();
+  openEditModal(card) {
+    let editModal = this.modalCtrl.create(CardEditPage, { cardInfo: card });
+    editModal.present()
+  }
+
+  openAddModal(){
+    let addModal = this.modalCtrl.create(CardAddPage)
+    addModal.present()
   }
 
 }
