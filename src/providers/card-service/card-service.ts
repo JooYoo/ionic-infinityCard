@@ -38,9 +38,20 @@ export class CardServiceProvider {
     ]
 
     this.cardBags = [
-      new CardBag(0, '卡包一','StackEins', cardsA, "iconA"),
-      new CardBag(1, '卡包二', 'StackZwei',cardsB, 'iconB'),
-      new CardBag(2, '卡包三', 'StackDrei',cardsC, 'iconC'),
+      new CardBag(0, '卡包一', 'StackEins', cardsA, "iconA"),
+      new CardBag(1, '卡包二', 'StackZwei', cardsB, 'iconB'),
+      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
     ]
   }
+
+  addCardBag(titleCn: string, titleDe: string, icon: string) {
+
+    let id = this.cardBags.length
+    let title_Cn = titleCn
+    let title_De = titleDe 
+    var newCards = null
+
+    this.cardBags.push(new CardBag(id, title_Cn, title_De, newCards, icon))
+  }
+
 }

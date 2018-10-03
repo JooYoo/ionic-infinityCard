@@ -16,7 +16,9 @@ export class LibraryPage {
 
   items = [];
 
-  constructor(public nav: NavController, cardService: CardServiceProvider, public modalControl:ModalController) {
+  constructor(public nav: NavController, 
+              cardService: CardServiceProvider, 
+              public modalControl:ModalController) {
 
     this.items = cardService.cardBags
     
