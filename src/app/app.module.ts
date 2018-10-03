@@ -19,6 +19,7 @@ import { CardsPage } from '../pages/library/cards/cards';
 import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
 import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
 import { CardAddPage } from '../pages/library/cards/card-add/card-add';
+import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
 
 
 
@@ -28,6 +29,7 @@ import { CardAddPage } from '../pages/library/cards/card-add/card-add';
     StandardPage,
     LibraryPage,
     CardBagAddPage,
+    CardBagEditPage,
     CardsPage,
     CardEditPage,
     CardAddPage,
@@ -47,6 +49,7 @@ import { CardAddPage } from '../pages/library/cards/card-add/card-add';
     StandardPage,
     LibraryPage,
     CardBagAddPage,
+    CardBagEditPage,
     CubePage,
     CardsPage,
     CardEditPage,

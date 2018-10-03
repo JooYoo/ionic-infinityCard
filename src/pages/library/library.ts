@@ -3,6 +3,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
+import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
 
 @Component({
   selector: 'page-library',
@@ -26,8 +27,11 @@ export class LibraryPage {
   }
 
   openCardBagAddPage(){
-   const modal = this.modalControl.create(CardBagAddPage)
-   modal.present()
-    
+   const AddModal = this.modalControl.create(CardBagAddPage)
+   AddModal.present()
+  }
+  openCardBagEditPage(item){
+    const editModal = this.modalControl.create(CardBagEditPage,{itemInfo: item})
+    editModal.present()
   }
 }
