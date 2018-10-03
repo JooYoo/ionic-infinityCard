@@ -15,7 +15,7 @@
   <ion-searchbar></ion-searchbar>
 
   <ion-list no-lines style="border: none;">
-    <ion-item-sliding *ngFor="let item of items">
+    <ion-item-sliding *ngFor="let item of cardService.cardBags">
       <button ion-item icon-start (click)="openCardsPage(item)">
         <h2>{{item.titleCn}}</h2>
         <p>{{item.titleDe}}</p>
@@ -25,7 +25,7 @@
           <ion-icon name="build"></ion-icon>
           &nbsp;&nbsp;edit&nbsp;&nbsp;
         </button>
-        <button ion-button color="danger">
+        <button ion-button color="danger" (click)="cardBagDelete(item)">
           <ion-icon name="trash"></ion-icon>
           delete
         </button>

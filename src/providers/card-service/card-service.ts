@@ -54,4 +54,8 @@ export class CardServiceProvider {
     this.cardBags.push(new CardBag(id, title_Cn, title_De, newCards, icon))
   }
 
+  removeCardBag(cardBag:any){
+    this.cardBags = this.cardBags.filter(x=>x != cardBag)
+  }
+
 }

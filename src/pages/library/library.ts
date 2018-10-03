@@ -10,18 +10,11 @@ import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
   templateUrl: 'library.html',
 })
 
-
-
 export class LibraryPage {
 
-  items = [];
-
   constructor(public nav: NavController, 
-              cardService: CardServiceProvider, 
+              public cardService: CardServiceProvider, 
               public modalControl:ModalController) {
-
-    this.items = cardService.cardBags
-    
   }
 
   openCardsPage(item) {
@@ -35,5 +28,10 @@ export class LibraryPage {
   openCardBagEditPage(item){
     const editModal = this.modalControl.create(CardBagEditPage,{itemInfo: item})
     editModal.present()
+  }
+
+  cardBagDelete(item){
+   console.log(item)
+   this.cardService.removeCardBag(item)
   }
 }
