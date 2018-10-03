@@ -12,7 +12,7 @@ export class StandardPage {
 
   constructor(cardService:CardServiceProvider,public navCtrl: NavController, public navParams: NavParams) {
 
-    this.testString = cardService.cardBags[0].title
+    this.testString = cardService.cardBags[0].titleCn
   }
 
   ionViewDidLoad() {

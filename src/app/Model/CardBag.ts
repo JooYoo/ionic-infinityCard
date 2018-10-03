@@ -3,13 +3,15 @@ import { Card } from './Card'
 export class CardBag {
 
     id:number
-    title:string
+    titleCn:string
+    titleDe:string
     cards: Card[] = []
     icon: string
 
-    constructor(id:number, title:string, cards: Card[],icon:string) {
+    constructor(id:number, titleCn:string, titleDe:string, cards: Card[],icon:string) {
         this.id = id
-        this.title=title
+        this.titleCn=titleCn
+        this.titleDe = titleDe
         this.cards = cards
         this.icon = icon
     }

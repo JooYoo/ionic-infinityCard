@@ -38,9 +38,9 @@ export class CardServiceProvider {
     ]
 
     this.cardBags = [
-      new CardBag(0, '卡包一', cardsA, "iconA"),
-      new CardBag(1, '卡包二', cardsB, 'iconB'),
-      new CardBag(2, '卡包三', cardsC, 'iconC'),
+      new CardBag(0, '卡包一','StackEins', cardsA, "iconA"),
+      new CardBag(1, '卡包二', 'StackZwei',cardsB, 'iconB'),
+      new CardBag(2, '卡包三', 'StackDrei',cardsC, 'iconC'),
     ]
   }
 }

@@ -11,12 +11,14 @@
 
 
 <ion-content>
+
   <ion-searchbar></ion-searchbar>
 
   <ion-list>
     <ion-item-sliding *ngFor="let item of items">
       <button ion-item icon-start  (click)="openCardsPage(item)">
-        {{ item.title }}
+        <h2>{{ item.titleCn }}</h2>
+        <p>{{item.titleDe}}</p>
       </button>
       <ion-item-options side="left" >
         <button ion-button color="light">
