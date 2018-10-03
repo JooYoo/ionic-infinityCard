@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
@@ -31,7 +31,10 @@ export class LibraryPage {
   }
 
   cardBagDelete(item){
-   console.log(item)
    this.cardService.removeCardBag(item)
+  }
+
+  closeSlidingItem(slidingItem: ItemSliding){
+    slidingItem.close()
   }
 }

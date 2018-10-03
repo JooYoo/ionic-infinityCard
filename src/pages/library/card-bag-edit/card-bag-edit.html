@@ -17,12 +17,12 @@
   
       <ion-item>
         <ion-label color="primary" stacked>Title Chinese</ion-label>
-        <ion-input placeholder="{{cardBag.titleCn}}" clearInput></ion-input>
+        <ion-input placeholder="{{cardBag.titleCn}}" [(ngModel)]="cardBag.titleCn" clearInput></ion-input>
       </ion-item>
   
       <ion-item>
           <ion-label color="primary" stacked>Title Deutsch</ion-label>
-          <ion-input placeholder="{{cardBag.titleDe}}" clearInput></ion-input>
+          <ion-input placeholder="{{cardBag.titleDe}}" [(ngModel)]="cardBag.titleDe" clearInput></ion-input>
         </ion-item>
   
       <!-- Todo: icon selection -->
@@ -33,11 +33,15 @@
     </ion-list>
   </ion-content>
 
-  <ion-footer>
+  <ion-footer no-border>
       <ion-row>
     
         <ion-col style="text-align:center;">
-          <button ion-button outline round style="margin-bottom: 20px;">Save</button>
+          <button ion-button outline round style="margin-bottom: 20px;"
+                  (click)="editCardBag()"
+                  (click)="dismiss()">
+            Save
+        </button>
         </ion-col>
     
       </ion-row>

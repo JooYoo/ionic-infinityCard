@@ -15,13 +15,15 @@
   <ion-searchbar></ion-searchbar>
 
   <ion-list no-lines style="border: none;">
-    <ion-item-sliding *ngFor="let item of cardService.cardBags">
+    <ion-item-sliding *ngFor="let item of cardService.cardBags"  #slidingItem>
       <button ion-item icon-start (click)="openCardsPage(item)">
         <h2>{{item.titleCn}}</h2>
         <p>{{item.titleDe}}</p>
       </button>
-      <ion-item-options side="left">
-        <button ion-button color="light" (click)="openCardBagEditPage(item)">
+      <ion-item-options side="left" >
+        <button ion-button color="light" 
+                (click)="openCardBagEditPage(item)"
+                (click)="closeSlidingItem(slidingItem)">
           <ion-icon name="build"></ion-icon>
           &nbsp;&nbsp;edit&nbsp;&nbsp;
         </button>
