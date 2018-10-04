@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { CardEditPage } from './card-edit/card-edit';
 import { CardAddPage } from './card-add/card-add';
+import { CardServiceProvider } from '../../../providers/card-service/card-service';
 
 @Component({
   selector: 'page-cards',
@@ -13,7 +14,8 @@ export class CardsPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public cardService: CardServiceProvider) {
     this.cardBag = navParams.get('itemInfo')
   }
 
@@ -25,6 +27,10 @@ export class CardsPage {
   openAddModal() {
     let addModal = this.modalCtrl.create(CardAddPage, { cardBagInfo: this.cardBag })
     addModal.present()
+  }
+
+  removeCard(card){
+    this.cardService.removeCard(card,this.cardBag)
   }
 
 }

@@ -19,12 +19,13 @@
         <p>{{card.textDe}}</p>
         <ion-note item-end>{{card.date}}</ion-note>
       </ion-item>
+
       <ion-item-options side="left">
         <button ion-button color="light" (click)="openEditModal(card)">
           <ion-icon name="build"></ion-icon>
           &nbsp;&nbsp;edit&nbsp;&nbsp;  
         </button>
-        <button ion-button color="danger">
+        <button ion-button color="danger" (click)="removeCard(card)">
           <ion-icon name="trash"></ion-icon>
           delete
         </button>

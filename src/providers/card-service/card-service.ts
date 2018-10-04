@@ -74,11 +74,17 @@ export class CardServiceProvider {
 
     cardBag.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
   }
+  removeCard(card: any, cardBag: any) {
+    let targetCardBag = this.cardBags.find(x => x == cardBag)
+    targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
+  }
+
+
 
 
   // get current date
   getDateNow(): string {
-    
+
     let date = new Date()
     let dd
     let mm
