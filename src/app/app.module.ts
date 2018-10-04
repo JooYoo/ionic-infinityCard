@@ -10,7 +10,6 @@ import { SettingsPage } from '../pages/settings/settings';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { StandardPage } from '../pages/standard/standard';
 import { LibraryPage } from '../pages/library/library';
 import { CubePage } from '../pages/cube/cube';
 import { InfinityPage } from '../pages/infinity/infinity';
@@ -20,13 +19,14 @@ import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
 import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
 import { CardAddPage } from '../pages/library/cards/card-add/card-add';
 import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
+import { SwipePage } from '../pages/swipe/swipe';
 
 
 
 @NgModule({
   declarations: [
     MyApp,
-    StandardPage,
+    SwipePage,
     LibraryPage,
     CardBagAddPage,
     CardBagEditPage,
@@ -46,7 +46,7 @@ import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    StandardPage,
+    SwipePage,
     LibraryPage,
     CardBagAddPage,
     CardBagEditPage,
