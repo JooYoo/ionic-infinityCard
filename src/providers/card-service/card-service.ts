@@ -57,13 +57,51 @@ export class CardServiceProvider {
   removeCardBag(cardBag: any) {
     this.cardBags = this.cardBags.filter(x => x != cardBag)
   }
-
   editCardBag(cardBag: CardBag, newTitleCn: string, newTitleDe: string) {
     var editCardBag = this.cardBags.find(x => x == cardBag)
     editCardBag.titleCn = newTitleCn
     editCardBag.titleDe = newTitleDe
+  }
 
-    console.log(this.cardBags)
+  // Card: add, remove, edit
+  addCard(cardBag: CardBag, textCn: string, textDe: string) {
+
+    let _id = cardBag.cards.length;
+    let _date = this.getDateNow()
+    let _textCn = textCn
+    let _textDe = textDe
+    let _status = CardStatus.failed
+
+    cardBag.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
+  }
+
+
+  // get current date
+  getDateNow(): string {
+    
+    let date = new Date()
+    let dd
+    let mm
+
+    let rawDd = date.getDate()
+    let rawMm = date.getMonth() + 1
+    let yyyy = date.getFullYear()
+
+    // number always two digits
+    if (rawDd < 10) {
+      dd = '0' + rawDd.toString()
+    }
+    else {
+      dd = rawDd.toString()
+    }
+    if (rawMm < 10) {
+      mm = '0' + rawMm.toString()
+    }
+    else {
+      mm = rawMm.toString()
+    }
+
+    return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
   }
 
 }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ item.title }}</ion-title>
+    <ion-title>{{ cardBag.title }}</ion-title>
     <ion-buttons end>
         <button id="addBtn" (click)="openAddModal()">
           <ion-icon name="add"></ion-icon>
@@ -12,7 +12,7 @@
 <ion-content>
 
   <ion-list no-lines>
-    <ion-item-sliding *ngFor="let card of item.cards">
+    <ion-item-sliding *ngFor="let card of cardBag.cards">
 
       <ion-item>
         <h2>{{card.textCn}}</h2>
