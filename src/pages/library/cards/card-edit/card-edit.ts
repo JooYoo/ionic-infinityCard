@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { CardServiceProvider } from '../../../../providers/card-service/card-service';
 
 
 @Component({
@@ -14,19 +15,17 @@ export class CardEditPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
-    public viewCtrl: ViewController) {
-
+    public viewCtrl: ViewController,
+    public cardService: CardServiceProvider) {
 
     this.card = navParams.get('cardInfo')
     // get enum key
     this.cardStatus = this.getCardStatus(this.card.status)
-    
   }
 
   dismiss() {
     this.viewCtrl.dismiss();
   }
-
 
   // todo: pack to service provider
   getCardStatus(value: number) {
@@ -39,6 +38,10 @@ export class CardEditPage {
     else if (value == 2) {
       return "notSure"
     }
+  }
+
+  editCard(){
+    this.cardService.editCard(this.card, this.card.textCn, this.card.textDe)
   }
 
 }

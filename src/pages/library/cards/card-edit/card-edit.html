@@ -17,13 +17,12 @@
   
       <ion-item>
         <ion-label color="primary" stacked>Chinese</ion-label>
-        <ion-input placeholder="{{card.textCn}}"clearInput></ion-input>
+        <ion-input placeholder="{{card.textCn}}" [(ngModel)]="card.textCn" clearInput></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-label color="primary" stacked>Deutsch</ion-label>
-        <ion-input placeholder="{{card.textDe}}" clearInput></ion-input>
-       
+        <ion-input placeholder="{{card.textDe}}" [(ngModel)]="card.textDe" clearInput></ion-input>
       </ion-item>
   
       <ion-item>
@@ -34,11 +33,15 @@
     </ion-list>
   </ion-content>
 
-  <ion-footer>
+  <ion-footer no-border>
       <ion-row>
     
         <ion-col style="text-align:center;">
-          <button ion-button outline round style="margin-bottom: 20px;">Save</button>
+          <button ion-button outline round style="margin-bottom: 20px;"
+                  (click)="editCard()"
+                  (click)="dismiss()">
+            Save
+          </button>
         </ion-col>
     
       </ion-row>
