@@ -21,6 +21,9 @@ import { CardAddPage } from '../pages/library/cards/card-add/card-add';
 import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
 import { SwipePage } from '../pages/swipe/swipe';
 
+import { SwipeCardsModule } from 'ng2-swipe-cards'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+
 
 
 @NgModule({
@@ -42,6 +45,8 @@ import { SwipePage } from '../pages/swipe/swipe';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    BrowserAnimationsModule,
+    SwipeCardsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

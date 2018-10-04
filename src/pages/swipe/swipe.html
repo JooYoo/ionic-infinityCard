@@ -6,7 +6,27 @@
 
 </ion-header>
 
+<ion-content id="allCards" padding>
 
-<ion-content padding>
-  <p>swipe works</p>
+  <div class="card-container" *ngIf="ready">
+
+    <sc-card class="fp-card" 
+            (click)="toggleFlip()" 
+            [@FlipAnim]="isFlip" 
+            *ngFor="let attendant of attendants"
+            [orientation]="cardDirection" 
+            [tinder-card]="cardOverlay" 
+            [callDestroy]="attendant.destroyEvent" 
+            [callLike]="attendant.likeEvent"
+            (onLike)="onCardInteract($event)">
+
+      <div class="fp-front">{{attendant.asBg}}</div>
+      <div class="fp-back">answer</div>
+    </sc-card>
+
+  </div>
+
 </ion-content>
+
+
+<button id="RefreshBtn" ion-button color='light' (click)="startStack()">click</button>
