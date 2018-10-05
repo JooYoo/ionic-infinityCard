@@ -1,13 +1,13 @@
 import { Component, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
+import { CardServiceProvider } from '../../providers/card-service/card-service';
 
 
 @Component({
   selector: 'page-swipe',
   templateUrl: 'swipe.html',
   animations: [
-
     trigger('FlipAnim', [
 
       state('goFlip', style({
@@ -29,6 +29,9 @@ import { trigger, transition, useAnimation, state, style, animate, keyframes } f
   ]
 })
 export class SwipePage {
+  
+  frontSides =[]
+  backSides=[]
 
   ready = false;
   attendants = [];
@@ -37,20 +40,15 @@ export class SwipePage {
     like: { backgroundColor: '#28e93b' },
     dislike: { backgroundColor: '#e92828' }
   };
-  images = ["01", "02", "03", "04", "05", "06"]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    for (let i = 0; i < this.images.length; i++) {
-      this.attendants.push({
-        id: i + 1,
-        likeEvent: new EventEmitter(),
-        destroyEvent: new EventEmitter(),
-        asBg: this.images[i]
-      });
-    }
-    this.ready = true;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public cardService: CardServiceProvider) {
+
+   this.startStack()
   }
 
+  //todo: dont need Angular Animations
   onCardInteract(event) {
 
     console.log("onCardInteract:" + event);
@@ -60,8 +58,6 @@ export class SwipePage {
       this.isFlip = 'goQuickBack';
     }
   }
-
-
   isFlip: string = 'goBack';
   toggleFlip() {
     this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
@@ -71,22 +67,17 @@ export class SwipePage {
 
     console.log("clicked startStack")
 
-    this.ready = false;
     this.attendants = [];
-    this.cardDirection = "xy";
-    this.cardOverlay = {
-      like: { backgroundColor: '#28e93b' },
-      dislike: { backgroundColor: '#e92828' }
-    };
-    this.images = ["nihao", "xiexie", "zaijian", "haode", "duibuqi", "meiguanxi"]
+    this.frontSides = this.cardService.cardBags[1].cards
+    this.backSides = this.cardService.cardBags[1].cards
 
-
-    for (let i = 0; i < this.images.length; i++) {
+    for (let i = 0; i < this.frontSides.length; i++) {
       this.attendants.push({
         id: i + 1,
         likeEvent: new EventEmitter(),
         destroyEvent: new EventEmitter(),
-        asBg: this.images[i]
+        fronts: this.frontSides[i].textCn,
+        backs: this.backSides[i].textDe
       });
     }
     this.ready = true;
