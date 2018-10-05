@@ -29,9 +29,12 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
   ]
 })
 export class SwipePage {
-  
-  frontSides =[]
-  backSides=[]
+
+  frontSides = []
+  backSides = []
+  nextCardBag: number
+
+  islike: boolean
 
   ready = false;
   attendants = [];
@@ -42,34 +45,48 @@ export class SwipePage {
   };
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public cardService: CardServiceProvider) {
+    public navParams: NavParams,
+    public cardService: CardServiceProvider) {
 
-   this.startStack()
+    this.startNewRound()
   }
+
+  
 
   //todo: dont need Angular Animations
   onCardInteract(event) {
 
     console.log("onCardInteract:" + event);
+    console.log("islike: " + this.islike)
 
     // back flip to front
     if (this.isFlip == 'goFlip') {
       this.isFlip = 'goQuickBack';
     }
+  
   }
   isFlip: string = 'goBack';
   toggleFlip() {
     this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
   }
 
+  // new round Btn
+  startNewRound() {
+    this.nextCardBag = this.getRandomCardBag(this.cardService.cardBags.length)
+    console.log('new bag index: ' + this.nextCardBag)
+    this.startStack()
+  }
+  // todo: move to service
+  getRandomCardBag(itemLength: number): number {
+    return (Math.floor(Math.random() * itemLength))
+  }
+
+  // display cards
   startStack() {
 
-    console.log("clicked startStack")
-
     this.attendants = [];
-    this.frontSides = this.cardService.cardBags[1].cards
-    this.backSides = this.cardService.cardBags[1].cards
+    this.frontSides = this.cardService.cardBags[this.nextCardBag].cards
+    this.backSides = this.cardService.cardBags[this.nextCardBag].cards
 
     for (let i = 0; i < this.frontSides.length; i++) {
       this.attendants.push({
@@ -82,5 +99,7 @@ export class SwipePage {
     }
     this.ready = true;
   }
+
+ 
 
 }

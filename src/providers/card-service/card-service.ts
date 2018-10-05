@@ -21,20 +21,20 @@ export class CardServiceProvider {
     var date = new Date();
 
     var cardsA = [
-      new Card(0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
+      new Card(0, this.getDateNow(), '第零包', 'hallo', CardStatus.failed),
       new Card(1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
-      new Card(2, this.getDateNow(), '再见', 'diedersehen', CardStatus.failed),
+      new Card(2, this.getDateNow(), '再见', 'bye', CardStatus.failed),
       new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
       new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
     ]
     var cardsB = [
-      new Card(4, this.getDateNow(), '好的', 'ok', CardStatus.success),
+      new Card(4, this.getDateNow(), '第一包', 'ok', CardStatus.success),
       new Card(4, this.getDateNow(), '不是', 'nein', CardStatus.success),
       new Card(4, this.getDateNow(), '早上好', 'morgen', CardStatus.success),
-      new Card(4, this.getDateNow(), '晚安', 'gute Nacht', CardStatus.success)
+      new Card(4, this.getDateNow(), '晚安', 'nacht', CardStatus.success)
     ]
     var cardsC = [
-      new Card(4, this.getDateNow(), '好胃口', 'mahlzeit', CardStatus.success)
+      new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
 
     this.cardBags = [
@@ -63,6 +63,7 @@ export class CardServiceProvider {
     editCardBag.titleDe = newTitleDe
   }
 
+  
   // Card: add, remove, edit
   addCard(cardBag: CardBag, textCn: string, textDe: string) {
 
@@ -79,10 +80,8 @@ export class CardServiceProvider {
     targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
   }
   editCard(card:Card, newTextCn:string, newTextDe:string){
-
     card.textCn = newTextCn
     card.textDe = newTextDe
-
   }
 
 

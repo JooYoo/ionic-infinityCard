@@ -1,7 +1,7 @@
 page-swipe {
     .card-container {
         position: relative;
-        height: 90vw;
+        height: 110vw;
         width: 90vw;
       }
       
@@ -10,9 +10,10 @@ page-swipe {
         border-radius: 5px;
         width: 100%;
         height: 100%;
-        margin: 5rem auto;
+        margin: 3rem auto;
         transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
       }
       
       .fp-front {
@@ -50,9 +51,13 @@ page-swipe {
         z-index: 1;
       }
       
-      
-      #RefreshBtn{
-        margin-top: 400px;
-        z-index: 10;
+      .swipeFabBtn{
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        margin-bottom: 10px;
       }
+
+    //   #RefreshBtn{
+    //     margin-top: 400px;
+    //     z-index: 10;
+    //   }
 }
