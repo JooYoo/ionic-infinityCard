@@ -2,8 +2,7 @@ import { Component, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
-import { Card } from '../../app/Model/Card';
-import { CardStatus } from '../../app/Model/CardStatus';
+import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 
 
 @Component({
@@ -33,7 +32,6 @@ import { CardStatus } from '../../app/Model/CardStatus';
 export class SwipePage {
 
   cards = []
-  // backSides = []
   nextCardBag: number
   swipeIndex: number
 
@@ -47,28 +45,20 @@ export class SwipePage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    public cardService: CardServiceProvider) {
+    public cardService: CardServiceProvider,
+    public swipeService: SwipeServiceProvider) {
 
     this.startNewRound()
   }
 
-  changeCardStatue(swipeResult: boolean, currentCard: Card) {
-    if (swipeResult) {
-      currentCard.status = CardStatus.success
-    }
-    else {
-      currentCard.status = CardStatus.failed
-    }
-  }
-
   onCardInteract(event) {
     // swipe to change card status
-    console.log("swipeResult:" + event.like);
     let swipeResult = event.like
     let currentCard = this.cards[this.swipeIndex]
-    this.changeCardStatue(swipeResult, currentCard)
-    console.log(this.cards)
+    this.swipeService.changeCardStatue(swipeResult, currentCard)
     this.swipeIndex++
+    console.log("swipeResult:" + event.like);
+    console.log(this.cards)
     console.log('------')
 
     // back flip to front
@@ -84,21 +74,15 @@ export class SwipePage {
 
   // new round Btn
   startNewRound() {
-    this.nextCardBag = this.getRandomCardBag(this.cardService.cardBags.length)
+    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
     this.startStack()
-  }
-  // todo: move to service
-  getRandomCardBag(itemLength: number): number {
-    return (Math.floor(Math.random() * itemLength))
   }
 
   // display cards
   startStack() {
     this.swipeIndex = 0
-
     this.attendants = [];
     this.cards = this.cardService.cardBags[this.nextCardBag].cards
-    // this.backSides = this.cardService.cardBags[this.nextCardBag].cards
 
     for (let i = 0; i < this.cards.length; i++) {
       this.attendants.push({
