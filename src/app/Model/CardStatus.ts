@@ -1,5 +1,5 @@
 export enum CardStatus {
-    success,
     failed,
+    success,
     notSure,
 }

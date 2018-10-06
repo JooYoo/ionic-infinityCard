@@ -2,6 +2,8 @@ import { Component, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
+import { Card } from '../../app/Model/Card';
+import { CardStatus } from '../../app/Model/CardStatus';
 
 
 @Component({
@@ -30,17 +32,16 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
 })
 export class SwipePage {
 
-  frontSides = []
-  backSides = []
+  cards = []
+  // backSides = []
   nextCardBag: number
-
-  islike: boolean
+  swipeIndex: number
 
   ready = false;
   attendants = [];
   cardDirection = "xy";
   cardOverlay: any = {
-    like: { backgroundColor: '#28e93b' },
+    like: { backgroundColor: '#008975' },
     dislike: { backgroundColor: '#e92828' }
   };
 
@@ -51,20 +52,31 @@ export class SwipePage {
     this.startNewRound()
   }
 
-  
+  changeCardStatue(swipeResult: boolean, currentCard: Card) {
+    if (swipeResult) {
+      currentCard.status = CardStatus.success
+    }
+    else {
+      currentCard.status = CardStatus.failed
+    }
+  }
 
-  //todo: dont need Angular Animations
   onCardInteract(event) {
-
-    console.log("onCardInteract:" + event);
-    console.log("islike: " + this.islike)
+    // swipe to change card status
+    console.log("swipeResult:" + event.like);
+    let swipeResult = event.like
+    let currentCard = this.cards[this.swipeIndex]
+    this.changeCardStatue(swipeResult, currentCard)
+    console.log(this.cards)
+    this.swipeIndex++
+    console.log('------')
 
     // back flip to front
     if (this.isFlip == 'goFlip') {
       this.isFlip = 'goQuickBack';
     }
-  
   }
+
   isFlip: string = 'goBack';
   toggleFlip() {
     this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
@@ -73,7 +85,6 @@ export class SwipePage {
   // new round Btn
   startNewRound() {
     this.nextCardBag = this.getRandomCardBag(this.cardService.cardBags.length)
-    console.log('new bag index: ' + this.nextCardBag)
     this.startStack()
   }
   // todo: move to service
@@ -83,23 +94,22 @@ export class SwipePage {
 
   // display cards
   startStack() {
+    this.swipeIndex = 0
 
     this.attendants = [];
-    this.frontSides = this.cardService.cardBags[this.nextCardBag].cards
-    this.backSides = this.cardService.cardBags[this.nextCardBag].cards
+    this.cards = this.cardService.cardBags[this.nextCardBag].cards
+    // this.backSides = this.cardService.cardBags[this.nextCardBag].cards
 
-    for (let i = 0; i < this.frontSides.length; i++) {
+    for (let i = 0; i < this.cards.length; i++) {
       this.attendants.push({
         id: i + 1,
         likeEvent: new EventEmitter(),
         destroyEvent: new EventEmitter(),
-        fronts: this.frontSides[i].textCn,
-        backs: this.backSides[i].textDe
+        fronts: this.cards[i].textCn,
+        backs: this.cards[i].textDe
       });
     }
     this.ready = true;
   }
-
- 
 
 }

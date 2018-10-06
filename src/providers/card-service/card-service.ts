@@ -46,12 +46,10 @@ export class CardServiceProvider {
 
   // CardBag: add, remove, edit
   addCardBag(titleCn: string, titleDe: string, icon: string) {
-
     let id = this.cardBags.length
     let title_Cn = titleCn
     let title_De = titleDe
     var newCards = null
-
     this.cardBags.push(new CardBag(id, title_Cn, title_De, newCards, icon))
   }
   removeCardBag(cardBag: any) {
