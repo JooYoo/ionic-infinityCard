@@ -1,7 +1,23 @@
-<ion-header>
-  <ion-navbar>
+<ion-header >
+
+  <ion-navbar color="primary" no-border>
     <ion-title>Swipe</ion-title>
   </ion-navbar>
+
+  <ion-toolbar color="primary" no-border-top >
+    <ion-segment color="light"  [(ngModel)]="pet" no-border>
+      <ion-segment-button value="puppies">
+        Puppies
+      </ion-segment-button>
+      <ion-segment-button value="kittens">
+        Kittens
+      </ion-segment-button>
+      <ion-segment-button value="ducklings">
+        Ducklings
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content id="allCards" padding>
@@ -26,13 +42,14 @@
         </ion-icon>
       </button>
       <button class="swipeFabBtn" ion-fab (click)="repeatRound()">
-          <ion-icon name="ios-sync-outline">
-          </ion-icon>
-        </button>
+        <ion-icon name="ios-sync-outline">
+        </ion-icon>
+      </button>
       <button class="swipeFabBtn" ion-fab (click)="reviewFailedCards()">
         <ion-icon name="ios-filing-outline">
         </ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
+
 </ion-content>
