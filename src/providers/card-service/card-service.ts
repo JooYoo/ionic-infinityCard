@@ -8,11 +8,19 @@ import { CardStatus } from '../../app/Model/CardStatus';
 export class CardServiceProvider {
 
   cardBags: CardBag[]
+  failedCardBag: CardBag
+
 
   constructor(public http: HttpModule) {
     console.log('Hello CardServiceProvider Provider');
 
     this.mockCardBages()
+    this.getFailedCardBag()
+  }
+
+  getFailedCardBag(){
+    let failedcards = []
+    this.failedCardBag = new CardBag(0, '不记得', 'Failed Bag', failedcards,'iconX')
   }
 
 

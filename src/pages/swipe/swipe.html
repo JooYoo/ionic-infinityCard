@@ -7,15 +7,9 @@
 <ion-content id="allCards" padding>
 
   <div class="card-container" *ngIf="ready">
-    <sc-card class="fp-card" 
-            (click)="toggleFlip()" 
-            [@FlipAnim]="isFlip" 
-            *ngFor="let attendant of attendants"
-            [orientation]="cardDirection" 
-            [tinder-card]="cardOverlay" 
-            [callLike]="attendant.likeEvent"
-            [callDestroy]="attendant.destroyEvent" 
-            (onLike)="onCardInteract($event)">
+    <sc-card class="fp-card" (click)="toggleFlip()" [@FlipAnim]="isFlip" *ngFor="let attendant of attendants"
+      [orientation]="cardDirection" [tinder-card]="cardOverlay" [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent"
+      (onLike)="onCardInteract($event)">
 
       <div class="fp-front">{{attendant.fronts}}</div>
       <div class="fp-back">{{attendant.backs}}</div>
@@ -27,12 +21,16 @@
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-fab-list side="left">
-      <button class="swipeFabBtn" ion-fab (click)="startStack()">
-        <ion-icon ios="ios-repeat" md="md-repeat">
+      <button class="swipeFabBtn" ion-fab (click)="startNewRound()">
+        <ion-icon name="ios-return-right-outline">
         </ion-icon>
       </button>
-      <button class="swipeFabBtn" ion-fab (click)="startNewRound()">
-        <ion-icon ios="ios-return-right" md="md-return-right">
+      <button class="swipeFabBtn" ion-fab (click)="repeatRound()">
+          <ion-icon name="ios-sync-outline">
+          </ion-icon>
+        </button>
+      <button class="swipeFabBtn" ion-fab (click)="reviewFailedCards()">
+        <ion-icon name="ios-filing-outline">
         </ion-icon>
       </button>
     </ion-fab-list>

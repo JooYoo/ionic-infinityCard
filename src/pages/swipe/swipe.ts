@@ -55,10 +55,16 @@ export class SwipePage {
     // swipe to change card status
     let swipeResult = event.like
     let currentCard = this.cards[this.swipeIndex]
+
+    // change card status 
     this.swipeService.changeCardStatue(swipeResult, currentCard)
     this.swipeIndex++
-    console.log("swipeResult:" + event.like);
-    console.log(this.cards)
+    // console.log("swipeResult:" + event.like);
+    // console.log(this.cards)
+
+    //TODO: save current card into new stack
+    this.swipeService.addToFailedCardStack(event.like, currentCard)
+    console.log(this.cardService.failedCardBag)
     console.log('------')
 
     // back flip to front
@@ -72,17 +78,29 @@ export class SwipePage {
     this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
   }
 
-  // new round Btn
+  // review failed Btn
+  reviewFailedCards(){
+    console.log('in reviewFailedCards()')
+    this.initCards(this.cardService.failedCardBag.cards)
+  }
+
+  // new Round Btn
   startNewRound() {
     this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
-    this.startStack()
+    this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
+  }
+
+  // repeat Round Btn
+  repeatRound(){
+    this.initCards(this.cards)
   }
 
   // display cards
-  startStack() {
+  initCards(cards: any[]) {
     this.swipeIndex = 0
     this.attendants = [];
-    this.cards = this.cardService.cardBags[this.nextCardBag].cards
+    this.cards = cards
+    // this.cards = this.cardService.cardBags[this.nextCardBag].cards
 
     for (let i = 0; i < this.cards.length; i++) {
       this.attendants.push({
