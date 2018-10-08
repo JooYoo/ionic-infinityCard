@@ -1,5 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
@@ -10,7 +10,6 @@ import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-servic
   templateUrl: 'swipe.html',
   animations: [
     trigger('FlipAnim', [
-
       state('goFlip', style({
         transform: 'rotateY(180deg)'
       })),
@@ -25,7 +24,6 @@ import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-servic
         transform: 'rotateY(0deg)'
       })),
       transition('goFlip => goQuickBack', animate('0.000001ms ease-out'))
-
     ]),
   ]
 })
@@ -34,6 +32,9 @@ export class SwipePage {
   cards = []
   nextCardBag: number
   swipeIndex: number
+
+  cardBagMode: string = "standard"
+  isAndroid: boolean = false
 
   ready = false;
   attendants = [];
@@ -46,7 +47,11 @@ export class SwipePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
-    public swipeService: SwipeServiceProvider) {
+    public swipeService: SwipeServiceProvider,
+    platform: Platform) {
+
+    this.isAndroid = platform.is('android')
+
 
     this.startNewRound()
   }
