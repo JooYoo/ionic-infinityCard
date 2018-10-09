@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the CubePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+declare var Swiper
 @Component({
   selector: 'page-cube',
   templateUrl: 'cube.html',
@@ -17,8 +11,22 @@ export class CubePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CubePage');
+  ngAfterViewInit(){
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'cube',
+      grabCursor: true,
+      loop: true,
+      cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+
   }
 
 }
