@@ -3,19 +3,22 @@ import { Injectable } from '@angular/core';
 import { CardBag } from '../../app/Model/CardBag';
 import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
+import { CubeBag } from '../../app/Model/CubeBag';
+import {Cube} from '../../app/Model/Cube';
 
 @Injectable()
 export class CardServiceProvider {
 
   cardBags: CardBag[]
   failedCardBag: CardBag
+  cubeBags: CubeBag[]
 
 
   constructor(public http: HttpModule) {
-    console.log('Hello CardServiceProvider Provider');
 
     this.mockCardBages()
     this.getFailedCardBag()
+    this.mockCubeBags()
   }
 
   getFailedCardBag(){
@@ -49,6 +52,27 @@ export class CardServiceProvider {
       new CardBag(0, '卡包一', 'StackEins', cardsA, "iconA"),
       new CardBag(1, '卡包二', 'StackZwei', cardsB, 'iconB'),
       new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
+    ]
+  }
+
+  mockCubeBags(){
+    var date = new Date();
+
+    var cubesA = [
+      new Cube(0, this.getDateNow(), ['第一包','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(1, this.getDateNow(), ['方块二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
+      new Cube(2, this.getDateNow(), ['方块三','cubeThree','cubeDrei','cubeSan','cube3'] ),
+      new Cube(3, this.getDateNow(), ['方块四','cubeFour','cubeVier','cubeSi','cube4'] ),
+    ]
+    var cubesB = [
+      new Cube(0, this.getDateNow(), ['第二包','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(1, this.getDateNow(), ['方块二二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
+      new Cube(2, this.getDateNow(), ['方块三三','cubeThree','cubeDrei','cubeSan','cube3'] )
+    ]
+
+    this.cubeBags = [
+      new CubeBag(0, '第一方块包','CubeBagOne',cubesA, 'iconA'),
+      new CubeBag(1, '第二方块包','CubeBagTwo',cubesB, 'iconB')
     ]
   }
 

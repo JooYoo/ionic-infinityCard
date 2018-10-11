@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding, Platform, Platform, Platform, Platform, Platform } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
@@ -36,7 +36,6 @@ export class LibraryPage {
     const editModal = this.modalControl.create(CardBagEditPage, { itemInfo: item })
     editModal.present()
   }
-
   cardBagDelete(item) {
     this.cardService.removeCardBag(item)
   }
