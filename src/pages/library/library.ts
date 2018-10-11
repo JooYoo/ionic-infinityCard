@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, Platform, Platform, Platform, Platform, Platform } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
@@ -12,29 +12,36 @@ import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
 
 export class LibraryPage {
 
-  constructor(public nav: NavController, 
-              public cardService: CardServiceProvider, 
-              public modalControl:ModalController) {
+  libraryMode: string = "swipe"
+  isAndroid: boolean = false
+
+  constructor(public nav: NavController,
+              public cardService: CardServiceProvider,
+              public modalControl: ModalController,
+              platform: Platform) {
+
+    this.isAndroid = platform.is('android')
+    this.libraryMode = "swipe"
   }
 
   openCardsPage(item) {
     this.nav.push(CardsPage, { itemInfo: item });
   }
 
-  openCardBagAddPage(){
-   const AddModal = this.modalControl.create(CardBagAddPage)
-   AddModal.present()
+  openCardBagAddPage() {
+    const AddModal = this.modalControl.create(CardBagAddPage)
+    AddModal.present()
   }
-  openCardBagEditPage(item){
-    const editModal = this.modalControl.create(CardBagEditPage,{itemInfo: item})
+  openCardBagEditPage(item) {
+    const editModal = this.modalControl.create(CardBagEditPage, { itemInfo: item })
     editModal.present()
   }
 
-  cardBagDelete(item){
-   this.cardService.removeCardBag(item)
+  cardBagDelete(item) {
+    this.cardService.removeCardBag(item)
   }
 
-  closeSlidingItem(slidingItem: ItemSliding){
+  closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
   }
 }
