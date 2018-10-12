@@ -54,7 +54,7 @@
       <ion-list no-lines style="border: none;">
         <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
           <!-- TODO: openCubesPage(item)   -->
-          <button ion-item icon-start>
+          <button ion-item icon-start (click)="openCubeListPage(item)">
             <h2>{{item.titleCn}}</h2>
             <p>{{item.titleDe}}</p>
           </button>

@@ -6,15 +6,11 @@
 
 </ion-header>
 
-
 <ion-content padding>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" style="background: #325797; color: white;" >{{cube.cubeTexts[0]}}</div>
+          <div class="swiper-slide" style="background: lightgray;" >{{cube.cubeTexts[0]}}</div>
           <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>
-          <!-- <div class="swiper-slide" style="background: black; color: white;">answer02</div>
-          <div class="swiper-slide" style="background: black; color: white;">answer03</div>
-          <div class="swiper-slide" style="background: black; color: white;">answer04</div> -->
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>

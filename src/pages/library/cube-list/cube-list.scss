@@ -1,0 +1,17 @@
+page-cube-list {
+    #addBtn{
+        margin-right:5px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 15px;
+        border-radius: 4px;
+        background: whitesmoke;
+        box-shadow: 0 .5px 3px 0 rgba(0, 0, 0, 0.26);
+    }
+
+    .item-wrapper:last-child .item-block {
+        border-bottom: 0px solid transparent !important;
+    }
+}

@@ -4,6 +4,7 @@ import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
 import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
+import { CubeListPage } from '../../pages/library/cube-list/cube-list';
 
 @Component({
   selector: 'page-library',
@@ -26,6 +27,9 @@ export class LibraryPage {
 
   openCardsPage(item) {
     this.nav.push(CardsPage, { itemInfo: item });
+  }
+  openCubeListPage(item){
+    this.nav.push(CubeListPage, {itemInfo: item})
   }
 
   openCardBagAddPage() {

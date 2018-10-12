@@ -59,13 +59,13 @@ export class CardServiceProvider {
     var date = new Date();
 
     var cubesA = [
-      new Cube(0, this.getDateNow(), ['第一包','cubeOne','cubeEins','cubeYi','cube1'] ),
-      new Cube(1, this.getDateNow(), ['方块二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
-      new Cube(2, this.getDateNow(), ['方块三','cubeThree','cubeDrei','cubeSan','cube3'] ),
-      new Cube(3, this.getDateNow(), ['方块四','cubeFour','cubeVier','cubeSi','cube4'] ),
+      new Cube(0, this.getDateNow(), ['方块一一','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(1, this.getDateNow(), ['方块一二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
+      new Cube(2, this.getDateNow(), ['方块一三','cubeThree','cubeDrei','cubeSan','cube3'] ),
+      new Cube(3, this.getDateNow(), ['方块一四','cubeFour','cubeVier','cubeSi','cube4'] ),
     ]
     var cubesB = [
-      new Cube(0, this.getDateNow(), ['第二包','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(0, this.getDateNow(), ['方块二一','cubeOne','cubeEins','cubeYi','cube1'] ),
       new Cube(1, this.getDateNow(), ['方块二二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
       new Cube(2, this.getDateNow(), ['方块三三','cubeThree','cubeDrei','cubeSan','cube3'] )
     ]
