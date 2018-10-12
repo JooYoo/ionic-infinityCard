@@ -3,6 +3,7 @@
   <ion-navbar color="primary">
     <ion-title>Library</ion-title>
     <ion-buttons end>
+      <!-- TODO: openCubeBagAddPage() -->
       <button id="addBtn" (click)="openCardBagAddPage()">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -53,7 +54,6 @@
     <div *ngSwitchCase="'cube'">
       <ion-list no-lines style="border: none;">
         <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
-          <!-- TODO: openCubesPage(item)   -->
           <button ion-item icon-start (click)="openCubeListPage(item)">
             <h2>{{item.titleCn}}</h2>
             <p>{{item.titleDe}}</p>
@@ -61,6 +61,7 @@
           <ion-item-options side="left">
             <!-- TODO: openCubeBagEditPage(item)-->
             <button ion-button color="light" 
+            (click)="openCubeBagEditPage(item)"
             (click)="closeSlidingItem(slidingItem)">
               <ion-icon name="build"></ion-icon>
               &nbsp;&nbsp;edit&nbsp;&nbsp;

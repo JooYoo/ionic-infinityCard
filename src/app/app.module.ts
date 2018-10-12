@@ -25,6 +25,7 @@ import { SwipeCardsModule } from 'ng2-swipe-cards'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
 import { CubeListPage } from '../pages/library/cube-list/cube-list';
+import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
 
 
 
@@ -42,6 +43,7 @@ import { CubeListPage } from '../pages/library/cube-list/cube-list';
     InfinityPage,
     SettingsPage,
     CubeListPage,
+    CubeBagEditPage,
     TabsPage,
   ],
   imports: [
@@ -65,6 +67,7 @@ import { CubeListPage } from '../pages/library/cube-list/cube-list';
     InfinityPage,
     SettingsPage,
     CubeListPage,
+    CubeBagEditPage,
     TabsPage
   ],
   providers: [
