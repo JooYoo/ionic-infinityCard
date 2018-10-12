@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CubeBag } from '../../../app/Model/CubeBag';
+import { CardServiceProvider } from '../../../providers/card-service/card-service';
 
 @Component({
   selector: 'page-cube-bag-edit',
@@ -12,7 +13,8 @@ export class CubeBagEditPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public viewControl: ViewController) {
+              public viewControl: ViewController,
+              public cardService: CardServiceProvider) {
 
             this.cubeBag = navParams.get('itemInfo')
   }
@@ -22,7 +24,7 @@ export class CubeBagEditPage {
   }
 
   editCubeBag(){
-    console.log("clicked editCubeBag()")
+    this.cardService.editCubeBag(this.cubeBag, this.cubeBag.titleCn, this.cubeBag.titleDe)
   }
  
 

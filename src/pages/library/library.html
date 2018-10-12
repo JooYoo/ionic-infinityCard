@@ -59,7 +59,6 @@
             <p>{{item.titleDe}}</p>
           </button>
           <ion-item-options side="left">
-            <!-- TODO: openCubeBagEditPage(item)-->
             <button ion-button color="light" 
             (click)="openCubeBagEditPage(item)"
             (click)="closeSlidingItem(slidingItem)">
@@ -67,7 +66,8 @@
               &nbsp;&nbsp;edit&nbsp;&nbsp;
             </button>
             <!-- TODO: cubeBagDelete() -->
-            <button ion-button color="danger">
+            <button ion-button color="danger"
+                    (click)="cubeBagDelete(item)">
               <ion-icon name="trash"></ion-icon>
               delete
             </button>

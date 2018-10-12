@@ -9,9 +9,7 @@ import { CardServiceProvider } from '../../../providers/card-service/card-servic
 export class CardBagEditPage {
 
   cardBag: any
-  newTitleCn:string
-  newTitleDe:string
-
+ 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public viewControl: ViewController,

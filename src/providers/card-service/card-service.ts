@@ -76,6 +76,16 @@ export class CardServiceProvider {
     ]
   }
 
+  //CubeBag: add, remove, edit
+  editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string){
+    var editCubeBag = this.cubeBags.find(x =>x == cubeBag)
+    editCubeBag.titleCn = newTitleCn
+    editCubeBag.titleDe = newTitleDe
+  }
+  removeCubeBag(cubeBag: any){
+    this.cubeBags = this.cubeBags.filter(x=>x != cubeBag)
+  }
+
   // CardBag: add, remove, edit
   addCardBag(titleCn: string, titleDe: string, icon: string) {
     let id = this.cardBags.length
