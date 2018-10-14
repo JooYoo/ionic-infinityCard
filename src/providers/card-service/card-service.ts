@@ -110,6 +110,23 @@ export class CardServiceProvider {
     editCardBag.titleDe = newTitleDe
   }
 
+  // Cube: add, remove, edit 
+  //TODO: add different DeText for one Cube
+  addCube(cubeBag: CubeBag, cubeTexts:string[]) {
+
+    let _id = cubeBag.cubes.length;
+    let _date = this.getDateNow()
+    let _cubeTexts = cubeTexts
+
+    cubeBag.cubes.push(new Cube(_id, _date, _cubeTexts))
+  }
+  removeCube(cube: any, cubeBag: any) {
+    let targetCubeBag = this.cubeBags.find(x => x == cubeBag)
+    targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
+  }
+  editCube(cube:Cube, newCubeTexts:string[]){
+    cube.cubeTexts = newCubeTexts
+  }
   
   // Card: add, remove, edit
   addCard(cardBag: CardBag, textCn: string, textDe: string) {
