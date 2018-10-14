@@ -1,13 +1,23 @@
-<ion-header>
+<ion-header [ngSwitch]="libraryMode">
 
   <ion-navbar color="primary">
     <ion-title>Library</ion-title>
     <ion-buttons end>
-      <!-- TODO: openCubeBagAddPage() -->
-      <button id="addBtn" (click)="openCardBagAddPage()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+      <div *ngSwitchCase="'swipe'">
+        <button class="addBtn" (click)="openCardBagAddPage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
+
+      <div *ngSwitchCase="'cube'">
+        <button class="addBtn" (click)="openCubeBagAddPage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
     </ion-buttons>
+    <!-- TODO: openCubeBagAddPage() -->
   </ion-navbar>
 
   <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
@@ -59,15 +69,12 @@
             <p>{{item.titleDe}}</p>
           </button>
           <ion-item-options side="left">
-            <button ion-button color="light" 
-            (click)="openCubeBagEditPage(item)"
-            (click)="closeSlidingItem(slidingItem)">
+            <button ion-button color="light" (click)="openCubeBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
               <ion-icon name="build"></ion-icon>
               &nbsp;&nbsp;edit&nbsp;&nbsp;
             </button>
             <!-- TODO: cubeBagDelete() -->
-            <button ion-button color="danger"
-                    (click)="cubeBagDelete(item)">
+            <button ion-button color="danger" (click)="cubeBagDelete(item)">
               <ion-icon name="trash"></ion-icon>
               delete
             </button>
@@ -76,7 +83,7 @@
       </ion-list>
     </div>
 
-    
+
   </div>
 </ion-content>
 

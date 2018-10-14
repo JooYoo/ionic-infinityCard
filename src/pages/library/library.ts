@@ -6,6 +6,7 @@ import { CardBagAddPage } from './card-bag-add/card-bag-add';
 import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
 import { CubeBagEditPage } from '../library/cube-bag-edit/cube-bag-edit';
 import { CubeListPage } from '../../pages/library/cube-list/cube-list';
+import { CubeBagAddPage } from '../library/cube-bag-add/cube-bag-add';
 
 @Component({
   selector: 'page-library',
@@ -26,6 +27,7 @@ export class LibraryPage {
     this.libraryMode = "swipe"
   }
 
+  // open specific card/cube Bag, display all cards or cubes
   openCardsPage(item) {
     this.nav.push(CardsPage, { itemInfo: item });
   }
@@ -33,11 +35,17 @@ export class LibraryPage {
     this.nav.push(CubeListPage, {itemInfo: item})
   }
 
+  // right-top add button
   openCardBagAddPage() {
     const AddModal = this.modalControl.create(CardBagAddPage)
     AddModal.present()
   }
+  openCubeBagAddPage(){
+    const AddModal = this.modalControl.create(CubeBagAddPage)
+    AddModal.present()
+  }
 
+  // swipe item: edit cardBag / cubeBag
   openCardBagEditPage(item) {
     const editModal = this.modalControl.create(CardBagEditPage, { itemInfo: item })
     editModal.present()

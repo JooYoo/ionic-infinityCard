@@ -26,6 +26,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
 import { CubeListPage } from '../pages/library/cube-list/cube-list';
 import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
+import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
+
 
 
 
@@ -43,6 +45,7 @@ import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
     InfinityPage,
     SettingsPage,
     CubeListPage,
+    CubeBagAddPage,
     CubeBagEditPage,
     TabsPage,
   ],
@@ -67,6 +70,7 @@ import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
     InfinityPage,
     SettingsPage,
     CubeListPage,
+    CubeBagAddPage,
     CubeBagEditPage,
     TabsPage
   ],
