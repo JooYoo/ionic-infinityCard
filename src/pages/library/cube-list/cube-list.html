@@ -3,7 +3,8 @@
       <ion-title>{{ cubeBag.titleDe }}</ion-title>
       <ion-buttons end>
         <!-- TODO: "openAddModal()" -->
-          <button id="addBtn">
+          <button id="addBtn"
+                  (click)="openAddModal()">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-buttons>
@@ -24,11 +25,11 @@
         <ion-item-options side="left">
           <!-- TODO: openEditModal(cube)-->
           <button ion-button color="light"
+                  (click)="openEditModal(cube)"
                   (click)="closeSlidingItem(slidingItem)">
             <ion-icon name="build"></ion-icon>
             &nbsp;&nbsp;edit&nbsp;&nbsp;  
           </button>
-          <!-- TODO: removeCube(cube) -->
           <button ion-button color="danger" (click)="removeCube(cube)">
             <ion-icon name="trash"></ion-icon>
             delete

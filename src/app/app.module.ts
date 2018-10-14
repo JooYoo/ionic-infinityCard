@@ -27,6 +27,8 @@ import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
 import { CubeListPage } from '../pages/library/cube-list/cube-list';
 import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
 import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
+import { CubeAddPage } from '../pages/library/cube-list/cube-add/cube-add';
+import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
 
 
 
@@ -47,6 +49,8 @@ import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
     CubeListPage,
     CubeBagAddPage,
     CubeBagEditPage,
+    CubeAddPage,
+    CubeEditPage,
     TabsPage,
   ],
   imports: [
@@ -72,6 +76,8 @@ import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
     CubeListPage,
     CubeBagAddPage,
     CubeBagEditPage,
+    CubeAddPage,
+    CubeEditPage,
     TabsPage
   ],
   providers: [

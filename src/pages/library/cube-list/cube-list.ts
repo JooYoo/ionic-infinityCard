@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding } from 'ionic-angular';
-import { CubeBag } from '../../../app/Model/CubeBag';
+import { NavController, NavParams, ItemSliding, ModalController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
-import { Cube } from '../../../app/Model/Cube';
+import { CubeEditPage } from './cube-edit/cube-edit';
+import { CubeAddPage } from './cube-add/cube-add';
 
 
 @Component({
@@ -11,10 +11,11 @@ import { Cube } from '../../../app/Model/Cube';
 })
 export class CubeListPage {
 
-  cubeBag: CubeBag
+  cubeBag: any
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              public modalControl: ModalController,
               public cardService: CardServiceProvider) {
       this.cubeBag = navParams.get('itemInfo')
   }
@@ -23,7 +24,18 @@ export class CubeListPage {
     slidingItem.close()
   }
 
-  removeCube(cube: Cube){
+  openAddModal(){
+    console.log("test")
+    let addModal = this.modalControl.create(CubeAddPage,{cubeBagInfo: this.cubeBag})
+    addModal.present()
+  }
+
+  openEditModal(cube){
+    let editModal = this.modalControl.create(CubeEditPage,{cubeInfo: cube})
+    editModal.present()
+  }
+
+  removeCube(cube){
     this.cardService.removeCube(cube,this.cubeBag)
   }
 }
