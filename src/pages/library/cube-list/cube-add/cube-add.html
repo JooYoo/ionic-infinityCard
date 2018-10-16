@@ -14,24 +14,26 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-range min="2" 
+               max="10" 
+               step="1" 
+               pin="true" 
+               snaps="true" 
+               [(ngModel)]="sideLength"
+               (ionChange)="onRangeChange()">
+      <ion-icon range-left small ios="logo-buffer" md="logo-buffer"></ion-icon>
+      <ion-icon range-right ios="logo-buffer" md="logo-buffer"></ion-icon>
+    </ion-range>
+  </ion-item>
+
   <ion-list>
 
-    <ion-item>
-      <ion-label color="primary" stacked>Chinese</ion-label>
+    <ion-item *ngFor="let side of sides">
+      <ion-label color="primary" stacked>description</ion-label>
       <!-- TODO: [(ngModel)]='textCn'-->
-      <ion-input placeholder="chinese..." clearInput ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label color="primary" stacked>Deutsch</ion-label>
-      <!-- TODO: [(ngModel)]='textDe'-->
-      <ion-input placeholder="deutch..." clearInput ></ion-input>
-    </ion-item>
-
-    <!-- todo: DatePicker default current time -->
-    <ion-item>
-      <ion-label color="primary" stacked>Add Time</ion-label>
-      <ion-datetime displayFormat="YYYY-MM-DDDD" pickerFormat="YYYY MM DDDD">2018-09-21</ion-datetime>
+      <ion-input placeholder="chinese..." clearInput></ion-input>
     </ion-item>
 
   </ion-list>
@@ -41,9 +43,7 @@
   <ion-row>
 
     <ion-col style="text-align:center;">
-      <button ion-button outline round style="margin-bottom: 20px;"
-              (click)="addCube()"
-              (click)="dismiss()">
+      <button ion-button outline round style="margin-bottom: 20px;" (click)="addCube()" (click)="dismiss()">
         Save
       </button>
     </ion-col>
