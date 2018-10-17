@@ -34,9 +34,8 @@ export class CubeEditPage {
   }
 
   onRangeChange(){
-    
+    // set isEmpty string boolean value
     for (let i = 0; i < this.sides.length; i++) {
-
       if (this.sides[i] == undefined) {
         this.isEmptyArray = true
       }
@@ -44,17 +43,19 @@ export class CubeEditPage {
         this.isEmptyArray = false
       }
     }
-    
-    if (this.isEmptyArray) {
+
+    if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
       this.sides = new Array(this.sideLength)
     }
-    else {
+    else if(this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
       this.sides.push(null);
+    }
+    else if(this.sideLength < this.sides.length){ // FIXME: case 03: ArrayItem--
+      this.sides.pop()
     }
   }
 
   trackByIndex(index: number, obj: any): any {
     return index;
   }
-
 }

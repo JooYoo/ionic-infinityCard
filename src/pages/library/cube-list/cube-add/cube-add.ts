@@ -27,10 +27,8 @@ export class CubeAddPage {
   }
 
   onRangeChange() {
-
-    //TODO: case01: empty array
+    // set isEmpty string boolean value
     for (let i = 0; i < this.sides.length; i++) {
-
       if (this.sides[i] == undefined) {
         this.isEmptyArray = true
       }
@@ -38,19 +36,16 @@ export class CubeAddPage {
         this.isEmptyArray = false
       }
     }
-    if (this.isEmptyArray) {
+
+    if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
       this.sides = new Array(this.sideLength)
     }
-    else {
+    else if (this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
       this.sides.push(null);
     }
-    console.log('----------')
-
-
-    //TODO: case02: add new item in notEmpty array
-
-    //TODO: case03: reduce item in notEmpty array
-
+    else if (this.sideLength < this.sides.length) { // FIXME: case 03: ArrayItem--
+      this.sides.pop()
+    }
   }
 
   trackByIndex(index: number, obj: any): any {
