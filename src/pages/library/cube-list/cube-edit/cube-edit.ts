@@ -9,6 +9,7 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 export class CubeEditPage {
 
   cube: any
+  isEmptyArray: boolean = false
 
   sideLength: number
   sides:string[]
@@ -34,7 +35,22 @@ export class CubeEditPage {
 
   onRangeChange(){
     
-    this.sides = new Array(this.sideLength)
+    for (let i = 0; i < this.sides.length; i++) {
+
+      if (this.sides[i] == undefined) {
+        this.isEmptyArray = true
+      }
+      else {
+        this.isEmptyArray = false
+      }
+    }
+    
+    if (this.isEmptyArray) {
+      this.sides = new Array(this.sideLength)
+    }
+    else {
+      this.sides.push(null);
+    }
   }
 
   trackByIndex(index: number, obj: any): any {

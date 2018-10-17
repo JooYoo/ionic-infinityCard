@@ -29,28 +29,28 @@ export class CubeAddPage {
   onRangeChange() {
 
     //TODO: case01: empty array
-    this.sides.forEach(side => {
-      console.log(this.isEmptyArray)
+    for (let i = 0; i < this.sides.length; i++) {
 
-      if (side == undefined) {
+      if (this.sides[i] == undefined) {
         this.isEmptyArray = true
-        console.log(this.isEmptyArray)
       }
-      this.isEmptyArray = false
-    });
-
+      else {
+        this.isEmptyArray = false
+      }
+    }
     if (this.isEmptyArray) {
       this.sides = new Array(this.sideLength)
-
     }
+    else {
+      this.sides.push(null);
+    }
+    console.log('----------')
+
 
     //TODO: case02: add new item in notEmpty array
 
     //TODO: case03: reduce item in notEmpty array
 
-
-    console.log(this.sides)
-    console.log(this.sides[0])
   }
 
   trackByIndex(index: number, obj: any): any {
