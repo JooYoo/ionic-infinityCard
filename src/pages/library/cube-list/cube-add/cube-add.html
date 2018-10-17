@@ -30,10 +30,9 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let side of sides">
+    <ion-item *ngFor="let side of sides; let index = index; trackBy:trackByIndex;" >
       <ion-label color="primary" stacked>description</ion-label>
-      <!-- TODO: [(ngModel)]='textCn'-->
-      <ion-input placeholder="chinese..." clearInput></ion-input>
+      <ion-input placeholder="chinese..." [(ngModel)]='sides[index]'  clearInput></ion-input>
     </ion-item>
 
   </ion-list>

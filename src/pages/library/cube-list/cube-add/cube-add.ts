@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../../providers/card-service/card-service';
 
-
 @Component({
   selector: 'page-cube-add',
   templateUrl: 'cube-add.html',
@@ -10,7 +9,6 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 export class CubeAddPage {
 
   cubeBag: any
-
   sideLength: number = 3
   sides:string[]
 
@@ -19,18 +17,11 @@ export class CubeAddPage {
               public viewControl: ViewController,
               public cardService: CardServiceProvider) {
       this.cubeBag = navParams.get("cubeBagInfo")
-
       this.sides = new Array(this.sideLength)
   }
 
-
-  dismiss(){
-    this.viewControl.dismiss()
-  }
-
   addCube(){
-    console.log("addCube function")
-
+    this.cardService.addCube(this.cubeBag, this.sides)
   }
 
   onRangeChange(){
@@ -38,5 +29,12 @@ export class CubeAddPage {
     this.sides = new Array(this.sideLength)
   }
 
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
+  dismiss(){
+    this.viewControl.dismiss()
+  }
 
 }
