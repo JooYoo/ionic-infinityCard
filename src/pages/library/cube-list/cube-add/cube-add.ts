@@ -25,8 +25,10 @@ export class CubeAddPage {
   }
 
   onRangeChange(){
-    console.log(this.sideLength)
-    this.sides = new Array(this.sideLength)
+
+    
+      this.sides = new Array(this.sideLength)
+    
   }
 
   trackByIndex(index: number, obj: any): any {
