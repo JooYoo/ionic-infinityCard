@@ -14,21 +14,34 @@ export class CubePage {
   cubes: Cube[]
   cube: Cube
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public cardService: CardServiceProvider,
-              public swipeService: SwipeServiceProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public cardService: CardServiceProvider,
+    public swipeService: SwipeServiceProvider) {
 
-                this.startNewRound(0)
+    this.startFirstCube(0)
   }
 
-startNewRound(cubeIndex: number){
-  let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
-  this.cubes = this.cardService.cubeBags[randomIndex].cubes
-  this.cube = this.cubes[cubeIndex]
-}
 
-  ngAfterViewInit(){
+  getRandomNext() {
+    // get random CubeBag
+    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
+    this.cubes = this.cardService.cubeBags[randomIndex].cubes
+
+    // get random Cube
+    let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)
+    this.cube = this.cubes[cubeIndex]
+
+    console.log("in getRandomNext()")
+  }
+
+  startFirstCube(cubeIndex: number) {
+    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
+    this.cubes = this.cardService.cubeBags[randomIndex].cubes
+    this.cube = this.cubes[cubeIndex]
+  }
+
+  ngAfterViewInit() {
     var swiper = new Swiper('.swiper-container', {
       effect: 'cube',
       grabCursor: true,
