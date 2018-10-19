@@ -19,7 +19,7 @@ export class CubePage {
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider) {
 
-    this.startFirstCube(0)
+    this.getRandomNext()
   }
 
 
@@ -27,25 +27,23 @@ export class CubePage {
     // get random CubeBag
     let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
     this.cubes = this.cardService.cubeBags[randomIndex].cubes
+    // console.log("random cubeBag:" + randomIndex)
+    // console.log(this.cubes)
 
     // get random Cube
     let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)
     this.cube = this.cubes[cubeIndex]
-
-    console.log("in getRandomNext()")
+    // console.log("random cube:" + cubeIndex)
+    // console.log(this.cube)
+    // console.log("----------")
   }
-
-  startFirstCube(cubeIndex: number) {
-    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
-    this.cubes = this.cardService.cubeBags[randomIndex].cubes
-    this.cube = this.cubes[cubeIndex]
-  }
-
+  
   ngAfterViewInit() {
     var swiper = new Swiper('.swiper-container', {
       effect: 'cube',
       grabCursor: true,
-      loop: true,
+      loop: false,
+      slidesOffsetBefore: -60,
       cubeEffect: {
         shadow: true,
         slideShadows: true,

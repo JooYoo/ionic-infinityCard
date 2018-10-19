@@ -9,31 +9,25 @@
 <ion-content padding>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
-      <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>
+      <div class="swiper-slide" style="background: black; color: white">{{cube.cubeTexts[0]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
+      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div> -->
     </div>
     <!-- Add Pagination -->
     <div class="swiper-pagination"></div>
 
-    <!-- Fab btn -->
-    <ion-fab bottom right>
-      <button class="swipeFabBtn" ion-fab color="light" (click)="getRandomNext()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-      <!-- <ion-fab-list side="left">
-        <button class="swipeFabBtn" ion-fab (click)="startNewRound()">
-          <ion-icon name="ios-return-right-outline">
-          </ion-icon>
-        </button>
-        <button class="swipeFabBtn" ion-fab (click)="repeatRound()">
-          <ion-icon name="ios-sync-outline">
-          </ion-icon>
-        </button> -->
-        <!-- <button class="swipeFabBtn" ion-fab (click)="reviewFailedCards()">
-          <ion-icon name="ios-filing-outline">
-          </ion-icon>
-        </button> -->
-      <!-- </ion-fab-list> -->
-    </ion-fab>
+    
+
   </div>
+
+  <!-- Fab btn -->
+  <ion-fab bottom right>
+      <button class="swipeFabBtn" ion-fab color="light" (click)="getRandomNext()">
+        <ion-icon ios="ios-swap" md="md-swap"></ion-icon>
+      </button>
+    </ion-fab>
+
 </ion-content>
