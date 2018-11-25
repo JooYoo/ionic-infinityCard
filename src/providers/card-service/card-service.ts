@@ -3,19 +3,22 @@ import { Injectable } from '@angular/core';
 import { CardBag } from '../../app/Model/CardBag';
 import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
+import { CubeBag } from '../../app/Model/CubeBag';
+import {Cube} from '../../app/Model/Cube';
 
 @Injectable()
 export class CardServiceProvider {
 
   cardBags: CardBag[]
   failedCardBag: CardBag
+  cubeBags: CubeBag[]
 
 
   constructor(public http: HttpModule) {
-    console.log('Hello CardServiceProvider Provider');
 
     this.mockCardBages()
     this.getFailedCardBag()
+    this.mockCubeBags()
   }
 
   getFailedCardBag(){
@@ -52,6 +55,44 @@ export class CardServiceProvider {
     ]
   }
 
+  mockCubeBags(){
+    var date = new Date();
+
+    var cubesA = [
+      new Cube(0, this.getDateNow(), ['方块一一','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(1, this.getDateNow(), ['方块一二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
+      new Cube(2, this.getDateNow(), ['方块一三','cubeThree','cubeDrei','cubeSan','cube3'] ),
+      new Cube(3, this.getDateNow(), ['方块一四','cubeFour','cubeVier','cubeSi','cube4'] ),
+    ]
+    var cubesB = [
+      new Cube(0, this.getDateNow(), ['方块二一','cubeOne','cubeEins','cubeYi','cube1'] ),
+      new Cube(1, this.getDateNow(), ['方块二二','cubeTwo','cubeZwei','cubeEr','cube2'] ),
+      new Cube(2, this.getDateNow(), ['方块三三','cubeThree','cubeDrei','cubeSan','cube3'] )
+    ]
+
+    this.cubeBags = [
+      new CubeBag(0, '第一方块包','CubeBagOne',cubesA, 'iconA'),
+      new CubeBag(1, '第二方块包','CubeBagTwo',cubesB, 'iconB')
+    ]
+  }
+
+  //CubeBag: add, remove, edit
+  addCubeBag(titleCn: string, titleDe: string, icon: string) {
+    let id = this.cubeBags.length
+    let title_Cn = titleCn
+    let title_De = titleDe
+    var newCubes = null
+    this.cubeBags.push(new CubeBag(id,title_Cn,title_De,newCubes,icon))
+  }
+  editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string){
+    var editCubeBag = this.cubeBags.find(x =>x == cubeBag)
+    editCubeBag.titleCn = newTitleCn
+    editCubeBag.titleDe = newTitleDe
+  }
+  removeCubeBag(cubeBag: any){
+    this.cubeBags = this.cubeBags.filter(x=>x != cubeBag)
+  }
+
   // CardBag: add, remove, edit
   addCardBag(titleCn: string, titleDe: string, icon: string) {
     let id = this.cardBags.length
@@ -69,6 +110,23 @@ export class CardServiceProvider {
     editCardBag.titleDe = newTitleDe
   }
 
+  // Cube: add, remove, edit 
+  //TODO: add different DeText for one Cube
+  addCube(cubeBag: CubeBag, cubeTexts:string[]) {
+
+    let _id = cubeBag.cubes.length;
+    let _date = this.getDateNow()
+    let _cubeTexts = cubeTexts
+
+    cubeBag.cubes.push(new Cube(_id, _date, _cubeTexts))
+  }
+  removeCube(cube: any, cubeBag: any) {
+    let targetCubeBag = this.cubeBags.find(x => x == cubeBag)
+    targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
+  }
+  editCube(cube:Cube, newCubeTexts:string[]){
+    cube.cubeTexts = newCubeTexts
+  }
   
   // Card: add, remove, edit
   addCard(cardBag: CardBag, textCn: string, textDe: string) {

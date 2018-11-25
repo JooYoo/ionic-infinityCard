@@ -1,12 +1,33 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Cube</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-  <p>cube page works</p>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background: black; color: white">{{cube.cubeTexts[0]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
+      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div> -->
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+
+    
+
+  </div>
+
+  <!-- Fab btn -->
+  <ion-fab bottom right>
+      <button class="swipeFabBtn" ion-fab color="light" (click)="getRandomNext()">
+        <ion-icon ios="ios-swap" md="md-swap"></ion-icon>
+      </button>
+    </ion-fab>
+
 </ion-content>

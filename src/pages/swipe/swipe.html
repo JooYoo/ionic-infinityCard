@@ -4,7 +4,7 @@
     <ion-title>Swipe</ion-title>
   </ion-navbar>
 
-  <ion-toolbar color="primary" no-border-top  style="padding-bottom:0%;" >
+  <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
     <ion-segment color="light" [(ngModel)]="cardBagMode" no-border>
       <ion-segment-button value="standard" (click)="startNewRound()" style="margin-top:10px;">
         study
@@ -19,18 +19,31 @@
 
 <ion-content id="allCards" padding>
 
-  <div [ngSwitch]="cardBagMode">
+  <div [ngSwitch]="cardBagMode" >
 
     <!-- card standard mode -->
-    <div *ngSwitchCase="'standard'">
-      <div class="card-container" *ngIf="ready">
-        <sc-card class="fp-card" (click)="toggleFlip()" [@FlipAnim]="isFlip" *ngFor="let attendant of attendants"
-          [orientation]="cardDirection" [tinder-card]="cardOverlay" [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent"
-          (onLike)="onCardInteract($event)">
-          <div class="fp-front">{{attendant.fronts}}</div>
-          <div class="fp-back">{{attendant.backs}}</div>
+    <div *ngSwitchCase="'standard'"  >
+
+      <label class="flipContainer" *ngIf="ready" >
+        
+        <sc-card class="sc-card"
+                 *ngFor="let attendant of attendants"
+                 [orientation]="cardDirection" 
+                 [tinder-card]="cardOverlay"
+                 [callLike]="attendant.likeEvent" 
+                 [callDestroy]="attendant.destroyEvent" 
+                 (onLike)="onCardInteract($event)"
+                 >
+          <input type="checkbox" />
+
+          <div class="theCard">
+            <div id="card-front">{{attendant.fronts}}</div>
+            <div id="card-back">{{attendant.backs}}</div>
+          </div>
         </sc-card>
-      </div>
+
+      </label>
+
       <!-- FabBtn -->
       <ion-fab bottom right>
         <button class="swipeFabBtn" ion-fab color="light">
@@ -57,14 +70,25 @@
     <div *ngSwitchCase="'mistake'">
 
       <!-- card mistake mode -->
-      <div class="card-container" *ngIf="ready">
-        <sc-card class="fp-card" (click)="toggleFlip()" [@FlipAnim]="isFlip" *ngFor="let attendant of attendants"
-          [orientation]="cardDirection" [tinder-card]="cardOverlay" [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent"
-          (onLike)="onCardInteract($event)">
-          <div class="fp-front">{{attendant.fronts}}</div>
-          <div class="fp-back">{{attendant.backs}}</div>
-        </sc-card>
-      </div>
+      <label class="flipContainer" *ngIf="ready">
+          <sc-card class="sc-card" 
+                   *ngFor="let attendant of attendants"
+                   [orientation]="cardDirection" 
+                   [tinder-card]="cardOverlay"
+                   [callLike]="attendant.likeEvent" 
+                   [callDestroy]="attendant.destroyEvent" 
+                   (onLike)="onCardInteract($event)">
+            <input type="checkbox" />
+  
+            <div class="theCard">
+              <div id="card-front">{{attendant.fronts}}</div>
+              <div id="card-back">{{attendant.backs}}</div>
+            </div>
+  
+          </sc-card>
+  
+        </label>
+       
 
       <!-- FabBtn -->
       <ion-fab bottom right>
@@ -81,7 +105,7 @@
 
     </div>
 
-    
+
   </div>
 
 </ion-content>

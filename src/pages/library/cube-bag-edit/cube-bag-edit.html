@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      <!-- New Card -->
-      Stack: {{cardBag.titleCn}}
+      Edit Card Pack
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -17,19 +16,18 @@
   <ion-list>
 
     <ion-item>
-      <ion-label color="primary" stacked>Chinese</ion-label>
-      <ion-input placeholder="chinese..." clearInput [(ngModel)]='textCn'></ion-input>
+      <ion-label color="primary" stacked>Title Chinese</ion-label>
+      <ion-input placeholder="{{cubeBag.titleCn}}" [(ngModel)]="cubeBag.titleCn" clearInput></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Deutsch</ion-label>
-      <ion-input placeholder="deutch..." clearInput [(ngModel)]='textDe'></ion-input>
+      <ion-label color="primary" stacked>Title Deutsch</ion-label>
+      <ion-input placeholder="{{cubeBag.titleDe}}" [(ngModel)]="cubeBag.titleDe" clearInput></ion-input>
     </ion-item>
 
-    <!-- todo: DatePicker default current time -->
+    <!-- TODO: icon selection -->
     <ion-item>
-      <ion-label color="primary" stacked>Add Time</ion-label>
-      <ion-datetime displayFormat="YYYY-MM-DDDD" pickerFormat="YYYY MM DDDD">2018-09-21</ion-datetime>
+      <ion-label color="primary" stacked>icon</ion-label>
     </ion-item>
 
   </ion-list>
@@ -39,8 +37,8 @@
   <ion-row>
 
     <ion-col style="text-align:center;">
-      <button ion-button outline round style="margin-bottom: 20px;"
-              (click)="addCard()"
+      <button ion-button outline round style="margin-bottom: 20px;" 
+              (click)="editCubeBag()" 
               (click)="dismiss()">
         Save
       </button>

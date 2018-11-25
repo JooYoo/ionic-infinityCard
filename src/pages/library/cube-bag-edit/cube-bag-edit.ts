@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { CubeBag } from '../../../app/Model/CubeBag';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
 
 @Component({
-  selector: 'page-card-bag-edit',
-  templateUrl: 'card-bag-edit.html',
+  selector: 'page-cube-bag-edit',
+  templateUrl: 'cube-bag-edit.html',
 })
-export class CardBagEditPage {
+export class CubeBagEditPage {
 
-  cardBag: any
- 
+  cubeBag: CubeBag
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public viewControl: ViewController,
               public cardService: CardServiceProvider) {
 
-          this.cardBag = navParams.get('itemInfo')
+            this.cubeBag = navParams.get('itemInfo')
   }
-
 
   dismiss(){
     this.viewControl.dismiss()
   }
 
-  editCardBag(){
-    this.cardService.editCardBag(this.cardBag,this.cardBag.titleCn,this.cardBag.titleDe)
+  editCubeBag(){
+    this.cardService.editCubeBag(this.cubeBag, this.cubeBag.titleCn, this.cubeBag.titleDe)
   }
+ 
 
 }

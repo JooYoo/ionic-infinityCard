@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardBagAddPage } from './card-bag-add/card-bag-add';
 import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
+import { CubeBagEditPage } from '../library/cube-bag-edit/cube-bag-edit';
+import { CubeListPage } from '../../pages/library/cube-list/cube-list';
+import { CubeBagAddPage } from '../library/cube-bag-add/cube-bag-add';
 
 @Component({
   selector: 'page-library',
@@ -12,29 +15,55 @@ import { CardBagEditPage } from './card-bag-edit/card-bag-edit';
 
 export class LibraryPage {
 
-  constructor(public nav: NavController, 
-              public cardService: CardServiceProvider, 
-              public modalControl:ModalController) {
+  libraryMode: string = "swipe"
+  isAndroid: boolean = false
+
+  constructor(public nav: NavController,
+              public cardService: CardServiceProvider,
+              public modalControl: ModalController,
+              platform: Platform) {
+
+    this.isAndroid = platform.is('android')
+    this.libraryMode = "swipe"
   }
 
+  // open specific card/cube Bag, display all cards or cubes
   openCardsPage(item) {
     this.nav.push(CardsPage, { itemInfo: item });
   }
-
-  openCardBagAddPage(){
-   const AddModal = this.modalControl.create(CardBagAddPage)
-   AddModal.present()
+  openCubeListPage(item){
+    this.nav.push(CubeListPage, {itemInfo: item})
   }
-  openCardBagEditPage(item){
-    const editModal = this.modalControl.create(CardBagEditPage,{itemInfo: item})
+
+  // right-top add button
+  openCardBagAddPage() {
+    const AddModal = this.modalControl.create(CardBagAddPage)
+    AddModal.present()
+  }
+  openCubeBagAddPage(){
+    const AddModal = this.modalControl.create(CubeBagAddPage)
+    AddModal.present()
+  }
+
+  // swipe item: edit cardBag / cubeBag
+  openCardBagEditPage(item) {
+    const editModal = this.modalControl.create(CardBagEditPage, { itemInfo: item })
     editModal.present()
   }
-
-  cardBagDelete(item){
-   this.cardService.removeCardBag(item)
+  openCubeBagEditPage(item){
+    const cubeEditModal = this.modalControl.create(CubeBagEditPage, {itemInfo:item})
+    cubeEditModal.present()
   }
 
-  closeSlidingItem(slidingItem: ItemSliding){
+  cardBagDelete(item) {
+    this.cardService.removeCardBag(item)
+  }
+  cubeBagDelete(item){
+    console.log("inside cubeBagDelete")
+    this.cardService.removeCubeBag(item)
+  }
+
+  closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
   }
 }

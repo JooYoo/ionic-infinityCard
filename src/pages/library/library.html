@@ -1,40 +1,90 @@
-<ion-header>
+<ion-header [ngSwitch]="libraryMode">
+
   <ion-navbar color="primary">
     <ion-title>Library</ion-title>
     <ion-buttons end>
-      <button id="addBtn" (click)="openCardBagAddPage()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+      <div *ngSwitchCase="'swipe'">
+        <button class="addBtn" (click)="openCardBagAddPage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
+
+      <div *ngSwitchCase="'cube'">
+        <button class="addBtn" (click)="openCubeBagAddPage()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </div>
+
     </ion-buttons>
+    <!-- TODO: openCubeBagAddPage() -->
   </ion-navbar>
+
+  <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
+    <ion-segment color="light" [(ngModel)]="libraryMode" no-border>
+      <ion-segment-button value="swipe" style="margin-top:10px;">
+        swipe
+      </ion-segment-button>
+      <ion-segment-button value="cube" style="margin-top:10px;">
+        cube
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content>
+  <!-- <ion-searchbar></ion-searchbar> -->
+  <div [ngSwitch]="libraryMode">
 
-  <ion-searchbar></ion-searchbar>
+    <!-- swipe library mode -->
+    <div *ngSwitchCase="'swipe'">
+      <ion-list no-lines style="border: none;">
+        <ion-item-sliding *ngFor="let item of cardService.cardBags" #slidingItem>
+          <button ion-item icon-start (click)="openCardsPage(item)">
+            <h2>{{item.titleCn}}</h2>
+            <p>{{item.titleDe}}</p>
+          </button>
+          <ion-item-options side="left">
+            <button ion-button color="light" (click)="openCardBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
+              <ion-icon name="build"></ion-icon>
+              &nbsp;&nbsp;edit&nbsp;&nbsp;
+            </button>
+            <button ion-button color="danger" (click)="cardBagDelete(item)">
+              <ion-icon name="trash"></ion-icon>
+              delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
 
-  <ion-list no-lines style="border: none;">
-    <ion-item-sliding *ngFor="let item of cardService.cardBags"  #slidingItem>
-      <button ion-item icon-start (click)="openCardsPage(item)">
-        <h2>{{item.titleCn}}</h2>
-        <p>{{item.titleDe}}</p>
-      </button>
-      <ion-item-options side="left" >
-        <button ion-button color="light" 
-                (click)="openCardBagEditPage(item)"
-                (click)="closeSlidingItem(slidingItem)">
-          <ion-icon name="build"></ion-icon>
-          &nbsp;&nbsp;edit&nbsp;&nbsp;
-        </button>
-        <button ion-button color="danger" (click)="cardBagDelete(item)">
-          <ion-icon name="trash"></ion-icon>
-          delete
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    <!-- cube library mode -->
+    <div *ngSwitchCase="'cube'">
+      <ion-list no-lines style="border: none;">
+        <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
+          <button ion-item icon-start (click)="openCubeListPage(item)">
+            <h2>{{item.titleCn}}</h2>
+            <p>{{item.titleDe}}</p>
+          </button>
+          <ion-item-options side="left">
+            <button ion-button color="light" (click)="openCubeBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
+              <ion-icon name="build"></ion-icon>
+              &nbsp;&nbsp;edit&nbsp;&nbsp;
+            </button>
+            <!-- TODO: cubeBagDelete() -->
+            <button ion-button color="danger" (click)="cubeBagDelete(item)">
+              <ion-icon name="trash"></ion-icon>
+              delete
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
 
+
+  </div>
 </ion-content>
 
 
