@@ -34,13 +34,34 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-padding>
   <!-- <ion-searchbar></ion-searchbar> -->
   <div [ngSwitch]="libraryMode">
 
     <!-- swipe library mode -->
     <div *ngSwitchCase="'swipe'">
-      <ion-list no-lines style="border: none;">
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of cardService.cardBags">
+            <div class="wrapper">
+              
+                <div class="card" (click)="openCardsPage(item)">
+                  <img class="back-img" src="https://picsum.photos/300">
+                  <div class="card-title">{{item.titleCn}}</div>
+                  <div class="card-subtitle">{{item.titleDe}}</div>
+                </div>
+              
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+
+
+
+      <!-- <ion-list no-lines style="border: none;">
         <ion-item-sliding *ngFor="let item of cardService.cardBags" #slidingItem>
           <button ion-item icon-start (click)="openCardsPage(item)">
             <h2>{{item.titleCn}}</h2>
@@ -57,7 +78,7 @@
             </button>
           </ion-item-options>
         </ion-item-sliding>
-      </ion-list>
+      </ion-list> -->
     </div>
 
     <!-- cube library mode -->
