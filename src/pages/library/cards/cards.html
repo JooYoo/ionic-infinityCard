@@ -2,30 +2,68 @@
   <ion-navbar color="primary">
     <ion-title>{{ cardBag.titleDe }}</ion-title>
     <ion-buttons end>
-        <button id="addBtn" (click)="openAddModal()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button id="addBtn" (click)="openAddModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-item no-lines>
-
-      <div class="wrapper">
-          <div class="card">
-            <img class="back-img" src="https://picsum.photos/300">
-            <div class="card-title">BigT</div>
-            <div class="card-subtitle">SubT</div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5>
+        <ion-item no-lines>
+          <div class="wrapper">
+            <div class="card">
+              <img class="back-img" src="https://picsum.photos/300">
+              <div class="card-title">BigT</div>
+              <div class="card-subtitle">SubT</div>
+            </div>
           </div>
-      </div>
+        </ion-item>
 
-  </ion-item>
+      </ion-col>
+      <ion-col col-7>
+        <ion-list class="card-cover-edit">
+
+          <ion-item>
+            <ion-input placeholder="Title" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input placeholder="Title" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item >
+            <button class="card-cover-edit-btn" ion-button small color="danger" round outline>
+                <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
+            </button>
+            <button class="card-cover-edit-btn" ion-button small color="primary" round outline>
+              <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
+            </button>
+          </ion-item>
+
+
+
+
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+
 
   <hr>
 
-  
+
 
   <ion-list>
     <ion-item-sliding *ngFor="let card of cardBag.cards" #slidingItem>
@@ -37,11 +75,9 @@
       </ion-item>
 
       <ion-item-options side="left">
-        <button ion-button color="light" 
-                (click)="openEditModal(card)"
-                (click)="closeSlidingItem(slidingItem)">
+        <button ion-button color="light" (click)="openEditModal(card)" (click)="closeSlidingItem(slidingItem)">
           <ion-icon name="build"></ion-icon>
-          &nbsp;&nbsp;edit&nbsp;&nbsp;  
+          &nbsp;&nbsp;edit&nbsp;&nbsp;
         </button>
         <button ion-button color="danger" (click)="removeCard(card)">
           <ion-icon name="trash"></ion-icon>

@@ -1,6 +1,6 @@
 page-cards {
-    #addBtn{
-        margin-right:5px;
+    #addBtn {
+        margin-right: 5px;
         padding-left: 20px;
         padding-right: 20px;
         padding-top: 5px;
@@ -10,21 +10,19 @@ page-cards {
         background: whitesmoke;
         box-shadow: 0 .5px 3px 0 rgba(0, 0, 0, 0.26);
     }
-
     .item-wrapper:last-child .item-block {
         border-bottom: 0px solid transparent !important;
     }
-
-
     .wrapper {
         display: flex;
         margin-left: 10px;
         margin-top: 30px;
         margin-bottom: 30px;
+        
     }
     .card {
-        width: 100px;
-        height: 120px;
+        width: 110px;
+        height: 140px;
         background: white;
         position: relative;
         border: 5px solid #fff;
@@ -35,8 +33,8 @@ page-cards {
     .card:before {
         content: "";
         position: absolute;
-        width: 100px;
-        height: 120px;
+        width: 110px;
+        height: 140px;
         background: white;
         z-index: -1;
         border: 5px solid #fff;
@@ -51,8 +49,8 @@ page-cards {
         content: "";
         position: absolute;
         background: white;
-        width: 100px;
-        height: 120px;
+        width: 110px;
+        height: 140px;
         border: 5px solid #fff;
         top: -8px;
         left: -10px;
@@ -85,9 +83,23 @@ page-cards {
         height: 100%;
         border-radius: 7px;
     }
-
-    hr{
-        height: 3px;;
+    hr {
+        height: 3px;
     }
+    .card-cover-edit {
+        margin-top: 30px;
+        margin-right:10px;
+    }
+
+    .card-cover-edit-btn{
+        margin-top: 20px;
+        padding-top: 20px;
+        padding-bottom:20px;
+    }
+
+    .card-cover-icon{
+        font-size:30px;
+    }
+
 
 }
