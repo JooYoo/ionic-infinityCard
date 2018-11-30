@@ -11,6 +11,7 @@
 
 <ion-content>
 
+<!-- card stack cover edit area -->
   <ion-grid>
     <ion-row>
       <ion-col col-5>
@@ -23,52 +24,35 @@
             </div>
           </div>
         </ion-item>
-
       </ion-col>
       <ion-col col-7>
         <ion-list class="card-cover-edit">
-
           <ion-item>
             <ion-input placeholder="Title" clearInput></ion-input>
           </ion-item>
-
           <ion-item>
             <ion-input placeholder="Title" clearInput></ion-input>
           </ion-item>
-
-          <ion-item >
+          <ion-item>
             <button class="card-cover-edit-btn" ion-button small color="danger" round outline>
-                <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
+              <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
             </button>
             <button class="card-cover-edit-btn" ion-button small color="primary" round outline>
               <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
             </button>
           </ion-item>
-
-
-
-
         </ion-list>
-
       </ion-col>
     </ion-row>
   </ion-grid>
 
-
-
-
-
-
-
-
   <hr>
-
 
 
   <ion-list>
     <ion-item-sliding *ngFor="let card of cardBag.cards" #slidingItem>
 
-      <ion-item>
+      <ion-item (click)="openEditModal(card)">
         <h2>{{card.textCn}}</h2>
         <p>{{card.textDe}}</p>
         <ion-note item-end>{{card.date}}</ion-note>
