@@ -19,8 +19,8 @@
           <div class="wrapper">
             <div class="card">
               <img class="back-img" src="https://picsum.photos/300">
-              <div class="card-title">BigT</div>
-              <div class="card-subtitle">SubT</div>
+              <div class="card-title">{{cardBag.titleCn}}</div>
+              <div class="card-subtitle">{{cardBag.titleDe}}</div>
             </div>
           </div>
         </ion-item>
@@ -28,13 +28,15 @@
       <ion-col col-7>
         <ion-list class="card-cover-edit">
           <ion-item>
-            <ion-input placeholder="Title" clearInput></ion-input>
+            <ion-input placeholder="{{cardBag.titleCn}}" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="Title" clearInput></ion-input>
+            <ion-input placeholder="{{cardBag.titleDe}}" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <button class="card-cover-edit-btn" ion-button small color="danger" round outline>
+            <button class="card-cover-edit-btn" 
+                    ion-button small color="danger" round outline
+                    (click) = "removeCardBag(cardBag)">
               <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
             </button>
             <button class="card-cover-edit-btn" ion-button small color="primary" round outline>

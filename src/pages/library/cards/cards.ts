@@ -3,6 +3,7 @@ import { NavController, NavParams, ModalController, ItemSliding } from 'ionic-an
 import { CardEditPage } from './card-edit/card-edit';
 import { CardAddPage } from './card-add/card-add';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
+import { LibraryPage } from '../library';
 
 @Component({
   selector: 'page-cards',
@@ -12,7 +13,7 @@ export class CardsPage {
 
   cardBag: any
 
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public cardService: CardServiceProvider) {
@@ -27,6 +28,11 @@ export class CardsPage {
   openAddModal() {
     let addModal = this.modalCtrl.create(CardAddPage, { cardBagInfo: this.cardBag })
     addModal.present()
+  }
+
+  removeCardBag(item) {
+    this.cardService.removeCardBag(item)
+    this.nav.push(LibraryPage)
   }
 
   removeCard(card){

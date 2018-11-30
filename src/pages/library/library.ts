@@ -58,6 +58,7 @@ export class LibraryPage {
   cardBagDelete(item) {
     this.cardService.removeCardBag(item)
   }
+  
   cubeBagDelete(item){
     console.log("inside cubeBagDelete")
     this.cardService.removeCubeBag(item)
