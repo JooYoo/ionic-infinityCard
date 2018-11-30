@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{ cardBag.titleDe }}</ion-title>
+    <ion-title>Card Stack</ion-title>
     <ion-buttons end>
       <button id="addBtn" (click)="openAddModal()">
         <ion-icon name="add"></ion-icon>
@@ -28,10 +28,10 @@
       <ion-col col-7>
         <ion-list class="card-cover-edit">
           <ion-item>
-            <ion-input placeholder="{{cardBag.titleCn}}" clearInput></ion-input>
+            <ion-input placeholder="{{cardBag.titleCn}}" [(ngModel)]="cardBag.titleCn" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="{{cardBag.titleDe}}" clearInput></ion-input>
+            <ion-input placeholder="{{cardBag.titleDe}}" [(ngModel)]="cardBag.titleDe" clearInput></ion-input>
           </ion-item>
           <ion-item>
             <button class="card-cover-edit-btn" 
@@ -39,7 +39,9 @@
                     (click) = "removeCardBag(cardBag)">
               <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
             </button>
-            <button class="card-cover-edit-btn" ion-button small color="primary" round outline>
+            <button class="card-cover-edit-btn" 
+                    ion-button small color="primary" round outline
+                    (click)="editCardBag()">
               <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
             </button>
           </ion-item>

@@ -34,6 +34,11 @@ export class CardsPage {
     this.cardService.removeCardBag(item)
     this.nav.push(LibraryPage)
   }
+  
+  editCardBag(){
+    this.cardService.editCardBag(this.cardBag,this.cardBag.titleCn,this.cardBag.titleDe)
+    this.nav.push(LibraryPage)
+  }
 
   removeCard(card){
     this.cardService.removeCard(card,this.cardBag)
@@ -42,5 +47,4 @@ export class CardsPage {
   closeSlidingItem(slidingItem: ItemSliding){
     slidingItem.close()
   }
-
 }
