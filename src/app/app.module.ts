@@ -29,6 +29,7 @@ import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
 import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
 import { CubeAddPage } from '../pages/library/cube-list/cube-add/cube-add';
 import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
+import { PopoverComponent } from '../components/popover/popover';
 
 
 
@@ -52,6 +53,7 @@ import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
     CubeAddPage,
     CubeEditPage,
     TabsPage,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
     CubeBagEditPage,
     CubeAddPage,
     CubeEditPage,
-    TabsPage
+    TabsPage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,
