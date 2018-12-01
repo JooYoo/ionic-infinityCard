@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { NavController, NavParams } from 'ionic-angular';
 import { LibraryPage } from '../../pages/library/library';
