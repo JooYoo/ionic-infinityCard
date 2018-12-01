@@ -1,48 +1,49 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>
-        Edit Card
-      </ion-title>
-      <ion-buttons start>
-        <button ion-button (click)="dismiss()">
-          <span ion-textshowWhen="ios">Cancel</span>
-          <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <ion-list>
-  
-      <ion-item>
-        <ion-label color="primary" stacked>Chinese</ion-label>
-        <ion-input placeholder="{{card.textCn}}" [(ngModel)]="card.textCn" clearInput></ion-input>
-      </ion-item>
-  
-      <ion-item>
-        <ion-label color="primary" stacked>Deutsch</ion-label>
-        <ion-input placeholder="{{card.textDe}}" [(ngModel)]="card.textDe" clearInput></ion-input>
-      </ion-item>
-  
-      <ion-item>
-          <ion-label color="primary" stacked>Latest Status</ion-label>
-          <ion-badge item-end>{{cardStatus}}</ion-badge>
-      </ion-item> 
-  
-    </ion-list>
-  </ion-content>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Edit Card
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-textshowWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-footer no-border>
-      <ion-row>
-    
-        <ion-col style="text-align:center;">
-          <button ion-button outline round style="margin-bottom: 20px;"
-                  (click)="editCard()"
-                  (click)="dismiss()">
-            Save
-          </button>
-        </ion-col>
-    
-      </ion-row>
-    </ion-footer>
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Chinese</ion-label>
+      <ion-input placeholder="{{card.textCn}}" [(ngModel)]="card.textCn" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Deutsch</ion-label>
+      <ion-input placeholder="{{card.textDe}}" [(ngModel)]="card.textDe" clearInput></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Latest Status</ion-label>
+      <ion-badge item-end>{{cardStatus}}</ion-badge>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-row>
+
+    <ion-col style="text-align:center;">
+      <button class="card-edit-btn" ion-button outline round color="danger" (click)="removeCard()" (click)="dismiss()">
+        <ion-icon name="ios-trash-outline"></ion-icon>
+      </button>
+      <button class="card-edit-btn" ion-button outline round (click)="editCard()" (click)="dismiss()">
+        <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+      </button>
+    </ion-col>
+
+  </ion-row>
+</ion-footer>

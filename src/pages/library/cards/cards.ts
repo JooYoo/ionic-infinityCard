@@ -30,7 +30,7 @@ export class CardsPage {
   }
 
   openEditModal(card) {
-    let editModal = this.modalCtrl.create(CardEditPage, { cardInfo: card });
+    let editModal = this.modalCtrl.create(CardEditPage, { cardInfo: card, cardBagInfo: this.cardBag });
     editModal.present()
   }
 
