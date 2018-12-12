@@ -30,6 +30,7 @@ import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
 import { CubeAddPage } from '../pages/library/cube-list/cube-add/cube-add';
 import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
 import { PopoverComponent } from '../components/popover/popover';
+import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
 
 
 
@@ -53,7 +54,8 @@ import { PopoverComponent } from '../components/popover/popover';
     CubeAddPage,
     CubeEditPage,
     TabsPage,
-    PopoverComponent
+    PopoverComponent,
+    CubeListIconComponent
   ],
   imports: [
     BrowserModule,

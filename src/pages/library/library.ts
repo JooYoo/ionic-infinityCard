@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectionStrategy  } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
@@ -9,6 +9,7 @@ import { CubeListPage } from '../../pages/library/cube-list/cube-list';
 import { CubeBagAddPage } from '../library/cube-bag-add/cube-bag-add';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'page-library',
   templateUrl: 'library.html',
 })
@@ -17,6 +18,7 @@ export class LibraryPage {
 
   libraryMode: string = "swipe"
   isAndroid: boolean = false
+  cubeWrapperColor: string
 
   constructor(public nav: NavController,
               public cardService: CardServiceProvider,
@@ -25,6 +27,8 @@ export class LibraryPage {
 
     this.isAndroid = platform.is('android')
     this.libraryMode = "swipe"
+
+    this.cubeWrapperColor = "#9C27B0"
   }
 
   // open specific card/cube Bag, display all cards or cubes
@@ -62,6 +66,10 @@ export class LibraryPage {
   cubeBagDelete(item){
     console.log("inside cubeBagDelete")
     this.cardService.removeCubeBag(item)
+  }
+
+  getCubeStackColor(){
+    return this.cardService.getRandomBgColor();
   }
 
   closeSlidingItem(slidingItem: ItemSliding) {

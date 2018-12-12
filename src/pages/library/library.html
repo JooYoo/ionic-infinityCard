@@ -45,21 +45,17 @@
         <ion-row>
           <ion-col *ngFor="let item of cardService.cardBags">
             <div class="wrapper">
-              
-                <div class="card" (click)="openCardsPage(item)">
-                  <img class="back-img" src="https://picsum.photos/300">
-                  <div class="card-title">{{item.titleCn}}</div>
-                  <div class="card-subtitle">{{item.titleDe}}</div>
-                </div>
-              
+
+              <div class="card" (click)="openCardsPage(item)">
+                <img class="back-img" src="https://picsum.photos/300">
+                <div class="card-title">{{item.titleCn}}</div>
+                <div class="card-subtitle">{{item.titleDe}}</div>
+              </div>
+
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
-
-
-
-
 
       <!-- <ion-list no-lines style="border: none;">
         <ion-item-sliding *ngFor="let item of cardService.cardBags" #slidingItem>
@@ -83,6 +79,31 @@
 
     <!-- cube library mode -->
     <div *ngSwitchCase="'cube'">
+      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col *ngFor="let item of cardService.cubeBags">
+
+            <div class="cubes-card-wrapper" [style.background]="getCubeStackColor()" (click)="openCubeListPage(item)">
+              <div class="cubes-card-inner-wrapper">
+
+                <img class="cubes-card-img" src="../../assets/imgs/cubes.png">
+
+
+                <div class="cubes-card-title">{{item.titleCn}}</div>
+                <div class="cubes-card-subtitle">{{item.titleDe}}</div>
+              </div>
+
+            </div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+
+
       <ion-list no-lines style="border: none;">
         <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
           <button ion-item icon-start (click)="openCubeListPage(item)">
@@ -94,7 +115,7 @@
               <ion-icon name="build"></ion-icon>
               &nbsp;&nbsp;edit&nbsp;&nbsp;
             </button>
-            <!-- TODO: cubeBagDelete() -->
+
             <button ion-button color="danger" (click)="cubeBagDelete(item)">
               <ion-icon name="trash"></ion-icon>
               delete

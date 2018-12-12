@@ -12,6 +12,8 @@
   </ion-header>
   
   <ion-content>
+
+    
   
     <ion-list no-lines>
       <ion-item-sliding *ngFor="let cube of cubeBag.cubes" #slidingItem>
@@ -21,6 +23,8 @@
           <p>{{cube.cubeTexts[1]}}</p>
           <ion-note item-end>{{cube.date}}</ion-note>
         </ion-item>
+
+       
   
         <ion-item-options side="left">
           <!-- TODO: openEditModal(cube)-->
