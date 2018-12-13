@@ -52,6 +52,9 @@ export class CardServiceProvider {
       new CardBag(0, '卡包一', 'StackEins', cardsA, "iconA"),
       new CardBag(1, '卡包二', 'StackZwei', cardsB, 'iconB'),
       new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
+      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
+      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
+      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
     ]
   }
 
@@ -71,15 +74,15 @@ export class CardServiceProvider {
     ]
 
     this.cubeBags = [
-      new CubeBag(0, '第一方块包', 'CubeBagOne', cubesA, 'iconA'),
-      new CubeBag(1, '第二方块包', 'CubeBagTwo', cubesB, 'iconB'),
-      new CubeBag(2, '第三方块包', 'CubeBagThree', cubesA, 'iconA'),
-      new CubeBag(3, '第四方块包', 'CubeBagFour', cubesB, 'iconB'),
-      new CubeBag(4, '第五方块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五方块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五方块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五方块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五方块包', 'CubeBagFive', cubesA, 'iconA'),
+      new CubeBag(0, '第一块包', 'CubeBagOne', cubesA, 'iconA'),
+      new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
+      new CubeBag(2, '第三块包', 'CubeBagThree', cubesA, 'iconA'),
+      new CubeBag(3, '第四块包', 'CubeBagFour', cubesB, 'iconB'),
+      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
+      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
+      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
+      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
+      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
 
     ]
   }

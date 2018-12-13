@@ -41,18 +41,29 @@
     <!-- swipe library mode -->
     <div *ngSwitchCase="'swipe'">
 
+      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let item of cardService.cardBags">
-            <div class="wrapper">
-
-              <div class="card" (click)="openCardsPage(item)">
-                <img class="back-img" src="https://picsum.photos/300">
-                <div class="card-title">{{item.titleCn}}</div>
-                <div class="card-subtitle">{{item.titleDe}}</div>
+           
+              <div class="wrapper">
+                <div class="card" (click)="openCardsPage(item)">
+                  <img class="back-img" src="https://picsum.photos/311">
+                  <div class="card-title">{{item.titleCn}}</div>
+                  <div class="card-subtitle">{{item.titleDe}}</div>
+                </div>
               </div>
 
-            </div>
+              <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
+                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
+                </div>
+
+           
+
+
+           
+
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -85,11 +96,13 @@
         <ion-row>
           <ion-col *ngFor="let item of cardService.cubeBags">
 
-            <div class="cubes-card-wrapper" [style.background]="getCubeStackColor()" (click)="openCubeListPage(item)">
+            <div class="cubes-card-wrapper" (click)="openCubeListPage(item)">
               <div class="cubes-card-inner-wrapper">
-
                 <img class="cubes-card-img" src="../../assets/imgs/cubes.png">
 
+                <div class="progress">
+                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px;"></div>
+                </div>
 
                 <div class="cubes-card-title">{{item.titleCn}}</div>
                 <div class="cubes-card-subtitle">{{item.titleDe}}</div>
