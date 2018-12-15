@@ -90,43 +90,6 @@
         </ion-row>
       </ion-grid>
 
-
-
-
-      <ion-list no-lines style="border: none;">
-        <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
-          <button ion-item icon-start (click)="openCubeListPage(item)">
-            <h2>{{item.titleCn}}</h2>
-            <p>{{item.titleDe}}</p>
-          </button>
-          <ion-item-options side="left">
-            <button ion-button color="light" (click)="openCubeBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
-              <ion-icon name="build"></ion-icon>
-              &nbsp;&nbsp;edit&nbsp;&nbsp;
-            </button>
-
-            <button ion-button color="danger" (click)="cubeBagDelete(item)">
-              <ion-icon name="trash"></ion-icon>
-              delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
     </div>
-
-
   </div>
 </ion-content>
-
-
-
-
-
-
-<!-- <ion-fab right bottom>
-    <button ion-fab color="light" 
-            (click)="openCardBagDetailPage()"
-            style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);">
-            <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab> -->

@@ -9,21 +9,41 @@ import { LibraryPage } from '../../pages/library/library';
 })
 export class PopoverComponent {
 
-  text: string;
-  cardBag: any
- 
+
+  cardStack: any
+  cubeStack: any
+  tabInfo: string
+
 
   constructor(public cardService: CardServiceProvider,
     public nav: NavController,
     public navParams: NavParams) {
 
-      this.cardBag = navParams.get('cardBagInfo')
-      console.log(this.cardBag)
+    this.cardStack = navParams.get('cardStackInfo')
+    this.cubeStack = navParams.get('cubeStackInfo')
+
+    console.log("cardStack:" + this.cardStack)
+    console.log("cubeStack:" + this.cubeStack)
   }
 
-  removeCardBag() {
-    this.cardService.removeCardBag(this.cardBag)
-    this.nav.push(LibraryPage)
+  removeCardStack() {
+    this.cardService.removeCardBag(this.cardStack)
+    this.tabInfo = "swipe"
+    this.nav.push(LibraryPage, { tabInfo: this.tabInfo })
+  }
+  removeCubeStack() {
+    this.cardService.removeCubeBag(this.cubeStack)
+    this.tabInfo = "cube"
+    this.nav.push(LibraryPage, { tabInfo: this.tabInfo })
+  }
+
+  removeStack() {
+    if (this.cardStack != undefined) {
+      this.removeCardStack()
+    }
+    else{
+      this.removeCubeStack()
+    }
   }
 
 }

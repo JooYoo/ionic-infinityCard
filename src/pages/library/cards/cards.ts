@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, PopoverController } from 'ionic-angular';
 import { CardEditPage } from './card-edit/card-edit';
 import { CardAddPage } from './card-add/card-add';
@@ -11,7 +11,7 @@ import { PopoverComponent } from '../../../components/popover/popover';
   templateUrl: 'cards.html',
 })
 export class CardsPage {
-  
+
   cardBag: any
 
   constructor(public nav: NavController,
@@ -23,7 +23,7 @@ export class CardsPage {
   }
 
   presentPopover(ev) {
-    let popover = this.popoverCtrl.create(PopoverComponent, {cardBagInfo: this.cardBag});
+    let popover = this.popoverCtrl.create(PopoverComponent, { cardStackInfo: this.cardBag });
     popover.present({
       ev: ev
     });
@@ -39,21 +39,21 @@ export class CardsPage {
     addModal.present()
   }
 
-  removeCardBag(item) {
-    this.cardService.removeCardBag(item)
-    this.nav.push(LibraryPage)
-  }
-  
-  editCardBag(){
-    this.cardService.editCardBag(this.cardBag,this.cardBag.titleCn,this.cardBag.titleDe)
+  // removeCardBag(item) {
+  //   this.cardService.removeCardBag(item)
+  //   this.nav.push(LibraryPage)
+  // }
+
+  editCardBag() {
+    this.cardService.editCardBag(this.cardBag, this.cardBag.titleCn, this.cardBag.titleDe)
     this.nav.push(LibraryPage)
   }
 
-  removeCard(card){
-    this.cardService.removeCard(card,this.cardBag)
+  removeCard(card) {
+    this.cardService.removeCard(card, this.cardBag)
   }
 
-  closeSlidingItem(slidingItem: ItemSliding){
+  closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
   }
 }
