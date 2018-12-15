@@ -46,46 +46,22 @@
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let item of cardService.cardBags">
-           
-              <div class="wrapper">
-                <div class="card" (click)="openCardsPage(item)">
-                  <img class="back-img" src="https://picsum.photos/311">
-                  <div class="card-title">{{item.titleCn}}</div>
-                  <div class="card-subtitle">{{item.titleDe}}</div>
-                </div>
+
+            <div class="wrapper">
+              <div class="card" (click)="openCardsPage(item)">
+                <img class="back-img" src="https://picsum.photos/311">
+                <div class="card-title">{{item.titleCn}}</div>
+                <div class="card-subtitle">{{item.titleDe}}</div>
               </div>
+            </div>
 
-              <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
-                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
-                </div>
-
-           
-
-
-           
+            <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
+              <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
+            </div>
 
           </ion-col>
         </ion-row>
       </ion-grid>
-
-      <!-- <ion-list no-lines style="border: none;">
-        <ion-item-sliding *ngFor="let item of cardService.cardBags" #slidingItem>
-          <button ion-item icon-start (click)="openCardsPage(item)">
-            <h2>{{item.titleCn}}</h2>
-            <p>{{item.titleDe}}</p>
-          </button>
-          <ion-item-options side="left">
-            <button ion-button color="light" (click)="openCardBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
-              <ion-icon name="build"></ion-icon>
-              &nbsp;&nbsp;edit&nbsp;&nbsp;
-            </button>
-            <button ion-button color="danger" (click)="cardBagDelete(item)">
-              <ion-icon name="trash"></ion-icon>
-              delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list> -->
     </div>
 
     <!-- cube library mode -->
