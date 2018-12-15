@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
-
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 
@@ -18,7 +17,6 @@ import { CardsPage } from '../pages/library/cards/cards';
 import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
 import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
 import { CardAddPage } from '../pages/library/cards/card-add/card-add';
-import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
 import { SwipePage } from '../pages/swipe/swipe';
 
 import { SwipeCardsModule } from 'ng2-swipe-cards'
@@ -41,7 +39,6 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     SwipePage,
     LibraryPage,
     CardBagAddPage,
-    CardBagEditPage,
     CardsPage,
     CardEditPage,
     CardAddPage,
@@ -69,7 +66,6 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     SwipePage,
     LibraryPage,
     CardBagAddPage,
-    CardBagEditPage,
     CubePage,
     CardsPage,
     CardEditPage,
