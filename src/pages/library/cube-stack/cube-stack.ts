@@ -13,7 +13,7 @@ import { PopoverComponent } from '../../../components/popover/popover';
 })
 export class CubeStackPage {
 
-  cubeBag: any
+  cubeStack: any
   tabInfo: any
 
   constructor(public navCtrl: NavController,
@@ -22,12 +22,12 @@ export class CubeStackPage {
     public modalControl: ModalController,
     public cardService: CardServiceProvider) {
 
-    this.cubeBag = navParams.get('itemInfo')
+    this.cubeStack = navParams.get('itemInfo')
     this.tabInfo = "cube"
   }
 
   presentPopover(ev) {
-    let popover = this.popoverCtrl.create(PopoverComponent, { cubeStackInfo: this.cubeBag });
+    let popover = this.popoverCtrl.create(PopoverComponent, { cubeStackInfo: this.cubeStack });
     popover.present({
       ev: ev
     });
@@ -38,21 +38,21 @@ export class CubeStackPage {
   }
 
   openAddModal() {
-    let addModal = this.modalControl.create(CubeContentAddPage, { cubeBagInfo: this.cubeBag })
+    let addModal = this.modalControl.create(CubeContentAddPage, { cubeBagInfo: this.cubeStack })
     addModal.present()
   }
 
   openEditModal(cube) {
-    let editModal = this.modalControl.create(CubeContentEditPage, { cubeInfo: cube })
+    let editModal = this.modalControl.create(CubeContentEditPage, { cubeInfo: cube, cubeStackInfo: this.cubeStack })
     editModal.present()
   }
 
   removeCube(cube) {
-    this.cardService.removeCube(cube, this.cubeBag)
+    this.cardService.removeCube(cube, this.cubeStack)
   }
 
   editCubeBag() {
-    this.cardService.editCubeBag(this.cubeBag, this.cubeBag.titleCn, this.cubeBag.titleDe);
+    this.cardService.editCubeBag(this.cubeStack, this.cubeStack.titleCn, this.cubeStack.titleDe);
     this.navCtrl.push(LibraryPage, { tabInfo: this.tabInfo });
   }
 

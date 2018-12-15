@@ -9,6 +9,7 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 export class CubeContentEditPage {
 
   cube: any
+  cubeStack: any
   isEmptyArray: boolean = false
 
   sideLength: number
@@ -19,14 +20,17 @@ export class CubeContentEditPage {
               public viewControl: ViewController,
               public cardService: CardServiceProvider) {
       this.cube = navParams.get("cubeInfo")
+      this.cubeStack= navParams.get("cubeStackInfo")
+
       this.sideLength = this.cube.cubeTexts.length
       this.sides = this.cube.cubeTexts
-        
   }
 
   editCube(){
-    console.log("editCube function")
     this.cardService.editCube(this.cube, this.sides)
+  }
+  removeCube(){
+    this.cardService.removeCube(this.cube, this.cubeStack)
   }
 
   dismiss(){

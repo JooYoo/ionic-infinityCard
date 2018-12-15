@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{ cubeBag.titleDe }}</ion-title>
+    <ion-title>{{ cubeStack.titleDe }}</ion-title>
     <ion-buttons end>
       <!-- TODO: "openAddModal()" -->
       <button id="addBtn" (click)="openAddModal()">
@@ -19,8 +19,8 @@
           <div class="wrapper">
             <div>
               <img class="cube-icon" src="../../../assets/imgs/cubes.png">
-              <div class="cube-title" style="text-align:center;">{{cubeBag.titleCn}}</div>
-              <div class="cube-subtitle" style="text-align:center;">{{cubeBag.titleDe}}</div>
+              <div class="cube-title" style="text-align:center;">{{cubeStack.titleCn}}</div>
+              <div class="cube-subtitle" style="text-align:center;">{{cubeStack.titleDe}}</div>
             </div>
           </div>
         </ion-item>
@@ -28,10 +28,10 @@
       <ion-col col-7>
         <ion-list class="card-cover-edit">
           <ion-item>
-            <ion-input placeholder="{{cubeBag.titleCn}}" [(ngModel)]="cubeBag.titleCn" clearInput></ion-input>
+            <ion-input placeholder="{{cubeStack.titleCn}}" [(ngModel)]="cubeStack.titleCn" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="{{cubeBag.titleDe}}" [(ngModel)]="cubeBag.titleDe" clearInput></ion-input>
+            <ion-input placeholder="{{cubeStack.titleDe}}" [(ngModel)]="cubeStack.titleDe" clearInput></ion-input>
           </ion-item>
           <ion-item>
             <button class="cube-cover-edit-btn" ion-button small color="danger" round outline (click)="presentPopover($event)">
@@ -51,10 +51,9 @@
 
 
   <ion-list no-lines>
-    <ion-item-sliding *ngFor="let cube of cubeBag.cubes" #slidingItem>
+    <ion-item-sliding *ngFor="let cube of cubeStack.cubes" #slidingItem>
 
-      <ion-item>
-
+      <ion-item (click)="openEditModal(cube)">
         <h2>{{cube.cubeTexts[0]}}</h2>
         <p>{{cube.cubeTexts[1]}}</p>
         <ion-note item-end>{{cube.date}}</ion-note>
