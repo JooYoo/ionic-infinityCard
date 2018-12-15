@@ -15,7 +15,7 @@ import { InfinityPage } from '../pages/infinity/infinity';
 import { CardServiceProvider } from '../providers/card-service/card-service';
 import { CardsPage } from '../pages/library/cards/cards';
 import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
-import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
+import { CardStackAddPage } from '../pages/library/card-stack-add/card-stack-add';
 import { CardAddPage } from '../pages/library/cards/card-add/card-add';
 import { SwipePage } from '../pages/swipe/swipe';
 
@@ -38,7 +38,7 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     MyApp,
     SwipePage,
     LibraryPage,
-    CardBagAddPage,
+    CardStackAddPage,
     CardsPage,
     CardEditPage,
     CardAddPage,
@@ -65,7 +65,7 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     MyApp,
     SwipePage,
     LibraryPage,
-    CardBagAddPage,
+    CardStackAddPage,
     CubePage,
     CardsPage,
     CardEditPage,

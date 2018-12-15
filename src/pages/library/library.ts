@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
-import { CardBagAddPage } from './card-bag-add/card-bag-add';
+import { CardStackAddPage } from './card-stack-add/card-stack-add';
 import { CubeListPage } from '../../pages/library/cube-list/cube-list';
 import { CubeBagAddPage } from '../library/cube-bag-add/cube-bag-add';
 
@@ -48,7 +48,7 @@ export class LibraryPage {
 
   // right-top add button
   openCardBagAddPage() {
-    const AddModal = this.modalControl.create(CardBagAddPage)
+    const AddModal = this.modalControl.create(CardStackAddPage)
     AddModal.present()
   }
   openCubeBagAddPage() {
