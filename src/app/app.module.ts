@@ -22,10 +22,10 @@ import { SwipePage } from '../pages/swipe/swipe';
 import { SwipeCardsModule } from 'ng2-swipe-cards'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
-import { CubeListPage } from '../pages/library/cube-list/cube-list';
+import { CubeContentPage } from '../pages/library/cube-list/cube-content';
 
-import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
-import { CubeAddPage } from '../pages/library/cube-list/cube-add/cube-add';
+import { CubeStackAddPage } from '../pages/library/cube-stack-add/cube-stack-add';
+import { CubeContentAddPage } from '../pages/library/cube-list/cube-content-add/cube-content-add';
 import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
 import { PopoverComponent } from '../components/popover/popover';
 import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
@@ -45,9 +45,9 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     CubePage,
     InfinityPage,
     SettingsPage,
-    CubeListPage,
-    CubeBagAddPage,
-    CubeAddPage,
+    CubeContentPage,
+    CubeStackAddPage,
+    CubeContentAddPage,
     CubeEditPage,
     TabsPage,
     PopoverComponent,
@@ -72,9 +72,9 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     CardAddPage,
     InfinityPage,
     SettingsPage,
-    CubeListPage,
-    CubeBagAddPage,
-    CubeAddPage,
+    CubeContentPage,
+    CubeStackAddPage,
+    CubeContentAddPage,
     CubeEditPage,
     TabsPage,
     PopoverComponent

@@ -3,8 +3,8 @@ import { NavController, NavParams, ModalController, ItemSliding, Platform } from
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
-import { CubeListPage } from '../../pages/library/cube-list/cube-list';
-import { CubeBagAddPage } from '../library/cube-bag-add/cube-bag-add';
+import { CubeContentPage } from './cube-list/cube-content';
+import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,7 +43,7 @@ export class LibraryPage {
     this.nav.push(CardsPage, { itemInfo: item });
   }
   openCubeListPage(item) {
-    this.nav.push(CubeListPage, { itemInfo: item })
+    this.nav.push(CubeContentPage, { itemInfo: item })
   }
 
   // right-top add button
@@ -52,7 +52,7 @@ export class LibraryPage {
     AddModal.present()
   }
   openCubeBagAddPage() {
-    const AddModal = this.modalControl.create(CubeBagAddPage)
+    const AddModal = this.modalControl.create(CubeStackAddPage)
     AddModal.present()
   }
 
