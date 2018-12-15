@@ -3,7 +3,7 @@ import { NavController, NavParams, ModalController, ItemSliding, Platform } from
 import { CardsPage } from "../library/cards/cards"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
-import { CubeContentPage } from './cube-list/cube-content';
+import { CubeStackPage } from './cube-stack/cube-stack';
 import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
 
 @Component({
@@ -43,7 +43,7 @@ export class LibraryPage {
     this.nav.push(CardsPage, { itemInfo: item });
   }
   openCubeListPage(item) {
-    this.nav.push(CubeContentPage, { itemInfo: item })
+    this.nav.push(CubeStackPage, { itemInfo: item })
   }
 
   // right-top add button

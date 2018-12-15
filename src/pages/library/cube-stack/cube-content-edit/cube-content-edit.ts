@@ -3,10 +3,10 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../../providers/card-service/card-service';
 
 @Component({
-  selector: 'page-cube-edit',
-  templateUrl: 'cube-edit.html',
+  selector: 'page-cube-content-edit',
+  templateUrl: 'cube-content-edit.html',
 })
-export class CubeEditPage {
+export class CubeContentEditPage {
 
   cube: any
   isEmptyArray: boolean = false
