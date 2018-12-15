@@ -4,10 +4,10 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 
 
 @Component({
-  selector: 'page-card-edit',
-  templateUrl: 'card-edit.html',
+  selector: 'page-card-content-edit',
+  templateUrl: 'card-content-edit.html',
 })
-export class CardEditPage {
+export class CardContentEditPage {
 
   card: any
   cardBag: any

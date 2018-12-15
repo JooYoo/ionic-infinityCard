@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
-import { CardsPage } from "../library/cards/cards"
+import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
 import { CubeStackPage } from './cube-stack/cube-stack';
@@ -40,7 +40,7 @@ export class LibraryPage {
 
   // open specific card/cube Bag, display all cards or cubes
   openCardsPage(item) {
-    this.nav.push(CardsPage, { itemInfo: item });
+    this.nav.push(CardStackPage, { itemInfo: item });
   }
   openCubeListPage(item) {
     this.nav.push(CubeStackPage, { itemInfo: item })

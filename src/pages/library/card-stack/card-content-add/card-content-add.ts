@@ -3,10 +3,10 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../../providers/card-service/card-service';
 
 @Component({
-  selector: 'page-card-add',
-  templateUrl: 'card-add.html',
+  selector: 'page-card-content-add',
+  templateUrl: 'card-content-add.html',
 })
-export class CardAddPage {
+export class CardContentAddPage {
 
   cardBag: any
   textCn: string

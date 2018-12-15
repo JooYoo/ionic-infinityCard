@@ -13,10 +13,10 @@ import { LibraryPage } from '../pages/library/library';
 import { CubePage } from '../pages/cube/cube';
 import { InfinityPage } from '../pages/infinity/infinity';
 import { CardServiceProvider } from '../providers/card-service/card-service';
-import { CardsPage } from '../pages/library/cards/cards';
-import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
+import { CardStackPage } from '../pages/library/card-stack/card-stack';
+import { CardContentEditPage } from '../pages/library/card-stack/card-content-edit/card-content-edit';
 import { CardStackAddPage } from '../pages/library/card-stack-add/card-stack-add';
-import { CardAddPage } from '../pages/library/cards/card-add/card-add';
+import { CardContentAddPage } from '../pages/library/card-stack/card-content-add/card-content-add';
 import { SwipePage } from '../pages/swipe/swipe';
 
 import { SwipeCardsModule } from 'ng2-swipe-cards'
@@ -39,9 +39,9 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     SwipePage,
     LibraryPage,
     CardStackAddPage,
-    CardsPage,
-    CardEditPage,
-    CardAddPage,
+    CardStackPage,
+    CardContentEditPage,
+    CardContentAddPage,
     CubePage,
     InfinityPage,
     SettingsPage,
@@ -67,9 +67,9 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     LibraryPage,
     CardStackAddPage,
     CubePage,
-    CardsPage,
-    CardEditPage,
-    CardAddPage,
+    CardStackPage,
+    CardContentEditPage,
+    CardContentAddPage,
     InfinityPage,
     SettingsPage,
     CubeStackPage,

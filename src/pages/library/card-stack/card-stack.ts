@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, PopoverController } from 'ionic-angular';
-import { CardEditPage } from './card-edit/card-edit';
-import { CardAddPage } from './card-add/card-add';
+import { CardContentEditPage } from '../card-stack/card-content-edit/card-content-edit';
+import { CardContentAddPage } from '../card-stack/card-content-add/card-content-add';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
 import { LibraryPage } from '../library';
 import { PopoverComponent } from '../../../components/popover/popover';
 
 @Component({
-  selector: 'page-cards',
-  templateUrl: 'cards.html',
+  selector: 'page-card-stack',
+  templateUrl: 'card-stack.html',
 })
-export class CardsPage {
+export class CardStackPage {
 
   cardBag: any
 
@@ -30,12 +30,12 @@ export class CardsPage {
   }
 
   openEditModal(card) {
-    let editModal = this.modalCtrl.create(CardEditPage, { cardInfo: card, cardBagInfo: this.cardBag });
+    let editModal = this.modalCtrl.create(CardContentEditPage, { cardInfo: card, cardBagInfo: this.cardBag });
     editModal.present()
   }
 
   openAddModal() {
-    let addModal = this.modalCtrl.create(CardAddPage, { cardBagInfo: this.cardBag })
+    let addModal = this.modalCtrl.create(CardContentAddPage, { cardBagInfo: this.cardBag })
     addModal.present()
   }
 
