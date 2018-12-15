@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
+import { LibraryPage } from '../library';
 
 
 @Component({
@@ -11,6 +12,7 @@ export class CubeBagAddPage {
 
   titleCn: string
   titleDe: string
+  tabInfo: string
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -19,12 +21,12 @@ export class CubeBagAddPage {
   }
 
   dismiss(){
-    this.viewCtrl.dismiss()
+   // this.viewCtrl.dismiss()
+    this.tabInfo="cube"
+    this.navCtrl.push(LibraryPage,{tabInfo:this.tabInfo})
   }
 
-  addCubeBag(){
-    this.cardService.addCubeBag(this.titleCn, this.titleDe, "icon")
-    
+  addCubeStack(){
+    this.cardService.addCubeStack(this.titleCn, this.titleDe, "icon")
   }
-
 }

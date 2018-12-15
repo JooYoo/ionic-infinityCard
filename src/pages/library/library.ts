@@ -31,6 +31,7 @@ export class LibraryPage {
     this.tabInfo = navParams.get("tabInfo")
 
     // CubeStackEditPage: hit save Btn go back to CubeStackPage
+    console.log("libaray.tabInfo:" + this.tabInfo)
     if (this.tabInfo != undefined) {
       this.libraryMode = this.tabInfo
       return

@@ -11,14 +11,14 @@ export class CardServiceProvider {
 
   cardBags: CardBag[]
   failedCardBag: CardBag
-  cubeBags: CubeBag[]
+  cubeStacks: CubeBag[]
 
 
   constructor(public http: HttpModule) {
 
     this.mockCardBages()
     this.getFailedCardBag()
-    this.mockCubeBags()
+    this.mockCubeStack()
   }
 
   getFailedCardBag() {
@@ -58,7 +58,7 @@ export class CardServiceProvider {
     ]
   }
 
-  mockCubeBags() {
+  mockCubeStack() {
     var date = new Date();
 
     var cubesA = [
@@ -73,7 +73,7 @@ export class CardServiceProvider {
       new Cube(2, this.getDateNow(), ['方块三三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3'])
     ]
 
-    this.cubeBags = [
+    this.cubeStacks = [
       new CubeBag(0, '第一块包', 'CubeBagOne', cubesA, 'iconA'),
       new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
       new CubeBag(2, '第三块包', 'CubeBagThree', cubesA, 'iconA'),
@@ -88,20 +88,20 @@ export class CardServiceProvider {
   }
 
   //CubeBag: add, remove, edit
-  addCubeBag(titleCn: string, titleDe: string, icon: string) {
-    let id = this.cubeBags.length
+  addCubeStack(titleCn: string, titleDe: string, icon: string) {
+    let id = this.cubeStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
     var newCubes = null
-    this.cubeBags.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
+    this.cubeStacks.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
   }
   editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string) {
-    var editCubeBag = this.cubeBags.find(x => x == cubeBag)
+    var editCubeBag = this.cubeStacks.find(x => x == cubeBag)
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
   }
   removeCubeBag(cubeBag: any) {
-    this.cubeBags = this.cubeBags.filter(x => x != cubeBag)
+    this.cubeStacks = this.cubeStacks.filter(x => x != cubeBag)
   }
 
   // CardBag: add, remove, edit
@@ -122,7 +122,6 @@ export class CardServiceProvider {
   }
 
   // Cube: add, remove, edit 
-  //TODO: add different DeText for one Cube
   addCube(cubeBag: CubeBag, cubeTexts: string[]) {
 
     let _id = cubeBag.cubes.length;
@@ -132,12 +131,13 @@ export class CardServiceProvider {
     cubeBag.cubes.push(new Cube(_id, _date, _cubeTexts))
   }
   removeCube(cube: any, cubeBag: any) {
-    let targetCubeBag = this.cubeBags.find(x => x == cubeBag)
+    let targetCubeBag = this.cubeStacks.find(x => x == cubeBag)
     targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
   }
   editCube(cube: Cube, newCubeTexts: string[]) {
     cube.cubeTexts = newCubeTexts
   }
+
 
   // Card: add, remove, edit
   addCard(cardBag: CardBag, textCn: string, textDe: string) {
