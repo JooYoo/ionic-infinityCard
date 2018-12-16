@@ -30,7 +30,7 @@ import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-servic
 export class SwipePage {
 
   cards = []
-  studyCards:any
+  studyCards: any
   nextCardBag: number
   swipeIndex: number
   failedCardLength: any
@@ -53,8 +53,17 @@ export class SwipePage {
     platform: Platform) {
     this.isAndroid = platform.is('android')
 
-    
-    this.startNewRound()
+    this.studyCardSwitch()
+  }
+
+  studyCardSwitch() { // 1. come from library 2. this page random
+    this.studyCards = this.navParams.get("cardStack")
+    if (this.studyCards != undefined) {
+      this.initCards(this.studyCards.cards)
+    }
+    else {
+      this.startNewRound()
+    }
   }
 
   onCardInteract(event) {
@@ -88,15 +97,9 @@ export class SwipePage {
 
   // new Round Btn
   startNewRound() {
-    this.studyCards = this.navParams.get("cardStack")
-
-    if(this.studyCards != undefined){
-      this.initCards(this.studyCards.cards)
-    
-    }else{
-      this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
-      this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
-    }
+    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
+    this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
+    console.log("swipe startNewRound()")
   }
 
   // repeat Round Btn
