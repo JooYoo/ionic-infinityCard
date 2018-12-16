@@ -11,7 +11,7 @@
 
 <ion-content>
 
-<!-- card stack cover edit area -->
+  <!-- card stack cover edit area -->
   <ion-grid>
     <ion-row>
       <ion-col col-5>
@@ -19,42 +19,50 @@
           <div class="wrapper">
             <div class="card">
               <img class="back-img" src="https://picsum.photos/300">
-              <div class="card-title">{{cardBag.titleCn}}</div>
-              <div class="card-subtitle">{{cardBag.titleDe}}</div>
+              <div class="card-title">{{cardStack.titleCn}}</div>
+              <div class="card-subtitle">{{cardStack.titleDe}}</div>
             </div>
           </div>
+
         </ion-item>
       </ion-col>
       <ion-col col-7>
         <ion-list class="card-cover-edit">
           <ion-item>
-            <ion-input placeholder="{{cardBag.titleCn}}" [(ngModel)]="cardBag.titleCn" clearInput></ion-input>
+            <ion-input placeholder="{{cardStack.titleCn}}" [(ngModel)]="cardStack.titleCn" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input placeholder="{{cardBag.titleDe}}" [(ngModel)]="cardBag.titleDe" clearInput></ion-input>
+            <ion-input placeholder="{{cardStack.titleDe}}" [(ngModel)]="cardStack.titleDe" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <button class="card-cover-edit-btn" 
-                    ion-button small color="danger" round outline
-                    (click) = "presentPopover($event)">
-              <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
-            </button>
-            <button class="card-cover-edit-btn" 
-                    ion-button small color="primary" round outline
-                    (click)="editCardBag()">
-              <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
-            </button>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
+
+    <ion-row id="row-btns">
+      <ion-col col-5>
+        <button id="card-study-btn" ion-button color="light" small round (click)="toSwipePage()">
+          <ion-icon class="card-cover-icon" name="ios-school-outline"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-7>
+        <button class="card-cover-edit-btn" ion-button small color="danger" round outline (click)="presentPopover($event)">
+          <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
+        </button>
+        <button class="card-cover-edit-btn" ion-button small color="primary" round outline (click)="editCardBag()">
+          <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
   </ion-grid>
 
   <hr>
 
 
   <ion-list>
-    <ion-item-sliding *ngFor="let card of cardBag.cards" #slidingItem>
+    <ion-item-sliding *ngFor="let card of cardStack.cards" #slidingItem>
 
       <ion-item (click)="openEditModal(card)">
         <h2>{{card.textCn}}</h2>
