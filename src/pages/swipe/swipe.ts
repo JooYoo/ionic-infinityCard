@@ -30,6 +30,7 @@ import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-servic
 export class SwipePage {
 
   cards = []
+  studyCards:any
   nextCardBag: number
   swipeIndex: number
   failedCardLength: any
@@ -50,10 +51,9 @@ export class SwipePage {
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
     platform: Platform) {
-
     this.isAndroid = platform.is('android')
 
-
+    
     this.startNewRound()
   }
 
@@ -68,10 +68,8 @@ export class SwipePage {
 
     //TODO: save current card into new stack
     this.swipeService.addToFailedCardStack(event.like, currentCard)
-    console.log('failedcardLength:')
-    console.log(this.cardService.failedCardBag.cards.length)
-   this.failedCardLength = this.cardService.failedCardBag.cards.length
-    
+    this.failedCardLength = this.cardService.failedCardBag.cards.length
+
     // back flip to front
     if (this.isFlip == 'goFlip') {
       this.isFlip = 'goQuickBack';
@@ -84,18 +82,25 @@ export class SwipePage {
   }
 
   // review failed Btn
-  reviewFailedCards(){
+  reviewFailedCards() {
     this.initCards(this.cardService.failedCardBag.cards)
   }
 
   // new Round Btn
   startNewRound() {
-    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
-    this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
+    this.studyCards = this.navParams.get("cardStack")
+
+    if(this.studyCards != undefined){
+      this.initCards(this.studyCards.cards)
+    
+    }else{
+      this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
+      this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
+    }
   }
 
   // repeat Round Btn
-  repeatRound(){
+  repeatRound() {
     this.initCards(this.cards)
   }
 
@@ -104,7 +109,6 @@ export class SwipePage {
     this.swipeIndex = 0
     this.attendants = [];
     this.cards = cards
-    // this.cards = this.cardService.cardBags[this.nextCardBag].cards
 
     for (let i = 0; i < this.cards.length; i++) {
       this.attendants.push({

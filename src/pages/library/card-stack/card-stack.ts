@@ -5,6 +5,7 @@ import { CardContentAddPage } from '../card-stack/card-content-add/card-content-
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
 import { LibraryPage } from '../library';
 import { PopoverComponent } from '../../../components/popover/popover';
+import { SwipePage } from '../../../pages/swipe/swipe';
 
 @Component({
   selector: 'page-card-stack',
@@ -12,48 +13,47 @@ import { PopoverComponent } from '../../../components/popover/popover';
 })
 export class CardStackPage {
 
-  cardBag: any
+  cardStack: any
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public cardService: CardServiceProvider,
     private popoverCtrl: PopoverController) {
-    this.cardBag = navParams.get('itemInfo')
+    this.cardStack = navParams.get('itemInfo')
   }
 
   presentPopover(ev) {
-    let popover = this.popoverCtrl.create(PopoverComponent, { cardStackInfo: this.cardBag });
+    let popover = this.popoverCtrl.create(PopoverComponent, { cardStackInfo: this.cardStack });
     popover.present({
       ev: ev
     });
   }
 
   openEditModal(card) {
-    let editModal = this.modalCtrl.create(CardContentEditPage, { cardInfo: card, cardBagInfo: this.cardBag });
+    let editModal = this.modalCtrl.create(CardContentEditPage, { cardInfo: card, cardBagInfo: this.cardStack });
     editModal.present()
   }
 
   openAddModal() {
-    let addModal = this.modalCtrl.create(CardContentAddPage, { cardBagInfo: this.cardBag })
+    let addModal = this.modalCtrl.create(CardContentAddPage, { cardBagInfo: this.cardStack })
     addModal.present()
   }
 
-  // removeCardBag(item) {
-  //   this.cardService.removeCardBag(item)
-  //   this.nav.push(LibraryPage)
-  // }
-
   editCardBag() {
-    this.cardService.editCardBag(this.cardBag, this.cardBag.titleCn, this.cardBag.titleDe)
+    this.cardService.editCardBag(this.cardStack, this.cardStack.titleCn, this.cardStack.titleDe)
     this.nav.push(LibraryPage)
   }
 
   removeCard(card) {
-    this.cardService.removeCard(card, this.cardBag)
+    this.cardService.removeCard(card, this.cardStack)
   }
 
   closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
+  }
+
+  toSwipePage(){
+   this.nav.push(SwipePage, {cardStack: this.cardStack})
   }
 }
