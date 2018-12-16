@@ -25,8 +25,8 @@ export class CubePage {
 
   getRandomNext() {
     // get random CubeBag
-    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeBags.length)
-    this.cubes = this.cardService.cubeBags[randomIndex].cubes
+    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
+    this.cubes = this.cardService.cubeStacks[randomIndex].cubes
     // console.log("random cubeBag:" + randomIndex)
     // console.log(this.cubes)
 

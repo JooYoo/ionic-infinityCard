@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Card Stack</ion-title>
+    <ion-buttons end>
+      <button id="addBtn" (click)="openAddModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<!-- card stack cover edit area -->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5>
+        <ion-item no-lines>
+          <div class="wrapper">
+            <div class="card">
+              <img class="back-img" src="https://picsum.photos/300">
+              <div class="card-title">{{cardBag.titleCn}}</div>
+              <div class="card-subtitle">{{cardBag.titleDe}}</div>
+            </div>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col col-7>
+        <ion-list class="card-cover-edit">
+          <ion-item>
+            <ion-input placeholder="{{cardBag.titleCn}}" [(ngModel)]="cardBag.titleCn" clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="{{cardBag.titleDe}}" [(ngModel)]="cardBag.titleDe" clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <button class="card-cover-edit-btn" 
+                    ion-button small color="danger" round outline
+                    (click) = "presentPopover($event)">
+              <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
+            </button>
+            <button class="card-cover-edit-btn" 
+                    ion-button small color="primary" round outline
+                    (click)="editCardBag()">
+              <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
+            </button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <hr>
+
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let card of cardBag.cards" #slidingItem>
+
+      <ion-item (click)="openEditModal(card)">
+        <h2>{{card.textCn}}</h2>
+        <p>{{card.textDe}}</p>
+        <ion-note item-end>{{card.date}}</ion-note>
+      </ion-item>
+
+      <ion-item-options side="left">
+        <button ion-button color="light" (click)="openEditModal(card)" (click)="closeSlidingItem(slidingItem)">
+          <ion-icon name="build"></ion-icon>
+          &nbsp;&nbsp;edit&nbsp;&nbsp;
+        </button>
+        <button ion-button color="danger" (click)="removeCard(card)">
+          <ion-icon name="trash"></ion-icon>
+          delete
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>
+
+
+
+<!-- <ion-item-sliding *ngFor="let card of item.cards">
+
+    <button ion-item>
+      <h2>{{card.textCn}}</h2>
+      <p>{{card.textDe}}</p>
+      <ion-note item-end>{{card.date}}</ion-note>
+    </button>
+    <ion-item-options side="left">
+      <button ion-button color="light">
+        <ion-icon name="build"></ion-icon>
+      </button>
+    </ion-item-options>
+
+  </ion-item-sliding> -->

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
-
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 
@@ -14,21 +13,22 @@ import { LibraryPage } from '../pages/library/library';
 import { CubePage } from '../pages/cube/cube';
 import { InfinityPage } from '../pages/infinity/infinity';
 import { CardServiceProvider } from '../providers/card-service/card-service';
-import { CardsPage } from '../pages/library/cards/cards';
-import { CardEditPage } from '../pages/library/cards/card-edit/card-edit';
-import { CardBagAddPage } from '../pages/library/card-bag-add/card-bag-add';
-import { CardAddPage } from '../pages/library/cards/card-add/card-add';
-import { CardBagEditPage } from '../pages/library/card-bag-edit/card-bag-edit';
+import { CardStackPage } from '../pages/library/card-stack/card-stack';
+import { CardContentEditPage } from '../pages/library/card-stack/card-content-edit/card-content-edit';
+import { CardStackAddPage } from '../pages/library/card-stack-add/card-stack-add';
+import { CardContentAddPage } from '../pages/library/card-stack/card-content-add/card-content-add';
 import { SwipePage } from '../pages/swipe/swipe';
 
 import { SwipeCardsModule } from 'ng2-swipe-cards'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
-import { CubeListPage } from '../pages/library/cube-list/cube-list';
-import { CubeBagEditPage } from '../pages/library/cube-bag-edit/cube-bag-edit';
-import { CubeBagAddPage } from '../pages/library/cube-bag-add/cube-bag-add';
-import { CubeAddPage } from '../pages/library/cube-list/cube-add/cube-add';
-import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
+import { CubeStackPage } from '../pages/library/cube-stack/cube-stack';
+
+import { CubeStackAddPage } from '../pages/library/cube-stack-add/cube-stack-add';
+import { CubeContentAddPage } from '../pages/library/cube-stack/cube-content-add/cube-content-add';
+import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-edit/cube-content-edit';
+import { PopoverComponent } from '../components/popover/popover';
+import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
 
 
 
@@ -38,20 +38,20 @@ import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
     MyApp,
     SwipePage,
     LibraryPage,
-    CardBagAddPage,
-    CardBagEditPage,
-    CardsPage,
-    CardEditPage,
-    CardAddPage,
+    CardStackAddPage,
+    CardStackPage,
+    CardContentEditPage,
+    CardContentAddPage,
     CubePage,
     InfinityPage,
     SettingsPage,
-    CubeListPage,
-    CubeBagAddPage,
-    CubeBagEditPage,
-    CubeAddPage,
-    CubeEditPage,
+    CubeStackPage,
+    CubeStackAddPage,
+    CubeContentAddPage,
+    CubeContentEditPage,
     TabsPage,
+    PopoverComponent,
+    CubeListIconComponent
   ],
   imports: [
     BrowserModule,
@@ -65,20 +65,19 @@ import { CubeEditPage } from '../pages/library/cube-list/cube-edit/cube-edit';
     MyApp,
     SwipePage,
     LibraryPage,
-    CardBagAddPage,
-    CardBagEditPage,
+    CardStackAddPage,
     CubePage,
-    CardsPage,
-    CardEditPage,
-    CardAddPage,
+    CardStackPage,
+    CardContentEditPage,
+    CardContentAddPage,
     InfinityPage,
     SettingsPage,
-    CubeListPage,
-    CubeBagAddPage,
-    CubeBagEditPage,
-    CubeAddPage,
-    CubeEditPage,
-    TabsPage
+    CubeStackPage,
+    CubeStackAddPage,
+    CubeContentAddPage,
+    CubeContentEditPage,
+    TabsPage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,

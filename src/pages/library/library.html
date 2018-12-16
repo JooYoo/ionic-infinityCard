@@ -34,68 +34,62 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content no-padding>
   <!-- <ion-searchbar></ion-searchbar> -->
   <div [ngSwitch]="libraryMode">
 
     <!-- swipe library mode -->
     <div *ngSwitchCase="'swipe'">
-      <ion-list no-lines style="border: none;">
-        <ion-item-sliding *ngFor="let item of cardService.cardBags" #slidingItem>
-          <button ion-item icon-start (click)="openCardsPage(item)">
-            <h2>{{item.titleCn}}</h2>
-            <p>{{item.titleDe}}</p>
-          </button>
-          <ion-item-options side="left">
-            <button ion-button color="light" (click)="openCardBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
-              <ion-icon name="build"></ion-icon>
-              &nbsp;&nbsp;edit&nbsp;&nbsp;
-            </button>
-            <button ion-button color="danger" (click)="cardBagDelete(item)">
-              <ion-icon name="trash"></ion-icon>
-              delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+
+      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of cardService.cardBags">
+
+            <div class="wrapper">
+              <div class="card" (click)="openCardsPage(item)">
+                <img class="back-img" src="https://picsum.photos/311">
+                <div class="card-title">{{item.titleCn}}</div>
+                <div class="card-subtitle">{{item.titleDe}}</div>
+              </div>
+            </div>
+
+            <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
+              <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
+            </div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
 
     <!-- cube library mode -->
     <div *ngSwitchCase="'cube'">
-      <ion-list no-lines style="border: none;">
-        <ion-item-sliding *ngFor="let item of cardService.cubeBags" #slidingItem>
-          <button ion-item icon-start (click)="openCubeListPage(item)">
-            <h2>{{item.titleCn}}</h2>
-            <p>{{item.titleDe}}</p>
-          </button>
-          <ion-item-options side="left">
-            <button ion-button color="light" (click)="openCubeBagEditPage(item)" (click)="closeSlidingItem(slidingItem)">
-              <ion-icon name="build"></ion-icon>
-              &nbsp;&nbsp;edit&nbsp;&nbsp;
-            </button>
-            <!-- TODO: cubeBagDelete() -->
-            <button ion-button color="danger" (click)="cubeBagDelete(item)">
-              <ion-icon name="trash"></ion-icon>
-              delete
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col *ngFor="let item of cardService.cubeStacks">
+
+            <div class="cubes-card-wrapper" (click)="openCubeListPage(item)">
+              <div class="cubes-card-inner-wrapper">
+                <img class="cubes-card-img" src="../../assets/imgs/cubes.png">
+
+                <div class="progress">
+                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px;"></div>
+                </div>
+
+                <div class="cubes-card-title">{{item.titleCn}}</div>
+                <div class="cubes-card-subtitle">{{item.titleDe}}</div>
+              </div>
+
+            </div>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </div>
-
-
   </div>
 </ion-content>
-
-
-
-
-
-
-<!-- <ion-fab right bottom>
-    <button ion-fab color="light" 
-            (click)="openCardBagDetailPage()"
-            style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);">
-            <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab> -->

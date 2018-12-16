@@ -32,6 +32,7 @@ export class SwipePage {
   cards = []
   nextCardBag: number
   swipeIndex: number
+  failedCardLength: any
 
   cardBagMode: string = "standard"
   isAndroid: boolean = false
@@ -64,14 +65,13 @@ export class SwipePage {
     // change card status 
     this.swipeService.changeCardStatue(swipeResult, currentCard)
     this.swipeIndex++
-    // console.log("swipeResult:" + event.like);
-    // console.log(this.cards)
 
     //TODO: save current card into new stack
     this.swipeService.addToFailedCardStack(event.like, currentCard)
-    console.log(this.cardService.failedCardBag)
-    console.log('------')
-
+    console.log('failedcardLength:')
+    console.log(this.cardService.failedCardBag.cards.length)
+   this.failedCardLength = this.cardService.failedCardBag.cards.length
+    
     // back flip to front
     if (this.isFlip == 'goFlip') {
       this.isFlip = 'goQuickBack';
@@ -85,7 +85,6 @@ export class SwipePage {
 
   // review failed Btn
   reviewFailedCards(){
-    console.log('in reviewFailedCards()')
     this.initCards(this.cardService.failedCardBag.cards)
   }
 

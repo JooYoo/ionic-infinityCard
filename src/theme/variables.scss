@@ -42,6 +42,7 @@ $colors: (
 );
 
 
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -71,6 +72,13 @@ $colors: (
 // default are overridden.
 
 @import "ionic.theme.default";
+$text-input-highlight-color-valid: #488aff;
+
+
+$popover-md-width:  185px;
+$popover-ios-width: 185px;
+$popover-wp-width:  185px;
+$popover-md-border-radius: 10px;
 
 
 // Ionicons
