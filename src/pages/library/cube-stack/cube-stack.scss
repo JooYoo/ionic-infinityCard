@@ -24,17 +24,39 @@ page-cube-stack {
   }
 
   .cube-icon {
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 15px;
     -webkit-filter: drop-shadow(5px 5px 5px rgb(184, 184, 184));
     filter: drop-shadow(3px 3px 4px rgb(184, 184, 184));
   }
 
+  .cube-cover-textfild {
+    margin-top: 70px;
+    margin-right: 50px;
+  }
+
   .cube-cover-edit-btn {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
   }
 
-  .cube-cover-icon {
+  .cube-cover-btn-icon {
     font-size: 30px;
+  }
+
+  #cube-study-btn {
+    margin-top: 10px;
+    margin-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #row-btns {
+    margin-top: -40px;
+    margin-bottom: 10px;
+    padding-top: 10px;
   }
 }

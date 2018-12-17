@@ -13,31 +13,38 @@ export class CubePage {
 
   cubes: Cube[]
   cube: Cube
+  studyCubeStack: any
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider) {
 
-    this.getRandomNext()
+    this.studyCubeSwitch()
   }
 
+  // 如果是从lib.cubeStack来的，那么提取该Stack中的第一个Cube里显示；
+  // 否则随便从lib.cubeStacks抽一个stack, 显示该Stack第一个Cube
+  studyCubeSwitch() { 
+    this.studyCubeStack = this.navParams.get("cubeStack")
+    if (this.studyCubeStack != undefined) {
+      this.cube = this.studyCubeStack.cubes[0]
+    } else {
+      this.getRandomNext()
+    }
+  }
 
   getRandomNext() {
     // get random CubeBag
     let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
     this.cubes = this.cardService.cubeStacks[randomIndex].cubes
-    // console.log("random cubeBag:" + randomIndex)
-    // console.log(this.cubes)
 
-    // get random Cube
-    let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)
+    // TODO: 之前 get random Cube；现在 get 1st cube in this CubeStack 
+    // let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)
+    let cubeIndex = 0;
     this.cube = this.cubes[cubeIndex]
-    // console.log("random cube:" + cubeIndex)
-    // console.log(this.cube)
-    // console.log("----------")
   }
-  
+
   ngAfterViewInit() {
     var swiper = new Swiper('.swiper-container', {
       effect: 'cube',

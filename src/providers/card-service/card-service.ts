@@ -70,20 +70,18 @@ export class CardServiceProvider {
     var cubesB = [
       new Cube(0, this.getDateNow(), ['方块二一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
       new Cube(1, this.getDateNow(), ['方块二二', 'cubeTwo', 'cubeZwei', 'cubeEr', 'cube2']),
+      new Cube(2, this.getDateNow(), ['方块二三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3'])
+    ]
+    var cubesC = [
+      new Cube(0, this.getDateNow(), ['方块三一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
+      new Cube(1, this.getDateNow(), ['方块三二', 'cubeTwo', 'cubeZwei', 'cubeEr', 'cube2']),
       new Cube(2, this.getDateNow(), ['方块三三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3'])
     ]
 
     this.cubeStacks = [
       new CubeBag(0, '第一块包', 'CubeBagOne', cubesA, 'iconA'),
       new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
-      new CubeBag(2, '第三块包', 'CubeBagThree', cubesA, 'iconA'),
-      new CubeBag(3, '第四块包', 'CubeBagFour', cubesB, 'iconB'),
-      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
-      new CubeBag(4, '第五块包', 'CubeBagFive', cubesA, 'iconA'),
-
+      new CubeBag(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
     ]
   }
 
@@ -173,7 +171,7 @@ export class CardServiceProvider {
       "#0be881",
       "#485460",
       "#ffdd59",
-      
+
       "#ffd32a",
       "#ff3f34",
       "#808e9b",

@@ -5,6 +5,7 @@ import { CubeContentEditPage } from './cube-content-edit/cube-content-edit';
 import { CubeContentAddPage } from './cube-content-add/cube-content-add';
 import { LibraryPage } from '../library';
 import { PopoverComponent } from '../../../components/popover/popover';
+import { CubePage } from '../../../pages/cube/cube';
 
 
 @Component({
@@ -51,9 +52,13 @@ export class CubeStackPage {
     this.cardService.removeCube(cube, this.cubeStack)
   }
 
-  editCubeBag() {
+  editCubeStack() {
     this.cardService.editCubeBag(this.cubeStack, this.cubeStack.titleCn, this.cubeStack.titleDe);
     this.navCtrl.push(LibraryPage, { tabInfo: this.tabInfo });
+  }
+
+  toStudyCubePage(){
+    this.navCtrl.push(CubePage, {cubeStack: this.cubeStack})
   }
 
 }

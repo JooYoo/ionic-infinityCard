@@ -26,7 +26,7 @@
         </ion-item>
       </ion-col>
       <ion-col col-7>
-        <ion-list class="card-cover-edit">
+        <ion-list class="cube-cover-textfild">
           <ion-item>
             <ion-input placeholder="{{cubeStack.titleCn}}" [(ngModel)]="cubeStack.titleCn" clearInput></ion-input>
           </ion-item>
@@ -34,16 +34,28 @@
             <ion-input placeholder="{{cubeStack.titleDe}}" [(ngModel)]="cubeStack.titleDe" clearInput></ion-input>
           </ion-item>
           <ion-item>
-            <button class="cube-cover-edit-btn" ion-button small color="danger" round outline (click)="presentPopover($event)">
-              <ion-icon class="cube-cover-icon" name="ios-trash-outline"></ion-icon>
-            </button>
-            <button class="cube-cover-edit-btn" ion-button small color="primary" round outline (click)="editCubeBag()">
-              <ion-icon class="cube-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
-            </button>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
+
+    <ion-row id="row-btns">
+      <ion-col col-5>
+        <button id="cube-study-btn" ion-button color="light" small round (click)="toStudyCubePage()">
+          <ion-icon class="cube-cover-btn-icon" name="ios-school-outline"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-7>
+        <button class="cube-cover-edit-btn" ion-button small color="danger" round outline (click)="presentPopover($event)">
+          <ion-icon class="cube-cover-btn-icon" name="ios-trash-outline"></ion-icon>
+        </button>
+        <button class="cube-cover-edit-btn" ion-button small color="primary" round outline (click)="editCubeStack()">
+          <ion-icon class="cube-cover-btn-icon" name="ios-checkmark-circle-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+
   </ion-grid>
 
   <hr>
