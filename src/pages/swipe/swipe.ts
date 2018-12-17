@@ -99,7 +99,6 @@ export class SwipePage {
   startNewRound() {
     this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
     this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
-    console.log("swipe startNewRound()")
   }
 
   // repeat Round Btn
