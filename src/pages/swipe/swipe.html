@@ -25,8 +25,12 @@
     <!-- card standard mode -->
     <div *ngSwitchCase="'standard'">
 
-      <label class="flipContainer" *ngIf="ready">
+      <!-- TODO: Study and mistake has id to control the width percent-->
+      <div class="progress">
+        <div class="progress-bar bg-warning"></div>
+      </div>
 
+      <label class="flipContainer" *ngIf="ready">
 
         <sc-card class="sc-card" *ngFor="let attendant of attendants" [orientation]="cardDirection" [tinder-card]="cardOverlay"
           [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent" (onLike)="onCardInteract($event)">
@@ -40,7 +44,7 @@
 
       </label>
 
-      <!-- next and repeat Btn -->
+      <!-- next & repeat Btn -->
       <div text-center>
         <button id="new-round-btn" ion-button round large (click)="startNewRound()" color="light">
           <ion-icon name="fastforward"></ion-icon>
@@ -53,6 +57,12 @@
 
     <!-- card mistake mode -->
     <div *ngSwitchCase="'mistake'">
+
+      
+      <!-- TODO: Study and mistake has id to control the width percent-->
+      <div class="progress">
+          <div class="progress-bar bg-warning"></div>
+        </div>
 
       <!-- card mistake mode -->
       <label class="flipContainer" *ngIf="ready">

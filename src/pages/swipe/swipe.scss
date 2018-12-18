@@ -10,7 +10,7 @@ page-swipe {
     left: 50%;
     top: 50%;
     cursor: pointer;
-    margin-top: 200px;
+    margin-top: 170px;
     -webkit-perspective: 1000px;
     perspective: 1000px;
     -webkit-transform-style: preserve-3d;
@@ -84,10 +84,19 @@ page-swipe {
     margin-bottom: 10px;
   }
 
+  .progress{
+    margin-top: 30px;
+    border-radius: 200px;
+  }
+
+  .progress-bar{
+    width:40%; 
+    border-radius:200px;
+  }
 
 
   #new-round-btn {
-    margin-top: -40px;
+    margin-top: -60px;
     margin-right: 20px;
     width: 80px;
     height: 80px;
@@ -95,7 +104,7 @@ page-swipe {
   }
 
   #repeat-btn {
-    margin-top: -40px;
+    margin-top: -60px;
     margin-left: 10px;
     width: 80px;
     height: 80px;
