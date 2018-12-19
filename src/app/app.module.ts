@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LibraryPage } from '../pages/library/library';
@@ -29,9 +28,6 @@ import { CubeContentAddPage } from '../pages/library/cube-stack/cube-content-add
 import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-edit/cube-content-edit';
 import { PopoverComponent } from '../components/popover/popover';
 import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
-
-
-
 
 @NgModule({
   declarations: [

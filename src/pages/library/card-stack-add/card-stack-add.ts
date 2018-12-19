@@ -26,7 +26,7 @@ export class CardStackAddPage {
   }
 
   addCardBag(){
-    this.cardService.addCardBag(this.titleCn, this.titleDe, "icon")
+    this.cardService.addCardBag(this.titleCn, this.titleDe, "icon",0)
   }
 
 }
