@@ -26,8 +26,29 @@
     <div *ngSwitchCase="'standard'">
 
       <!-- TODO: Study and mistake has id to control the width percent-->
-      <div class="progress">
-        <div class="progress-bar"></div>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <div class="progress">
+              <div class="progress-bar" [style.width.%]="progressValue"></div>
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div id="mistake-filing">
+              <button (click)="onFiling()" style="background:transparent;">
+                <ion-icon name="ios-filing-outline">
+                    <ion-badge id="filing-badge" item-end color="danger" *ngIf="failedCardLength > 0">{{failedCardLength}}</ion-badge>
+                </ion-icon>
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+      <div id="cardStack-title">
+        {{cardStack.titleDe}}
       </div>
 
       <label class="flipContainer" *ngIf="ready">
@@ -59,9 +80,9 @@
     <div *ngSwitchCase="'mistake'">
 
       <!-- TODO: Study and mistake has id to control the width percent-->
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
+      <!-- <div class="progress">
+        <div class="progress-bar" [style.width.%]="progressvalue"></div>
+      </div> -->
 
       <!-- card mistake mode -->
       <label class="flipContainer" *ngIf="ready">

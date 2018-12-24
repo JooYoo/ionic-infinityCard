@@ -51,12 +51,12 @@
               <div class="card" (click)="openCardsPage(item)">
                 <img class="back-img" src="https://picsum.photos/314">
                 <div class="card-title">{{item.titleCn}}</div>
-                <div class="card-subtitle">{{item.titleDe}}</div>
+                <div class="card-subtitle">{{item.progress}}</div>
               </div>
             </div>
 
             <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
-              <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
+              <div class="progress-bar bg-warning" style="border-radius:120px;" [style.width.%]='item.progress' ></div>
             </div>
 
           </ion-col>

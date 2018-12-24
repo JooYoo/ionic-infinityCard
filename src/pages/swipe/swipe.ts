@@ -34,6 +34,8 @@ export class SwipePage {
   nextCardBag: number
   swipeIndex: number
   failedCardLength: any
+  progressValue: number = 0
+  cardStack:any
 
   cardBagMode: string = "standard"
   isAndroid: boolean = false
@@ -56,9 +58,14 @@ export class SwipePage {
     this.studyCardSwitch()
   }
 
+  onFiling(){
+    console.log('in Filing')
+  }
+
   studyCardSwitch() { // 1. come from library 2. this page random
     this.studyCards = this.navParams.get("cardStack")
     if (this.studyCards != undefined) {
+      this.cardStack=this.studyCards
       this.initCards(this.studyCards.cards)
     }
     else {
@@ -73,16 +80,15 @@ export class SwipePage {
 
     // change card status 
     this.swipeService.changeCardStatue(swipeResult, currentCard)
+
+    // progress value
+    this.progressValue += this.swipeService.onProgress(swipeResult, this.cards)
+    this.cardStack.progress=this.progressValue
     this.swipeIndex++
 
     //TODO: save current card into new stack
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
-
-    // back flip to front
-    if (this.isFlip == 'goFlip') {
-      this.isFlip = 'goQuickBack';
-    }
   }
 
   isFlip: string = 'goBack';
@@ -97,12 +103,16 @@ export class SwipePage {
 
   // new Round Btn
   startNewRound() {
+   
     this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
-    this.initCards(this.cardService.cardStacks[this.nextCardBag].cards)
+    this.cardStack=this.cardService.cardStacks[this.nextCardBag]
+    this.initCards(this.cardStack.cards)
+    this.cardStack.progress=this.progressValue
   }
 
   // repeat Round Btn
   repeatRound() {
+    this.cardStack.progress=this.progressValue
     this.initCards(this.cards)
   }
 
@@ -122,6 +132,8 @@ export class SwipePage {
       });
     }
     this.ready = true;
+
+    this.progressValue = 0
   }
 
 }

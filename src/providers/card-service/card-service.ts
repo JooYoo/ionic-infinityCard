@@ -23,7 +23,7 @@ export class CardServiceProvider {
 
   getFailedCardBag() {
     let failedcards = []
-    this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX',0)
+    this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
 
@@ -49,12 +49,12 @@ export class CardServiceProvider {
     ]
 
     this.cardStacks = [
-      new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA",0),
-      new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB',0),
-      new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC',0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC',0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC',0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC',0)
+      new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
+      new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
+      new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0)
     ]
   }
 

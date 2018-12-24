@@ -8,7 +8,14 @@ import { CardServiceProvider } from '../card-service/card-service';
 @Injectable()
 export class SwipeServiceProvider {
   constructor(public http: HttpModule,
-              public cardService: CardServiceProvider) {
+    public cardService: CardServiceProvider) {
+  }
+
+  onProgress(swipeResult: boolean, attents: any) {
+
+   
+      return 1 / attents.length * 100
+   
   }
 
   changeCardStatue(swipeResult: boolean, currentCard: Card) {
@@ -24,15 +31,15 @@ export class SwipeServiceProvider {
     return (Math.floor(Math.random() * itemLength))
   }
 
-  addToFailedCardStack(isOk: boolean, currentCard: Card){
+  addToFailedCardStack(isOk: boolean, currentCard: Card) {
 
-    let isExist = this.cardService.failedCardBag.cards.filter(x=>x == currentCard).length > 0 
+    let isExist = this.cardService.failedCardBag.cards.filter(x => x == currentCard).length > 0
 
-    if(!isOk && !isExist){
+    if (!isOk && !isExist) {
       this.cardService.failedCardBag.cards.push(currentCard)
     }
-    else if(isOk){
-      this.cardService.failedCardBag.cards = this.cardService.failedCardBag.cards.filter(x=>x != currentCard)
+    else if (isOk) {
+      this.cardService.failedCardBag.cards = this.cardService.failedCardBag.cards.filter(x => x != currentCard)
     }
   }
 
