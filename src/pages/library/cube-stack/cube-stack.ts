@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ItemSliding, ModalController, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, ItemSliding, ModalController, PopoverController, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
 import { CubeContentEditPage } from './cube-content-edit/cube-content-edit';
 import { CubeContentAddPage } from './cube-content-add/cube-content-add';
@@ -21,7 +21,8 @@ export class CubeStackPage {
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
     public modalControl: ModalController,
-    public cardService: CardServiceProvider) {
+    public cardService: CardServiceProvider,
+    public viewCtrl: ViewController) {
 
     this.cubeStack = navParams.get('itemInfo')
     this.tabInfo = "cube"
@@ -32,6 +33,11 @@ export class CubeStackPage {
     popover.present({
       ev: ev
     });
+
+    popover.onDidDismiss(()=>{
+      this.cardService.removeCubeBag(this.cubeStack)
+      this.viewCtrl.dismiss()
+    })
   }
 
   closeSlidingItem(slidingItem: ItemSliding) {

@@ -99,8 +99,11 @@ export class CardServiceProvider {
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
   }
-  removeCubeBag(cubeBag: any) {
-    this.cubeStacks = this.cubeStacks.filter(x => x != cubeBag)
+  removeCubeBag(cubeStack: any) {
+    let index = this.cubeStacks.indexOf(cubeStack)
+    if (index > -1) {
+      this.cubeStacks.splice(cubeStack, 1)
+    }
   }
 
   // CardBag: add, remove, edit
@@ -112,7 +115,12 @@ export class CardServiceProvider {
     this.cardStacks.push(new CardStack(id, title_Cn, title_De, newCards, icon, onProgress))
   }
   removeCardBag(cardBag: any) {
-    this.cardStacks = this.cardStacks.filter(x => x != cardBag)
+    // this.cardStacks = this.cardStacks.filter(x => x != cardBag)
+
+    let index = this.cardStacks.indexOf(cardBag)
+    if (index > -1) {
+      this.cardStacks.splice(index, 1)
+    }
   }
   editCardBag(cardBag: CardStack, newTitleCn: string, newTitleDe: string) {
     var editCardBag = this.cardStacks.find(x => x == cardBag)

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, PopoverController, ViewController } from 'ionic-angular';
 import { CardContentEditPage } from '../card-stack/card-content-edit/card-content-edit';
 import { CardContentAddPage } from '../card-stack/card-content-add/card-content-add';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
@@ -19,7 +19,8 @@ export class CardStackPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public cardService: CardServiceProvider,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private viewCtrl: ViewController) {
     this.cardStack = navParams.get('itemInfo')
   }
 
@@ -28,6 +29,17 @@ export class CardStackPage {
     popover.present({
       ev: ev
     });
+
+    popover.onDidDismiss(() => {
+       this.cardService.removeCardBag(this.cardStack)
+      this.viewCtrl.dismiss()
+    })
+  }
+
+  testRemove() {
+    this.cardService.removeCardBag(this.cardStack)
+    this.viewCtrl.dismiss()
+    console.log(this.cardService.cardStacks.length)
   }
 
   openEditModal(card) {
@@ -53,7 +65,7 @@ export class CardStackPage {
     slidingItem.close()
   }
 
-  toSwipePage(){
-   this.nav.push(SwipePage, {cardStack: this.cardStack})
+  toSwipePage() {
+    this.nav.push(SwipePage, { cardStack: this.cardStack })
   }
 }
