@@ -3,9 +3,7 @@
     <ion-title>{{ cubeStack.titleDe }}</ion-title>
     <ion-buttons end>
       <!-- TODO: "openAddModal()" -->
-      <button id="addBtn" (click)="openAddModal()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+      
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -87,5 +85,11 @@
 
     </ion-item-sliding>
   </ion-list>
+
+  <ion-fab bottom right>
+    <button ion-fab color="light" id="addBtn" (click)="openAddModal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 
 </ion-content>
