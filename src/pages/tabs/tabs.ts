@@ -4,7 +4,6 @@ import { LibraryPage } from '../library/library';
 import { CubePage } from '../cube/cube';
 import { InfinityPage } from '../infinity/infinity';
 import { SwipePage } from '../swipe/swipe';
-import { CardHubPage } from '../library/card-hub';
 @Component({
   templateUrl: 'tabs.html'
 })
@@ -14,7 +13,6 @@ export class TabsPage {
   tab3Root = CubePage;
   tab4Root = InfinityPage;
   tab5Root = SettingsPage;
-  tab6Root = CardHubPage
   constructor() {
   }
 }

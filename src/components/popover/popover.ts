@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { LibraryPage } from '../../pages/library/library';
 
 @Component({
@@ -17,7 +17,8 @@ export class PopoverComponent {
 
   constructor(public cardService: CardServiceProvider,
     public nav: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public viewCtrl: ViewController) {
 
     this.cardStack = navParams.get('cardStackInfo')
     this.cubeStack = navParams.get('cubeStackInfo')
@@ -26,7 +27,9 @@ export class PopoverComponent {
   removeCardStack() {
     this.cardService.removeCardBag(this.cardStack)
     this.tabInfo = "swipe"
-    this.nav.push(LibraryPage, { tabInfo: this.tabInfo })
+    
+    this.viewCtrl.dismiss()
+    //this.nav.push(LibraryPage, { tabInfo: this.tabInfo })
   }
   removeCubeStack() {
     this.cardService.removeCubeBag(this.cubeStack)

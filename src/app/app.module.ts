@@ -29,7 +29,6 @@ import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-ed
 import { PopoverComponent } from '../components/popover/popover';
 import { CubeListIconComponent } from '../components/cube-list-icon/cube-list-icon';
 import { MistakePage } from '../pages/swipe/mistake/mistake'
-import { CardHubPage } from '../pages/library/card-hub';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,6 @@ import { CardHubPage } from '../pages/library/card-hub';
     TabsPage,
     PopoverComponent,
     CubeListIconComponent,
-    CardHubPage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +77,6 @@ import { CardHubPage } from '../pages/library/card-hub';
     CubeContentEditPage,
     TabsPage,
     PopoverComponent,
-    CardHubPage
   ],
   providers: [
     StatusBar,
