@@ -3,10 +3,9 @@
     <ion-title>
       Add Card Pack
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons end>
       <button ion-button (click)="dismiss()">
-        <span ion-text  showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -25,10 +24,10 @@
       <ion-input placeholder="Title in Chinese..." clearInput [(ngModel)]='titleDe'></ion-input>
     </ion-item>
 
-    <!-- Todo: icon selection -->
-    <ion-item>
+    <!-- TODO: icon selection -->
+    <!-- <ion-item>
       <ion-label color="primary" stacked>icon</ion-label>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
 </ion-content>
@@ -37,9 +36,7 @@
   <ion-row>
 
     <ion-col style="text-align:center;">
-      <button ion-button outline round style="margin-bottom: 20px;"
-              (click)="addCardBag()"
-              (click)="dismiss()">
+      <button ion-button outline round style="margin-bottom: 20px;" (click)="addCardBag()" (click)="dismiss()">
         Save
       </button>
     </ion-col>

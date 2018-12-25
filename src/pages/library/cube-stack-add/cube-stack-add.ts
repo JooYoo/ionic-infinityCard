@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
-import { LibraryPage } from '../library';
-
 
 @Component({
   selector: 'page-cube-stack-add',
@@ -21,9 +19,7 @@ export class CubeStackAddPage {
   }
 
   dismiss(){
-   // this.viewCtrl.dismiss()
-    this.tabInfo="cube"
-    this.navCtrl.push(LibraryPage,{tabInfo:this.tabInfo})
+    this.viewCtrl.dismiss()
   }
 
   addCubeStack(){

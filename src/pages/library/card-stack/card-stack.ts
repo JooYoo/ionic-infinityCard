@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, PopoverController, ViewController, App, ToastController } from 'ionic-angular';
 import { CardContentEditPage } from '../card-stack/card-content-edit/card-content-edit';
 import { CardContentAddPage } from '../card-stack/card-content-add/card-content-add';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
@@ -14,13 +14,27 @@ import { SwipePage } from '../../../pages/swipe/swipe';
 export class CardStackPage {
 
   cardStack: any
+  toast: any
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public cardService: CardServiceProvider,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private viewCtrl: ViewController,
+    private toastCtrl: ToastController,
+    private app: App) {
     this.cardStack = navParams.get('itemInfo')
+  }
+
+  toastSetting() {
+    this.toast = this.toastCtrl.create({
+      message: this.cardStack.titleCn + ' has been removed',
+      duration: 3000,
+      position: 'top',
+      closeButtonText:'X',
+      showCloseButton: true,
+    })
   }
 
   presentPopover(ev) {
@@ -28,6 +42,14 @@ export class CardStackPage {
     popover.present({
       ev: ev
     });
+
+    this.toastSetting()
+
+    popover.onDidDismiss(() => {
+      this.cardService.removeCardBag(this.cardStack)
+      this.toast.present()
+      this.viewCtrl.dismiss()
+    })
   }
 
   openEditModal(card) {
@@ -53,7 +75,8 @@ export class CardStackPage {
     slidingItem.close()
   }
 
-  toSwipePage(){
-   this.nav.push(SwipePage, {cardStack: this.cardStack})
+  toSwipePage() {
+    // this.nav.setRoot(SwipePage, { cardStack: this.cardStack })
+    this.nav.push(SwipePage, { cardStack: this.cardStack })
   }
 }

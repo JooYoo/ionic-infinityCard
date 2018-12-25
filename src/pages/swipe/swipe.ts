@@ -1,8 +1,9 @@
 import { Component, EventEmitter } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
+import { MistakePage } from '../swipe/mistake/mistake';
 
 
 @Component({
@@ -34,6 +35,9 @@ export class SwipePage {
   nextCardBag: number
   swipeIndex: number
   failedCardLength: any
+  failedCards: any
+  progressValue: number = 0
+  cardStack: any
 
   cardBagMode: string = "standard"
   isAndroid: boolean = false
@@ -50,21 +54,24 @@ export class SwipePage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
-    platform: Platform) {
-    this.isAndroid = platform.is('android')
+    public platform: Platform,
+    public modalCtrl: ModalController) {
 
+   // this.isAndroid = platform.is('android')
     this.studyCardSwitch()
   }
 
   studyCardSwitch() { // 1. come from library 2. this page random
     this.studyCards = this.navParams.get("cardStack")
     if (this.studyCards != undefined) {
+      this.cardStack = this.studyCards
       this.initCards(this.studyCards.cards)
     }
     else {
       this.startNewRound()
     }
   }
+
 
   onCardInteract(event) {
     // swipe to change card status
@@ -73,16 +80,20 @@ export class SwipePage {
 
     // change card status 
     this.swipeService.changeCardStatue(swipeResult, currentCard)
-    this.swipeIndex++
 
+    // progress value
+    this.progressValue += this.swipeService.onProgress(swipeResult, this.cards)
+    this.cardStack.progress = this.progressValue
+   
+    this.swipeIndex++
     //TODO: save current card into new stack
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
+  }
 
-    // back flip to front
-    if (this.isFlip == 'goFlip') {
-      this.isFlip = 'goQuickBack';
-    }
+  onMistake(){
+    let modal = this.modalCtrl.create(MistakePage)
+    modal.present()
   }
 
   isFlip: string = 'goBack';
@@ -97,12 +108,15 @@ export class SwipePage {
 
   // new Round Btn
   startNewRound() {
-    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardBags.length)
-    this.initCards(this.cardService.cardBags[this.nextCardBag].cards)
+    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
+    this.cardStack = this.cardService.cardStacks[this.nextCardBag]
+    this.initCards(this.cardStack.cards)
+    this.cardStack.progress = this.progressValue
   }
 
   // repeat Round Btn
   repeatRound() {
+    this.cardStack.progress = this.progressValue
     this.initCards(this.cards)
   }
 
@@ -122,6 +136,8 @@ export class SwipePage {
       });
     }
     this.ready = true;
+
+    this.progressValue = 0
   }
 
 }

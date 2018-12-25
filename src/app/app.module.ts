@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
 
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LibraryPage } from '../pages/library/library';
@@ -20,7 +19,7 @@ import { CardContentAddPage } from '../pages/library/card-stack/card-content-add
 import { SwipePage } from '../pages/swipe/swipe';
 
 import { SwipeCardsModule } from 'ng2-swipe-cards'
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
 import { CubeStackPage } from '../pages/library/cube-stack/cube-stack';
 
@@ -28,15 +27,14 @@ import { CubeStackAddPage } from '../pages/library/cube-stack-add/cube-stack-add
 import { CubeContentAddPage } from '../pages/library/cube-stack/cube-content-add/cube-content-add';
 import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-edit/cube-content-edit';
 import { PopoverComponent } from '../components/popover/popover';
-import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
-
-
-
+import { CubeListIconComponent } from '../components/cube-list-icon/cube-list-icon';
+import { MistakePage } from '../pages/swipe/mistake/mistake'
 
 @NgModule({
   declarations: [
     MyApp,
     SwipePage,
+    MistakePage,
     LibraryPage,
     CardStackAddPage,
     CardStackPage,
@@ -51,7 +49,7 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     CubeContentEditPage,
     TabsPage,
     PopoverComponent,
-    CubeListIconComponent
+    CubeListIconComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +62,7 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
   entryComponents: [
     MyApp,
     SwipePage,
+    MistakePage,
     LibraryPage,
     CardStackAddPage,
     CubePage,
@@ -77,14 +76,14 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
     CubeContentAddPage,
     CubeContentEditPage,
     TabsPage,
-    PopoverComponent
+    PopoverComponent,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     CardServiceProvider,
     SwipeServiceProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

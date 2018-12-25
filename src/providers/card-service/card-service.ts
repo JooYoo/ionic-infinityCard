@@ -1,16 +1,17 @@
 import { HttpModule } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { CardBag } from '../../app/Model/CardBag';
+import { CardStack } from '../../app/Model/CardStack';
 import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
 import { CubeBag } from '../../app/Model/CubeBag';
 import { Cube } from '../../app/Model/Cube';
+import { empty } from 'rxjs/Observer';
 
 @Injectable()
 export class CardServiceProvider {
 
-  cardBags: CardBag[]
-  failedCardBag: CardBag
+  cardStacks: CardStack[]
+  failedCardBag: CardStack
   cubeStacks: CubeBag[]
 
 
@@ -23,7 +24,7 @@ export class CardServiceProvider {
 
   getFailedCardBag() {
     let failedcards = []
-    this.failedCardBag = new CardBag(0, '不记得', 'Failed Bag', failedcards, 'iconX')
+    this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
 
@@ -48,13 +49,13 @@ export class CardServiceProvider {
       new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
 
-    this.cardBags = [
-      new CardBag(0, '卡包零', 'StackEins', cardsA, "iconA"),
-      new CardBag(1, '卡包一', 'StackZwei', cardsB, 'iconB'),
-      new CardBag(2, '卡包二', 'StackDrei', cardsC, 'iconC'),
-      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
-      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC'),
-      new CardBag(2, '卡包三', 'StackDrei', cardsC, 'iconC')
+    this.cardStacks = [
+      new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
+      new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
+      new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
+      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0)
     ]
   }
 
@@ -90,7 +91,7 @@ export class CardServiceProvider {
     let id = this.cubeStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCubes = null
+    var newCubes = []
     this.cubeStacks.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
   }
   editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string) {
@@ -98,30 +99,37 @@ export class CardServiceProvider {
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
   }
-  removeCubeBag(cubeBag: any) {
-    this.cubeStacks = this.cubeStacks.filter(x => x != cubeBag)
+  removeCubeBag(cubeStack: any) {
+    let index = this.cubeStacks.indexOf(cubeStack)
+    if (index > -1) {
+      this.cubeStacks.splice(cubeStack, 1)
+    }
   }
 
   // CardBag: add, remove, edit
-  addCardBag(titleCn: string, titleDe: string, icon: string) {
-    let id = this.cardBags.length
+  addCardBag(titleCn: string, titleDe: string, icon: string, onProgress: number) {
+    let id = this.cardStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCards = null
-    this.cardBags.push(new CardBag(id, title_Cn, title_De, newCards, icon))
+    var newCards = []
+    this.cardStacks.push(new CardStack(id, title_Cn, title_De, newCards, icon, onProgress))
   }
   removeCardBag(cardBag: any) {
-    this.cardBags = this.cardBags.filter(x => x != cardBag)
+    // this.cardStacks = this.cardStacks.filter(x => x != cardBag)
+
+    let index = this.cardStacks.indexOf(cardBag)
+    if (index > -1) {
+      this.cardStacks.splice(index, 1)
+    }
   }
-  editCardBag(cardBag: CardBag, newTitleCn: string, newTitleDe: string) {
-    var editCardBag = this.cardBags.find(x => x == cardBag)
+  editCardBag(cardBag: CardStack, newTitleCn: string, newTitleDe: string) {
+    var editCardBag = this.cardStacks.find(x => x == cardBag)
     editCardBag.titleCn = newTitleCn
     editCardBag.titleDe = newTitleDe
   }
 
   // Cube: add, remove, edit 
   addCube(cubeBag: CubeBag, cubeTexts: string[]) {
-
     let _id = cubeBag.cubes.length;
     let _date = this.getDateNow()
     let _cubeTexts = cubeTexts
@@ -138,7 +146,7 @@ export class CardServiceProvider {
 
 
   // Card: add, remove, edit
-  addCard(cardBag: CardBag, textCn: string, textDe: string) {
+  addCard(cardBag: CardStack, textCn: string, textDe: string) {
 
     let _id = cardBag.cards.length;
     let _date = this.getDateNow()
@@ -149,7 +157,7 @@ export class CardServiceProvider {
     cardBag.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
   }
   removeCard(card: any, cardBag: any) {
-    let targetCardBag = this.cardBags.find(x => x == cardBag)
+    let targetCardBag = this.cardStacks.find(x => x == cardBag)
     targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
   }
   editCard(card: Card, newTextCn: string, newTextDe: string) {

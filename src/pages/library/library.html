@@ -1,23 +1,6 @@
 <ion-header [ngSwitch]="libraryMode">
-
   <ion-navbar color="primary">
     <ion-title>Library</ion-title>
-    <ion-buttons end>
-      <div *ngSwitchCase="'swipe'">
-        <button class="addBtn" (click)="openCardBagAddPage()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </div>
-
-
-      <div *ngSwitchCase="'cube'">
-        <button class="addBtn" (click)="openCubeBagAddPage()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </div>
-
-    </ion-buttons>
-    <!-- TODO: openCubeBagAddPage() -->
   </ion-navbar>
 
   <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
@@ -45,22 +28,28 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col *ngFor="let item of cardService.cardBags">
+          <ion-col *ngFor="let item of cardStacks">
 
             <div class="wrapper">
               <div class="card" (click)="openCardsPage(item)">
-                <img class="back-img" src="https://picsum.photos/314">
+                <img class="back-img" src="https://picsum.photos/318">
                 <div class="card-title">{{item.titleCn}}</div>
                 <div class="card-subtitle">{{item.titleDe}}</div>
               </div>
             </div>
 
             <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
-              <div class="progress-bar bg-warning" style="width:40%; border-radius:120px; "></div>
+              <div class="progress-bar bg-warning" style="border-radius:120px;" [style.width.%]='item.progress'></div>
             </div>
 
           </ion-col>
         </ion-row>
+
+        <ion-fab bottom right>
+          <button ion-fab class="addBtn" color='light' (click)="onCardStackAddPage()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
       </ion-grid>
     </div>
 
@@ -88,6 +77,11 @@
 
           </ion-col>
         </ion-row>
+        <ion-fab bottom right>
+          <button ion-fab class="addBtn" color='light' (click)="onCubeStackAddPage()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
       </ion-grid>
 
     </div>

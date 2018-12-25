@@ -4,82 +4,65 @@
     <ion-title>Swipe</ion-title>
   </ion-navbar>
 
-  <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
-    <ion-segment color="light" [(ngModel)]="cardBagMode" no-border>
-      <ion-segment-button value="standard" (click)="startNewRound()" style="margin-top:10px;">
-        study
-      </ion-segment-button>
-      <ion-segment-button value="mistake" (click)="reviewFailedCards()" style="margin-top:10px;">
-        mistake
-        <ion-badge item-end color="danger" *ngIf="failedCardLength > 0">{{failedCardLength}}</ion-badge>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+
 
 </ion-header>
 
 <ion-content id="allCards" padding>
 
-  <div [ngSwitch]="cardBagMode">
+  <!-- TODO: Study and mistake has id to control the width percent-->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div id="mistake-filing">
+          <button (click)="onMistake()" style="background:transparent;">
+            <ion-icon name="ios-archive-outline">
+              <ion-badge id="filing-badge" item-end color="danger" *ngIf="failedCardLength > 0">{{cardService.failedCardBag.cards.length}}</ion-badge>
+            </ion-icon>
+          </button>
+        </div>
+      </ion-col>
+      <ion-col col-10>
+        <div class="progress">
+          <div class="progress-bar" [style.width.%]="progressValue"></div>
+        </div>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
 
-    <!-- card standard mode -->
-    <div *ngSwitchCase="'standard'">
-
-      <label class="flipContainer" *ngIf="ready">
-
-
-        <sc-card class="sc-card" *ngFor="let attendant of attendants" [orientation]="cardDirection" [tinder-card]="cardOverlay"
-          [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent" (onLike)="onCardInteract($event)">
-          <input type="checkbox" />
-
-          <div class="theCard">
-            <div id="card-front">{{attendant.fronts}}</div>
-            <div id="card-back">{{attendant.backs}}</div>
-          </div>
-        </sc-card>
-
-      </label>
-
-      <!-- next and repeat Btn -->
-      <div text-center>
-        <button id="new-round-btn" ion-button round large (click)="startNewRound()" color="light">
-          <ion-icon name="fastforward"></ion-icon>
-        </button>
-        <button id="repeat-btn" ion-button round large (click)="repeatRound()" color="light">
-          <ion-icon name="repeat"></ion-icon>
-        </button>
+  <!-- CardStack -->
+  <label class="flipContainer" *ngIf="ready">
+    <sc-card class="sc-card" *ngFor="let attendant of attendants" [orientation]="cardDirection" [tinder-card]="cardOverlay"
+      [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent" (onLike)="onCardInteract($event)">
+      <input type="checkbox" />
+      <div class="theCard">
+        <div id="card-front">{{attendant.fronts}}</div>
+        <div id="card-back">{{attendant.backs}}</div>
       </div>
-    </div>
+    </sc-card>
+  </label>
 
-    <!-- card mistake mode -->
-    <div *ngSwitchCase="'mistake'">
-
-      <!-- card mistake mode -->
-      <label class="flipContainer" *ngIf="ready">
-
-        <sc-card class="sc-card" *ngFor="let attendant of attendants" [orientation]="cardDirection" [tinder-card]="cardOverlay"
-          [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent" (onLike)="onCardInteract($event)">
-          <input type="checkbox" />
-
-          <div class="theCard">
-            <div id="card-front">{{attendant.fronts}}</div>
-            <div id="card-back">{{attendant.backs}}</div>
-          </div>
-        </sc-card>
-
-      </label>
-
-
-      <!-- FabBtn -->
-      <div text-center>
-        <button id="mistake-repet-btn" ion-button round large color="light" (click)="repeatRound()">
-          <ion-icon name="repeat">
-          </ion-icon>
-        </button>
-      </div>
-
-    </div>
-
+  <div id="cardStack-title">
+    {{cardStack.titleDe}}
   </div>
+
+  <!-- next & repeat Btn -->
+  <ion-fab id="more-btn" bottom large right>
+    <button ion-fab color='light'>
+      <ion-icon name="ios-menu"></ion-icon>
+    </button>
+    <ion-fab-list side="left">
+      <button ion-fab class="btn-list" (click)="startNewRound()" color="light">
+        <ion-icon name="fastforward"></ion-icon>
+      </button>
+      <button ion-fab class="btn-list" (click)="repeatRound()" color="light">
+        <ion-icon name="repeat"></ion-icon>
+      </button>
+      <button ion-fab class="btn-list" color="light">
+        <ion-icon name="clock"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

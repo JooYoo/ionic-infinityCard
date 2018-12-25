@@ -5,8 +5,7 @@
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        <span ion-text  showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -37,10 +36,8 @@
   <ion-row>
 
     <ion-col style="text-align:center;">
-      <button ion-button outline round style="margin-bottom: 20px;"
-              (click)="addCubeStack()"
-              (click)="dismiss()">
-        Save
+      <button id="cube-add-confirm" ion-button outline round style="margin-bottom: 20px;" (click)="addCubeStack()" (click)="dismiss()">
+        <ion-icon name="ios-checkmark-circle-outline"></ion-icon>
       </button>
     </ion-col>
 
