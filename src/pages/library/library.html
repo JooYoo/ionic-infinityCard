@@ -1,20 +1,6 @@
 <ion-header [ngSwitch]="libraryMode">
-
   <ion-navbar color="primary">
     <ion-title>Library</ion-title>
-    <!-- <ion-buttons end>
-      <div *ngSwitchCase="'swipe'">
-        <button class="addBtn" (click)="openCardBagAddPage()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </div>
-      <div *ngSwitchCase="'cube'">
-        <button class="addBtn" (click)="openCubeBagAddPage()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </div>
-    </ion-buttons> -->
-    <!-- TODO: openCubeBagAddPage() -->
   </ion-navbar>
 
   <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
@@ -42,7 +28,7 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col *ngFor="let item of cardService.cardStacks">
+          <ion-col *ngFor="let item of cardStacks">
 
             <div class="wrapper">
               <div class="card" (click)="openCardsPage(item)">
@@ -92,7 +78,7 @@
           </ion-col>
         </ion-row>
         <ion-fab bottom right>
-          <button ion-fab class="addBtn" color='light'(click)="openCubeBagAddPage()">
+          <button ion-fab class="addBtn" color='light' (click)="openCubeBagAddPage()">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-fab>

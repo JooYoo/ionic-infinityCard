@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, App } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { CardServiceProvider } from '../../../../providers/card-service/card-service';
 
 @Component({

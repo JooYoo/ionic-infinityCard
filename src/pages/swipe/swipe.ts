@@ -92,7 +92,7 @@ export class SwipePage {
   }
 
   onMistake(){
-    let modal = this.modalCtrl.create(MistakePage,{failedCards: this.failedCards})
+    let modal = this.modalCtrl.create(MistakePage)
     modal.present()
   }
 

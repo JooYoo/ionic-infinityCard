@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, NgZone } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding, Platform, Modal } from 'ionic-angular';
 import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
@@ -24,16 +24,18 @@ export class LibraryPage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public modalCtrl: ModalController,
-    platform: Platform) {
+    private zone: NgZone) {
 
-    this.isAndroid = platform.is('android')
-    this.tabInfo = navParams.get("tabInfo")
+    //this.isAndroid = platform.is('android')
+    //this.tabInfo = navParams.get("tabInfo")
 
     // CubeStackEditPage: hit save Btn go back to CubeStackPage
-    if (this.tabInfo != undefined) {
-      this.libraryMode = this.tabInfo
-      return
-    }
+    // if (this.tabInfo != undefined) {
+    //   this.libraryMode = this.tabInfo
+    //   return
+    // }
+
+    this.cardStacks = this.cardService.cardStacks;
 
     this.libraryMode = "swipe"
   }
@@ -48,14 +50,22 @@ export class LibraryPage {
 
   // right-top add button
   openCardBagAddPage() {
-    let addCardModal: Modal = this.modalCtrl.create(CardStackAddPage)
+    let addCardModal = this.modalCtrl.create(CardStackAddPage)
+
+    addCardModal.onDidDismiss(() => {
+      this.cardStacks = this.cardService.cardStacks
+    })
+
     addCardModal.present()
+
   }
 
   openCubeBagAddPage() {
     const AddModal = this.modalCtrl.create(CubeStackAddPage)
     AddModal.present()
   }
+
+  
 
 
   cardBagDelete(item) {

@@ -16,8 +16,8 @@
       <ion-col>
         <div id="mistake-filing">
           <button (click)="onMistake()" style="background:transparent;">
-            <ion-icon name="ios-filing-outline">
-              <ion-badge id="filing-badge" item-end color="danger" *ngIf="failedCardLength > 0">{{failedCardLength}}</ion-badge>
+            <ion-icon name="ios-archive-outline">
+              <ion-badge id="filing-badge" item-end color="danger" *ngIf="failedCardLength > 0">{{cardService.failedCardBag.cards.length}}</ion-badge>
             </ion-icon>
           </button>
         </div>
