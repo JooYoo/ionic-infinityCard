@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NavController, NavParams, ModalController, ItemSliding, Platform } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ItemSliding, Platform, Modal } from 'ionic-angular';
 import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
@@ -18,11 +18,12 @@ export class LibraryPage {
   isAndroid: boolean = false
   cubeWrapperColor: string
   tabInfo: any
+  cardStacks: any
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
-    public modalControl: ModalController,
+    public modalCtrl: ModalController,
     platform: Platform) {
 
     this.isAndroid = platform.is('android')
@@ -47,11 +48,12 @@ export class LibraryPage {
 
   // right-top add button
   openCardBagAddPage() {
-    const AddModal = this.modalControl.create(CardStackAddPage)
-    AddModal.present()
+    let addCardModal: Modal = this.modalCtrl.create(CardStackAddPage)
+    addCardModal.present()
   }
+
   openCubeBagAddPage() {
-    const AddModal = this.modalControl.create(CubeStackAddPage)
+    const AddModal = this.modalCtrl.create(CubeStackAddPage)
     AddModal.present()
   }
 

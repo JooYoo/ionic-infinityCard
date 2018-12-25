@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController,App } from 'ionic-angular';
 import { CardServiceProvider } from '../../../providers/card-service/card-service';
 import { LibraryPage } from '../library';
 
@@ -9,24 +9,29 @@ import { LibraryPage } from '../library';
 })
 export class CardStackAddPage {
 
-  titleCn:string
-  titleDe:string
+  titleCn: string
+  titleDe: string
   tabInfo: string
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public viewCtrl: ViewController,
-              public cardService: CardServiceProvider) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private viewCtrl: ViewController,
+    public cardService: CardServiceProvider,
+    public appCtrl: App) {
   }
 
-  dismiss(){
-   // this.viewCtrl.dismiss()
-    this.tabInfo="swipe"
-    this.navCtrl.push(LibraryPage,{tabInfo:this.tabInfo})
+  dismiss() {
+     this.tabInfo = "swipe"
+     this.navCtrl.push(LibraryPage, { tabInfo: this.tabInfo })
+    
+    this.viewCtrl.dismiss()
+   
+    
+    console.log(this.cardService.cardStacks.length)
   }
 
-  addCardBag(){
-    this.cardService.addCardBag(this.titleCn, this.titleDe, "icon",0)
+  addCardBag() {
+    this.cardService.addCardBag(this.titleCn, this.titleDe, "icon", 0)
   }
 
 }

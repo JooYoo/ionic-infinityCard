@@ -2,9 +2,7 @@
   <ion-navbar color="primary">
     <ion-title>Card Stack</ion-title>
     <ion-buttons end>
-      <button id="addBtn" (click)="openAddModal()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -18,7 +16,7 @@
         <ion-item no-lines>
           <div class="wrapper">
             <div class="card">
-              <img class="back-img" src="https://picsum.photos/300">
+              <img class="back-img" src="https://picsum.photos/302">
               <div class="card-title">{{cardStack.titleCn}}</div>
               <div class="card-subtitle">{{cardStack.titleDe}}</div>
             </div>
@@ -84,21 +82,10 @@
     </ion-item-sliding>
   </ion-list>
 
-</ion-content>
-
-
-
-<!-- <ion-item-sliding *ngFor="let card of item.cards">
-
-    <button ion-item>
-      <h2>{{card.textCn}}</h2>
-      <p>{{card.textDe}}</p>
-      <ion-note item-end>{{card.date}}</ion-note>
+  <ion-fab bottom right>
+    <button ion-fab color="light" id="addBtn" (click)="openAddModal()">
+      <ion-icon name="add"></ion-icon>
     </button>
-    <ion-item-options side="left">
-      <button ion-button color="light">
-        <ion-icon name="build"></ion-icon>
-      </button>
-    </ion-item-options>
+  </ion-fab>
 
-  </ion-item-sliding> -->
+</ion-content>

@@ -21,9 +21,6 @@ export class PopoverComponent {
 
     this.cardStack = navParams.get('cardStackInfo')
     this.cubeStack = navParams.get('cubeStackInfo')
-
-    console.log("cardStack:" + this.cardStack)
-    console.log("cubeStack:" + this.cubeStack)
   }
 
   removeCardStack() {

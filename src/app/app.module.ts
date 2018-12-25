@@ -28,11 +28,13 @@ import { CubeContentAddPage } from '../pages/library/cube-stack/cube-content-add
 import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-edit/cube-content-edit';
 import { PopoverComponent } from '../components/popover/popover';
 import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-icon';
+import {MistakePage} from '../pages/swipe/mistake/mistake'
 
 @NgModule({
   declarations: [
     MyApp,
     SwipePage,
+    MistakePage,
     LibraryPage,
     CardStackAddPage,
     CardStackPage,
@@ -60,6 +62,7 @@ import { CubeListIconComponent} from '../components/cube-list-icon/cube-list-ico
   entryComponents: [
     MyApp,
     SwipePage,
+    MistakePage,
     LibraryPage,
     CardStackAddPage,
     CubePage,

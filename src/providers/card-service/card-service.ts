@@ -5,6 +5,7 @@ import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
 import { CubeBag } from '../../app/Model/CubeBag';
 import { Cube } from '../../app/Model/Cube';
+import { empty } from 'rxjs/Observer';
 
 @Injectable()
 export class CardServiceProvider {
@@ -90,7 +91,7 @@ export class CardServiceProvider {
     let id = this.cubeStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCubes = null
+    var newCubes = []
     this.cubeStacks.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
   }
   editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string) {
@@ -107,7 +108,7 @@ export class CardServiceProvider {
     let id = this.cardStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCards = null
+    var newCards = []
     this.cardStacks.push(new CardStack(id, title_Cn, title_De, newCards, icon, onProgress))
   }
   removeCardBag(cardBag: any) {
@@ -121,7 +122,6 @@ export class CardServiceProvider {
 
   // Cube: add, remove, edit 
   addCube(cubeBag: CubeBag, cubeTexts: string[]) {
-
     let _id = cubeBag.cubes.length;
     let _date = this.getDateNow()
     let _cubeTexts = cubeTexts

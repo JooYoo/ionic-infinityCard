@@ -1,4 +1,4 @@
-page-swipe {
+page-mistake {
     .flipContainer {
         display: block;
         width: 400px;
@@ -8,7 +8,7 @@ page-swipe {
         left: 50%;
         top: 50%;
         cursor: pointer;
-        margin-top: -200px;
+        margin-top: -140px;
         -webkit-perspective: 1000px;
         perspective: 1000px;
         -webkit-transform-style: preserve-3d;
@@ -67,44 +67,31 @@ page-swipe {
         background: white;
         border: none;
     }
-    .swipeFabBtn {
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-        margin-bottom: 10px;
-    }
+
     .progress {
-        margin-top: 30px;
+        margin-top: 50px;
         border-radius: 200px;
     }
     .progress-bar {
         border-radius: 200px;
     }
+
+    #mistake-repeat-btn {
+        margin: 10px;
+        margin-bottom:80px;
+    }
+
     #mistake-filing {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 30px;
         font-size: 40px;
         background: transparent;
     }
-    #filing-badge {
+
+    #mistake-badge {
         font-size: 13px;
         position: absolute;
         bottom: 50px;
-        right: 0px;
-    }
-    #cardStack-title {
-        text-align: center;
-        font-size: 25px;
-        font-weight: bolder;
-        color: silver;
-        margin-top: 320px;
-    }
-    #more-btn {
-        font-size: 25px;
-        margin: 10px;
-    }
-    .btn-list {
-        margin-left: 10px;
-        width: 60px;
-        height: 60px;
-        font-size: 25px;
+        right: 10px;
     }
 }

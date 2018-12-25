@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar start color="primary">
+    <ion-title>Mistake</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <div id="mistake-filing">
+          <ion-icon name="ios-filing">
+            <ion-badge id="mistake-badge" end color="danger" *ngIf="failedCardLength > 0">{{failedCardLength}}</ion-badge>
+          </ion-icon>
+        </div>
+      </ion-col>
+      <ion-col col-10>
+        <!-- ProgressBar-->
+        <div class="progress">
+          <div class="progress-bar" [style.width.%]="progressValue"></div>
+        </div>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
+
+
+
+
+  <!-- Card Stack -->
+  <label class="flipContainer" *ngIf="ready">
+    <sc-card class="sc-card" *ngFor="let attendant of attendants" [orientation]="cardDirection" [tinder-card]="cardOverlay"
+      [callLike]="attendant.likeEvent" [callDestroy]="attendant.destroyEvent" (onLike)="onCardInteract($event)">
+      <input type="checkbox" />
+      <div class="theCard">
+        <div id="card-front">{{attendant.fronts}}</div>
+        <div id="card-back">{{attendant.backs}}</div>
+      </div>
+    </sc-card>
+  </label>
+
+
+  <!-- FabBtn -->
+  <ion-fab text-center bottom right>
+    <button id="mistake-repeat-btn" ion-fab color="light" (click)="repeatRound()">
+      <ion-icon name="repeat"></ion-icon>
+    </button>
+  </ion-fab>
+
+
+
+</ion-content>
