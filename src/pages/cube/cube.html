@@ -31,18 +31,21 @@
 
   <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
 
-  
+
 
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
-         {{cubeStack.titleCn}} <br/> {{cubeStack.titleDe}} <br/> {{cube.date}}
+        <div> {{cube.titleCn}} </div>
+        <div>{{cube.titleDe}}</div>
+        <div>{{cube.date}} </div>
       </div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div> 
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
       <!-- <div *ngFor="let item of cube.cubeTexts" class="swiper-slide" style="background: lightgray;">{{item}}</div>   -->
       <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>-->
     </div>

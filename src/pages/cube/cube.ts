@@ -20,12 +20,12 @@ export class CubePage {
   cubeStackLength: any
   perCubePercent: any
   progress: any = 0
+  isEnd: boolean = false
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider) {
-
 
     this.studyCubeSwitch()
   }
@@ -36,10 +36,12 @@ export class CubePage {
     this.studyCubeStack = this.navParams.get("cubeStack")
     if (this.studyCubeStack != undefined) {
       this.cube = this.studyCubeStack.cubes[0]
-      
+
       this.cubes = this.studyCubeStack.cubes
       this.cubeStackLength = this.cubes.length
       this.perCubePercent = (1 / this.cubeStackLength) * 100
+      this.progress = this.perCubePercent
+
       this.cubeStack = this.studyCubeStack
     } else {
       this.getRandomNext()
@@ -49,16 +51,14 @@ export class CubePage {
     // get random CubeStack
     let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
     this.cubes = this.cardService.cubeStacks[randomIndex].cubes
-
-    this.cubeStackLength = this.cubes.length
-    //progressbar
-    this.perCubePercent = (1 / this.cubeStackLength) * 100
-   // this.progress=this.perCubePercent
-
     this.cubeStack = this.cardService.cubeStacks[randomIndex]
 
+    //progressbar
+    this.cubeStackLength = this.cubes.length
+    this.perCubePercent = (1 / this.cubeStackLength) * 100
+    this.progress = this.perCubePercent
+
     // TODO: 之前 get random Cube；现在 get 1st cube in this CubeStack 
-    // let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)
     let cubeIndex = 0;
     this.cube = this.cubes[cubeIndex]
   }
@@ -66,47 +66,44 @@ export class CubePage {
   toNextCube() {
     // cube
     this.cubeIndex++
-    if (this.cubeIndex > this.cubeStackLength - 1) {
-      this.cubeIndex = 0
-    }
-    this.cube = this.cubes[this.cubeIndex]
+    //cube
+    if (this.cubeIndex <= this.cubeStackLength - 1) {
+      this.cube = this.cubes[this.cubeIndex]
+      this.progress += this.perCubePercent
 
-    //progressbar
-    this.progress += this.perCubePercent
-    if (this.progress > 100) {
-      this.progress = 0
+    } else {
+      this.cubeIndex = this.cubeStackLength
+      this.progress = 100
+      this.isEnd = true
     }
-    console.log(this.progress)
 
   }
 
   toLastCube() {
-    //cube
-    this.cubeIndex--;
-    if (this.cubeIndex < 0) {
-      this.cubeIndex = this.cubeStackLength - 1
-    }
-    this.cube = this.cubes[this.cubeIndex]
 
-    //progress
-    this.progress -= this.perCubePercent
-    if (this.progress < 0) {
-      this.progress = 0
+    this.cubeIndex--;
+
+    if (this.cubeIndex > 0) {
+      this.cube = this.cubes[this.cubeIndex]
+      this.progress -= this.perCubePercent
+    } else {
+      this.cubeIndex = 0
+      this.progress = this.perCubePercent
     }
-    console.log(this.progress)
   }
 
 
   toFirstCube() {
     this.cube = this.cubes[0]
     this.cubeIndex = 0
-    this.progress = 0
+    this.progress = this.perCubePercent
   }
 
 
 
   // cube UI setting
   ngAfterViewInit() {
+    console.log('ngAfterViewInit')
     var swiper = new Swiper('.swiper-container', {
       effect: 'cube',
       grabCursor: true,

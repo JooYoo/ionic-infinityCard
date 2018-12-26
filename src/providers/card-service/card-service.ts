@@ -63,10 +63,10 @@ export class CardServiceProvider {
     var date = new Date();
 
     var cubesA = [
-      new Cube(0, this.getDateNow(),'中一一','德一一', ['方块一一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
-      new Cube(1, this.getDateNow(),'中一二','德一二', ['方块一二', 'cubeTwo', 'cubeZwei', 'cubeEr', 'cube2']),
-      new Cube(2, this.getDateNow(),'中一三','德一三', ['方块一三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3']),
-      new Cube(3, this.getDateNow(),'中一四','德一四', ['方块一四', 'cubeFour', 'cubeVier', 'cubeSi', 'cube4']),
+      new Cube(0, this.getDateNow(),'问好','Greeting', ['hello', 'hallo', 'hey', 'hi','yo']),
+      new Cube(1, this.getDateNow(),'告别','farewell', ['bye', 'byebye', 'see you', 'good bye', 'see you later']),
+      new Cube(2, this.getDateNow(),'抱歉','apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
+      new Cube(3, this.getDateNow(),'感激','appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
     ]
     var cubesB = [
       new Cube(0, this.getDateNow(),'中二一','德二一', ['方块二一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
@@ -80,7 +80,7 @@ export class CardServiceProvider {
     ]
 
     this.cubeStacks = [
-      new CubeBag(0, '第一块包', 'CubeBagOne', cubesA, 'iconA'),
+      new CubeBag(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA'),
       new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
       new CubeBag(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
     ]
