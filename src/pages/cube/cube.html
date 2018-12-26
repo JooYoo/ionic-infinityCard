@@ -11,30 +11,40 @@
   <ion-grid>
     <ion-row>
       <ion-col col-1>
-        <ion-icon id="arrow-left" name="ios-arrow-back-outline"></ion-icon>
+        <button (click)='toLastCube()' style="background:transparent;">
+          <ion-icon id="arrow-left" name="ios-arrow-back-outline">
+          </ion-icon>
+        </button>
       </ion-col>
       <ion-col col-9>
         <div class="progress">
-          <div class="progress-bar" style="width:50%;"></div>
+          <div class="progress-bar" [style.width.%]="progress"></div>
         </div>
       </ion-col>
       <ion-col col-2>
-        <ion-icon id="arrow-right" name="ios-arrow-forward"></ion-icon>
+        <button (click)="toNextCube()" style="background:transparent">
+          <ion-icon id="arrow-right" name="ios-arrow-forward"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
 
+  
+
 
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background: black; color: white">{{cube.cubeTexts[0]}}</div>
+      <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
+         {{cubeStack.titleCn}} <br/> {{cubeStack.titleDe}} <br/> {{cube.date}}
+      </div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
-      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div> -->
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div> 
+      <!-- <div *ngFor="let item of cube.cubeTexts" class="swiper-slide" style="background: lightgray;">{{item}}</div>   -->
+      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>-->
     </div>
     <!--  Pagination -->
     <div class="swiper-pagination"></div>
@@ -49,7 +59,7 @@
       <button class="btn-list" ion-fab color="light" (click)="getRandomNext()">
         <ion-icon name="fastforward"></ion-icon>
       </button>
-      <button class="btn-list" ion-fab color="light">
+      <button class="btn-list" ion-fab color="light" (click)="toFirstCube()">
         <ion-icon name="repeat"></ion-icon>
       </button>
       <button class="btn-list" ion-fab color="light">
