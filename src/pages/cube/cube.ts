@@ -15,6 +15,8 @@ export class CubePage {
   cube: Cube
   studyCubeStack: any
 
+  cubeStack: any
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
@@ -29,6 +31,7 @@ export class CubePage {
     this.studyCubeStack = this.navParams.get("cubeStack")
     if (this.studyCubeStack != undefined) {
       this.cube = this.studyCubeStack.cubes[0]
+      this.cubeStack=this.studyCubeStack
     } else {
       this.getRandomNext()
     }
@@ -38,6 +41,7 @@ export class CubePage {
     // get random CubeBag
     let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
     this.cubes = this.cardService.cubeStacks[randomIndex].cubes
+    this.cubeStack = this.cardService.cubeStacks[randomIndex]
 
     // TODO: 之前 get random Cube；现在 get 1st cube in this CubeStack 
     // let cubeIndex = this.swipeService.getRandomCardBag(this.cubes.length)

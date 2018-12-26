@@ -7,6 +7,26 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-1>
+        <ion-icon id="arrow-left" name="ios-arrow-back-outline"></ion-icon>
+      </ion-col>
+      <ion-col col-9>
+        <div class="progress">
+          <div class="progress-bar" style="width:50%;"></div>
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <ion-icon id="arrow-right" name="ios-arrow-forward"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
+
+
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" style="background: black; color: white">{{cube.cubeTexts[0]}}</div>
@@ -16,18 +36,26 @@
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
       <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div> -->
     </div>
-    <!-- Add Pagination -->
+    <!--  Pagination -->
     <div class="swiper-pagination"></div>
-
-    
-
   </div>
 
   <!-- Fab btn -->
-  <ion-fab bottom right>
-      <button class="swipeFabBtn" ion-fab color="light" (click)="getRandomNext()">
-        <ion-icon ios="ios-swap" md="md-swap"></ion-icon>
+  <ion-fab id="cube-fab" bottom right>
+    <button ion-fab color="light">
+      <ion-icon name="ios-menu"></ion-icon>
+    </button>
+    <ion-fab-list side='left'>
+      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()">
+        <ion-icon name="fastforward"></ion-icon>
       </button>
-    </ion-fab>
+      <button class="btn-list" ion-fab color="light">
+        <ion-icon name="repeat"></ion-icon>
+      </button>
+      <button class="btn-list" ion-fab color="light">
+        <ion-icon name="clock"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>
