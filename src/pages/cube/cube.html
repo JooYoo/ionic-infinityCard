@@ -40,12 +40,15 @@
   <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
 
 
-  <div id="anim-cube" [@myTrigger]='animState'  class="swiper-container">
+  <div id="anim-cube" [@myTrigger]='animState' class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
-        <div> {{cube.titleCn}} </div>
-        <div>{{cube.titleDe}}</div>
-        <div>{{cube.date}} </div>
+        <ion-grid id="cube-begin-titles">
+          <ion-row id="cube-begin-titles-cn">{{cube.titleCn}}</ion-row>
+          <ion-row id="cube-begin-titles-de">{{cube.titleDe}}</ion-row>
+          <ion-row id="cube-begin-titles-date">{{cube.date}}</ion-row>
+        </ion-grid>
+
       </div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
@@ -66,7 +69,7 @@
       <ion-icon name="ios-menu"></ion-icon>
     </button>
     <ion-fab-list side='left'>
-      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()" >
+      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()">
         <ion-icon name="fastforward"></ion-icon>
       </button>
       <button class="btn-list" ion-fab color="light" (click)="toFirstCube()">

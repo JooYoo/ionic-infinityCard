@@ -20,12 +20,14 @@ declare var Swiper
       //   transform: 'translateX(600px)'
       // })),
       state('fadeIn', style({
-        opacity:'1'
+        opacity: '1'
       })),
-      transition('idle<=>fadeIn', [ 
-        style({opacity:'0', 
-               transform:'translateY(-200px)'}),
-        animate('500ms')
+      transition('idle<=>fadeIn', [
+        style({
+          opacity: '0',
+          transform: 'translateY(-200px)'
+        }),
+        animate('200ms')
       ])
     ])
   ]
@@ -62,7 +64,7 @@ export class CubePage {
     //this.animState = 'fadeIn'
   }
 
-  
+
 
   // 如果是从lib.cubeStack来的，那么提取该Stack中的第一个Cube里显示；
   // 否则随便从lib.cubeStacks抽一个stack, 显示该Stack第一个Cube
@@ -148,7 +150,7 @@ export class CubePage {
         loop: false,
         slidesOffsetBefore: -60,
         cubeEffect: {
-          shadow: false,
+          shadow: true,
           slideShadows: true,
           shadowOffset: 20,
           shadowScale: 0.94,
@@ -163,25 +165,7 @@ export class CubePage {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-
-        on: {
-          // init: function () {
-          //   this.testIndex=0
-          //   console.log('swiper initialized');
-          // },
-          slideNextTransitionStart: function () {
-            console.log('next');
-            console.log(this.cubeIndex)
-          },
-
-          slidePrevTransitionStart: function () {
-            console.log('prev');
-            console.log(this.cubeIndex)
-          },
-
-        },
       }
-
     )
 
 
