@@ -69,10 +69,10 @@
       <ion-icon name="ios-menu"></ion-icon>
     </button>
     <ion-fab-list side='left'>
-      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()">
+      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()" (click)='animCube()'>
         <ion-icon name="fastforward"></ion-icon>
       </button>
-      <button class="btn-list" ion-fab color="light" (click)="toFirstCube()">
+      <button class="btn-list" ion-fab color="light" (click)="toFirstCube()" (click)='animCube()'>
         <ion-icon name="repeat"></ion-icon>
       </button>
       <button class="btn-list" ion-fab color="light">
