@@ -7,27 +7,78 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="swiper-container">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-1>
+        <button (click)='toLastCube()' style="background:transparent;" (click)='animCube()'>
+          <ion-icon id="arrow-left" name="ios-arrow-back-outline">
+          </ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-10>
+
+        <ion-row>
+          <ion-col *ngFor='let item of cubes'>
+            <div class="progress">
+              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=item.id'></div>
+              <!-- FIXME: 本来计划每次方块滑动都增加进度条 <div class="progress-bar" [style.width.%]="progress" ></div> -->
+            </div>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-col>
+      <ion-col col-1>
+        <button (click)="toNextCube()" (click)="animCube()" style="background:transparent;">
+          <ion-icon id="arrow-right" name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
+
+
+  <div id="anim-cube" [@myTrigger]='animState' class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background: black; color: white">{{cube.cubeTexts[0]}}</div>
+      <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
+        <ion-grid id="cube-begin-titles">
+          <ion-row id="cube-begin-titles-cn">{{cube.titleCn}}</ion-row>
+          <ion-row id="cube-begin-titles-de">{{cube.titleDe}}</ion-row>
+          <ion-row id="cube-begin-titles-date">{{cube.date}}</ion-row>
+        </ion-grid>
+
+      </div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
       <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
-      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div> -->
+      <!-- <div *ngFor="let item of cube.cubeTexts" class="swiper-slide" style="background: lightgray;">{{item}}</div>   -->
+      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>-->
     </div>
-    <!-- Add Pagination -->
+    <!--  Pagination -->
     <div class="swiper-pagination"></div>
-
-    
-
   </div>
 
+
   <!-- Fab btn -->
-  <ion-fab bottom right>
-      <button class="swipeFabBtn" ion-fab color="light" (click)="getRandomNext()">
-        <ion-icon ios="ios-swap" md="md-swap"></ion-icon>
+  <ion-fab id="cube-fab" bottom right>
+    <button ion-fab color="light">
+      <ion-icon name="ios-menu"></ion-icon>
+    </button>
+    <ion-fab-list side='left'>
+      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()" (click)='animCube()'>
+        <ion-icon name="fastforward"></ion-icon>
       </button>
-    </ion-fab>
+      <button class="btn-list" ion-fab color="light" (click)="toFirstCube()" (click)='animCube()'>
+        <ion-icon name="repeat"></ion-icon>
+      </button>
+      <button class="btn-list" ion-fab color="light">
+        <ion-icon name="clock"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>

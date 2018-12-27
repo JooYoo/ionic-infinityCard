@@ -9,48 +9,57 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 export class CubeContentAddPage {
 
   cubeBag: any
-  sideLength: number = 3
-  sides: string[]
+  //sideLength: number = 3
+  //isEmptyArray: boolean = false;
+  //sides: string[]
 
-  isEmptyArray: boolean = false;
+  id: number
+  date: string = new Date().toISOString()
+  cubeTitleCn: string
+  cubeTitleDe: string
+  cubeTexts: string[] = []
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public viewControl: ViewController,
     public cardService: CardServiceProvider) {
+
     this.cubeBag = navParams.get("cubeBagInfo")
-    this.sides = new Array(this.sideLength)
+
+    //this.sides = new Array(this.sideLength)
   }
 
   addCube() {
-    this.cardService.addCube(this.cubeBag, this.sides)
+    this.cardService.addCube(this.cubeBag,this.cubeTitleCn,this.cubeTitleDe, this.cubeTexts)
   }
 
-  onRangeChange() {
-    // set isEmpty string boolean value
-    for (let i = 0; i < this.sides.length; i++) {
-      if (this.sides[i] == undefined) {
-        this.isEmptyArray = true
-      }
-      else {
-        this.isEmptyArray = false
-      }
-    }
+  
 
-    if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
-      this.sides = new Array(this.sideLength)
-    }
-    else if (this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
-      this.sides.push(null);
-    }
-    else if (this.sideLength < this.sides.length) { // FIXME: case 03: ArrayItem--
-      this.sides.pop()
-    }
-  }
+  // onRangeChange() {
+  //   // set isEmpty string boolean value
+  //   for (let i = 0; i < this.sides.length; i++) {
+  //     if (this.sides[i] == undefined) {
+  //       this.isEmptyArray = true
+  //     }
+  //     else {
+  //       this.isEmptyArray = false
+  //     }
+  //   }
 
-  trackByIndex(index: number, obj: any): any {
-    return index;
-  }
+  //   if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
+  //     this.sides = new Array(this.sideLength)
+  //   }
+  //   else if (this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
+  //     this.sides.push(null);
+  //   }
+  //   else if (this.sideLength < this.sides.length) { // FIXME: case 03: ArrayItem--
+  //     this.sides.pop()
+  //   }
+  // }
+  // trackByIndex(index: number, obj: any): any {
+  //   return index;
+  // }
 
   dismiss() {
     this.viewControl.dismiss()

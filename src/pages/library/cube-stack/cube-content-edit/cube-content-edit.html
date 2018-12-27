@@ -13,7 +13,7 @@
 
 <ion-content>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-range min="2" max="10" step="1" pin="true" snaps="true" [(ngModel)]="sideLength" (ionChange)="onRangeChange(slideValue)">
       <ion-icon range-left small ios="logo-buffer" md="logo-buffer"></ion-icon>
       <ion-icon range-right ios="logo-buffer" md="logo-buffer"></ion-icon>
@@ -27,7 +27,56 @@
       <ion-input placeholder="chinese..." [(ngModel)]='sides[index]' clearInput></ion-input>
     </ion-item>
 
-  </ion-list>
+  </ion-list> -->
+
+  <ion-list>
+
+      <ion-item>
+        <ion-label floating>title CN</ion-label>
+        <ion-input type="text" [(ngModel)]='cube.titleCn'></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>title DE</ion-label>
+        <ion-input type="text" [(ngModel)]='cube.titleDe'></ion-input>
+      </ion-item>
+  
+       <ion-item>
+        <ion-label floating>{{cube.date}}</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="cube.date"></ion-datetime>
+      </ion-item> 
+  
+    </ion-list>
+  
+    <ion-list>
+  
+      <ion-item>
+        <ion-label floating>opt 1</ion-label>
+        <ion-input type="text" [(ngModel)]='cubeTexts[0]'></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>opt 2</ion-label>
+        <ion-input type="text" [(ngModel)]='cubeTexts[1]'></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>opt 3</ion-label>
+        <ion-input type="text" [(ngModel)]='cubeTexts[2]'></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>opt 4</ion-label>
+        <ion-input type="text" [(ngModel)]='cubeTexts[3]'></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>opt 5</ion-label>
+        <ion-input type="text" [(ngModel)]='cubeTexts[4]'></ion-input>
+      </ion-item>
+  
+    </ion-list>
+  
 </ion-content>
 
 <ion-footer no-border>

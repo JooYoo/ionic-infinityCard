@@ -8,12 +8,12 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 })
 export class CubeContentEditPage {
 
+  // isEmptyArray: boolean = false
+  // sideLength: number
+  
   cube: any
   cubeStack: any
-  isEmptyArray: boolean = false
-
-  sideLength: number
-  sides:string[]
+  cubeTexts:string[]
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -22,12 +22,12 @@ export class CubeContentEditPage {
       this.cube = navParams.get("cubeInfo")
       this.cubeStack= navParams.get("cubeStackInfo")
 
-      this.sideLength = this.cube.cubeTexts.length
-      this.sides = this.cube.cubeTexts
+     // this.sideLength = this.cube.cubeTexts.length
+      this.cubeTexts = this.cube.cubeTexts
   }
 
   editCube(){
-    this.cardService.editCube(this.cube, this.sides)
+    this.cardService.editCube(this.cube, this.cubeTexts)
   }
   removeCube(){
     this.cardService.removeCube(this.cube, this.cubeStack)
@@ -37,29 +37,28 @@ export class CubeContentEditPage {
     this.viewControl.dismiss()
   }
 
-  onRangeChange(){
-    // set isEmpty string boolean value
-    for (let i = 0; i < this.sides.length; i++) {
-      if (this.sides[i] == undefined) {
-        this.isEmptyArray = true
-      }
-      else {
-        this.isEmptyArray = false
-      }
-    }
+  // onRangeChange(){
+  //   // set isEmpty string boolean value
+  //   for (let i = 0; i < this.sides.length; i++) {
+  //     if (this.sides[i] == undefined) {
+  //       this.isEmptyArray = true
+  //     }
+  //     else {
+  //       this.isEmptyArray = false
+  //     }
+  //   }
 
-    if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
-      this.sides = new Array(this.sideLength)
-    }
-    else if(this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
-      this.sides.push(null);
-    }
-    else if(this.sideLength < this.sides.length){ // FIXME: case 03: ArrayItem--
-      this.sides.pop()
-    }
-  }
-
-  trackByIndex(index: number, obj: any): any {
-    return index;
-  }
+  //   if (this.isEmptyArray) { // FIXME: case 01: Empty Array 
+  //     this.sides = new Array(this.sideLength)
+  //   }
+  //   else if(this.sideLength > this.sides.length) { // FIXME: case 02: ArrayItem++
+  //     this.sides.push(null);
+  //   }
+  //   else if(this.sideLength < this.sides.length){ // FIXME: case 03: ArrayItem--
+  //     this.sides.pop()
+  //   }
+  // }
+  // trackByIndex(index: number, obj: any): any {
+  //   return index;
+  // }
 }
