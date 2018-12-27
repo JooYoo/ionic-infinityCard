@@ -11,18 +11,26 @@
   <ion-grid>
     <ion-row>
       <ion-col col-1>
-        <button (click)='toLastCube()' style="background:transparent;">
+        <button (click)='toLastCube()' style="background:transparent;" (click)='animCube()'>
           <ion-icon id="arrow-left" name="ios-arrow-back-outline">
           </ion-icon>
         </button>
       </ion-col>
-      <ion-col col-9>
-        <div class="progress">
-          <div class="progress-bar" [style.width.%]="progress"></div>
-        </div>
+      <ion-col col-10>
+
+        <ion-row>
+          <ion-col *ngFor='let item of cubes'>
+            <div class="progress">
+              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=item.id'></div>
+              <!-- FIXME: 本来计划每次方块滑动都增加进度条 <div class="progress-bar" [style.width.%]="progress" ></div> -->
+            </div>
+          </ion-col>
+        </ion-row>
+
+
       </ion-col>
-      <ion-col col-2>
-        <button (click)="toNextCube()" style="background:transparent">
+      <ion-col col-1>
+        <button (click)="toNextCube()" (click)="animCube()" style="background:transparent;">
           <ion-icon id="arrow-right" name="ios-arrow-forward"></ion-icon>
         </button>
       </ion-col>
@@ -32,9 +40,7 @@
   <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
 
 
-
-
-  <div class="swiper-container">
+  <div id="anim-cube" [@myTrigger]='animState'  class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
         <div> {{cube.titleCn}} </div>
@@ -53,13 +59,14 @@
     <div class="swiper-pagination"></div>
   </div>
 
+
   <!-- Fab btn -->
   <ion-fab id="cube-fab" bottom right>
     <button ion-fab color="light">
       <ion-icon name="ios-menu"></ion-icon>
     </button>
     <ion-fab-list side='left'>
-      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()">
+      <button class="btn-list" ion-fab color="light" (click)="getRandomNext()" >
         <ion-icon name="fastforward"></ion-icon>
       </button>
       <button class="btn-list" ion-fab color="light" (click)="toFirstCube()">
