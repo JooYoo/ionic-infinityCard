@@ -1,15 +1,16 @@
 {
   "name": "infinityCard",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "JooYoo",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint"
+    "lint": "ionic-app-scripts lint",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://jooyoo.github.io/ionic-infinityCard",
   "dependencies": {
     "@angular/animations": "5.2.11",
     "@angular/common": "5.2.11",
@@ -33,6 +34,7 @@
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
     "cryptiles": "^4.1.3",
+    "gh-pages": "^2.0.1",
     "hoek": "^6.1.2",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
