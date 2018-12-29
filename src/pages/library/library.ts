@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ItemSliding } from 'ionic-angular';
 import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
@@ -12,7 +12,6 @@ import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
 })
 
 export class LibraryPage {
-
   libraryMode: string
   cardStacks: any
 
@@ -22,7 +21,7 @@ export class LibraryPage {
     public modalCtrl: ModalController) {
 
     this.cardStacks = this.cardService.cardStacks;
-    this.libraryMode = "swipe"
+    this.libraryMode = "cube"
   }
 
   // open specific card/cube Bag, display all cards or cubes

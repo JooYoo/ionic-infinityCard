@@ -5,11 +5,11 @@
 
   <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
     <ion-segment color="light" [(ngModel)]="libraryMode" no-border>
-      <ion-segment-button value="swipe" style="margin-top:10px;">
-        swipe
-      </ion-segment-button>
       <ion-segment-button value="cube" style="margin-top:10px;">
         cube
+      </ion-segment-button>
+      <ion-segment-button value="swipe" style="margin-top:10px;">
+        swipe
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -17,9 +17,41 @@
 </ion-header>
 
 
-<ion-content no-padding>
-  <!-- <ion-searchbar></ion-searchbar> -->
+<ion-content no-padding no-bounce>
   <div [ngSwitch]="libraryMode">
+
+    <!-- cube library mode -->
+    <div *ngSwitchCase="'cube'">
+      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col *ngFor="let item of cardService.cubeStacks">
+
+            <div class="cubes-card-wrapper" (click)="openCubeListPage(item)">
+              <div class="cubes-card-inner-wrapper">
+                <img class="cubes-card-img" src="https://cdn.dribbble.com/users/997435/screenshots/5759108/cubes.png">
+
+                <div class="progress">
+                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px;"></div>
+                </div>
+
+                <div class="cubes-card-title">{{item.titleCn}}</div>
+                <div class="cubes-card-subtitle">{{item.titleDe}}</div>
+              </div>
+
+            </div>
+
+          </ion-col>
+        </ion-row>
+        <ion-fab bottom right>
+          <button ion-fab clear class="addBtn" color='light' (click)="onCubeStackAddPage()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
+      </ion-grid>
+
+    </div>
 
     <!-- swipe library mode -->
     <div *ngSwitchCase="'swipe'">
@@ -53,37 +85,5 @@
       </ion-grid>
     </div>
 
-    <!-- cube library mode -->
-    <div *ngSwitchCase="'cube'">
-      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
-
-      <ion-grid no-padding>
-        <ion-row>
-          <ion-col *ngFor="let item of cardService.cubeStacks">
-
-            <div class="cubes-card-wrapper" (click)="openCubeListPage(item)">
-              <div class="cubes-card-inner-wrapper">
-                <img class="cubes-card-img" src="../../assets/imgs/cubes.png">
-
-                <div class="progress">
-                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px;"></div>
-                </div>
-
-                <div class="cubes-card-title">{{item.titleCn}}</div>
-                <div class="cubes-card-subtitle">{{item.titleDe}}</div>
-              </div>
-
-            </div>
-
-          </ion-col>
-        </ion-row>
-        <ion-fab bottom right>
-          <button ion-fab class="addBtn" color='light' (click)="onCubeStackAddPage()">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-fab>
-      </ion-grid>
-
-    </div>
   </div>
 </ion-content>
