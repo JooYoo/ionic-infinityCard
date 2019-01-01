@@ -4,6 +4,7 @@ import { trigger, transition, useAnimation, state, style, animate, keyframes } f
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class SwipePage {
   failedCards: any
   progressValue: number = 0
   cardStack: any
+  
 
   cardBagMode: string = "standard"
   isAndroid: boolean = false
@@ -54,6 +56,7 @@ export class SwipePage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
+    private storage: Storage,
     public platform: Platform,
     public modalCtrl: ModalController) {
 
@@ -106,12 +109,31 @@ export class SwipePage {
     this.initCards(this.cardService.failedCardBag.cards)
   }
 
+
+
   // new Round Btn
   startNewRound() {
-    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
+
+   let cardStacksLength
+   this.storage.length().then(result => {
+    cardStacksLength = result
+    console.log('storageLength: ',cardStacksLength)
+
+    this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)
     this.cardStack = this.cardService.cardStacks[this.nextCardBag]
+    console.log('swipe:',this.cardStack)
     this.initCards(this.cardStack.cards)
     this.cardStack.progress = this.progressValue
+  })
+
+    
+  
+    // this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
+    //  this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)
+    // this.cardStack = this.cardService.cardStacks[this.nextCardBag]
+    // console.log('swipe:',this.cardStack)
+    // this.initCards(this.cardStack.cards)
+    // this.cardStack.progress = this.progressValue
   }
 
   // repeat Round Btn

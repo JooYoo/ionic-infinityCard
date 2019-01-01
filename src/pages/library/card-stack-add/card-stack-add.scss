@@ -3,4 +3,13 @@ page-card-stack-add {
     .col{
         border-top: 0px solid transparent !important;
     }
+
+    button{
+        outline: none;
+    }
+
+    #confirm-btn{
+        margin-bottom: 20px;
+        font-size: 25px;
+    }
 }

@@ -21,7 +21,7 @@ export class LibraryPage {
     public modalCtrl: ModalController) {
 
     this.cardStacks = this.cardService.cardStacks;
-    this.libraryMode = "cube"
+    this.libraryMode = "swipe"
   }
 
   // open specific card/cube Bag, display all cards or cubes
