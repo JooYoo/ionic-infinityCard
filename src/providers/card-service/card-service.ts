@@ -102,7 +102,7 @@ export class CardServiceProvider {
   removeCubeBag(cubeStack: any) {
     let index = this.cubeStacks.indexOf(cubeStack)
     if (index > -1) {
-      this.cubeStacks.splice(cubeStack, 1)
+      this.cubeStacks.splice(index, 1)
     }
   }
 
