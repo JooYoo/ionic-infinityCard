@@ -18,7 +18,7 @@ export class CardServiceProvider {
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider) {
 
-   // this.mockCardStacks()
+    // this.mockCardStacks()
     this.getAllCardStacks()
     this.getFailedCardBag()
     this.mockCubeStack()
@@ -47,9 +47,9 @@ export class CardServiceProvider {
     var cardsC = [
       new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
-    
+
     var cardsD = []
-    
+
     this.cardStacks = [
       //new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
       //new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
@@ -84,11 +84,11 @@ export class CardServiceProvider {
   }
 
   // CardStack: all, add, remove, edit
-  getAllCardStacks(){
+  getAllCardStacks() {
     this.cardStacks = this.storageService.storageGetAllCardStacks()
-   }  
+  }
   addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
-    let id = this.cardStacks.length +1
+    let id = this.cardStacks.length + 1
     let title_Cn = titleCn
     let title_De = titleDe
     var newCards = []
@@ -102,7 +102,7 @@ export class CardServiceProvider {
     if (index > -1) {
       this.cardStacks.splice(index, 1)
     }
-    
+
     this.storageService.storageRemoveCardStack(cardStack)
   }
   editCardBag(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
@@ -121,17 +121,18 @@ export class CardServiceProvider {
     let _textDe = textDe
     let _status = CardStatus.failed
     cardStack.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
-   
-    //console.log('cardStackID: ', cardStack.id)
-   this.storageService.storageAddCard(cardStack)
+
+    this.storageService.storageAddCard(cardStack)
   }
-  removeCard(card: any, cardBag: any) {
-    let targetCardBag = this.cardStacks.find(x => x == cardBag)
-    targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
+  removeCard(card: any, cardStack: any) {
+    let targetcardStack = this.cardStacks.find(x => x == cardStack)
+    targetcardStack.cards = targetcardStack.cards.filter(x => x != card)
   }
-  editCard(card: Card, newTextCn: string, newTextDe: string) {
+  editCard(cardStack: CardStack, card: Card, newTextCn: string, newTextDe: string) {
     card.textCn = newTextCn
     card.textDe = newTextDe
+
+    this.storageService.storageEditCard(cardStack)
   }
 
 
@@ -170,7 +171,7 @@ export class CardServiceProvider {
   }
 
 
-  
+
 
 
   getRandomBgColor() {
