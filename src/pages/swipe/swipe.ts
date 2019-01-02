@@ -114,19 +114,14 @@ export class SwipePage {
   // new Round Btn
   startNewRound() {
 
-   let cardStacksLength
-   this.storage.length().then(result => {
-    cardStacksLength = result
-    console.log('storageLength: ',cardStacksLength)
+   this.storage.length().then(cardStacksLength => {
 
     this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)
     this.cardStack = this.cardService.cardStacks[this.nextCardBag]
-    console.log('swipe:',this.cardStack)
     this.initCards(this.cardStack.cards)
     this.cardStack.progress = this.progressValue
   })
-
-    
+  
   
     // this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
     //  this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)

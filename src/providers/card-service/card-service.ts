@@ -91,22 +91,22 @@ export class CardServiceProvider {
   
   // CardStack: add, remove, edit
   addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
-    let id = this.cardStacks.length
+    let id = this.cardStacks.length +1
     let title_Cn = titleCn
     let title_De = titleDe
     var newCards = []
     var newCardStack = new CardStack(id, title_Cn, title_De, newCards, icon, onProgress)
 
-    this.cardStacks.push(newCardStack)
-   
     this.storageService.storageAddCardStack(newCardStack)
+    this.cardStacks.push(newCardStack)
   }
-  removeCardBag(cardBag: any) {
-    // this.cardStacks = this.cardStacks.filter(x => x != cardBag)
-    let index = this.cardStacks.indexOf(cardBag)
+  removeCardBag(cardStack: any) {
+    let index = this.cardStacks.indexOf(cardStack)
     if (index > -1) {
       this.cardStacks.splice(index, 1)
     }
+    
+    this.storageService.storageRemoveCardStack(cardStack)
   }
   editCardBag(cardBag: CardStack, newTitleCn: string, newTitleDe: string) {
     var editCardBag = this.cardStacks.find(x => x == cardBag)

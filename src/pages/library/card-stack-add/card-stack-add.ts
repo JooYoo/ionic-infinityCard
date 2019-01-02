@@ -26,14 +26,9 @@ export class CardStackAddPage {
 
   addCardBag() {
     this.cardService.addCardStack(this.titleCn, this.titleDe, "icon", 0)
-    let newCardStack = this.cardService.cardStacks[this.cardService.cardStacks.length - 1]
+  //  let newCardStack = this.cardService.cardStacks[this.cardService.cardStacks.length - 1]
 
-    this.storage.storageAddCardStack(newCardStack)
-
-    console.log('new CardStack Info:')
-    console.log(newCardStack)
-    console.log('allCardStacks')
-    console.log(this.cardService.cardStacks)
+   // this.storage.storageAddCardStack(newCardStack)
   }
 
 
