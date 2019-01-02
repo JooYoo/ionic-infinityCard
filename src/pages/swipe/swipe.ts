@@ -33,13 +33,13 @@ export class SwipePage {
 
   cards = []
   studyCards: any
-  nextCardBag: number
+  randomIndex: number
   swipeIndex: number
   failedCardLength: any
   failedCards: any
   progressValue: number = 0
   cardStack: any
-  
+
 
   cardBagMode: string = "standard"
   isAndroid: boolean = false
@@ -60,7 +60,7 @@ export class SwipePage {
     public platform: Platform,
     public modalCtrl: ModalController) {
 
-   // this.isAndroid = platform.is('android')
+    // this.isAndroid = platform.is('android')
     this.studyCardSwitch()
   }
 
@@ -87,14 +87,14 @@ export class SwipePage {
     // progress value
     this.progressValue += this.swipeService.onProgress(swipeResult, this.cards)
     this.cardStack.progress = this.progressValue
-   
+
     this.swipeIndex++
     //TODO: save current card into new stack
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
   }
 
-  onMistake(){
+  onMistake() {
     let modal = this.modalCtrl.create(MistakePage)
     modal.present()
   }
@@ -113,19 +113,16 @@ export class SwipePage {
 
   // new Round Btn
   startNewRound() {
+    this.storage.length().then(cardStacksLength => {
+      this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
+      this.cardStack = this.cardService.cardStacks[this.randomIndex]
+      this.initCards(this.cardStack.cards)
+      this.cardStack.progress = this.progressValue
+    })
 
-   this.storage.length().then(cardStacksLength => {
-
-    this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)
-    this.cardStack = this.cardService.cardStacks[this.nextCardBag]
-    this.initCards(this.cardStack.cards)
-    this.cardStack.progress = this.progressValue
-  })
-  
-  
-    // this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
-    //  this.nextCardBag = this.swipeService.getRandomCardBag(cardStacksLength)
-    // this.cardStack = this.cardService.cardStacks[this.nextCardBag]
+    // this.randomIndex = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
+    //  this.randomIndex = this.swipeService.getRandomCardBag(cardStacksLength)
+    // this.cardStack = this.cardService.cardStacks[this.randomIndex]
     // console.log('swipe:',this.cardStack)
     // this.initCards(this.cardStack.cards)
     // this.cardStack.progress = this.progressValue

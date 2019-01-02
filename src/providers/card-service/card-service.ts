@@ -19,7 +19,7 @@ export class CardServiceProvider {
     public storageService: StorageServiceProvider) {
 
    // this.mockCardStacks()
-    this.getCardStacks()
+    this.getAllCardStacks()
     this.getFailedCardBag()
     this.mockCubeStack()
   }
@@ -29,11 +29,7 @@ export class CardServiceProvider {
     this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
-
-  getCardStacks(){
-   this.cardStacks = this.storageService.storageGetAllCardStacks()
-  }
-
+  // MockData: mocakCards, mockCubes
   mockCardStacks() {
     var cardsA = [
       new Card(0, this.getDateNow(), '第零包', 'hallo', CardStatus.failed),
@@ -51,9 +47,9 @@ export class CardServiceProvider {
     var cardsC = [
       new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
-
+    
     var cardsD = []
-
+    
     this.cardStacks = [
       //new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
       //new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
@@ -61,7 +57,6 @@ export class CardServiceProvider {
       new CardStack(3, '卡包三', 'StackDrei', [], 'iconC', 0)
     ]
   }
-
   mockCubeStack() {
     var date = new Date();
     var cubesA = [
@@ -88,8 +83,10 @@ export class CardServiceProvider {
     ]
   }
 
-  
-  // CardStack: add, remove, edit
+  // CardStack: all, add, remove, edit
+  getAllCardStacks(){
+    this.cardStacks = this.storageService.storageGetAllCardStacks()
+   }  
   addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
     let id = this.cardStacks.length +1
     let title_Cn = titleCn
@@ -116,6 +113,28 @@ export class CardServiceProvider {
     this.storageService.storageEditCardStack(cardStack)
   }
 
+  // Card: add, remove, edit
+  addCard(cardStack: CardStack, textCn: string, textDe: string) {
+    let _id = cardStack.cards.length;
+    let _date = this.getDateNow()
+    let _textCn = textCn
+    let _textDe = textDe
+    let _status = CardStatus.failed
+    cardStack.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
+   
+    //console.log('cardStackID: ', cardStack.id)
+   this.storageService.storageAddCard(cardStack)
+  }
+  removeCard(card: any, cardBag: any) {
+    let targetCardBag = this.cardStacks.find(x => x == cardBag)
+    targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
+  }
+  editCard(card: Card, newTextCn: string, newTextDe: string) {
+    card.textCn = newTextCn
+    card.textDe = newTextDe
+  }
+
+
   //CubeBag: add, remove, edit
   addCubeStack(titleCn: string, titleDe: string, icon: string) {
     let id = this.cubeStacks.length
@@ -135,7 +154,6 @@ export class CardServiceProvider {
       this.cubeStacks.splice(index, 1)
     }
   }
-
   // Cube: add, remove, edit 
   addCube(cubeBag: CubeBag, title_Cn: string, title_De: string, cubeTexts: string[]) {
     let _id = cubeBag.cubes.length;
@@ -152,24 +170,7 @@ export class CardServiceProvider {
   }
 
 
-  // Card: add, remove, edit
-  addCard(cardBag: CardStack, textCn: string, textDe: string) {
-    let _id = cardBag.cards.length;
-    let _date = this.getDateNow()
-    let _textCn = textCn
-    let _textDe = textDe
-    let _status = CardStatus.failed
-
-    cardBag.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
-  }
-  removeCard(card: any, cardBag: any) {
-    let targetCardBag = this.cardStacks.find(x => x == cardBag)
-    targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
-  }
-  editCard(card: Card, newTextCn: string, newTextDe: string) {
-    card.textCn = newTextCn
-    card.textDe = newTextDe
-  }
+  
 
 
   getRandomBgColor() {

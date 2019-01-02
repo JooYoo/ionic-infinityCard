@@ -26,7 +26,7 @@ export class SwipeServiceProvider {
     }
   }
 
-  getRandomCardBag(itemLength: number) {
+  getRandomNr(itemLength: number) {
     return (Math.floor(Math.random() * itemLength))
   }
 

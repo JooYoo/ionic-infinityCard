@@ -8,7 +8,7 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 })
 export class CardContentAddPage {
 
-  cardBag: any
+  cardStack: any
   textCn: string
   textDe: string
 
@@ -17,7 +17,7 @@ export class CardContentAddPage {
     public viewControl: ViewController,
     public cardService: CardServiceProvider,) {
 
-    this.cardBag = navParams.get('cardBagInfo')
+    this.cardStack = navParams.get('cardBagInfo')
   }
 
   dismiss() {
@@ -25,7 +25,7 @@ export class CardContentAddPage {
   }
 
   addCard() {
-    this.cardService.addCard(this.cardBag, this.textCn, this.textDe)
+    this.cardService.addCard(this.cardStack, this.textCn, this.textDe)
   }
 
 }

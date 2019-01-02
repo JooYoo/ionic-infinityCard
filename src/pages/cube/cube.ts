@@ -88,7 +88,7 @@ export class CubePage {
     //this.animProgress=0
 
     // get random CubeStack
-    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
+    let randomIndex = this.swipeService.getRandomNr(this.cardService.cubeStacks.length)
     this.cubes = this.cardService.cubeStacks[randomIndex].cubes
     this.cubeStack = this.cardService.cubeStacks[randomIndex]
 
