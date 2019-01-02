@@ -96,9 +96,9 @@ export class CardServiceProvider {
     let title_De = titleDe
     var newCards = []
     var newCardStack = new CardStack(id, title_Cn, title_De, newCards, icon, onProgress)
+    this.cardStacks.push(newCardStack)
 
     this.storageService.storageAddCardStack(newCardStack)
-    this.cardStacks.push(newCardStack)
   }
   removeCardBag(cardStack: any) {
     let index = this.cardStacks.indexOf(cardStack)
@@ -108,10 +108,12 @@ export class CardServiceProvider {
     
     this.storageService.storageRemoveCardStack(cardStack)
   }
-  editCardBag(cardBag: CardStack, newTitleCn: string, newTitleDe: string) {
-    var editCardBag = this.cardStacks.find(x => x == cardBag)
-    editCardBag.titleCn = newTitleCn
-    editCardBag.titleDe = newTitleDe
+  editCardBag(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
+    var editcardStack = this.cardStacks.find(x => x == cardStack)
+    editcardStack.titleCn = newTitleCn
+    editcardStack.titleDe = newTitleDe
+
+    this.storageService.storageEditCardStack(cardStack)
   }
 
   //CubeBag: add, remove, edit
@@ -134,7 +136,6 @@ export class CardServiceProvider {
     }
   }
 
-
   // Cube: add, remove, edit 
   addCube(cubeBag: CubeBag, title_Cn: string, title_De: string, cubeTexts: string[]) {
     let _id = cubeBag.cubes.length;
@@ -153,7 +154,6 @@ export class CardServiceProvider {
 
   // Card: add, remove, edit
   addCard(cardBag: CardStack, textCn: string, textDe: string) {
-
     let _id = cardBag.cards.length;
     let _date = this.getDateNow()
     let _textCn = textCn
