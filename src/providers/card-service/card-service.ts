@@ -128,7 +128,7 @@ export class CardServiceProvider {
     let targetcardStack = this.cardStacks.find(x => x == cardStack)
     targetcardStack.cards = targetcardStack.cards.filter(x => x != card)
 
-    this.storageService.storageRemoveCard(cardStack,card)
+    this.storageService.storageRemoveCard(cardStack, card)
   }
   editCard(cardStack: CardStack, card: Card, newTextCn: string, newTextDe: string) {
     card.textCn = newTextCn
