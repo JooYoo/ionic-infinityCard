@@ -109,22 +109,29 @@ export class SwipePage {
     this.initCards(this.cardService.failedCardBag.cards)
   }
 
-
+  ionViewDidEnter(){
+    this.cardService.getAllCardStacks()
+  }
 
   // new Round Btn
   startNewRound() {
+
     this.storage.length().then(cardStacksLength => {
+
+      if(cardStacksLength === 0){
+       this.cardService.cardStacks.push(this.cardService.defaultData())
+      }
       this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
+       console.log('cardStacks: ', this.cardService.cardStacks)
       this.cardStack = this.cardService.cardStacks[this.randomIndex]
       this.initCards(this.cardStack.cards)
       this.cardStack.progress = this.progressValue
     })
 
-    // this.randomIndex = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
-    //  this.randomIndex = this.swipeService.getRandomCardBag(cardStacksLength)
+    // this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
     // this.cardStack = this.cardService.cardStacks[this.randomIndex]
     // console.log('swipe:',this.cardStack)
-    // this.initCards(this.cardStack.cards)
+    // this.initCards(this.cardStack!.cards)
     // this.cardStack.progress = this.progressValue
   }
 

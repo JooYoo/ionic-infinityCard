@@ -18,8 +18,8 @@ export class CardServiceProvider {
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider) {
 
-    // this.mockCardStacks()
-    this.getAllCardStacks()
+    //this.mockCardStacks()
+    //this.getAllCardStacks()
     this.getFailedCardBag()
     this.mockCubeStack()
   }
@@ -29,10 +29,22 @@ export class CardServiceProvider {
     this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
+  // defaultData
+  defaultData() {
+    var dafaultCards = [
+      new Card(0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
+      new Card(1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
+      new Card(2, this.getDateNow(), '再见', 'bye', CardStatus.failed),
+      new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
+      new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
+    ]
+    return new CardStack(0, '你好再见', 'Hallo', dafaultCards, "iconA", 0)
+  }
+
   // MockData: mocakCards, mockCubes
   mockCardStacks() {
     var cardsA = [
-      new Card(0, this.getDateNow(), '第零包', 'hallo', CardStatus.failed),
+      new Card(0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
       new Card(1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
       new Card(2, this.getDateNow(), '再见', 'bye', CardStatus.failed),
       new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
@@ -48,13 +60,12 @@ export class CardServiceProvider {
       new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
 
-    var cardsD = []
+
 
     this.cardStacks = [
-      //new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
+      new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
       //new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
       //new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC', 0),
-      new CardStack(3, '卡包三', 'StackDrei', [], 'iconC', 0)
     ]
   }
   mockCubeStack() {
@@ -83,9 +94,12 @@ export class CardServiceProvider {
     ]
   }
 
+  
+
   // CardStack: all, add, remove, edit
   getAllCardStacks() {
-    this.cardStacks = this.storageService.storageGetAllCardStacks()
+    //this.cardStacks = this.storageService.storageGetAllCardStacks()
+    this.storageService.storageGetAllCardStacks().then(cardSs => this.cardStacks = cardSs)
   }
   addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
     let id = this.cardStacks.length + 1

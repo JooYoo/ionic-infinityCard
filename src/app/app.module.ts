@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
-
+import{ SQLite } from '@ionic-native/sqlite'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LibraryPage } from '../pages/library/library';
@@ -32,6 +32,7 @@ import { CubeListIconComponent } from '../components/cube-list-icon/cube-list-ic
 import { MistakePage } from '../pages/swipe/mistake/mistake'
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { IonicStorageModule } from '@ionic/storage';
+import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 
 @NgModule({
   declarations: [
@@ -85,10 +86,12 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
+    SQLite,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CardServiceProvider,
     SwipeServiceProvider,
-    StorageServiceProvider
+    StorageServiceProvider,
+    SqlStorageProvider
   ]
 })
 export class AppModule { }
