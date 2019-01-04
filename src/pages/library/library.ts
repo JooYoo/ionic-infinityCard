@@ -12,16 +12,16 @@ import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
 })
 
 export class LibraryPage {
-  libraryMode: string
+  libraryMode: string = 'swipe'
   cardStacks: any
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController) { }
 
+  ionViewDidLoad() {
     this.cardStacks = this.cardService.cardStacks;
-    this.libraryMode = "swipe"
   }
 
   // open specific card/cube Bag, display all cards or cubes

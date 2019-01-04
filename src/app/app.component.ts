@@ -10,7 +10,7 @@ import { StorageServiceProvider } from '../providers/storage-service/storage-ser
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: any
 
   constructor(platform: Platform, 
     statusBar: StatusBar, 
@@ -21,7 +21,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      console.log('after splashScreen')
+   
       storageService.initStorage().then(()=> this.rootPage = TabsPage)
     });
   }

@@ -10,24 +10,7 @@ import { Storage } from '@ionic/storage';
 @Component({
   selector: 'page-swipe',
   templateUrl: 'swipe.html',
-  animations: [
-    trigger('FlipAnim', [
-      state('goFlip', style({
-        transform: 'rotateY(180deg)'
-      })),
-      state('goBack', style({
-        transform: 'rotateY(0)'
-      })),
-      transition('goFlip => goBack', animate('200ms ease-out')),
-      transition('goBack => goFlip', animate('400ms ease-in')),
-
-      // if display back to swipe, then show font 
-      state('goQuickBack', style({
-        transform: 'rotateY(0deg)'
-      })),
-      transition('goFlip => goQuickBack', animate('0.000001ms ease-out'))
-    ]),
-  ]
+  animations: []
 })
 export class SwipePage {
 
@@ -40,9 +23,7 @@ export class SwipePage {
   progressValue: number = 0
   cardStack: any
 
-
   cardBagMode: string = "standard"
-  isAndroid: boolean = false
 
   ready = false;
   attendants = [];
@@ -58,9 +39,10 @@ export class SwipePage {
     public swipeService: SwipeServiceProvider,
     private storage: Storage,
     public platform: Platform,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController) { }
 
-    // this.isAndroid = platform.is('android')
+  ionViewDidLoad() { // load data first then start the game
+    this.cardService.getAllCardStacks()
     this.studyCardSwitch()
   }
 
@@ -99,30 +81,23 @@ export class SwipePage {
     modal.present()
   }
 
-  isFlip: string = 'goBack';
-  toggleFlip() {
-    this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
-  }
-
   // review failed Btn
   reviewFailedCards() {
     this.initCards(this.cardService.failedCardBag.cards)
   }
 
-  ionViewDidEnter(){
-    this.cardService.getAllCardStacks()
-  }
+
 
   // new Round Btn
   startNewRound() {
 
     this.storage.length().then(cardStacksLength => {
 
-      if(cardStacksLength === 0){
-       this.cardService.cardStacks.push(this.cardService.defaultData())
+      if (cardStacksLength === 0) {
+        this.cardService.cardStacks.push(this.cardService.defaultData())
       }
       this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
-       console.log('cardStacks: ', this.cardService.cardStacks)
+      console.log('cardStacks: ', this.cardService.cardStacks)
       this.cardStack = this.cardService.cardStacks[this.randomIndex]
       this.initCards(this.cardStack.cards)
       this.cardStack.progress = this.progressValue

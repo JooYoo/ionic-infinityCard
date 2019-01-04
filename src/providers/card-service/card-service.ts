@@ -102,7 +102,7 @@ export class CardServiceProvider {
     this.storageService.storageGetAllCardStacks().then(cardSs => this.cardStacks = cardSs)
   }
   addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
-    let id = this.cardStacks.length + 1
+    let id = this.cardStacks.length
     let title_Cn = titleCn
     let title_De = titleDe
     var newCards = []
