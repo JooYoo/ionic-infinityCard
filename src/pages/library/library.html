@@ -1,30 +1,33 @@
-<ion-header [ngSwitch]="libraryMode">
-  <ion-navbar color="primary">
-    <ion-title>Library</ion-title>
-  </ion-navbar>
+<ion-header [ngSwitch]="libraryMode" color="light">
+  <!-- TODO: title if need  -->
+  <ion-navbar color="light">
+    <!-- <ion-title>Library</ion-title> -->
+    <!-- <ion-toolbar color="light" >
+    </ion-toolbar> -->
 
-  <ion-toolbar color="primary" no-border-top style="padding-bottom:0%;">
-    <ion-segment color="light" [(ngModel)]="libraryMode" no-border>
-      <ion-segment-button value="cube" style="margin-top:10px;">
+    <ion-segment [(ngModel)]="libraryMode">
+      <ion-segment-button value="cube">
         cube
       </ion-segment-button>
-      <ion-segment-button value="swipe" style="margin-top:10px;">
+      <ion-segment-button value="swipe">
         swipe
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
 
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content no-padding no-bounce>
+
   <div [ngSwitch]="libraryMode">
 
     <!-- cube library mode -->
     <div *ngSwitchCase="'cube'">
-      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
 
-      <ion-grid no-padding>
+      <!--TODO: search input if need: <ion-searchbar class="cubes-searchbar"></ion-searchbar> -->
+
+      <ion-grid>
         <ion-row>
           <ion-col *ngFor="let item of cardService.cubeStacks">
 
@@ -56,23 +59,26 @@
     <!-- swipe library mode -->
     <div *ngSwitchCase="'swipe'">
 
-      <ion-searchbar class="cubes-searchbar"></ion-searchbar>
+      <!--TODO: search input if need: <ion-searchbar class="cubes-searchbar"></ion-searchbar> -->
 
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let item of cardStacks">
 
-            <div class="wrapper">
-              <div class="card" (click)="openCardsPage(item)">
-                <img class="back-img" src="https://picsum.photos/200/300/?random">
-                <div class="card-title">{{item.titleCn}}</div>
-                <div class="card-subtitle">{{item.titleDe}}</div>
+            <div id="wrapper" >
+              <div class="cardStack-wrapper">
+                <div class="card" (click)="openCardsPage(item)">
+                  <img class="back-img" src="https://picsum.photos/200/300/?random">
+                  <div class="card-title">{{item.titleCn}}</div>
+                  <div class="card-subtitle">{{item.titleDe}}</div>
+                </div>
+              </div>
+
+              <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
+                <div class="progress-bar bg-warning" style="border-radius:120px;" [style.width.%]='item.progress'></div>
               </div>
             </div>
 
-            <div class="progress" style="width:100px; margin-top:5px; margin-left: 8px;">
-              <div class="progress-bar bg-warning" style="border-radius:120px;" [style.width.%]='item.progress'></div>
-            </div>
 
           </ion-col>
         </ion-row>

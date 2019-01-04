@@ -6,22 +6,21 @@ export class CardStack {
     titleCn: string
     titleDe: string
     cards: Card[] = []
-    icon: string //TODO: change to date: establish CardStack date
+    date: string //TODO: change to date: establish CardStack date
     progress: number
 
     constructor(id: number,
         titleCn: string,
         titleDe: string,
         cards: Card[],
-        icon: string,
+        date: string,
         progress: number) {
 
         this.id = id
         this.titleCn = titleCn
         this.titleDe = titleDe
         this.cards = cards
-        this.icon = icon
+        this.date = date
         this.progress = progress
-
     }
 }

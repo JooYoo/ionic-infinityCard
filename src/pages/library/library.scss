@@ -1,14 +1,19 @@
 page-library {
   .addBtn {
     font-size: 25px;
-    margin:10px;
+    margin-bottom:10px;
+    margin-right: 10px;
   }
 
   .item-wrapper:last-child .item-block {
     border-bottom: 0px solid transparent !important;
   }
 
-  .wrapper {
+  #wrapper{
+    margin-left: 25px;
+  }
+
+  .cardStack-wrapper {
     display: flex;
     margin-left: 10px;
     margin-top: 15px;

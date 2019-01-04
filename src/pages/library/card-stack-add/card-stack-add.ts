@@ -12,12 +12,16 @@ export class CardStackAddPage {
   titleCn: string
   titleDe: string
   tabInfo: string
+  currentDate: string
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private viewCtrl: ViewController,
     public cardService: CardServiceProvider,
-    private storage: StorageServiceProvider) {
+    private storage: StorageServiceProvider) { }
+
+  ionViewDidLoad() {
+    this.currentDate = new Date().toISOString()
   }
 
   dismiss() {
@@ -25,10 +29,10 @@ export class CardStackAddPage {
   }
 
   addCardBag() {
-    this.cardService.addCardStack(this.titleCn, this.titleDe, "icon", 0)
-  //  let newCardStack = this.cardService.cardStacks[this.cardService.cardStacks.length - 1]
+    this.cardService.addCardStack(this.titleCn, this.titleDe, this.cardService.getDateNow(), 0)
+    //  let newCardStack = this.cardService.cardStacks[this.cardService.cardStacks.length - 1]
 
-   // this.storage.storageAddCardStack(newCardStack)
+    // this.storage.storageAddCardStack(newCardStack)
   }
 
 

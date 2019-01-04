@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-title>
       New CardStack
     </ion-title>
@@ -28,6 +28,14 @@
     <!-- <ion-item>
       <ion-label color="primary" stacked>icon</ion-label>
     </ion-item> -->
+    <ion-item>
+        <ion-label color="primary" style="margin-left:10px;">Date:</ion-label>
+        <ion-datetime [(ngModel)]="currentDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+      </ion-item>
+  
+      <ion-item>
+        
+      </ion-item>
 
   </ion-list>
 </ion-content>

@@ -11,6 +11,7 @@ export class CardContentAddPage {
   cardStack: any
   textCn: string
   textDe: string
+  currentDate: string
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -18,6 +19,10 @@ export class CardContentAddPage {
     public cardService: CardServiceProvider,) {
 
     this.cardStack = navParams.get('cardBagInfo')
+  }
+
+  ionViewDidLoad() {
+    this.currentDate = new Date().toISOString()
   }
 
   dismiss() {

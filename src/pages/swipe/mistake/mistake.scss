@@ -1,8 +1,8 @@
 page-mistake {
     .flipContainer {
         display: block;
-        width: 400px;
-        height: 250px;
+        width: 330px;
+        height: 230px;
         border: none;
         position: relative;
         left: 50%;
@@ -42,16 +42,16 @@ page-mistake {
     #card-front {
         background: white;
         color: black;
-        width: 400px;
-        height: 250px;
+        width: 330px;
+        height: 230px;
         font-size: 60px;
         font-family: Arial, Helvetica, sans-serif;
     }
     .theCard #card-back {
         background: white;
         color: black;
-        width: 400px;
-        height: 250px;
+        width: 330px;
+        height: 230px;
         font-size: 30px;
         border-radius: 20px;
         transform: rotateY(180deg);
@@ -67,7 +67,6 @@ page-mistake {
         background: white;
         border: none;
     }
-
     .progress {
         margin-top: 30px;
         border-radius: 200px;
@@ -75,23 +74,23 @@ page-mistake {
     .progress-bar {
         border-radius: 200px;
     }
-
     #mistake-repeat-btn {
         margin: 10px;
-        margin-bottom:80px;
+        margin-bottom: 10px;
     }
-
     #mistake-filing {
         text-align: center;
         margin-top: 10px;
         font-size: 40px;
         background: transparent;
     }
-
     #mistake-badge {
         font-size: 13px;
         position: absolute;
         bottom: 50px;
         right: 10px;
+    }
+    button {
+        outline: none !important;
     }
 }
