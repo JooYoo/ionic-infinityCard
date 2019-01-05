@@ -41,10 +41,15 @@ export class SwipePage {
     private storage: Storage,
     private storageService: StorageServiceProvider,
     public platform: Platform,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController) {
+
+    this.cardService.getAllCardStacks()
+
+
+     }
 
   ionViewCanEnter() {
-    this.cardService.getAllCardStacks()
+    
   }
 
 
