@@ -14,12 +14,9 @@ export class CardServiceProvider {
   failedCardBag: CardStack
   cubeStacks: CubeBag[]
 
-
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider) {
-
     //this.mockCardStacks()
-    //this.getAllCardStacks()
     this.getFailedCardBag()
     this.mockCubeStack()
   }
@@ -94,14 +91,12 @@ export class CardServiceProvider {
     ]
   }
 
-
   // CardStack: all, add, remove, edit
   getAllCardStacks() {
     //this.cardStacks = this.storageService.storageGetAllCardStacks()
     this.storageService.storageGetAllCardStacks().then(cardSs => this.cardStacks = cardSs)
   }
   addCardStack(titleCn: string, titleDe: string, progress: number) {
-    
     let id = this.cardStacks.length
     let newCards = []
     let title_Cn = titleCn
@@ -111,7 +106,7 @@ export class CardServiceProvider {
 
     this.storageService.storageAddCardStack(newCardStack)
   }
-  removeCardBag(cardStack: any) {
+  removeCardStack(cardStack: any) {
     let index = this.cardStacks.indexOf(cardStack)
     if (index > -1) {
       this.cardStacks.splice(index, 1)

@@ -4,7 +4,9 @@ import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
 import { CubeStackPage } from './cube-stack/cube-stack';
+import { Storage } from '@ionic/storage';
 import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
+import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
 
 @Component({
   selector: 'page-library',
@@ -18,10 +20,33 @@ export class LibraryPage {
   constructor(public nav: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    private storageService: StorageServiceProvider,
+    private storage: Storage) {
+
+  }
 
   ionViewDidLoad() {
-    this.cardStacks = this.cardService.cardStacks;
+    // this.cardStacks = this.cardService.cardStacks;
+
+    // if no data load default data
+    this.onDefaultStack()
+    // load data to app
+    this.storageService.storageGetAllCardStacks().then(data => {
+      this.cardStacks = data
+      this.cardService.cardStacks = data
+      console.log('library:cardStacks:', this.cardStacks)
+    })
+  }
+
+  onDefaultStack() {
+    this.storage.length().then(cardStacksLength => {
+      if (cardStacksLength === 0) {
+        let defaultStack = this.cardService.defaultData()
+        this.cardService.cardStacks.push(defaultStack)
+        this.storageService.storageAddCardStack(defaultStack)
+      }
+    })
   }
 
   // open specific card/cube Bag, display all cards or cubes
@@ -43,15 +68,9 @@ export class LibraryPage {
     AddModal.present()
   }
 
-
-  cardBagDelete(item) {
-    this.cardService.removeCardBag(item)
-  }
-
   cubeBagDelete(item) {
     this.cardService.removeCubeBag(item)
   }
-
   getCubeStackColor() {
     return this.cardService.getRandomBgColor();
   }

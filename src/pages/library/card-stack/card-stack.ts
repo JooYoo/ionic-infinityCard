@@ -34,6 +34,7 @@ export class CardStackPage {
       position: 'top',
       closeButtonText:'X',
       showCloseButton: true,
+      cssClass: 'toast-style'
     })
   }
 
@@ -46,7 +47,7 @@ export class CardStackPage {
     this.toastSetting()
 
     popover.onDidDismiss(() => {
-      this.cardService.removeCardBag(this.cardStack)
+      this.cardService.removeCardStack(this.cardStack)
       this.toast.present()
       this.viewCtrl.dismiss()
     })

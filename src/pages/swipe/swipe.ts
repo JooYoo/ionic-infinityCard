@@ -1,12 +1,8 @@
 import { Component, EventEmitter } from '@angular/core';
 import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
-import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
-import { Storage } from '@ionic/storage';
-import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
-
 
 @Component({
   selector: 'page-swipe',
@@ -38,22 +34,10 @@ export class SwipePage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
-    private storage: Storage,
-    private storageService: StorageServiceProvider,
     public platform: Platform,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController) { }
 
-    this.cardService.getAllCardStacks()
-
-
-     }
-
-  ionViewCanEnter() {
-    
-  }
-
-
-  ionViewDidEnter() { // load data first then start the game
+  ionViewDidEnter() {
     this.studyCardSwitch()
   }
 
@@ -98,45 +82,36 @@ export class SwipePage {
   }
 
 
-
   // new Round Btn
   startNewRound() {
 
-    this.storage.length().then(cardStacksLength => {
-      this.onDefaultStack(cardStacksLength)
+    // this.storage.length().then(cardStacksLength => {
+    //this.onDefaultStack(cardStacksLength)
 
-      this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
-      this.cardStack = this.cardService.cardStacks[this.randomIndex]
-      console.log('swipe:randomIndex: ', this.randomIndex)
-      console.log('swipe:cardStack:', this.cardStack)
-
-      try {
-        this.initCards(this.cardStack.cards)
-      } catch (error) {
-        console.log('no cards')
-      }
-
-      try {
-        this.cardStack.progress = this.progressValue
-      } catch (error) {
-        console.log('no progress')
-      }
-
-    })
-
-    // this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
+    // let cardStacksLength = this.cardService.cardStacks.length
+    // console.log('swipe:cardStacksLength:', cardStacksLength)
+    // this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
     // this.cardStack = this.cardService.cardStacks[this.randomIndex]
-    // console.log('swipe:',this.cardStack)
-    // this.initCards(this.cardStack!.cards)
-    // this.cardStack.progress = this.progressValue
-  }
+    // console.log('swipe:randomIndex: ', this.randomIndex)
+    // console.log('swipe:cardStack:', this.cardStack)
 
-  onDefaultStack(cardStacksLength) {
-    if (cardStacksLength === 0) {
-      let defaultStack = this.cardService.defaultData()
-      this.cardService.cardStacks.push(defaultStack)
-      this.storageService.storageAddCardStack(defaultStack)
-    }
+    // try {
+    //   this.initCards(this.cardStack.cards)
+    // } catch (error) {
+    //   console.log('swipe:no cards')
+    // }
+    // try {
+    //   this.cardStack.progress = this.progressValue
+    // } catch (error) {
+    //   console.log('swipe:no progress')
+    // }
+    // })
+
+    this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
+    this.cardStack = this.cardService.cardStacks[this.randomIndex]
+    console.log('swipe:', this.cardStack)
+    this.initCards(this.cardStack!.cards)
+    this.cardStack.progress = this.progressValue
   }
 
   // repeat Round Btn
