@@ -26,7 +26,7 @@ export class StorageServiceProvider {
           console.log('***inside foreach', data)
           cardStacks.push(JSON.parse(data))
         })
-        return resolve( cardStacks)
+        return resolve(cardStacks)
       })
     }
     // let cardStacks = []
@@ -38,9 +38,9 @@ export class StorageServiceProvider {
   }
   storageAddCardStack(cardStack) {
     if (this.sqlMode) {
-      this.sql.set((cardStack.id ).toString(), JSON.stringify(cardStack))
+      this.sql.set((cardStack.id).toString(), JSON.stringify(cardStack))
     } else {
-      this.storage.set((cardStack.id ).toString(), JSON.stringify(cardStack))
+      this.storage.set((cardStack.id).toString(), JSON.stringify(cardStack))
     }
   }
   storageRemoveCardStack(cardStack) {
@@ -52,15 +52,20 @@ export class StorageServiceProvider {
   }
   storageEditCardStack(cardStack) {
     if (this.sqlMode) {
-      this.sql.set((cardStack.id + 1).toString(), JSON.stringify(cardStack))
+      this.sql.set((cardStack.id).toString(), JSON.stringify(cardStack))
     } else {
-      this.storage.set((cardStack.id + 1).toString(), JSON.stringify(cardStack))
+      this.storage.set((cardStack.id).toString(), JSON.stringify(cardStack))
     }
   }
 
   // Card
   storageAddCard(cardStack) {
-    this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    //this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    if(this.sqlMode){
+      this.sql.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    }else{
+      this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    }
   }
   storageRemoveCard(cardStack, card) {
     // get all the data in this CardStack

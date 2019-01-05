@@ -28,8 +28,8 @@ export class CardStackAddPage {
     this.viewCtrl.dismiss()
   }
 
-  addCardBag() {
-    this.cardService.addCardStack(this.titleCn, this.titleDe, this.cardService.getDateNow(), 0)
+  addCardStack() {
+    this.cardService.addCardStack(this.titleCn, this.titleDe, 0)
     //  let newCardStack = this.cardService.cardStacks[this.cardService.cardStacks.length - 1]
 
     // this.storage.storageAddCardStack(newCardStack)

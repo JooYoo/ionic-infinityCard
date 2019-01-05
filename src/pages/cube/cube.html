@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Cube</ion-title>
+  <ion-navbar color="light" *ngIf="cubeStack?.titleDe">
+    <ion-title style="text-align:center;">{{cubeStack.titleDe}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -37,7 +37,7 @@
     </ion-row>
   </ion-grid>
 
-  <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
+  <div id="cubeStack-title"></div>
 
 
   <div id="anim-cube" [@myTrigger]='animState' class="swiper-container">

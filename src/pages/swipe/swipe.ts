@@ -5,6 +5,7 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
 import { Storage } from '@ionic/storage';
+import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
 
 
 @Component({
@@ -38,11 +39,16 @@ export class SwipePage {
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
     private storage: Storage,
+    private storageService: StorageServiceProvider,
     public platform: Platform,
     public modalCtrl: ModalController) { }
 
-  ionViewDidLoad() { // load data first then start the game
+  ionViewCanEnter() {
     this.cardService.getAllCardStacks()
+  }
+
+
+  ionViewDidEnter() { // load data first then start the game
     this.studyCardSwitch()
   }
 
@@ -92,15 +98,25 @@ export class SwipePage {
   startNewRound() {
 
     this.storage.length().then(cardStacksLength => {
+      this.onDefaultStack(cardStacksLength)
 
-      if (cardStacksLength === 0) {
-        this.cardService.cardStacks.push(this.cardService.defaultData())
-      }
       this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
-      console.log('cardStacks: ', this.cardService.cardStacks)
       this.cardStack = this.cardService.cardStacks[this.randomIndex]
-      this.initCards(this.cardStack.cards)
-      this.cardStack.progress = this.progressValue
+      console.log('swipe:randomIndex: ', this.randomIndex)
+      console.log('swipe:cardStack:', this.cardStack)
+
+      try {
+        this.initCards(this.cardStack.cards)
+      } catch (error) {
+        console.log('no cards')
+      }
+
+      try {
+        this.cardStack.progress = this.progressValue
+      } catch (error) {
+        console.log('no progress')
+      }
+
     })
 
     // this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
@@ -108,6 +124,14 @@ export class SwipePage {
     // console.log('swipe:',this.cardStack)
     // this.initCards(this.cardStack!.cards)
     // this.cardStack.progress = this.progressValue
+  }
+
+  onDefaultStack(cardStacksLength) {
+    if (cardStacksLength === 0) {
+      let defaultStack = this.cardService.defaultData()
+      this.cardService.cardStacks.push(defaultStack)
+      this.storageService.storageAddCardStack(defaultStack)
+    }
   }
 
   // repeat Round Btn
@@ -120,6 +144,7 @@ export class SwipePage {
   initCards(cards: any[]) {
     this.swipeIndex = 0
     this.attendants = [];
+    console.log('initCards:')
     this.cards = cards
 
     for (let i = 0; i < this.cards.length; i++) {

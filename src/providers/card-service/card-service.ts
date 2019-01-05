@@ -38,7 +38,7 @@ export class CardServiceProvider {
       new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
       new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
     ]
-    return new CardStack(0, '你好再见', 'Hallo', dafaultCards, "iconA", 0)
+    return new CardStack(0, '你好世界', 'HelloWorld', dafaultCards, this.getDateNow(), 0)
   }
 
   // MockData: mocakCards, mockCubes
@@ -94,19 +94,19 @@ export class CardServiceProvider {
     ]
   }
 
-  
 
   // CardStack: all, add, remove, edit
   getAllCardStacks() {
     //this.cardStacks = this.storageService.storageGetAllCardStacks()
     this.storageService.storageGetAllCardStacks().then(cardSs => this.cardStacks = cardSs)
   }
-  addCardStack(titleCn: string, titleDe: string, icon: string, onProgress: number) {
+  addCardStack(titleCn: string, titleDe: string, progress: number) {
+    
     let id = this.cardStacks.length
+    let newCards = []
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCards = []
-    var newCardStack = new CardStack(id, title_Cn, title_De, newCards, icon, onProgress)
+    let newCardStack = new CardStack(id, title_Cn, title_De, newCards, this.getDateNow(), progress)
     this.cardStacks.push(newCardStack)
 
     this.storageService.storageAddCardStack(newCardStack)
@@ -185,8 +185,6 @@ export class CardServiceProvider {
   editCube(cube: Cube, newCubeTexts: string[]) {
     cube.cubeTexts = newCubeTexts
   }
-
-
 
 
 
