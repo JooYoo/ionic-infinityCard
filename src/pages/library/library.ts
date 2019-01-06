@@ -24,12 +24,13 @@ export class LibraryPage {
     private storageService: StorageServiceProvider,
     private storage: Storage) {
 
+    // if no data load default data
+    
+
   }
 
   ionViewDidLoad() {
     // this.cardStacks = this.cardService.cardStacks;
-
-    // if no data load default data
     this.onDefaultStack()
     // load data to app
     this.storageService.storageGetAllCardStacks().then(data => {
@@ -37,6 +38,7 @@ export class LibraryPage {
       this.cardService.cardStacks = data
       console.log('library:cardStacks:', this.cardStacks)
     })
+
   }
 
   onDefaultStack() {
