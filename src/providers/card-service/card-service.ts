@@ -44,7 +44,7 @@ export class CardServiceProvider {
       new Cube(2, this.getDateNow(), '抱歉', 'apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
       new Cube(3, this.getDateNow(), '感激', 'appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
     ]
-    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow())
+    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(),0)
   }
 
   // MockData: mocakCards, mockCubes
@@ -94,9 +94,9 @@ export class CardServiceProvider {
     ]
 
     this.cubeStacks = [
-      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA'),
-      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
-      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
+      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA',0),
+      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB',0),
+      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA',0),
     ]
   }
 
@@ -157,12 +157,12 @@ export class CardServiceProvider {
 
 
   //CubeBag: add, remove, edit
-  addCubeStack(titleCn: string, titleDe: string, icon: string) {
+  addCubeStack(titleCn: string, titleDe: string, date: string) {
     let id = this.cubeStacks.length
     let newCubes = []
     let title_Cn = titleCn
     let title_De = titleDe
-    let newCubeStack = new CubeStack(id, title_Cn, title_De, newCubes, icon)
+    let newCubeStack = new CubeStack(id, title_Cn, title_De, newCubes, this.getDateNow(), 0)
     this.cubeStacks.push(newCubeStack)
 
     this.storageService.storageAddCubeStack(newCubeStack)

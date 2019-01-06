@@ -37,7 +37,7 @@
                 <img class="cubes-card-img" src="https://cdn.dribbble.com/users/997435/screenshots/5759108/cubes.png">
 
                 <div id="cube-progress" class="progress">
-                  <div class="progress-bar bg-warning" style="width:40%; border-radius:120px;"></div>
+                  <div class="progress-bar bg-warning" style="border-radius:120px;" [style.width.%]="item.progress"></div>
                 </div>
 
                 <div class="cubes-card-title">{{item.titleCn}}</div>

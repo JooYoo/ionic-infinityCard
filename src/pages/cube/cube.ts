@@ -58,8 +58,6 @@ export class CubePage {
   }
 
   animCube() {
-
-    console.log('in animCube')
     this.animState = (this.animState === 'idle' ? 'fadeIn' : 'idle')
     //this.animState = 'fadeIn'
   }
@@ -78,7 +76,7 @@ export class CubePage {
       this.perCubePercent = (1 / this.cubeStackLength) * 100
       this.progress = this.perCubePercent
 
-      this.cubeStack = this.studyCubeStack
+      this.cubeStack = this.progress
 
     } else {
       this.getRandomNext()
@@ -96,25 +94,27 @@ export class CubePage {
     this.cubeStackLength = this.cubes.length
     this.perCubePercent = (1 / this.cubeStackLength) * 100
     this.progress = this.perCubePercent
+    this.cubeStack.progress = this.progress
 
     this.cube = this.cubes[this.cubeIndex]
-
   }
 
   toNextCube() {
-
 
     this.cubeIndex++
     //cube
     if (this.cubeIndex <= this.cubeStackLength - 1) {
       this.cube = this.cubes[this.cubeIndex]
       this.progress += this.perCubePercent
+      console.log( this.progress)
+      
     } else {
       this.cubeIndex = this.cubeStackLength
       this.progress = 100
+
       this.cubeIndex = this.cubeStackLength - 1
     }
-
+    this.cubeStack.progress = this.progress
   }
 
   toLastCube() {
@@ -127,6 +127,7 @@ export class CubePage {
       this.cubeIndex = 0
       this.progress = this.perCubePercent
     }
+    this.cubeStack.progress = this.progress
 
   }
 
@@ -135,6 +136,8 @@ export class CubePage {
     this.cube = this.cubes[0]
     this.cubeIndex = 0
     this.progress = this.perCubePercent
+
+    this.cubeStack.progress = this.progress
   }
 
 
@@ -155,9 +158,9 @@ export class CubePage {
           shadowOffset: 20,
           shadowScale: 0.94,
         },
-        pagination: {
-          el: '.swiper-pagination',
-        },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
         scrollbar: {
           el: '.swiper-scrollbar',
         },
