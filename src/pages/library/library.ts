@@ -22,26 +22,45 @@ export class LibraryPage {
     public cardService: CardServiceProvider,
     public modalCtrl: ModalController,
     private storageService: StorageServiceProvider,
-    private storage: Storage) {
-
-    // if no data load default data
-    
-
-  }
+    private storage: Storage) { }
 
   ionViewDidLoad() {
-    // this.cardStacks = this.cardService.cardStacks;
-    this.onDefaultStack()
-    // load data to app
+    // load Cubes data to app
+    this.onDefaultCubeStack()
+
+    // load Cards data to app
+    this.onDefaultCardStack()
     this.storageService.storageGetAllCardStacks().then(data => {
       this.cardStacks = data
       this.cardService.cardStacks = data
       console.log('library:cardStacks:', this.cardStacks)
     })
+  }
+
+  onDefaultCubeStack() {
+    if (this.storageService.sqlMode) { // SQLite
+      this.storage.length().then(cardStacksLength => {
+        if (cardStacksLength === 0) { // first time load
+          let defaultCubeStack = this.cardService.defaultCubeData()
+          this.cardService.cubeStacks.push(defaultCubeStack)
+          this.storageService.storageAddCubeStack(defaultCubeStack)
+          console.log('library:cubeStacks:', this.cardService.cubeStacks)
+        } else { // normal load
+          this.storageService.storageGetAllCubeStacks().then(data => {
+            this.cardService.cubeStacks = data
+            console.log('library:cubeStacks:', this.cardService.cubeStacks)
+          })
+        }
+      })
+    } else { // Web SQL
+      let defaultCubeStack = this.cardService.defaultCubeData()
+      this.cardService.cubeStacks.push(defaultCubeStack)
+      console.log('library:cubeStacks:', this.cardService.cubeStacks)
+    }
 
   }
 
-  onDefaultStack() {
+  onDefaultCardStack() {
     this.storage.length().then(cardStacksLength => {
       if (cardStacksLength === 0) {
         let defaultStack = this.cardService.defaultData()
@@ -50,6 +69,8 @@ export class LibraryPage {
       }
     })
   }
+
+
 
   // open specific card/cube Bag, display all cards or cubes
   openCardsPage(item) {
@@ -70,9 +91,9 @@ export class LibraryPage {
     AddModal.present()
   }
 
-  cubeBagDelete(item) {
-    this.cardService.removeCubeBag(item)
-  }
+  // cubeBagDelete(item) {
+  //   this.cardService.removeCubeStack(item)
+  // }
   getCubeStackColor() {
     return this.cardService.getRandomBgColor();
   }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CardStack } from '../../app/Model/CardStack';
 import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
-import { CubeBag } from '../../app/Model/CubeBag';
+import { CubeStack } from '../../app/Model/CubeStack';
 import { Cube } from '../../app/Model/Cube';
 import { StorageServiceProvider } from '../storage-service/storage-service';
 
@@ -12,13 +12,13 @@ export class CardServiceProvider {
 
   cardStacks: any
   failedCardBag: CardStack
-  cubeStacks: CubeBag[]
+  cubeStacks: any = []
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider) {
-    //this.mockCardStacks()
     this.getFailedCardBag()
-    this.mockCubeStack()
+    //this.mockCardStacks()
+    //this.mockCubeStack()
   }
 
   getFailedCardBag() {
@@ -36,6 +36,15 @@ export class CardServiceProvider {
       new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
     ]
     return new CardStack(0, '你好世界', 'HelloWorld', dafaultCards, this.getDateNow(), 0)
+  }
+  defaultCubeData() {
+    var defaultCubes = [
+      new Cube(0, this.getDateNow(), '问好', 'Greeting', ['hello', 'hallo', 'hey', 'hi', 'yo']),
+      new Cube(1, this.getDateNow(), '告别', 'farewell', ['bye', 'byebye', 'see you', 'good bye', 'see you later']),
+      new Cube(2, this.getDateNow(), '抱歉', 'apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
+      new Cube(3, this.getDateNow(), '感激', 'appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
+    ]
+    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow())
   }
 
   // MockData: mocakCards, mockCubes
@@ -85,9 +94,9 @@ export class CardServiceProvider {
     ]
 
     this.cubeStacks = [
-      new CubeBag(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA'),
-      new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
-      new CubeBag(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
+      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA'),
+      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
+      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
     ]
   }
 
@@ -150,35 +159,47 @@ export class CardServiceProvider {
   //CubeBag: add, remove, edit
   addCubeStack(titleCn: string, titleDe: string, icon: string) {
     let id = this.cubeStacks.length
+    let newCubes = []
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCubes = []
-    this.cubeStacks.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
+    let newCubeStack = new CubeStack(id, title_Cn, title_De, newCubes, icon)
+    this.cubeStacks.push(newCubeStack)
+
+    this.storageService.storageAddCubeStack(newCubeStack)
   }
-  editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string) {
-    var editCubeBag = this.cubeStacks.find(x => x == cubeBag)
+  editCubeBag(cubeStack: CubeStack, newTitleCn: string, newTitleDe: string) {
+    var editCubeBag = this.cubeStacks.find(x => x == cubeStack)
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
+
+    this.storageService.storageEditCubeStack(cubeStack)
   }
-  removeCubeBag(cubeStack: any) {
+  removeCubeStack(cubeStack: any) {
     let index = this.cubeStacks.indexOf(cubeStack)
     if (index > -1) {
       this.cubeStacks.splice(index, 1)
     }
+
+    this.storageService.storageRemoveCubeStack(cubeStack)
   }
   // Cube: add, remove, edit 
-  addCube(cubeBag: CubeBag, title_Cn: string, title_De: string, cubeTexts: string[]) {
-    let _id = cubeBag.cubes.length;
+  addCube(cubeStack: CubeStack, title_Cn: string, title_De: string, cubeTexts: string[]) {
+    let _id = cubeStack.cubes.length;
     let _date = this.getDateNow()
+    cubeStack.cubes.push(new Cube(_id, _date, title_Cn, title_De, cubeTexts))
 
-    cubeBag.cubes.push(new Cube(_id, _date, title_Cn, title_De, cubeTexts))
+    this.storageService.storageAddCube(cubeStack)
   }
-  removeCube(cube: any, cubeBag: any) {
-    let targetCubeBag = this.cubeStacks.find(x => x == cubeBag)
+  removeCube(cube: any, cubeStack: any) {
+    let targetCubeBag = this.cubeStacks.find(x => x == cubeStack)
     targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
+
+    this.storageService.storageRemoveCube(cubeStack, cube)
   }
-  editCube(cube: Cube, newCubeTexts: string[]) {
+  editCube(cubeStack: any,cube: Cube, newCubeTexts: string[]) {
     cube.cubeTexts = newCubeTexts
+
+    this.storageService.storageEditCube(cubeStack)
   }
 
 

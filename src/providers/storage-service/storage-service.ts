@@ -5,7 +5,7 @@ import { SqlStorageProvider } from '../sql-storage/sql-storage';
 const win: any = window;
 @Injectable()
 export class StorageServiceProvider {
-  private sqlMode: boolean = false;
+  public sqlMode: boolean = false;
 
   constructor(private storage: Storage, private sql: SqlStorageProvider) {
     if (win.sqlitePlugin) {
@@ -15,6 +15,49 @@ export class StorageServiceProvider {
     }
   }
 
+  //CubeStack
+  storageGetAllCubeStacks(): Promise<any> {
+    if (this.sqlMode) {
+      return this.sql.cubeGetAll()
+    }
+  }
+  storageAddCubeStack(cubeStack) {
+    if (this.sqlMode) {
+      this.sql.cubeSet((cubeStack.id).toString(), JSON.stringify(cubeStack))
+    }
+  }
+  storageRemoveCubeStack(cubeStack) {
+    if (this.sqlMode) {
+      this.sql.cubeRemove(cubeStack.id.toString())
+    }
+  }
+  storageEditCubeStack(cubeStack) {
+    if (this.sqlMode) {
+      this.sql.cubeSet((cubeStack.id).toString(), JSON.stringify(cubeStack))
+    }
+  }
+  //Cube
+  storageAddCube(cubeStack) {
+    if (this.sqlMode) {
+      this.sql.set(cubeStack.id.toString(), JSON.stringify(cubeStack))
+    }
+  }
+  storageRemoveCube(cubeStack, cube) {
+    // get all the data in this CardStack
+    let newCubeStack = this.storage.get(cubeStack.id.toString()).then(cubes => {
+      let index = cubes.indexOf(cube)
+      if (index > -1) {
+        cubes.splice(index, 1)
+      }
+      cubeStack = newCubeStack
+    })
+    this.storage.set(cubeStack.id, JSON.stringify(cubeStack))
+  }
+  storageEditCube(cubeStack) {
+    this.storage.set(cubeStack.id.toString(), JSON.stringify(cubeStack))
+  }
+
+
   // CardStack
   storageGetAllCardStacks(): Promise<any> {
     if (this.sqlMode) {
@@ -23,18 +66,12 @@ export class StorageServiceProvider {
       return new Promise(resolve => {
         let cardStacks = []
         this.storage.forEach(data => {
-          console.log('***inside foreach', data)
+          console.log('***inside foreach cards', data)
           cardStacks.push(JSON.parse(data))
         })
         return resolve(cardStacks)
       })
     }
-    // let cardStacks = []
-    // this.storage.forEach(data => {
-    //   console.log('***inside foreach', data)
-    //   cardStacks.push(JSON.parse(data))
-    // })
-    // return cardStacks
   }
   storageAddCardStack(cardStack) {
     if (this.sqlMode) {
@@ -57,13 +94,12 @@ export class StorageServiceProvider {
       this.storage.set((cardStack.id).toString(), JSON.stringify(cardStack))
     }
   }
-
   // Card
   storageAddCard(cardStack) {
     //this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
-    if(this.sqlMode){
+    if (this.sqlMode) {
       this.sql.set(cardStack.id.toString(), JSON.stringify(cardStack))
-    }else{
+    } else {
       this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
     }
   }
@@ -91,8 +127,10 @@ export class StorageServiceProvider {
       return new Promise(resolve => resolve())
     }
   }
-
-
-
+  cubeInitStorage(): Promise<any> {
+    if (this.sqlMode) {
+      return this.sql.cubeInitializeDatabase()
+    }
+  }
 
 }
