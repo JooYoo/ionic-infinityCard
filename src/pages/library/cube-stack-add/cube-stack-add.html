@@ -15,19 +15,19 @@
   <ion-list>
 
     <ion-item>
-      <ion-label color="primary" stacked>Title Chinese</ion-label>
-      <ion-input placeholder="Title in Chinese..." clearInput [(ngModel)]='titleCn'></ion-input>
+      <ion-input placeholder="Title" clearInput [(ngModel)]='titleCn'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Title Deutsch</ion-label>
-      <ion-input placeholder="Title in Chinese..." clearInput [(ngModel)]='titleDe'></ion-input>
+      <ion-input placeholder="Subtitle" clearInput [(ngModel)]='titleDe'></ion-input>
     </ion-item>
 
-    <!-- Todo: icon selection -->
     <ion-item>
-      <ion-label color="primary" stacked>icon</ion-label>
+      <ion-label color="primary" style="margin-left:10px;">Date:</ion-label>
+      <ion-datetime [(ngModel)]="currentDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
     </ion-item>
+
+    <ion-item></ion-item>
 
   </ion-list>
 </ion-content>

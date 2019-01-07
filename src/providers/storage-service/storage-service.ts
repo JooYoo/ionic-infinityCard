@@ -39,11 +39,11 @@ export class StorageServiceProvider {
   //Cube
   storageAddCube(cubeStack) {
     if (this.sqlMode) {
-      this.sql.set(cubeStack.id.toString(), JSON.stringify(cubeStack))
+      this.sql.cubeSet(cubeStack.id.toString(), JSON.stringify(cubeStack))
     }
   }
   storageRemoveCube(cubeStack, cube) {
-    // get all the data in this CardStack
+    // get all the data in this CubeStack
     let newCubeStack = this.storage.get(cubeStack.id.toString()).then(cubes => {
       let index = cubes.indexOf(cube)
       if (index > -1) {
@@ -51,10 +51,14 @@ export class StorageServiceProvider {
       }
       cubeStack = newCubeStack
     })
-    this.storage.set(cubeStack.id, JSON.stringify(cubeStack))
+    if (this.sqlMode) {
+      this.sql.cubeSet(cubeStack.id, JSON.stringify(cubeStack))
+    }
   }
   storageEditCube(cubeStack) {
-    this.storage.set(cubeStack.id.toString(), JSON.stringify(cubeStack))
+    if (this.sqlMode) {
+      this.sql.cubeSet(cubeStack.id.toString(), JSON.stringify(cubeStack))
+    }
   }
 
 
@@ -112,10 +116,18 @@ export class StorageServiceProvider {
       }
       cardStack = newCardStack
     })
-    this.storage.set(cardStack.id, JSON.stringify(cardStack))
+    if (this.sqlMode) {
+      this.sql.set(cardStack.id, JSON.stringify(cardStack))
+    } else {
+      this.storage.set(cardStack.id, JSON.stringify(cardStack))
+    }
   }
   storageEditCard(cardStack) {
-    this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    if (this.sqlMode) {
+      this.sql.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    } else {
+      this.storage.set(cardStack.id.toString(), JSON.stringify(cardStack))
+    }
   }
 
 

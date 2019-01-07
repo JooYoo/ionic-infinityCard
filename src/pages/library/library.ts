@@ -38,9 +38,10 @@ export class LibraryPage {
   }
 
   onDefaultCubeStack() {
+    
     if (this.storageService.sqlMode) { // SQLite
-      this.storage.length().then(cardStacksLength => {
-        if (cardStacksLength === 0) { // first time load
+      this.storage.length().then(cubeStacksLength => {
+        if (cubeStacksLength === 0) { // first time load
           let defaultCubeStack = this.cardService.defaultCubeData()
           this.cardService.cubeStacks.push(defaultCubeStack)
           this.storageService.storageAddCubeStack(defaultCubeStack)

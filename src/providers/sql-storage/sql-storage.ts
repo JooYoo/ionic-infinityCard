@@ -38,6 +38,7 @@ export class SqlStorageProvider {
       })
   }
   cubeInitializeDatabase() {
+    
     return this.sqlite.create({ name: 'data.db', location: 'default' }).then(db => {
       this.db = db;
       return this.db.executeSql('CREATE TABLE IF NOT EXISTS cubekv (key text primary key, value text)', [])
@@ -81,8 +82,8 @@ export class SqlStorageProvider {
     return this.sqlite.create({ name: 'data.db', location: 'default' }).then(db => {
       this.db = db;
       return this.db.executeSql('CREATE TABLE IF NOT EXISTS kv (key text primary key, value text)', [])
-        .then(data => {
-          console.log('**after CREATE TABLE kv check', data)
+        .then(() => {
+          return this.db.executeSql('CREATE TABLE IF NOT EXISTS cubekv (key text primary key, value text)', [])
         })
     })
   }
