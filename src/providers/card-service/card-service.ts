@@ -35,7 +35,7 @@ export class CardServiceProvider {
       new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
       new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
     ]
-    return new CardStack(0, '你好世界', 'HelloWorld', dafaultCards, this.getDateNow(), 0)
+    return [new CardStack(1, '你好世界', 'HelloWorld', dafaultCards, this.getDateNow(), 0)]
   }
   defaultCubeData() {
     var defaultCubes = [
@@ -44,7 +44,7 @@ export class CardServiceProvider {
       new Cube(2, this.getDateNow(), '抱歉', 'apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
       new Cube(3, this.getDateNow(), '感激', 'appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
     ]
-    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)
+    return [new CubeStack(1, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)]
   }
 
   // MockData: mocakCards, mockCubes
@@ -159,7 +159,7 @@ export class CardServiceProvider {
   //CubeBag: add, remove, edit
   addCubeStack(titleCn: string, titleDe: string, date: string) {
     let id = this.cubeStacks.length
-    let newCubes = []
+    let newCubes = [new Cube(0, this.getDateNow(), '问好', 'Greeting', ['hello', 'hallo', 'hey', 'hi', 'yo'])]
     let title_Cn = titleCn
     let title_De = titleDe
     let newCubeStack = new CubeStack(id, title_Cn, title_De, newCubes, this.getDateNow(), 0)

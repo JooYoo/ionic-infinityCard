@@ -40,60 +40,44 @@ export class LibraryPage {
 
 
   onCubeSql() { //SQLite
-    // this.storage.length().then(length => {
-    // if (length < 1) {
-    //   this.cardService.defaultCubeData()
-    //   console.log('library:cubeStacks:length0', this.cardService.cubeStacks)
-    // } else {
     this.storageService.storageGetAllCubeStacks().then(data => {
       this.cardService.cubeStacks = data
-      // if (this.cardService.cubeStacks[0] === undefined) {
-      //   this.cardService.cubeStacks.push(this.cardService.defaultCubeData())
-      // }
-      console.log('library:cubeStacks:length!0', this.cardService.cubeStacks)
+      console.log('library:cubeStacks:', this.cardService.cubeStacks)
     })
 
-    // }
+    //FIXME: first load show example data
+    // this.storage.length().then(cubeStacksLength =>{
+    //   if(cubeStacksLength === 0){
+    //     this.cardService.cubeStacks = this.cardService.defaultCubeData()
+    //     //this.storageService.storageAddCubeStack(this.cardService.cubeStacks[0])
+    //   }
     // })
   }
-
 
   onDefaultCubeStack() {
     if (this.sqlMode) { // SQLite
       this.onCubeSql()
       console.log('library:cubeStacks:sqlite')
     } else { // Web SQL
-      // if (this.cardService.cubeStacks.length === 0) {
-      //   this.cardService.cubeStacks.push(this.cardService.defaultCubeData())
-      // }
+      this.cardService.cubeStacks = this.cardService.defaultCubeData()
       console.log('library:cubeStacks:WebSQL', this.cardService.cubeStacks)
     }
   }
 
-
   onDefaultCardStack() {
-    //this.storage.length().then(cardStacksLength => {
-    // if (cardStacksLength === 0) {
-    //   this.cardService.defaultCardData()
-    //   this.storageService.storageAddCubeStack(this.cardService.cardStacks[0])
-    //   console.log('library:cardStacks:length0', this.cardService.cardStacks)
-    // } else {
-
     this.storageService.storageGetAllCardStacks().then(data => {
       this.cardService.cardStacks = data
-
-      // if (this.cardService.cardStacks[0] === undefined) {
-      //   this.cardService.cardStacks.push(this.cardService.defaultCardData())
-      // }
-      console.log('library:cardStacks:length!0', this.cardService.cardStacks)
+      console.log('library:cardStack: ', this.cardService.cardStacks)
     })
 
-
-    // }
-    //})
+    //FIXME: first load show example data
+    // this.storage.length().then(cardStackLength => {
+    //   if (cardStackLength === 0) {
+    //     this.cardService.cardStacks = this.cardService.defaultCardData()
+    //     //this.storageService.storageAddCardStack(this.cardService.cardStacks[0])
+    //   }
+    // })
   }
-
-
 
   // open specific card/cube Bag, display all cards or cubes
   openCardsPage(item) {
@@ -113,10 +97,6 @@ export class LibraryPage {
     const AddModal = this.modalCtrl.create(CubeStackAddPage)
     AddModal.present()
   }
-
-  // cubeBagDelete(item) {
-  //   this.cardService.removeCubeStack(item)
-  // }
   getCubeStackColor() {
     return this.cardService.getRandomBgColor();
   }
