@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
 import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
 
+const win: any = window;
 @Component({
   selector: 'page-library',
   templateUrl: 'library.html',
@@ -15,60 +16,81 @@ import { StorageServiceProvider } from '../../providers/storage-service/storage-
 
 export class LibraryPage {
   libraryMode: string = 'swipe'
-  cardStacks: any
+  sqlMode: boolean = false
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public modalCtrl: ModalController,
     private storageService: StorageServiceProvider,
-    private storage: Storage) { }
-
-  ionViewDidLoad() {
-    // load Cubes data to app
-    this.onDefaultCubeStack()
-
-    // load Cards data to app
-    this.onDefaultCardStack()
-    this.storageService.storageGetAllCardStacks().then(data => {
-      this.cardStacks = data
-      this.cardService.cardStacks = data
-      console.log('library:cardStacks:', this.cardStacks)
-    })
+    private storage: Storage) {
+    if (win.sqlitePlugin) {
+      this.sqlMode = true
+    } else {
+      console.warn('SQLite plugin not installed. Falling back to regular Web Storage.')
+    }
   }
+
+  ionViewCanEnter() {
+    // load Cubes
+    this.onDefaultCubeStack()
+    // load Cards 
+    this.onDefaultCardStack()
+  }
+
+
+  onCubeSql() { //SQLite
+    // this.storage.length().then(length => {
+    // if (length < 1) {
+    //   this.cardService.defaultCubeData()
+    //   console.log('library:cubeStacks:length0', this.cardService.cubeStacks)
+    // } else {
+    this.storageService.storageGetAllCubeStacks().then(data => {
+      this.cardService.cubeStacks = data
+      // if (this.cardService.cubeStacks[0] === undefined) {
+      //   this.cardService.cubeStacks.push(this.cardService.defaultCubeData())
+      // }
+      console.log('library:cubeStacks:length!0', this.cardService.cubeStacks)
+    })
+
+    // }
+    // })
+  }
+
 
   onDefaultCubeStack() {
-    
-    if (this.storageService.sqlMode) { // SQLite
-      this.storage.length().then(cubeStacksLength => {
-        if (cubeStacksLength === 0) { // first time load
-          let defaultCubeStack = this.cardService.defaultCubeData()
-          this.cardService.cubeStacks.push(defaultCubeStack)
-          this.storageService.storageAddCubeStack(defaultCubeStack)
-          console.log('library:cubeStacks:', this.cardService.cubeStacks)
-        } else { // normal load
-          this.storageService.storageGetAllCubeStacks().then(data => {
-            this.cardService.cubeStacks = data
-            console.log('library:cubeStacks:', this.cardService.cubeStacks)
-          })
-        }
-      })
+    if (this.sqlMode) { // SQLite
+      this.onCubeSql()
+      console.log('library:cubeStacks:sqlite')
     } else { // Web SQL
-      let defaultCubeStack = this.cardService.defaultCubeData()
-      this.cardService.cubeStacks.push(defaultCubeStack)
-      console.log('library:cubeStacks:', this.cardService.cubeStacks)
+      // if (this.cardService.cubeStacks.length === 0) {
+      //   this.cardService.cubeStacks.push(this.cardService.defaultCubeData())
+      // }
+      console.log('library:cubeStacks:WebSQL', this.cardService.cubeStacks)
     }
-
   }
 
+
   onDefaultCardStack() {
-    this.storage.length().then(cardStacksLength => {
-      if (cardStacksLength === 0) {
-        let defaultStack = this.cardService.defaultData()
-        this.cardService.cardStacks.push(defaultStack)
-        this.storageService.storageAddCardStack(defaultStack)
-      }
+    //this.storage.length().then(cardStacksLength => {
+    // if (cardStacksLength === 0) {
+    //   this.cardService.defaultCardData()
+    //   this.storageService.storageAddCubeStack(this.cardService.cardStacks[0])
+    //   console.log('library:cardStacks:length0', this.cardService.cardStacks)
+    // } else {
+
+    this.storageService.storageGetAllCardStacks().then(data => {
+      this.cardService.cardStacks = data
+
+      // if (this.cardService.cardStacks[0] === undefined) {
+      //   this.cardService.cardStacks.push(this.cardService.defaultCardData())
+      // }
+      console.log('library:cardStacks:length!0', this.cardService.cardStacks)
     })
+
+
+    // }
+    //})
   }
 
 

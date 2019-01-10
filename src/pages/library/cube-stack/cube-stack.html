@@ -64,8 +64,8 @@
     <ion-item-sliding *ngFor="let cube of cubeStack.cubes" #slidingItem>
 
       <ion-item (click)="openEditModal(cube)">
-        <h2>{{cube.cubeTexts[0]}}</h2>
-        <p>{{cube.cubeTexts[1]}}</p>
+        <h2>{{cube.titleCn}}</h2>
+        <p>{{cube.titleDe}}</p>
         <ion-note item-end>{{cube.date}}</ion-note>
       </ion-item>
 

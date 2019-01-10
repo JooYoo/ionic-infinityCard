@@ -96,7 +96,12 @@ export class CubePage {
     this.progress = this.perCubePercent
     this.cubeStack.progress = this.progress
 
+    // get cube contents
     this.cube = this.cubes[this.cubeIndex]
+    if(!this.cube){
+      console.log('cube:getRandomNext: cube no content try next')
+      this.getRandomNext()
+    }
   }
 
   toNextCube() {
@@ -144,8 +149,6 @@ export class CubePage {
 
   // cube UI setting
   ngAfterViewInit() {
-
-
     var swiper = new Swiper('.swiper-container',
       {
         effect: 'cube',
@@ -170,9 +173,5 @@ export class CubePage {
         },
       }
     )
-
-
-
-
   }
 }

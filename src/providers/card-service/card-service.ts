@@ -10,14 +10,14 @@ import { StorageServiceProvider } from '../storage-service/storage-service';
 @Injectable()
 export class CardServiceProvider {
 
-  cardStacks: any
-  failedCardBag: CardStack
+  cardStacks: any = []
   cubeStacks: any = []
+  failedCardBag: CardStack
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider) {
     this.getFailedCardBag()
-    //this.mockCardStacks()
+    // this.mockCardStacks()
     //this.mockCubeStack()
   }
 
@@ -27,7 +27,7 @@ export class CardServiceProvider {
   }
 
   // defaultData
-  defaultData() {
+  defaultCardData() {
     var dafaultCards = [
       new Card(0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
       new Card(1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
@@ -44,7 +44,7 @@ export class CardServiceProvider {
       new Cube(2, this.getDateNow(), '抱歉', 'apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
       new Cube(3, this.getDateNow(), '感激', 'appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
     ]
-    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(),0)
+    return new CubeStack(0, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)
   }
 
   // MockData: mocakCards, mockCubes
@@ -94,9 +94,9 @@ export class CardServiceProvider {
     ]
 
     this.cubeStacks = [
-      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA',0),
-      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB',0),
-      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA',0),
+      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA', 0),
+      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB', 0),
+      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA', 0),
     ]
   }
 
@@ -196,7 +196,7 @@ export class CardServiceProvider {
 
     this.storageService.storageRemoveCube(cubeStack, cube)
   }
-  editCube(cubeStack: any,cube: Cube, newCubeTexts: string[]) {
+  editCube(cubeStack: any, cube: Cube, newCubeTexts: string[]) {
     cube.cubeTexts = newCubeTexts
 
     this.storageService.storageEditCube(cubeStack)
