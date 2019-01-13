@@ -33,6 +33,7 @@ import { MistakePage } from '../pages/swipe/mistake/mistake'
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
+import { DbServiceProvider } from '../providers/db-service/db-service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
     CardServiceProvider,
     SwipeServiceProvider,
     StorageServiceProvider,
-    SqlStorageProvider
+    SqlStorageProvider,
+    DbServiceProvider
   ]
 })
 export class AppModule { }

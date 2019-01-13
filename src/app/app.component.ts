@@ -24,8 +24,8 @@ export class MyApp {
       splashScreen.hide();
 
       
-      storageService.initStorage().then(() => this.rootPage = TabsPage)
-      //storageService.cubeInitStorage()
+      // storageService.initStorage().then(() => this.rootPage = TabsPage)
+      this.rootPage = TabsPage
     });
   }
 

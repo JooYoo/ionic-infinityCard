@@ -25,6 +25,7 @@ export class CardStackPage {
     private toastCtrl: ToastController,
     private app: App) {
     this.cardStack = navParams.get('itemInfo')
+    console.log('cardStack:constructor:cardStack: ', this.cardStack)
   }
 
   toastSetting() {
@@ -32,7 +33,7 @@ export class CardStackPage {
       message: this.cardStack.titleCn + ' has been removed',
       duration: 3000,
       position: 'top',
-      closeButtonText:'X',
+      closeButtonText: 'X',
       showCloseButton: true,
       cssClass: 'toast-style'
     })

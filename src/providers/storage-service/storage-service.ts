@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { SqlStorageProvider } from '../sql-storage/sql-storage';
+import { DbServiceProvider, TABLES } from '../db-service/db-service';
 
 const win: any = window;
 @Injectable()
 export class StorageServiceProvider {
   public sqlMode: boolean = false;
 
-  constructor(private storage: Storage, private sql: SqlStorageProvider) {
+  constructor(private storage: Storage, 
+    private sql: SqlStorageProvider,
+    private dbService: DbServiceProvider) {
     if (win.sqlitePlugin) {
       this.sqlMode = true
     } else {
@@ -52,7 +55,8 @@ export class StorageServiceProvider {
       cubeStack = newCubeStack
     })
     if (this.sqlMode) {
-      this.sql.cubeSet(cubeStack.id, JSON.stringify(cubeStack))
+      // this.sql.cubeSet(cubeStack.id, JSON.stringify(cubeStack))
+      this.dbService.update(cubeStack,TABLES.Cube)
     }
   }
   storageEditCube(cubeStack) {
