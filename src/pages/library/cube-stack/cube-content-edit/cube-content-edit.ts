@@ -13,7 +13,10 @@ export class CubeContentEditPage {
   
   cube: any
   cubeStack: any
-  cubeTexts:string[]
+  cubeSide1:string
+  cubeSide2:string
+  cubeSide3:string
+  cubeSide4:string
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -22,12 +25,14 @@ export class CubeContentEditPage {
       this.cube = navParams.get("cubeInfo")
       this.cubeStack= navParams.get("cubeStackInfo")
 
-     // this.sideLength = this.cube.cubeTexts.length
-      this.cubeTexts = this.cube.cubeTexts
+      this.cubeSide1 = this.cube.cubeSide1
+      this.cubeSide2 = this.cube.cubeSide2
+      this.cubeSide3 = this.cube.cubeSide3
+      this.cubeSide4 = this.cube.cubeSide4
   }
 
   editCube(){
-    this.cardService.editCube(this.cubeStack,this.cube, this.cubeTexts)
+    this.cardService.editCube(this.cubeStack,this.cube, this.cubeSide1, this.cubeSide2, this.cubeSide3, this.cubeSide4)
   }
   removeCube(){
     this.cardService.removeCube(this.cube, this.cubeStack)
