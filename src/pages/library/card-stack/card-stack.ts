@@ -64,8 +64,8 @@ export class CardStackPage {
     addModal.present()
   }
 
-  editCardBag() {
-    this.cardService.editCardBag(this.cardStack, this.cardStack.titleCn, this.cardStack.titleDe)
+  editCardStack() {
+    this.cardService.editCardStack(this.cardStack, this.cardStack.titleCn, this.cardStack.titleDe)
     this.nav.push(LibraryPage)
   }
 

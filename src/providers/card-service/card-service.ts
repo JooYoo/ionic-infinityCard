@@ -24,12 +24,8 @@ export class CardServiceProvider {
     //this.mockCubeStack()
   }
 
-  getFailedCardBag() {
-    let failedcards = []
-    this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
-  }
-
-  // defaultData
+  
+  // defaultData: mocakCards, mockCubes
   defaultCardStack() {
     return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
   }
@@ -51,7 +47,6 @@ export class CardServiceProvider {
     ]
     return [new CubeStack(1, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)]
   }
-  // MockData: mocakCards, mockCubes
   mockCardStacks() {
     var cardsA = [
       new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
@@ -69,8 +64,6 @@ export class CardServiceProvider {
     var cardsC = [
       new Card(0, 2, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
     ]
-
-
 
     this.cardStacks = [
       new CardStack(0, '卡包零', 'StackEins', cardsA, this.getDateNow(), 0),
@@ -103,6 +96,10 @@ export class CardServiceProvider {
       new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA', 0),
     ]
   }
+  getFailedCardBag() {
+    let failedcards = []
+    this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
+  }
 
   // CardStack: all, add, remove, edit
   addCardStack(titleCn: string, titleDe: string, progress: number) {
@@ -113,7 +110,6 @@ export class CardServiceProvider {
     let newCardStack = new CardStack(id, title_Cn, title_De, newCards, this.getDateNow(), progress)
     this.cardStacks.push(newCardStack)
 
-    // this.storageService.storageAddCardStack(newCardStack)
     this.dbService.insert(newCardStack, TABLES.CardStack)
   }
   removeCardStack(cardStack: any) {
@@ -122,15 +118,13 @@ export class CardServiceProvider {
       this.cardStacks.splice(index, 1)
     }
 
-    // this.storageService.storageRemoveCardStack(cardStack)
     this.dbService.delete(TABLES.CardStack, cardStack)
   }
-  editCardBag(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
+  editCardStack(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
     var editcardStack = this.cardStacks.find(x => x == cardStack)
     editcardStack.titleCn = newTitleCn
     editcardStack.titleDe = newTitleDe
 
-    // this.storageService.storageEditCardStack(cardStack)
     this.dbService.update(cardStack, TABLES.CardStack)
   }
   // Card: add, remove, edit

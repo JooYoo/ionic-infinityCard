@@ -65,8 +65,8 @@ export class DbServiceProvider {
                         progress varchar
                      )
     `).catch(err => {
-        console.error('Storage: Unable to create initial storage Card table', err.tx, err.err);
-      });
+      console.error('Storage: Unable to create initial storage Card table', err.tx, err.err);
+    });
   }
   private createCardTable() {
     this.query(`
@@ -80,11 +80,9 @@ export class DbServiceProvider {
                         FOREIGN KEY(cardStackID) REFERENCES CardStack(ID)
                      )
     `).catch(err => {
-        console.error('Storage: Unable to create initial storage Card table', err.tx, err.err);
-      });
+      console.error('Storage: Unable to create initial storage Card table', err.tx, err.err);
+    });
   }
-
-
   private createCubeTable() {
     this.query(`
       CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.Cube] + ` (
@@ -92,8 +90,8 @@ export class DbServiceProvider {
                           value text
                      )
     `).catch(err => {
-        console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
-      });
+      console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
+    });
   }
 
   query(query: string, params: any[] = []): Promise<any> {
@@ -138,6 +136,25 @@ export class DbServiceProvider {
     });
   }
 
+  // Add Item
+  insert(newObject, table: TABLES): Promise<any> {
+    return this.query('INSERT INTO ' + TABLES[table] + ' (' + this.getFieldNamesStr(newObject)
+      + ') VALUES (' + this.getFieldValuesStr(newObject) + ")", []);
+  }
+
+  // Edit Item
+  update(object, table: TABLES): Promise<any> {
+    return this.query('UPDATE ' + TABLES[table] + ' SET ' + this.getFieldSetNamesStr(object) + ' WHERE id=?',
+      this.getFieldValuesArray(object));
+  }
+
+  // Remove Item
+  delete(table: TABLES, object): Promise<any> {
+    let query = "DELETE FROM " + TABLES[table] + " WHERE id=?";
+    return this.query(query, [object.id]);
+  }
+
+
   // columne data
   private getFieldNamesStr(newObject) {
     let fields = '';
@@ -170,23 +187,5 @@ export class DbServiceProvider {
     }
     fields.push(object.id);
     return fields;
-  }
-
-  // Add Item
-  insert(newObject, table: TABLES): Promise<any> {
-    return this.query('INSERT INTO ' + TABLES[table] + ' (' + this.getFieldNamesStr(newObject)
-      + ') VALUES (' + this.getFieldValuesStr(newObject) + ")", []);
-  }
-
-  // Edit Item
-  update(object, table: TABLES): Promise<any> {
-    return this.query('UPDATE ' + TABLES[table] + ' SET ' + this.getFieldSetNamesStr(object) + ' WHERE id=?',
-      this.getFieldValuesArray(object));
-  }
-
-  // Remove Item
-  delete(table: TABLES, object): Promise<any> {
-    let query = "DELETE FROM " + TABLES[table] + " WHERE id=?";
-    return this.query(query, object.id);
   }
 }
