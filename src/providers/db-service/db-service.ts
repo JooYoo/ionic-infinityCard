@@ -5,7 +5,7 @@ import { Platform } from "ionic-angular";
 
 const DB_NAME: string = 'infinityDB';
 const win: any = window;
-export enum TABLES { CardStack, Card, CubeStack, Cube };
+export enum TABLES { CardStack, Card, CubeStack, Cube, CubeSide };
 
 @Injectable()
 export class DbServiceProvider {
@@ -44,7 +44,9 @@ export class DbServiceProvider {
     }
     this.createCardStackTable()
     this.createCardTable()
+    this.createCubeStackTable()
     this.createCubeTable()
+    this.createCubeSideTable()
   }
   private dropTable(table: TABLES) {
     this.query("DROP TABLE " + TABLES[table]
@@ -77,22 +79,54 @@ export class DbServiceProvider {
                         textDe text,
                         date text,
                         status text,
-                        FOREIGN KEY(cardStackID) REFERENCES CardStack(ID)
+                        FOREIGN KEY(cardStackId) REFERENCES CardStack(id)
                      )
     `).catch(err => {
       console.error('Storage: Unable to create initial storage Card table', err.tx, err.err);
     });
   }
+  private createCubeStackTable() {
+    this.query(`
+    CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.CubeStack] + ` (
+                        id integer primary key,
+                        titleCn text,
+                        titleDe text,
+                        cubes text,
+                        date text,
+                        progress varchar
+                   )
+    `).catch(err => {
+      console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
+    });
+  }
   private createCubeTable() {
     this.query(`
       CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.Cube] + ` (
-                          key text primary key, 
-                          value text
+                      id integer primary key,
+                      cubeStackId integer,
+                      date text,
+                      titleCn text,
+                      titleDe text,
+                      cubeTexts text,
+                      FOREIGN KEY(cubeStackId) REFERENCES CubeStack(id)
                      )
     `).catch(err => {
       console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
     });
   }
+  private createCubeSideTable() {
+    this.query(`
+      CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.CubeSide] + ` (
+                      id integer primary key,
+                      cubeId integer,
+                      sideText text,
+                      FOREIGN KEY(cubeId) REFERENCES Cube(id)
+                     )
+    `).catch(err => {
+      console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
+    });
+  }
+
 
   query(query: string, params: any[] = []): Promise<any> {
     return new Promise((resolve, reject) => {

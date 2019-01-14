@@ -33,79 +33,51 @@ export class LibraryPage {
   }
 
   ionViewDidLoad() {
-
-
     // load CardStack 
     this.onDefaultCardStack()
-
     // load Cubes
     this.onDefaultCubeStack()
   }
 
-  onCubeSql() { //SQLite
-    this.storageService.storageGetAllCubeStacks().then(data => {
-      this.cardService.cubeStacks = data
-
-      //console.log('library:cubeStacks:', this.cardService.cubeStacks)
-    })
-
-    //FIXME: first load show example data
-    // this.storage.length().then(cubeStacksLength =>{
-    //   if(cubeStacksLength === 0){
-    //     this.cardService.cubeStacks = this.cardService.defaultCubeData()
-    //     //this.storageService.storageAddCubeStack(this.cardService.cubeStacks[0])
-    //   }
-    // })
+  loadCubeDb() {
+  //  this.dbService.list()
   }
 
   onDefaultCubeStack() {
-    // if (this.sqlMode) { // SQLite
-    //   this.onCubeSql()
-    //   console.log('library:cubeStacks:sqlite')
-    // } else { // Web SQL
-    //   this.cardService.cubeStacks = this.cardService.defaultCubeData()
-    //   console.log('library:cubeStacks:WebSQL', this.cardService.cubeStacks)
-    // }
     this.dbService.list(TABLES.Cube).then(data => {
       this.cardService.cubeStacks = data
       if (!this.cardService.cubeStacks) {
         this.cardService.cubeStacks = this.cardService.defaultCubeData()
       }
-      //console.log('Library:cubeStack: ', this.cardService.cubeStacks)
+      console.log('[S1]:Library:cubeStacks: ', this.cardService.cubeStacks)
+    }).then(() => {
+      this.loadCubeDb()
     })
   }
 
+  // load Cards Data
   loadCardDb() {
     this.dbService.list(TABLES.Card).then(data => {
       this.cardService.cards = data
-      if(!this.cardService.cards){
-      //TODO: [DefaultCards]
-         this.cardService.cards = this.cardService.defaultCards()
-        //this.cardService.cardStackBuilder(this.cardService.defaultCardStack(), this.cardService.defaultCards())
-
+      if (!this.cardService.cards) {
+        this.cardService.cards = this.cardService.defaultCards()
         console.log('[S1.5]:Library:loadCardDb:defaultStack: ', this.cardService.cardStacks)
       }
       console.log('[S2]:Library:cards: ', this.cardService.cards)
-    }).then(()=>{
+    }).then(() => {
       this.cardService.cardStackBuilder(this.cardService.cardStacks, this.cardService.cards)
       console.log('[S3]:Library:cardStackBuilder:CardStacks: ', this.cardService.cardStacks)
     })
   }
-  
   onDefaultCardStack() {
-    
     this.dbService.list(TABLES.CardStack).then(data => {
       this.cardService.cardStacks = data
       if (!this.cardService.cardStacks) {
         this.cardService.cardStacks = this.cardService.defaultCardStack()
       }
-      console.log('[S1]:Library:cardStacks: ', this.cardService.cardStacks)
     }).then(() => {
-      // load Cards
       this.loadCardDb()
     })
-
-
   }
 
   // open specific card/cube Bag, display all cards or cubes
@@ -115,13 +87,11 @@ export class LibraryPage {
   openCubeListPage(item) {
     this.nav.push(CubeStackPage, { itemInfo: item })
   }
-
   // right-top add button
   onCardStackAddPage() {
     let addCardModal = this.modalCtrl.create(CardStackAddPage)
     addCardModal.present()
   }
-
   onCubeStackAddPage() {
     const AddModal = this.modalCtrl.create(CubeStackAddPage)
     AddModal.present()
@@ -129,7 +99,6 @@ export class LibraryPage {
   getCubeStackColor() {
     return this.cardService.getRandomBgColor();
   }
-
   closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
   }

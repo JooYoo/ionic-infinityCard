@@ -47,6 +47,7 @@ export class CardServiceProvider {
     ]
     return [new CubeStack(1, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)]
   }
+  
   mockCardStacks() {
     var cardsA = [
       new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
@@ -124,7 +125,7 @@ export class CardServiceProvider {
     if (index > -1) {
       this.cardStacks.splice(index, 1)
     }
-    
+
     // remove Cards in the stack
     cardStack.cards.forEach(card => {
       this.dbService.delete(TABLES.Card, card)
