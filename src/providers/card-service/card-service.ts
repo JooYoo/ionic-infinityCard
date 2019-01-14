@@ -186,7 +186,9 @@ export class CardServiceProvider {
     let newCubeStack = new CubeStack(id, titleCn, titleDe, defaultCube, this.getDateNow(), 0)
     this.cubeStacks.push(newCubeStack)
 
-    this.dbService.insert(newCubeStack, TABLES.Cube)
+    this.addCube(newCubeStack, '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi')
+    // this.dbService.insert(defaultCube,TABLES.Cube)
+    this.dbService.insert(newCubeStack, TABLES.CubeStack)
   }
   editCubeBag(cubeStack: CubeStack, newTitleCn: string, newTitleDe: string) {
     var editCubeBag = this.cubeStacks.find(x => x == cubeStack)
@@ -204,13 +206,25 @@ export class CardServiceProvider {
     this.dbService.delete(TABLES.Cube, cubeStack)
   }
   // Cube: add, remove, edit 
-  addCube(cubeStack: CubeStack, title_Cn: string, title_De: string,
-    cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+  addCube(cubeStack: CubeStack, title_Cn: string, title_De: string, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+    
+      // let _id
+      // this.dbService.list(TABLES.Cube).then(data => {
+      //   if (!data) {
+      //     _id = 0
+      //     cubeStack.cubes = new Array()
+      //   }
+      //   let newCube = new Cube(_id,cubeStack.id, this.getDateNow(), title_Cn, title_De,
+      //   cubeSide1, cubeSide2, cubeSide3, cubeSide4)
+      //   cubeStack.cubes.push(newCube)
+      //   this.dbService.insert(newCube, TABLES.Cube)
+      // })
+    
     let _id = cubeStack.cubes.length;
-    cubeStack.cubes.push(new Cube(_id,cubeStack.id, this.getDateNow(), title_Cn, title_De,
-      cubeSide1, cubeSide2, cubeSide3, cubeSide4))
+    let newCube = new Cube(_id,cubeStack.id, this.getDateNow(), title_Cn, title_De, cubeSide1, cubeSide2, cubeSide3, cubeSide4)
+    cubeStack.cubes.push(newCube)
 
-    this.dbService.insert(cubeStack, TABLES.Cube)
+    this.dbService.insert(newCube, TABLES.Cube)
   }
   removeCube(cube: any, cubeStack: any) {
     let targetCubeBag = this.cubeStacks.find(x => x == cubeStack)
