@@ -105,18 +105,15 @@ export class CubePage {
   }
 
   toNextCube() {
-
     this.cubeIndex++
     //cube
     if (this.cubeIndex <= this.cubeStackLength - 1) {
       this.cube = this.cubes[this.cubeIndex]
       this.progress += this.perCubePercent
       console.log( this.progress)
-      
     } else {
       this.cubeIndex = this.cubeStackLength
       this.progress = 100
-
       this.cubeIndex = this.cubeStackLength - 1
     }
     this.cubeStack.progress = this.progress

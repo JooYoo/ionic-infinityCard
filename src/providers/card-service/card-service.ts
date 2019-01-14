@@ -47,7 +47,7 @@ export class CardServiceProvider {
     ]
     return [new CubeStack(1, '你好方块', 'HelloCube', defaultCubes, this.getDateNow(), 0)]
   }
-  
+
   mockCardStacks() {
     var cardsA = [
       new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
@@ -178,7 +178,6 @@ export class CardServiceProvider {
     let newCubeStack = new CubeStack(id, title_Cn, title_De, newCubes, this.getDateNow(), 0)
     this.cubeStacks.push(newCubeStack)
 
-    // this.storageService.storageAddCubeStack(newCubeStack)
     this.dbService.insert(newCubeStack, TABLES.Cube)
   }
   editCubeBag(cubeStack: CubeStack, newTitleCn: string, newTitleDe: string) {
@@ -186,7 +185,6 @@ export class CardServiceProvider {
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
 
-    // this.storageService.storageEditCubeStack(cubeStack)
     this.dbService.update(cubeStack, TABLES.Cube)
   }
   removeCubeStack(cubeStack: any) {
@@ -195,7 +193,6 @@ export class CardServiceProvider {
       this.cubeStacks.splice(index, 1)
     }
 
-    // this.storageService.storageRemoveCubeStack(cubeStack)
     this.dbService.delete(TABLES.Cube, cubeStack)
   }
   // Cube: add, remove, edit 
@@ -204,7 +201,6 @@ export class CardServiceProvider {
     let _date = this.getDateNow()
     cubeStack.cubes.push(new Cube(_id, _date, title_Cn, title_De, cubeTexts))
 
-    //  this.storageService.storageAddCube(cubeStack)
     this.dbService.insert(cubeStack, TABLES.Cube)
   }
   removeCube(cube: any, cubeStack: any) {
@@ -217,7 +213,6 @@ export class CardServiceProvider {
   editCube(cubeStack: any, cube: Cube, newCubeTexts: string[]) {
     cube.cubeTexts = newCubeTexts
 
-    // this.storageService.storageEditCube(cubeStack)
     this.dbService.update(cubeStack, TABLES.Cube)
   }
 
