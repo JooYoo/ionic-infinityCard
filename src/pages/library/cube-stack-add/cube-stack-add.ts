@@ -28,6 +28,6 @@ export class CubeStackAddPage {
   }
 
   addCubeStack(){
-    this.cardService.addCubeStack(this.titleCn, this.titleDe, "icon")
+    this.cardService.addCubeStack(this.titleCn, this.titleDe)
   }
 }

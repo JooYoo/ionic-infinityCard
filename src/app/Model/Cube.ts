@@ -1,6 +1,7 @@
 export class Cube {
 
     id: number
+    cubeStackId: number
     date: string
     titleCn: string
     titleDe: string
@@ -10,10 +11,11 @@ export class Cube {
     cubeSide4: string
  
 
-    constructor(id: number, date: string, titleCn: string, 
+    constructor(id: number, cubeStackId: number, date: string, titleCn: string, 
                 titleDe: string, cubeSide1: string, cubeSide2: string,
                 cubeSide3:string, cubeSide4:string) {
         this.id = id
+        this.cubeStackId = cubeStackId
         this.date = date
         this.titleCn = titleCn
         this.titleDe = titleDe
