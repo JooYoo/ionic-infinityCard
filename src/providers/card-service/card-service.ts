@@ -182,12 +182,11 @@ export class CardServiceProvider {
   //CubeBag: add, remove, edit
   addCubeStack(titleCn: string, titleDe: string) {
     let id = this.cubeStacks.length
-    let defaultCube = [new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi')]
+    let defaultCube = []
     let newCubeStack = new CubeStack(id, titleCn, titleDe, defaultCube, this.getDateNow(), 0)
     this.cubeStacks.push(newCubeStack)
 
     this.addCube(newCubeStack, '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi')
-    // this.dbService.insert(defaultCube,TABLES.Cube)
     this.dbService.insert(newCubeStack, TABLES.CubeStack)
   }
   editCubeBag(cubeStack: CubeStack, newTitleCn: string, newTitleDe: string) {
