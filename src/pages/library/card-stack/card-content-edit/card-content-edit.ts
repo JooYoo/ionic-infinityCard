@@ -43,7 +43,7 @@ export class CardContentEditPage {
   }
 
   editCard(){
-    this.cardService.editCard(this.cardStack, this.card, this.card.textCn, this.card.textDe)
+    this.cardService.editCard(this.card, this.card.textCn, this.card.textDe)
   }
 
   removeCard(){

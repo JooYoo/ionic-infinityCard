@@ -24,12 +24,12 @@ export class CardServiceProvider {
     //this.mockCubeStack()
   }
 
-  
+
   // defaultData: mocakCards, mockCubes
   defaultCardStack() {
     return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
   }
-  defaultCards(){
+  defaultCards() {
     return [
       new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
       new Card(1, 0, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
@@ -101,6 +101,13 @@ export class CardServiceProvider {
     this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
+  // CardStack Builder
+  cardStackBuilder(cardStacks: CardStack[], cards: Card[]) {
+    cardStacks.forEach(item => {
+      item.cards = new Array()
+      item.cards = cards.filter(x => x.cardStackId === item.id)
+    });
+  }
   // CardStack: all, add, remove, edit
   addCardStack(titleCn: string, titleDe: string, progress: number) {
     let id = this.cardStacks.length
@@ -117,7 +124,12 @@ export class CardServiceProvider {
     if (index > -1) {
       this.cardStacks.splice(index, 1)
     }
-
+    
+    // remove Cards in the stack
+    cardStack.cards.forEach(card => {
+      this.dbService.delete(TABLES.Card, card)
+    });
+    // remove this Stack
     this.dbService.delete(TABLES.CardStack, cardStack)
   }
   editCardStack(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
@@ -128,12 +140,6 @@ export class CardServiceProvider {
     this.dbService.update(cardStack, TABLES.CardStack)
   }
   // Card: add, remove, edit
-  cardStackBuilder(cardStacks:CardStack[], cards: Card[]) {
-    cardStacks.forEach(item => {
-      item.cards = new Array()
-      item.cards = cards.filter(x => x.cardStackId === item.id)
-    });
-  }
   addCard(cardStack: CardStack, textCn: string, textDe: string) {
     let _id
     this.dbService.list(TABLES.Card).then(data => {
@@ -152,14 +158,12 @@ export class CardServiceProvider {
     let targetcardStack = this.cardStacks.find(x => x == cardStack)
     targetcardStack.cards = targetcardStack.cards.filter(x => x != card)
 
-    // this.storageService.storageRemoveCard(cardStack, card)
     this.dbService.delete(TABLES.Card, card)
   }
-  editCard(cardStack: CardStack, card: Card, newTextCn: string, newTextDe: string) {
+  editCard(card: Card, newTextCn: string, newTextDe: string) {
     card.textCn = newTextCn
     card.textDe = newTextDe
 
-    //this.storageService.storageEditCard(cardStack)
     this.dbService.update(card, TABLES.Card)
   }
 
