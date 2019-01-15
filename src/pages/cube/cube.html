@@ -21,7 +21,7 @@
         <ion-row>
           <ion-col *ngFor='let item of cubes'>
             <div class="progress">
-              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=item.id'></div>
+              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=item.id-1'></div>
               <!-- FIXME: 本来计划每次方块滑动都增加进度条 <div class="progress-bar" [style.width.%]="progress" ></div> -->
             </div>
           </ion-col>

@@ -32,7 +32,7 @@ export class CubeContentEditPage {
   }
 
   editCube(){
-    this.cardService.editCube(this.cubeStack,this.cube, this.cubeSide1, this.cubeSide2, this.cubeSide3, this.cubeSide4)
+    this.cardService.editCube(this.cube, this.cubeSide1, this.cubeSide2, this.cubeSide3, this.cubeSide4)
   }
   removeCube(){
     this.cardService.removeCube(this.cube, this.cubeStack)

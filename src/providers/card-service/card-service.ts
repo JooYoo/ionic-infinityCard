@@ -42,12 +42,12 @@ export class CardServiceProvider {
   defaultCubeStack() {
     return [new CubeStack(0, '你好方块', 'HelloCube', this.defaultCubes(), this.getDateNow(), 0)]
   }
-  defaultCubes(){
+  defaultCubes() {
     return [
-      new Cube(0,0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
-      new Cube(1,0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
-      new Cube(2,0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
-      new Cube(3,0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
+      new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
+      new Cube(1, 0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
+      new Cube(2, 0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
+      new Cube(3, 0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
     ]
   }
 
@@ -78,20 +78,20 @@ export class CardServiceProvider {
   mockCubeStack() {
     var date = new Date();
     var cubesA = [
-      new Cube(0,0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
-      new Cube(1,0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
-      new Cube(2,0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
-      new Cube(3,0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
+      new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
+      new Cube(1, 0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
+      new Cube(2, 0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
+      new Cube(3, 0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
     ]
     var cubesB = [
-      new Cube(0,1, this.getDateNow(), '中二一', '德二一', '方块二一', 'cubeOne', 'cubeEins', 'cubeYi'),
-      new Cube(1,1, this.getDateNow(), '中二二', '德二二', '方块二二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
-      new Cube(2,1, this.getDateNow(), '中二三', '德二三', '方块二三', 'cubeThree', 'cubeDrei', 'cubeSan')
+      new Cube(0, 1, this.getDateNow(), '中二一', '德二一', '方块二一', 'cubeOne', 'cubeEins', 'cubeYi'),
+      new Cube(1, 1, this.getDateNow(), '中二二', '德二二', '方块二二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
+      new Cube(2, 1, this.getDateNow(), '中二三', '德二三', '方块二三', 'cubeThree', 'cubeDrei', 'cubeSan')
     ]
     var cubesC = [
-      new Cube(0,2, this.getDateNow(), '中三一', '德三一', '方块三一', 'cubeOne', 'cubeEins', 'cubeYi'),
-      new Cube(1,2, this.getDateNow(), '中三二', '德三二', '方块三二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
-      new Cube(2,2, this.getDateNow(), '中三三', '德三三', '方块三三', 'cubeThree', 'cubeDrei', 'cubeSan')
+      new Cube(0, 2, this.getDateNow(), '中三一', '德三一', '方块三一', 'cubeOne', 'cubeEins', 'cubeYi'),
+      new Cube(1, 2, this.getDateNow(), '中三二', '德三二', '方块三二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
+      new Cube(2, 2, this.getDateNow(), '中三三', '德三三', '方块三三', 'cubeThree', 'cubeDrei', 'cubeSan')
     ]
 
     this.cubeStacks = [
@@ -172,8 +172,8 @@ export class CardServiceProvider {
   }
 
 
-   // CardStack Builder
-   cubeStackBuilder(cubeStacks: CubeStack[], cubes: Cube[]) {
+  // CardStack Builder
+  cubeStackBuilder(cubeStacks: CubeStack[], cubes: Cube[]) {
     cubeStacks.forEach(item => {
       item.cubes = new Array()
       item.cubes = cubes.filter(x => x.cubeStackId === item.id)
@@ -194,7 +194,7 @@ export class CardServiceProvider {
     editCubeBag.titleCn = newTitleCn
     editCubeBag.titleDe = newTitleDe
 
-    this.dbService.update(cubeStack, TABLES.Cube)
+    this.dbService.update(cubeStack, TABLES.CubeStack)
   }
   removeCubeStack(cubeStack: any) {
     let index = this.cubeStacks.indexOf(cubeStack)
@@ -202,25 +202,12 @@ export class CardServiceProvider {
       this.cubeStacks.splice(index, 1)
     }
 
-    this.dbService.delete(TABLES.Cube, cubeStack)
+    this.dbService.delete(TABLES.CubeStack, cubeStack)
   }
   // Cube: add, remove, edit 
   addCube(cubeStack: CubeStack, title_Cn: string, title_De: string, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
-    
-      // let _id
-      // this.dbService.list(TABLES.Cube).then(data => {
-      //   if (!data) {
-      //     _id = 0
-      //     cubeStack.cubes = new Array()
-      //   }
-      //   let newCube = new Cube(_id,cubeStack.id, this.getDateNow(), title_Cn, title_De,
-      //   cubeSide1, cubeSide2, cubeSide3, cubeSide4)
-      //   cubeStack.cubes.push(newCube)
-      //   this.dbService.insert(newCube, TABLES.Cube)
-      // })
-    
     let _id = cubeStack.cubes.length;
-    let newCube = new Cube(_id,cubeStack.id, this.getDateNow(), title_Cn, title_De, cubeSide1, cubeSide2, cubeSide3, cubeSide4)
+    let newCube = new Cube(_id, cubeStack.id, this.getDateNow(), title_Cn, title_De, cubeSide1, cubeSide2, cubeSide3, cubeSide4)
     cubeStack.cubes.push(newCube)
 
     this.dbService.insert(newCube, TABLES.Cube)
@@ -228,19 +215,16 @@ export class CardServiceProvider {
   removeCube(cube: any, cubeStack: any) {
     let targetCubeBag = this.cubeStacks.find(x => x == cubeStack)
     targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
-
-    //FIXME: changed storageRemoveCube()
-    this.storageService.storageRemoveCube(cubeStack, cube)
+    
+    this.dbService.delete(TABLES.Cube, cube)
   }
-  editCube(cubeStack: any, cube: Cube, 
-          cubeSide1:string, cubeSide2: string, cubeSide3:string, cubeSide4:string) {
-     cube.cubeSide1 = cubeSide1 
-     cube.cubeSide2 = cubeSide2 
-     cube.cubeSide3 = cubeSide3 
-     cube.cubeSide4 = cubeSide4 
+  editCube( cube: Cube, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+    cube.cubeSide1 = cubeSide1
+    cube.cubeSide2 = cubeSide2
+    cube.cubeSide3 = cubeSide3
+    cube.cubeSide4 = cubeSide4
 
-
-    this.dbService.update(cubeStack, TABLES.Cube)
+    this.dbService.update(cube, TABLES.Cube)
   }
 
 

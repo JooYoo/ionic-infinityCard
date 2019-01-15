@@ -95,6 +95,8 @@ export class CubePage {
     this.perCubePercent = (1 / this.cubeStackLength) * 100
     this.progress = this.perCubePercent
     this.cubeStack.progress = this.progress
+    console.log('cube:studyCubeSwitch:progress: ', this.cubeStackLength)
+
 
     // get cube contents
     this.cube = this.cubes[this.cubeIndex]
