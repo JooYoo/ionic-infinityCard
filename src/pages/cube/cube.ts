@@ -95,7 +95,7 @@ export class CubePage {
     this.perCubePercent = (1 / this.cubeStackLength) * 100
     this.progress = this.perCubePercent
     this.cubeStack.progress = this.progress
-    console.log('cube:studyCubeSwitch:progress: ', this.cubeStackLength)
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
 
 
     // get cube contents
@@ -119,6 +119,9 @@ export class CubePage {
       this.cubeIndex = this.cubeStackLength - 1
     }
     this.cubeStack.progress = this.progress
+    console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
+
   }
 
   toLastCube() {
@@ -132,6 +135,9 @@ export class CubePage {
       this.progress = this.perCubePercent
     }
     this.cubeStack.progress = this.progress
+    console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
+
 
   }
 
@@ -142,6 +148,8 @@ export class CubePage {
     this.progress = this.perCubePercent
 
     this.cubeStack.progress = this.progress
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
+
   }
 
 
