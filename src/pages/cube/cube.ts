@@ -4,6 +4,7 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { Cube } from '../../app/Model/Cube';
 import { trigger, state, style, transition, animate } from '@angular/animations'
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
 
 declare var Swiper
 @Component({
@@ -52,7 +53,8 @@ export class CubePage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
-    public renderer: Renderer) {
+    public renderer: Renderer,
+    private dbService: DbServiceProvider) {
 
     this.studyCubeSwitch()
   }
@@ -118,7 +120,11 @@ export class CubePage {
       this.progress = 100
       this.cubeIndex = this.cubeStackLength - 1
     }
+
+    // progressbar
     this.cubeStack.progress = this.progress
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
+
     console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
     console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
 
@@ -134,7 +140,10 @@ export class CubePage {
       this.cubeIndex = 0
       this.progress = this.perCubePercent
     }
+    // progressbar
     this.cubeStack.progress = this.progress
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
+
     console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
     console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
 
@@ -147,9 +156,11 @@ export class CubePage {
     this.cubeIndex = 0
     this.progress = this.perCubePercent
 
+    // progressbar
     this.cubeStack.progress = this.progress
-    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
 
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
   }
 
 

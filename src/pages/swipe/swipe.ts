@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform, ModalController } from 'ionic-angul
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
 
 @Component({
   selector: 'page-swipe',
@@ -35,7 +36,8 @@ export class SwipePage {
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
     public platform: Platform,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    public dbService: DbServiceProvider) { }
 
   ionViewDidEnter() {
     this.studyCardSwitch()
@@ -64,11 +66,14 @@ export class SwipePage {
     // progress value
     this.progressValue += this.swipeService.onProgress(swipeResult, this.cards)
     this.cardStack.progress = this.progressValue
+    this.dbService.update(this.cardStack, TABLES.CardStack)
 
     this.swipeIndex++
-    //TODO: save current card into new stack
+    
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
+
+    
   }
 
   onMistake() {
