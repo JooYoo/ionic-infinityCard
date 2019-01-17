@@ -49,7 +49,8 @@ export class CubeStackPage {
     });
 
     popover.onDidDismiss(()=>{
-      this.cardService.removeCubeBag(this.cubeStack)
+      
+      this.cardService.removeCubeStack(this.cubeStack)
       this.toast.present()
       this.viewCtrl.dismiss()
     })
@@ -71,6 +72,7 @@ export class CubeStackPage {
 
   removeCube(cube) {
     this.cardService.removeCube(cube, this.cubeStack)
+    
   }
 
   editCubeStack() {

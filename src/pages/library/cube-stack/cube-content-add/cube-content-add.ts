@@ -17,7 +17,11 @@ export class CubeContentAddPage {
   date: string = new Date().toISOString()
   cubeTitleCn: string
   cubeTitleDe: string
-  cubeTexts: string[] = []
+  cubeSide1:string
+  cubeSide2:string
+  cubeSide3:string
+  cubeSide4:string
+  
 
 
   constructor(public navCtrl: NavController,
@@ -31,7 +35,8 @@ export class CubeContentAddPage {
   }
 
   addCube() {
-    this.cardService.addCube(this.cubeBag,this.cubeTitleCn,this.cubeTitleDe, this.cubeTexts)
+    this.cardService.addCube(this.cubeBag,this.cubeTitleCn,this.cubeTitleDe,
+                              this.cubeSide1, this.cubeSide2, this.cubeSide3, this.cubeSide4)
   }
 
   

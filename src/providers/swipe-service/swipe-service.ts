@@ -6,16 +6,15 @@ import { CardServiceProvider } from '../card-service/card-service';
 
 
 @Injectable()
+
 export class SwipeServiceProvider {
   constructor(public http: HttpModule,
     public cardService: CardServiceProvider) {
   }
 
-  onProgress(swipeResult: boolean, attents: any) {
 
-   
-      return 1 / attents.length * 100
-   
+  onProgress(swipeResult: boolean, attents: any) {
+    return 1 / attents.length * 100
   }
 
   changeCardStatue(swipeResult: boolean, currentCard: Card) {
@@ -27,7 +26,7 @@ export class SwipeServiceProvider {
     }
   }
 
-  getRandomCardBag(itemLength: number) {
+  getRandomNr(itemLength: number) {
     return (Math.floor(Math.random() * itemLength))
   }
 

@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SettingsPage } from '../pages/settings/settings';
-
+import{ SQLite } from '@ionic-native/sqlite'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LibraryPage } from '../pages/library/library';
@@ -18,6 +18,7 @@ import { CardStackAddPage } from '../pages/library/card-stack-add/card-stack-add
 import { CardContentAddPage } from '../pages/library/card-stack/card-content-add/card-content-add';
 import { SwipePage } from '../pages/swipe/swipe';
 
+
 import { SwipeCardsModule } from 'ng2-swipe-cards'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { SwipeServiceProvider } from '../providers/swipe-service/swipe-service';
@@ -29,6 +30,10 @@ import { CubeContentEditPage } from '../pages/library/cube-stack/cube-content-ed
 import { PopoverComponent } from '../components/popover/popover';
 import { CubeListIconComponent } from '../components/cube-list-icon/cube-list-icon';
 import { MistakePage } from '../pages/swipe/mistake/mistake'
+import { StorageServiceProvider } from '../providers/storage-service/storage-service';
+import { IonicStorageModule } from '@ionic/storage';
+import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
+import { DbServiceProvider } from '../providers/db-service/db-service';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,7 @@ import { MistakePage } from '../pages/swipe/mistake/mistake'
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     BrowserAnimationsModule,
     SwipeCardsModule
   ],
@@ -81,9 +87,13 @@ import { MistakePage } from '../pages/swipe/mistake/mistake'
   providers: [
     StatusBar,
     SplashScreen,
+    SQLite,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     CardServiceProvider,
-    SwipeServiceProvider
+    SwipeServiceProvider,
+    StorageServiceProvider,
+    SqlStorageProvider,
+    DbServiceProvider
   ]
 })
 export class AppModule { }

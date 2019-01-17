@@ -1,38 +1,20 @@
 import { Component, EventEmitter } from '@angular/core';
 import { NavController, NavParams, Platform, ModalController } from 'ionic-angular';
-import { trigger, transition, useAnimation, state, style, animate, keyframes } from '@angular/animations';
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
-
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
 
 @Component({
   selector: 'page-swipe',
   templateUrl: 'swipe.html',
-  animations: [
-    trigger('FlipAnim', [
-      state('goFlip', style({
-        transform: 'rotateY(180deg)'
-      })),
-      state('goBack', style({
-        transform: 'rotateY(0)'
-      })),
-      transition('goFlip => goBack', animate('200ms ease-out')),
-      transition('goBack => goFlip', animate('400ms ease-in')),
-
-      // if display back to swipe, then show font 
-      state('goQuickBack', style({
-        transform: 'rotateY(0deg)'
-      })),
-      transition('goFlip => goQuickBack', animate('0.000001ms ease-out'))
-    ]),
-  ]
+  animations: []
 })
 export class SwipePage {
 
   cards = []
   studyCards: any
-  nextCardBag: number
+  randomIndex: number
   swipeIndex: number
   failedCardLength: any
   failedCards: any
@@ -40,7 +22,6 @@ export class SwipePage {
   cardStack: any
 
   cardBagMode: string = "standard"
-  isAndroid: boolean = false
 
   ready = false;
   attendants = [];
@@ -55,9 +36,10 @@ export class SwipePage {
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
     public platform: Platform,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    public dbService: DbServiceProvider) { }
 
-   // this.isAndroid = platform.is('android')
+  ionViewDidEnter() {
     this.studyCardSwitch()
   }
 
@@ -84,21 +66,19 @@ export class SwipePage {
     // progress value
     this.progressValue += this.swipeService.onProgress(swipeResult, this.cards)
     this.cardStack.progress = this.progressValue
-   
+    this.dbService.update(this.cardStack, TABLES.CardStack)
+
     this.swipeIndex++
-    //TODO: save current card into new stack
+    
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
+
+    
   }
 
-  onMistake(){
+  onMistake() {
     let modal = this.modalCtrl.create(MistakePage)
     modal.present()
-  }
-
-  isFlip: string = 'goBack';
-  toggleFlip() {
-    this.isFlip = (this.isFlip == 'goBack') ? 'goFlip' : 'goBack';
   }
 
   // review failed Btn
@@ -106,11 +86,36 @@ export class SwipePage {
     this.initCards(this.cardService.failedCardBag.cards)
   }
 
+
   // new Round Btn
   startNewRound() {
-    this.nextCardBag = this.swipeService.getRandomCardBag(this.cardService.cardStacks.length)
-    this.cardStack = this.cardService.cardStacks[this.nextCardBag]
-    this.initCards(this.cardStack.cards)
+
+    // this.storage.length().then(cardStacksLength => {
+    //this.onDefaultStack(cardStacksLength)
+
+    // let cardStacksLength = this.cardService.cardStacks.length
+    // console.log('swipe:cardStacksLength:', cardStacksLength)
+    // this.randomIndex = this.swipeService.getRandomNr(cardStacksLength)
+    // this.cardStack = this.cardService.cardStacks[this.randomIndex]
+    // console.log('swipe:randomIndex: ', this.randomIndex)
+    // console.log('swipe:cardStack:', this.cardStack)
+
+    // try {
+    //   this.initCards(this.cardStack.cards)
+    // } catch (error) {
+    //   console.log('swipe:no cards')
+    // }
+    // try {
+    //   this.cardStack.progress = this.progressValue
+    // } catch (error) {
+    //   console.log('swipe:no progress')
+    // }
+    // })
+
+    this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
+    this.cardStack = this.cardService.cardStacks[this.randomIndex]
+    console.log('swipe:', this.cardStack)
+    this.initCards(this.cardStack!.cards)
     this.cardStack.progress = this.progressValue
   }
 
@@ -124,6 +129,7 @@ export class SwipePage {
   initCards(cards: any[]) {
     this.swipeIndex = 0
     this.attendants = [];
+    console.log('initCards:')
     this.cards = cards
 
     for (let i = 0; i < this.cards.length; i++) {

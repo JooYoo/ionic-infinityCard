@@ -10,7 +10,7 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 export class CardContentEditPage {
 
   card: any
-  cardBag: any
+  cardStack: any
   cardStatus: any
 
   constructor(public navCtrl: NavController,
@@ -20,7 +20,7 @@ export class CardContentEditPage {
     public cardService: CardServiceProvider) {
 
     this.card = navParams.get('cardInfo')
-    this.cardBag = navParams.get('cardBagInfo')
+    this.cardStack = navParams.get('cardBagInfo')
     // get enum key
     this.cardStatus = this.getCardStatus(this.card.status)
   }
@@ -47,7 +47,7 @@ export class CardContentEditPage {
   }
 
   removeCard(){
-    this.cardService.removeCard(this.card,this.cardBag)
+    this.cardService.removeCard(this.card,this.cardStack)
   }
 
 }

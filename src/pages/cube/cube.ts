@@ -4,6 +4,7 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { Cube } from '../../app/Model/Cube';
 import { trigger, state, style, transition, animate } from '@angular/animations'
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
 
 declare var Swiper
 @Component({
@@ -52,14 +53,13 @@ export class CubePage {
     public navParams: NavParams,
     public cardService: CardServiceProvider,
     public swipeService: SwipeServiceProvider,
-    public renderer: Renderer) {
+    public renderer: Renderer,
+    private dbService: DbServiceProvider) {
 
     this.studyCubeSwitch()
   }
 
   animCube() {
-
-    console.log('in animCube')
     this.animState = (this.animState === 'idle' ? 'fadeIn' : 'idle')
     //this.animState = 'fadeIn'
   }
@@ -78,7 +78,7 @@ export class CubePage {
       this.perCubePercent = (1 / this.cubeStackLength) * 100
       this.progress = this.perCubePercent
 
-      this.cubeStack = this.studyCubeStack
+      this.cubeStack = this.progress
 
     } else {
       this.getRandomNext()
@@ -88,7 +88,7 @@ export class CubePage {
     //this.animProgress=0
 
     // get random CubeStack
-    let randomIndex = this.swipeService.getRandomCardBag(this.cardService.cubeStacks.length)
+    let randomIndex = this.swipeService.getRandomNr(this.cardService.cubeStacks.length)
     this.cubes = this.cardService.cubeStacks[randomIndex].cubes
     this.cubeStack = this.cardService.cubeStacks[randomIndex]
 
@@ -96,24 +96,37 @@ export class CubePage {
     this.cubeStackLength = this.cubes.length
     this.perCubePercent = (1 / this.cubeStackLength) * 100
     this.progress = this.perCubePercent
+    this.cubeStack.progress = this.progress
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
 
+
+    // get cube contents
     this.cube = this.cubes[this.cubeIndex]
-
+    if(!this.cube){
+      console.log('cube:getRandomNext: cube no content try next')
+      this.getRandomNext()
+    }
   }
 
   toNextCube() {
-
-
     this.cubeIndex++
     //cube
     if (this.cubeIndex <= this.cubeStackLength - 1) {
       this.cube = this.cubes[this.cubeIndex]
       this.progress += this.perCubePercent
+      console.log( this.progress)
     } else {
       this.cubeIndex = this.cubeStackLength
       this.progress = 100
       this.cubeIndex = this.cubeStackLength - 1
     }
+
+    // progressbar
+    this.cubeStack.progress = this.progress
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
+
+    console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
 
   }
 
@@ -127,6 +140,13 @@ export class CubePage {
       this.cubeIndex = 0
       this.progress = this.perCubePercent
     }
+    // progressbar
+    this.cubeStack.progress = this.progress
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
+
+    console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
+
 
   }
 
@@ -135,14 +155,18 @@ export class CubePage {
     this.cube = this.cubes[0]
     this.cubeIndex = 0
     this.progress = this.perCubePercent
+
+    // progressbar
+    this.cubeStack.progress = this.progress
+    this.dbService.update(this.cubeStack, TABLES.CubeStack)
+
+    console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
   }
 
 
 
   // cube UI setting
   ngAfterViewInit() {
-
-
     var swiper = new Swiper('.swiper-container',
       {
         effect: 'cube',
@@ -155,9 +179,9 @@ export class CubePage {
           shadowOffset: 20,
           shadowScale: 0.94,
         },
-        pagination: {
-          el: '.swiper-pagination',
-        },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        // },
         scrollbar: {
           el: '.swiper-scrollbar',
         },
@@ -167,9 +191,5 @@ export class CubePage {
         },
       }
     )
-
-
-
-
   }
 }

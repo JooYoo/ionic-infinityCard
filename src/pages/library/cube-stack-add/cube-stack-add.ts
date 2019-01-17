@@ -11,6 +11,7 @@ export class CubeStackAddPage {
   titleCn: string
   titleDe: string
   tabInfo: string
+  currentDate: string
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -18,11 +19,15 @@ export class CubeStackAddPage {
               public cardService: CardServiceProvider) {
   }
 
+  ionViewDidLoad() {
+    this.currentDate = new Date().toISOString()
+  }
+
   dismiss(){
     this.viewCtrl.dismiss()
   }
 
   addCubeStack(){
-    this.cardService.addCubeStack(this.titleCn, this.titleDe, "icon")
+    this.cardService.addCubeStack(this.titleCn, this.titleDe)
   }
 }

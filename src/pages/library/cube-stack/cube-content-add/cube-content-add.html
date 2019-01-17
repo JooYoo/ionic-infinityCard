@@ -1,8 +1,7 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-title>
-      <!-- New Card -->
-      Stack: {{cubeBag.titleCn}}
+      NewCube
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -41,47 +40,37 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>title CN</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTitleCn'></ion-input>
+      <ion-input placeholder="Title" type="text" [(ngModel)]='cubeTitleCn'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>title DE</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTitleDe'></ion-input>
+      <ion-input placeholder="Subtitle" type="text" [(ngModel)]='cubeTitleDe'></ion-input>
     </ion-item>
 
      <ion-item>
-      <ion-label floating></ion-label>
+      <ion-label color="primary" style="margin-left:10px;">Date:</ion-label>
       <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="date"></ion-datetime>
     </ion-item> 
+    <ion-item></ion-item>
 
   </ion-list>
 
   <ion-list>
 
     <ion-item>
-      <ion-label floating>opt 1</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTexts[0]'></ion-input>
+      <ion-input placeholder="opt 1" type="text" [(ngModel)]='cubeSide1'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>opt 2</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTexts[1]'></ion-input>
+      <ion-input placeholder="opt 2" type="text" [(ngModel)]='cubeSide2'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>opt 3</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTexts[2]'></ion-input>
+      <ion-input placeholder="opt 3" type="text" [(ngModel)]='cubeSide3'></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>opt 4</ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTexts[3]'></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>opt 5 </ion-label>
-      <ion-input type="text" [(ngModel)]='cubeTexts[4]'></ion-input>
+      <ion-input placeholder="opt 4" type="text" [(ngModel)]='cubeSide4'></ion-input>
     </ion-item>
 
   </ion-list>

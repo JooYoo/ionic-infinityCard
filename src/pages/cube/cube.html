@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Cube</ion-title>
+  <ion-navbar color="light" *ngIf="cubeStack?.titleDe">
+    <ion-title style="text-align:center;">{{cubeStack.titleDe}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,7 +21,7 @@
         <ion-row>
           <ion-col *ngFor='let item of cubes'>
             <div class="progress">
-              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=item.id'></div>
+              <div class="progress-bar" style="width:100%" *ngIf='cubeIndex>=cubes.indexOf(item)'></div>
               <!-- FIXME: 本来计划每次方块滑动都增加进度条 <div class="progress-bar" [style.width.%]="progress" ></div> -->
             </div>
           </ion-col>
@@ -37,7 +37,7 @@
     </ion-row>
   </ion-grid>
 
-  <div id="cubeStack-title">{{cubeStack.titleDe}}</div>
+  <div id="cubeStack-title"></div>
 
 
   <div id="anim-cube" [@myTrigger]='animState' class="swiper-container">
@@ -48,15 +48,12 @@
           <ion-row id="cube-begin-titles-de">{{cube.titleDe}}</ion-row>
           <ion-row id="cube-begin-titles-date">{{cube.date}}</ion-row>
         </ion-grid>
-
       </div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[0]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[1]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[2]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[3]}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeTexts[4]}}</div>
-      <!-- <div *ngFor="let item of cube.cubeTexts" class="swiper-slide" style="background: lightgray;">{{item}}</div>   -->
-      <!-- <div class="swiper-slide" style="background: #0f1c33; color: white;" *ngFor="let item of cube.cubeTexts | slice:1">{{item}}</div>-->
+
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide1}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide2}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide3}}</div>
+      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide4}}</div>
     </div>
     <!--  Pagination -->
     <div class="swiper-pagination"></div>

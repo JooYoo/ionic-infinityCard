@@ -4,24 +4,88 @@ import { CardStackPage } from "./card-stack/card-stack"
 import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { CardStackAddPage } from './card-stack-add/card-stack-add';
 import { CubeStackPage } from './cube-stack/cube-stack';
+import { Storage } from '@ionic/storage';
 import { CubeStackAddPage } from '../library/cube-stack-add/cube-stack-add';
+import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
 
+const win: any = window;
 @Component({
   selector: 'page-library',
   templateUrl: 'library.html',
 })
 
 export class LibraryPage {
-  libraryMode: string
-  cardStacks: any
+  libraryMode: string = 'swipe'
+  sqlMode: boolean = false
 
   constructor(public nav: NavController,
     public navParams: NavParams,
     public cardService: CardServiceProvider,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private storageService: StorageServiceProvider,
+    private dbService: DbServiceProvider) {
+    if (win.sqlitePlugin) {
+      this.sqlMode = true
+    } else {
+      console.warn('SQLite plugin not installed. Falling back to regular Web Storage.')
+    }
+  }
 
-    this.cardStacks = this.cardService.cardStacks;
-    this.libraryMode = "cube"
+  ionViewDidLoad() {
+    // load CardStack 
+    this.onDefaultCardStack()
+    // load Cubes
+    this.onDefaultCubeStack()
+  }
+
+  loadCubeDb() {
+    //  this.dbService.list()
+    this.dbService.list(TABLES.Cube).then(data => {
+      this.cardService.cubes = data
+      if (!this.cardService.cubes) {
+        this.cardService.cubes = this.cardService.defaultCubes()
+        console.log('[S1.5]:Library:loadCubeDb:defaultStack: ', this.cardService.cubeStacks)
+      }
+      console.log('[S2]:Library:cubes: ', this.cardService.cubes)
+    }).then(() => {
+      this.cardService.cubeStackBuilder(this.cardService.cubeStacks, this.cardService.cubes)
+      console.log('[S3]:Library:cubeStackBuilder:CubeStacks: ', this.cardService.cubeStacks)
+    })
+  }
+
+  onDefaultCubeStack() {
+    this.dbService.list(TABLES.CubeStack).then(data => {
+      this.cardService.cubeStacks = data
+      if (!this.cardService.cubeStacks) {
+        this.cardService.cubeStacks = this.cardService.defaultCubeStack()
+      }
+      console.log('[S1]:Library:cubeStacks: ', this.cardService.cubeStacks)
+    }).then(() => {
+      this.loadCubeDb()
+    })
+  }
+
+  // load Cards Data
+  loadCardDb() {
+    this.dbService.list(TABLES.Card).then(data => {
+      this.cardService.cards = data
+      if (!this.cardService.cards) {
+        this.cardService.cards = this.cardService.defaultCards()
+      }
+    }).then(() => {
+      this.cardService.cardStackBuilder(this.cardService.cardStacks, this.cardService.cards)
+    })
+  }
+  onDefaultCardStack() {
+    this.dbService.list(TABLES.CardStack).then(data => {
+      this.cardService.cardStacks = data
+      if (!this.cardService.cardStacks) {
+        this.cardService.cardStacks = this.cardService.defaultCardStack()
+      }
+    }).then(() => {
+      this.loadCardDb()
+    })
   }
 
   // open specific card/cube Bag, display all cards or cubes
@@ -31,31 +95,18 @@ export class LibraryPage {
   openCubeListPage(item) {
     this.nav.push(CubeStackPage, { itemInfo: item })
   }
-
   // right-top add button
   onCardStackAddPage() {
     let addCardModal = this.modalCtrl.create(CardStackAddPage)
     addCardModal.present()
   }
-
   onCubeStackAddPage() {
     const AddModal = this.modalCtrl.create(CubeStackAddPage)
     AddModal.present()
   }
-
-
-  cardBagDelete(item) {
-    this.cardService.removeCardBag(item)
-  }
-
-  cubeBagDelete(item) {
-    this.cardService.removeCubeBag(item)
-  }
-
   getCubeStackColor() {
     return this.cardService.getRandomBgColor();
   }
-
   closeSlidingItem(slidingItem: ItemSliding) {
     slidingItem.close()
   }

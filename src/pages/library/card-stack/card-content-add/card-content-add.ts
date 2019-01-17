@@ -8,16 +8,21 @@ import { CardServiceProvider } from '../../../../providers/card-service/card-ser
 })
 export class CardContentAddPage {
 
-  cardBag: any
+  cardStack: any
   textCn: string
   textDe: string
+  currentDate: string
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public viewControl: ViewController,
     public cardService: CardServiceProvider,) {
 
-    this.cardBag = navParams.get('cardBagInfo')
+    this.cardStack = navParams.get('cardBagInfo')
+  }
+
+  ionViewDidLoad() {
+    this.currentDate = new Date().toISOString()
   }
 
   dismiss() {
@@ -25,7 +30,7 @@ export class CardContentAddPage {
   }
 
   addCard() {
-    this.cardService.addCard(this.cardBag, this.textCn, this.textDe)
+    this.cardService.addCard(this.cardStack, this.textCn, this.textDe)
   }
 
 }

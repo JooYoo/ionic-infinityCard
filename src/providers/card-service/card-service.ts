@@ -3,166 +3,230 @@ import { Injectable } from '@angular/core';
 import { CardStack } from '../../app/Model/CardStack';
 import { Card } from '../../app/Model/Card';
 import { CardStatus } from '../../app/Model/CardStatus';
-import { CubeBag } from '../../app/Model/CubeBag';
+import { CubeStack } from '../../app/Model/CubeStack';
 import { Cube } from '../../app/Model/Cube';
-import { empty } from 'rxjs/Observer';
+import { StorageServiceProvider } from '../storage-service/storage-service';
+import { DbServiceProvider, TABLES } from '../db-service/db-service';
 
 @Injectable()
 export class CardServiceProvider {
 
-  cardStacks: CardStack[]
+  cardStacks: CardStack[] = []
+  cards: any = []
+  cubeStacks: any = []
+  cubes: Cube[] = []
   failedCardBag: CardStack
-  cubeStacks: CubeBag[]
 
-
-  constructor(public http: HttpModule) {
-
-    this.mockCardBages()
+  constructor(public http: HttpModule,
+    public storageService: StorageServiceProvider,
+    public dbService: DbServiceProvider) {
     this.getFailedCardBag()
-    this.mockCubeStack()
+    // this.mockCardStacks()
+    //this.mockCubeStack()
   }
 
+
+  // defaultData: mocakCards, mockCubes
+  defaultCardStack() {
+    return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
+  }
+  defaultCards() {
+    return [
+      new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
+      new Card(1, 0, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
+      new Card(2, 0, this.getDateNow(), '再见', 'bye', CardStatus.failed),
+      new Card(3, 0, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
+      new Card(4, 0, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
+    ]
+  }
+  defaultCubeStack() {
+    return [new CubeStack(0, '你好方块', 'HelloCube', this.defaultCubes(), this.getDateNow(), 0)]
+  }
+  defaultCubes() {
+    return [
+      new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
+      new Cube(1, 0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
+      new Cube(2, 0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
+      new Cube(3, 0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
+    ]
+  }
+
+  mockCardStacks() {
+    var cardsA = [
+      new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
+      new Card(1, 0, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
+      new Card(2, 0, this.getDateNow(), '再见', 'bye', CardStatus.failed),
+      new Card(3, 0, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
+      new Card(4, 0, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
+    ]
+    var cardsB = [
+      new Card(0, 1, this.getDateNow(), '第一包', 'ok', CardStatus.success),
+      new Card(1, 1, this.getDateNow(), '不是', 'nein', CardStatus.success),
+      new Card(2, 1, this.getDateNow(), '早上好', 'morgen', CardStatus.success),
+      new Card(3, 1, this.getDateNow(), '晚安', 'nacht', CardStatus.success)
+    ]
+    var cardsC = [
+      new Card(0, 2, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
+    ]
+
+    this.cardStacks = [
+      new CardStack(0, '卡包零', 'StackEins', cardsA, this.getDateNow(), 0),
+      //new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
+      //new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC', 0),
+    ]
+  }
+  mockCubeStack() {
+    var date = new Date();
+    var cubesA = [
+      new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
+      new Cube(1, 0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
+      new Cube(2, 0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
+      new Cube(3, 0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
+    ]
+    var cubesB = [
+      new Cube(0, 1, this.getDateNow(), '中二一', '德二一', '方块二一', 'cubeOne', 'cubeEins', 'cubeYi'),
+      new Cube(1, 1, this.getDateNow(), '中二二', '德二二', '方块二二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
+      new Cube(2, 1, this.getDateNow(), '中二三', '德二三', '方块二三', 'cubeThree', 'cubeDrei', 'cubeSan')
+    ]
+    var cubesC = [
+      new Cube(0, 2, this.getDateNow(), '中三一', '德三一', '方块三一', 'cubeOne', 'cubeEins', 'cubeYi'),
+      new Cube(1, 2, this.getDateNow(), '中三二', '德三二', '方块三二', 'cubeTwo', 'cubeZwei', 'cubeEr'),
+      new Cube(2, 2, this.getDateNow(), '中三三', '德三三', '方块三三', 'cubeThree', 'cubeDrei', 'cubeSan')
+    ]
+
+    this.cubeStacks = [
+      new CubeStack(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA', 0),
+      new CubeStack(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB', 0),
+      new CubeStack(2, '第三块包', 'CubeBagThree', cubesC, 'iconA', 0),
+    ]
+  }
   getFailedCardBag() {
     let failedcards = []
     this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
   }
 
-
-  mockCardBages() {
-    //todo: to getDate when new card generate
-    var date = new Date();
-
-    var cardsA = [
-      new Card(0, this.getDateNow(), '第零包', 'hallo', CardStatus.failed),
-      new Card(1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
-      new Card(2, this.getDateNow(), '再见', 'bye', CardStatus.failed),
-      new Card(3, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
-      new Card(4, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
-    ]
-    var cardsB = [
-      new Card(4, this.getDateNow(), '第一包', 'ok', CardStatus.success),
-      new Card(4, this.getDateNow(), '不是', 'nein', CardStatus.success),
-      new Card(4, this.getDateNow(), '早上好', 'morgen', CardStatus.success),
-      new Card(4, this.getDateNow(), '晚安', 'nacht', CardStatus.success)
-    ]
-    var cardsC = [
-      new Card(4, this.getDateNow(), '第二包', 'zeit', CardStatus.success)
-    ]
-
-    this.cardStacks = [
-      new CardStack(0, '卡包零', 'StackEins', cardsA, "iconA", 0),
-      new CardStack(1, '卡包一', 'StackZwei', cardsB, 'iconB', 0),
-      new CardStack(2, '卡包二', 'StackDrei', cardsC, 'iconC', 0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0),
-      new CardStack(2, '卡包三', 'StackDrei', cardsC, 'iconC', 0)
-    ]
+  // CardStack Builder
+  cardStackBuilder(cardStacks: CardStack[], cards: Card[]) {
+    cardStacks.forEach(item => {
+      item.cards = new Array()
+      item.cards = cards.filter(x => x.cardStackId === item.id)
+    });
   }
-
-  mockCubeStack() {
-    var date = new Date();
-
-    var cubesA = [
-      new Cube(0, this.getDateNow(),'问好','Greeting', ['hello', 'hallo', 'hey', 'hi','yo']),
-      new Cube(1, this.getDateNow(),'告别','farewell', ['bye', 'byebye', 'see you', 'good bye', 'see you later']),
-      new Cube(2, this.getDateNow(),'抱歉','apology', ['sorry', 'really sorry', 'Im sorry', 'my bad', 'my fault']),
-      new Cube(3, this.getDateNow(),'感激','appreciate', ['thanks', 'thank you', 'thank you very much', 'thanks a lot', 'im appreciate']),
-    ]
-    var cubesB = [
-      new Cube(0, this.getDateNow(),'中二一','德二一', ['方块二一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
-      new Cube(1, this.getDateNow(),'中二二','德二二', ['方块二二', 'cubeTwo', 'cubeZwei', 'cubeEr', 'cube2']),
-      new Cube(2, this.getDateNow(),'中二三','德二三', ['方块二三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3'])
-    ]
-    var cubesC = [
-      new Cube(0, this.getDateNow(),'中三一','德三一', ['方块三一', 'cubeOne', 'cubeEins', 'cubeYi', 'cube1']),
-      new Cube(1, this.getDateNow(),'中三二','德三二', ['方块三二', 'cubeTwo', 'cubeZwei', 'cubeEr', 'cube2']),
-      new Cube(2, this.getDateNow(),'中三三','德三三', ['方块三三', 'cubeThree', 'cubeDrei', 'cubeSan', 'cube3'])
-    ]
-
-    this.cubeStacks = [
-      new CubeBag(0, '问候与告别', 'Hello & Bye', cubesA, 'iconA'),
-      new CubeBag(1, '第二块包', 'CubeBagTwo', cubesB, 'iconB'),
-      new CubeBag(2, '第三块包', 'CubeBagThree', cubesC, 'iconA'),
-    ]
-  }
-
-  //CubeBag: add, remove, edit
-  addCubeStack(titleCn: string, titleDe: string, icon: string) {
-    let id = this.cubeStacks.length
-    let title_Cn = titleCn
-    let title_De = titleDe
-    var newCubes = []
-    this.cubeStacks.push(new CubeBag(id, title_Cn, title_De, newCubes, icon))
-  }
-  editCubeBag(cubeBag: CubeBag, newTitleCn: string, newTitleDe: string) {
-    var editCubeBag = this.cubeStacks.find(x => x == cubeBag)
-    editCubeBag.titleCn = newTitleCn
-    editCubeBag.titleDe = newTitleDe
-  }
-  removeCubeBag(cubeStack: any) {
-    let index = this.cubeStacks.indexOf(cubeStack)
-    if (index > -1) {
-      this.cubeStacks.splice(cubeStack, 1)
-    }
-  }
-
-  // CardBag: add, remove, edit
-  addCardBag(titleCn: string, titleDe: string, icon: string, onProgress: number) {
+  // CardStack: all, add, remove, edit
+  addCardStack(titleCn: string, titleDe: string, progress: number) {
     let id = this.cardStacks.length
+    let newCards = []
     let title_Cn = titleCn
     let title_De = titleDe
-    var newCards = []
-    this.cardStacks.push(new CardStack(id, title_Cn, title_De, newCards, icon, onProgress))
-  }
-  removeCardBag(cardBag: any) {
-    // this.cardStacks = this.cardStacks.filter(x => x != cardBag)
+    let newCardStack = new CardStack(id, title_Cn, title_De, newCards, this.getDateNow(), progress)
+    this.cardStacks.push(newCardStack)
 
-    let index = this.cardStacks.indexOf(cardBag)
+    this.dbService.insert(newCardStack, TABLES.CardStack)
+  }
+  removeCardStack(cardStack: any) {
+    let index = this.cardStacks.indexOf(cardStack)
     if (index > -1) {
       this.cardStacks.splice(index, 1)
     }
-  }
-  editCardBag(cardBag: CardStack, newTitleCn: string, newTitleDe: string) {
-    var editCardBag = this.cardStacks.find(x => x == cardBag)
-    editCardBag.titleCn = newTitleCn
-    editCardBag.titleDe = newTitleDe
-  }
 
-  // Cube: add, remove, edit 
-  addCube(cubeBag: CubeBag, title_Cn:string, title_De:string, cubeTexts: string[]) {
-    let _id = cubeBag.cubes.length;
-    let _date = this.getDateNow()
-
-    cubeBag.cubes.push(new Cube(_id, _date, title_Cn, title_De, cubeTexts))
+    // remove Cards in the stack
+    cardStack.cards.forEach(card => {
+      this.dbService.delete(TABLES.Card, card)
+    });
+    // remove this Stack
+    this.dbService.delete(TABLES.CardStack, cardStack)
   }
-  removeCube(cube: any, cubeBag: any) {
-    let targetCubeBag = this.cubeStacks.find(x => x == cubeBag)
-    targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
-  }
-  editCube(cube: Cube, newCubeTexts: string[]) {
-    cube.cubeTexts = newCubeTexts
-  }
+  editCardStack(cardStack: CardStack, newTitleCn: string, newTitleDe: string) {
+    var editcardStack = this.cardStacks.find(x => x == cardStack)
+    editcardStack.titleCn = newTitleCn
+    editcardStack.titleDe = newTitleDe
 
-
+    this.dbService.update(cardStack, TABLES.CardStack)
+  }
   // Card: add, remove, edit
-  addCard(cardBag: CardStack, textCn: string, textDe: string) {
-
-    let _id = cardBag.cards.length;
-    let _date = this.getDateNow()
-    let _textCn = textCn
-    let _textDe = textDe
-    let _status = CardStatus.failed
-
-    cardBag.cards.push(new Card(_id, _date, _textCn, _textDe, _status))
+  addCard(cardStack: CardStack, textCn: string, textDe: string) {
+    let _id
+    this.dbService.list(TABLES.Card).then(data => {
+      if (!data) {
+        _id = 0
+        cardStack.cards = new Array()
+      }
+      let newCard = new Card(_id, cardStack.id, this.getDateNow(), textCn, textDe, CardStatus.failed)
+      cardStack.cards.push(newCard)
+      this.dbService.insert(newCard, TABLES.Card)
+      console.log('cardService:addCard:cardId:', _id)
+    })
+    console.log('cardService:addCard:cardStack.cards: ', cardStack.cards)
   }
-  removeCard(card: any, cardBag: any) {
-    let targetCardBag = this.cardStacks.find(x => x == cardBag)
-    targetCardBag.cards = targetCardBag.cards.filter(x => x != card)
+  removeCard(card: any, cardStack: any) {
+    let targetcardStack = this.cardStacks.find(x => x == cardStack)
+    targetcardStack.cards = targetcardStack.cards.filter(x => x != card)
+
+    this.dbService.delete(TABLES.Card, card)
   }
   editCard(card: Card, newTextCn: string, newTextDe: string) {
     card.textCn = newTextCn
     card.textDe = newTextDe
+
+    this.dbService.update(card, TABLES.Card)
   }
+
+
+  // CardStack Builder
+  cubeStackBuilder(cubeStacks: CubeStack[], cubes: Cube[]) {
+    cubeStacks.forEach(item => {
+      item.cubes = new Array()
+      item.cubes = cubes.filter(x => x.cubeStackId === item.id)
+    });
+  }
+  //CubeBag: add, remove, edit
+  addCubeStack(titleCn: string, titleDe: string) {
+    let id = this.cubeStacks.length
+    let defaultCube = []
+    let newCubeStack = new CubeStack(id, titleCn, titleDe, defaultCube, this.getDateNow(), 0)
+    this.cubeStacks.push(newCubeStack)
+
+    this.addCube(newCubeStack, '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi')
+    this.dbService.insert(newCubeStack, TABLES.CubeStack)
+  }
+  editCubeBag(cubeStack: CubeStack, newTitleCn: string, newTitleDe: string) {
+    var editCubeBag = this.cubeStacks.find(x => x == cubeStack)
+    editCubeBag.titleCn = newTitleCn
+    editCubeBag.titleDe = newTitleDe
+
+    this.dbService.update(cubeStack, TABLES.CubeStack)
+  }
+  removeCubeStack(cubeStack: any) {
+    let index = this.cubeStacks.indexOf(cubeStack)
+    if (index > -1) {
+      this.cubeStacks.splice(index, 1)
+    }
+
+    this.dbService.delete(TABLES.CubeStack, cubeStack)
+  }
+  // Cube: add, remove, edit 
+  addCube(cubeStack: CubeStack, title_Cn: string, title_De: string, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+    let _id = cubeStack.cubes.length;
+    let newCube = new Cube(_id, cubeStack.id, this.getDateNow(), title_Cn, title_De, cubeSide1, cubeSide2, cubeSide3, cubeSide4)
+    cubeStack.cubes.push(newCube)
+
+    this.dbService.insert(newCube, TABLES.Cube)
+  }
+  removeCube(cube: any, cubeStack: any) {
+    let targetCubeBag = this.cubeStacks.find(x => x == cubeStack)
+    targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
+    
+    this.dbService.delete(TABLES.Cube, cube)
+  }
+  editCube( cube: Cube, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+    cube.cubeSide1 = cubeSide1
+    cube.cubeSide2 = cubeSide2
+    cube.cubeSide3 = cubeSide3
+    cube.cubeSide4 = cubeSide4
+
+    this.dbService.update(cube, TABLES.Cube)
+  }
+
 
 
   getRandomBgColor() {
@@ -178,7 +242,6 @@ export class CardServiceProvider {
       "#0be881",
       "#485460",
       "#ffdd59",
-
       "#ffd32a",
       "#ff3f34",
       "#808e9b",
@@ -188,7 +251,6 @@ export class CardServiceProvider {
     console.log("randomNum:" + randomNum)
     return colors[randomNum]
   }
-
   // get current date
   getDateNow(): string {
 
@@ -216,5 +278,4 @@ export class CardServiceProvider {
 
     return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
   }
-
 }

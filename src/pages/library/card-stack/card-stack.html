@@ -1,9 +1,7 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>Card Stack</ion-title>
-    <ion-buttons end>
-
-    </ion-buttons>
+  <ion-navbar color="light">
+    <ion-title>CardStack</ion-title>
+    
   </ion-navbar>
 </ion-header>
 
@@ -16,7 +14,7 @@
         <ion-item no-lines>
           <div class="wrapper">
             <div class="card">
-              <img class="back-img" src="https://picsum.photos/302">
+              <img class="back-img" src="https://picsum.photos/314">
               <div class="card-title">{{cardStack.titleCn}}</div>
               <div class="card-subtitle">{{cardStack.titleDe}}</div>
             </div>
@@ -48,7 +46,7 @@
         <button class="card-cover-edit-btn" ion-button small color="danger" round outline (click)="presentPopover($event)">
           <ion-icon class="card-cover-icon" name="ios-trash-outline"></ion-icon>
         </button>
-        <button class="card-cover-edit-btn" ion-button small color="primary" round outline (click)="editCardBag()">
+        <button class="card-cover-edit-btn" ion-button small color="primary" round outline (click)="editCardStack()">
           <ion-icon class="card-cover-icon" name="ios-checkmark-circle-outline"></ion-icon>
         </button>
       </ion-col>

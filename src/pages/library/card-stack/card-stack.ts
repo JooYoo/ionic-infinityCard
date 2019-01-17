@@ -25,6 +25,7 @@ export class CardStackPage {
     private toastCtrl: ToastController,
     private app: App) {
     this.cardStack = navParams.get('itemInfo')
+    console.log('cardStack:constructor:cardStack: ', this.cardStack)
   }
 
   toastSetting() {
@@ -32,8 +33,9 @@ export class CardStackPage {
       message: this.cardStack.titleCn + ' has been removed',
       duration: 3000,
       position: 'top',
-      closeButtonText:'X',
+      closeButtonText: 'X',
       showCloseButton: true,
+      cssClass: 'toast-style'
     })
   }
 
@@ -46,7 +48,7 @@ export class CardStackPage {
     this.toastSetting()
 
     popover.onDidDismiss(() => {
-      this.cardService.removeCardBag(this.cardStack)
+      this.cardService.removeCardStack(this.cardStack)
       this.toast.present()
       this.viewCtrl.dismiss()
     })
@@ -62,8 +64,8 @@ export class CardStackPage {
     addModal.present()
   }
 
-  editCardBag() {
-    this.cardService.editCardBag(this.cardStack, this.cardStack.titleCn, this.cardStack.titleDe)
+  editCardStack() {
+    this.cardService.editCardStack(this.cardStack, this.cardStack.titleCn, this.cardStack.titleDe)
     this.nav.push(LibraryPage)
   }
 
