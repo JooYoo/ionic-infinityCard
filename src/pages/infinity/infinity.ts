@@ -170,13 +170,20 @@ export class InfinityPage {
   mouseUp() {
     this.isActive = false
     if (!this.isActive) {
-      this.zoomAmount = 1
+      //this.zoomAmount = 1
     }
   }
 
-  panEvent(e) {
-    this.zoomAmount += 0.01
+  panRightEvent(e) {
+    this.zoomAmount -= 0.03
     console.log('zoomAmount: ', this.zoomAmount)
+    console.log('right')
+  }
+
+  panLeftEvent(e) {
+    this.zoomAmount += 0.03
+    console.log('zoomAmount: ', this.zoomAmount)
+    console.log('left')
   }
   
   //#endregion

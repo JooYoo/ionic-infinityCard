@@ -7,7 +7,8 @@
 </ion-header>
 
 
-<ion-content class="no-scroll" padding #content scrollX="true" scrollY="true" (pan)='panEvent($event)' style="width: 100%; height: 100%;">
+<ion-content class="no-scroll" padding #content scrollX="true" scrollY="true" (panright)='panRightEvent($event)'
+  (panleft)='panLeftEvent($event)' style="width: 100%; height: 100%;">
 
   <div #infinity class="wrapper" [style.zoom]='zoomAmount'>
     <div *ngFor="let card of cards">
@@ -23,21 +24,19 @@
   </div>
 
   <ion-fab center bottom>
-    <button id="active-btn" ion-fab round large (mousedown)='mouseDown()' (mouseup)='mouseUp()' (touchstart)='mouseDown()'
-      (touchend)='mouseUp()'>
-
-      <ion-icon name="ios-move-outline" style="zoom:1.5;"></ion-icon>
+    <button id="active-btn" color="light" ion-fab round large (mousedown)='mouseDown()' (mouseup)='mouseUp()'
+      (touchstart)='mouseDown()' (touchend)='mouseUp()'>
+      <ion-icon name="radio-button-on" style="zoom:1.5;"></ion-icon>
     </button>
-
-    
   </ion-fab>
+
   <ion-item style="transform: rotateX(90deg);">
-      <ion-badge item-end>{{zoomAmount}}</ion-badge>
-      <ion-range step="0,1" min="0" max="10"  snaps="true" [(ngModel)]="zoomAmount">
-        <ion-icon range-left small name="sunny"></ion-icon>
-        <ion-icon range-right name="sunny"></ion-icon>
-      </ion-range>
-    </ion-item>
+    <ion-badge item-end>{{zoomAmount}}</ion-badge>
+    <ion-range step="0,1" min="0" max="10" snaps="true" [(ngModel)]="zoomAmount">
+      <ion-icon range-left small name="sunny"></ion-icon>
+      <ion-icon range-right name="sunny"></ion-icon>
+    </ion-range>
+  </ion-item>
 
 
 
