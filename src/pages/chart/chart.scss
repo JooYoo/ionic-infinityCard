@@ -1,3 +1,36 @@
 page-chart {
+    #chart-title{
+        // text-align: left;
+    }
 
+    #chart-circle-progress{
+        //margin-top: 50px;
+    }
+
+    button{
+       outline: 0 !important;
+    }
+
+    #chart-todaystudy-header{
+        background: rgba(1, 1, 1, 0);
+        color: rgba(1, 1, 1, 0.5);;
+    }
+    .chart-card{
+        margin-top:10px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+    }
+    #chart-card1{
+        margin-top:10px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-radius: 20px;
+    }
+
+    .not-active {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
+      }
 }

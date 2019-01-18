@@ -35,6 +35,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { DbServiceProvider } from '../providers/db-service/db-service';
 import { ChartPage } from '../pages/chart/chart';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { Chart } from 'chart.js';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,15 @@ import { ChartPage } from '../pages/chart/chart';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     BrowserAnimationsModule,
-    SwipeCardsModule
+    SwipeCardsModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
