@@ -34,6 +34,7 @@ import { StorageServiceProvider } from '../providers/storage-service/storage-ser
 import { IonicStorageModule } from '@ionic/storage';
 import { SqlStorageProvider } from '../providers/sql-storage/sql-storage';
 import { DbServiceProvider } from '../providers/db-service/db-service';
+import { ChartPage } from '../pages/chart/chart';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     CubeStackAddPage,
     CubeContentAddPage,
     CubeContentEditPage,
+    ChartPage,
     TabsPage,
     PopoverComponent,
     CubeListIconComponent,
@@ -81,6 +83,7 @@ import { DbServiceProvider } from '../providers/db-service/db-service';
     CubeStackAddPage,
     CubeContentAddPage,
     CubeContentEditPage,
+    ChartPage,
     TabsPage,
     PopoverComponent,
   ],
