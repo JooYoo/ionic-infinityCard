@@ -69,13 +69,20 @@ export class SwipePage {
     this.dbService.update(this.cardStack, TABLES.CardStack)
 
     this.swipeIndex++
-    
+
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
 
     // write to StudyDb
-    this.cardService.addStudy(this.cardStack.titleCn, this.cardStack.progress)
-    
+    this.dbService.list(TABLES.Study).then((data) => {
+      this.cardService.studys = data
+      if (!this.cardService.studys) {
+        this.cardService.studys = this.cardService.defaultStudys()
+      }
+    }).then(() => {
+      this.cardService.addStudy(this.cardStack)
+    })
+
   }
 
   onMistake() {
@@ -116,7 +123,7 @@ export class SwipePage {
 
     this.randomIndex = this.swipeService.getRandomNr(this.cardService.cardStacks.length)
     this.cardStack = this.cardService.cardStacks[this.randomIndex]
-    console.log('swipe:', this.cardStack)
+    //console.log('swipe:', this.cardStack)
     this.initCards(this.cardStack!.cards)
     this.cardStack.progress = this.progressValue
   }
@@ -131,7 +138,6 @@ export class SwipePage {
   initCards(cards: any[]) {
     this.swipeIndex = 0
     this.attendants = [];
-    console.log('initCards:')
     this.cards = cards
 
     for (let i = 0; i < this.cards.length; i++) {

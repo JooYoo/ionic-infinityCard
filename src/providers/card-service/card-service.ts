@@ -17,7 +17,7 @@ export class CardServiceProvider {
   cubeStacks: any = []
   cubes: Cube[] = []
   failedCardBag: CardStack
-  studys: Study[]=[]
+  studys: Study[] = []
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider,
@@ -27,18 +27,18 @@ export class CardServiceProvider {
     //this.mockCubeStack()
   }
 
-  defaultStudys(){
-    return[
-      new Study(1,this.getDateNow(),10,0,"No Record",0),
-      new Study(2,this.getDateNow(),10,0,"No Record",0),
-      new Study(3,this.getDateNow(),10,0,"No Record",0),
-      new Study(4,this.getDateNow(),10,0,"No Record",0),
-      new Study(5,this.getDateNow(),10,0,"No Record",0),
-      new Study(6,this.getDateNow(),10,0,"No Record",0),
-      new Study(7,this.getDateNow(),10,0,"No Record",0),
-      new Study(8,this.getDateNow(),10,0,"No Record",0),
-      new Study(9,this.getDateNow(),10,0,"No Record",0),
-      new Study(10,this.getDateNow(),10,0,"No Record",0),
+  defaultStudys() {
+    return [
+      new Study(1, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(2, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(3, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(4, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(5, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(6, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(7, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(8, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(9, this.getDateNow(), 10, 0, "No Record", 0),
+      new Study(10, this.getDateNow(), 10, 0, "No Record", 0),
     ]
   }
 
@@ -123,25 +123,35 @@ export class CardServiceProvider {
   }
 
   // Studys: all, add, remove, edit
-  addStudy(stackTitle: string, stackProgress: any){
+  addStudy(stack: CardStack) {
 
-    console.log('cardService:addStudy: in addStudy!!!')
-    let existStudy = this.studys.find(x=>x.date == this.getDateNow())
+
+    console.log('CardService:addStudy:studys: ', this.studys)
+    let existStudy = this.studys.find(x => x.stackTitle == stack.titleCn)
+    console.log('CardService:addStudy:existStudy: ', existStudy)
+
 
     if (existStudy) { // update
-      existStudy.stackProgress = stackProgress
+      existStudy.stackProgress = stack.progress
       existStudy.actualAmount++
-      console.log('cardService:addStudy:existStudy: ', existStudy)
-      this.dbService.update(existStudy,TABLES.Study)
-    }else{ // insert
+      this.dbService.update(existStudy, TABLES.Study)
+    } else { // insert
       let id = this.studys.length
-      let newStudy = new Study(id, this.getDateNow(),10,0,stackTitle,stackProgress)
+      let planAmount = 10
+      let actualAmount = 0
+
+      if (this.studys.length > 0) { // 继承之前的planAmount 和 actualAmount
+        planAmount = this.studys[id - 1].planAmount
+        actualAmount = this.studys[id - 1].actualAmount
+      }
+      let newStudy = new Study(id, this.getDateNow(), planAmount, actualAmount, stack.titleCn, stack.progress)
+
       newStudy.actualAmount++
       this.studys.push(newStudy)
       this.dbService.insert(newStudy, TABLES.Study)
       console.log('cardService:addStudy:insertStudy: ', newStudy)
     }
-    
+
   }
 
   // CardStack Builder
@@ -254,10 +264,10 @@ export class CardServiceProvider {
   removeCube(cube: any, cubeStack: any) {
     let targetCubeBag = this.cubeStacks.find(x => x == cubeStack)
     targetCubeBag.cubes = targetCubeBag.cubes.filter(x => x != cube)
-    
+
     this.dbService.delete(TABLES.Cube, cube)
   }
-  editCube( cube: Cube, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
+  editCube(cube: Cube, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
     cube.cubeSide1 = cubeSide1
     cube.cubeSide2 = cubeSide2
     cube.cubeSide3 = cubeSide3

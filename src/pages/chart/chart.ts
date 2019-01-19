@@ -10,19 +10,22 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
   templateUrl: 'chart.html',
 })
 export class ChartPage {
-
-  studys: any
-  currentStudy: any
-
-  planAmount: any
-  actualAmount: any
-  circleDisplay: any
-
   barChart: any;
   @ViewChild('barCanvas') barCanvas;
-
   lineChart: any
   @ViewChild('lineCanvas') lineCanvas;
+
+  currentStudy: any
+
+  // Chart: StudyToday
+  planAmount: any
+  actualAmount: any =0
+  circleDisplay: any
+
+  // Chart: StudyTrend
+
+  // Chart: StackProgress
+  stackProgressHub: any
 
 
   constructor(public navCtrl: NavController,
@@ -32,9 +35,15 @@ export class ChartPage {
   }
 
   ionViewDidEnter() {
-
-    // load DB 
+    // Chart: StudyToday
     this.getStudys()
+
+    // Chart: StudyTrend
+
+    // Chart: StackProgress
+    // let studys = this.cardService.studys
+    // console.log('Chart:ionViewDidEnter:studys: ', studys)
+
 
     // charts
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
@@ -100,10 +109,18 @@ export class ChartPage {
   }
 
   onSelected(){ // change planAmount 
+    console.log('Chart:onSelected:planAmount: ', this.planAmount)
+    console.log('Chart:onSelected:actualAmount: ', this.actualAmount)
+    console.log('Chart:onSelected:circleDisplay: ', this.circleDisplay)
     this.circleDisplay = this.actualAmount / this.planAmount * 100
     console.log('Chart:onSelected:circleDisplay: ', this.circleDisplay)
     // update DB
+     console.log("Chart:onSlected:planAmount: ", this.planAmount)
+    
     this.currentStudy.planAmount = this.planAmount
+    console.log('Chart:onSelected:planAmount: ', this.planAmount)
+    console.log('Chart:onSelected:currentStudy: ', this.currentStudy)
+
     this.dbService.update(this.currentStudy, TABLES.Study)
   }
 
@@ -112,34 +129,34 @@ export class ChartPage {
       this.cardService.studys = data
       if (!this.cardService.studys) {
         this.cardService.studys = this.cardService.defaultStudys()
-        console.log('Chart:DefaultStudys: ', this.cardService.studys)
+       // console.log('Chart:DefaultStudys: ', this.cardService.studys)
       }
-      console.log('Chart:DBStudys: ', this.cardService.studys)
+     // console.log('Chart:DBStudys: ', this.cardService.studys)
     }).then(() => {
-      // prepare Data
       this.getTodayStudy()
     })
   }
 
   getTodayStudy() {
     var today = this.cardService.getDateNow()
-    var todayStudy = this.cardService.studys.find(x => x.date == today)
-    console.log('Chart:getTodayData:todayStudy: ', todayStudy)
+    let todayStudys = this.cardService.studys.filter(x => x.date == today)
+    console.log('Chart:getTodayData:todayStudy: ', todayStudys)
 
-    if (todayStudy) {
-      this.planAmount = todayStudy.planAmount
-      this.actualAmount = todayStudy.actualAmount
-      this.currentStudy = todayStudy
+    if (todayStudys) {
+      todayStudys.forEach(x => {
+        this.actualAmount += x.actualAmount
+      });
+      this.planAmount = todayStudys[todayStudys.length-1].planAmount
+      this.currentStudy = todayStudys[todayStudys.length-1]
     } else {
       this.planAmount = 10
       this.actualAmount = 0
     }
     this.circleDisplay = this.actualAmount / this.planAmount * 100
 
-    console.log('Chart:getTodayData:planAmount: ', this.planAmount)
-    console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
-    console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
-
+     console.log('Chart:getTodayData:planAmount: ', this.planAmount)
+     console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
+     console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
   }
 
 }

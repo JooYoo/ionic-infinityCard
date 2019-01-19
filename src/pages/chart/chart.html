@@ -16,10 +16,10 @@
     <ion-card-content>
         <ion-item id="chart-todaystudy-header">
             <ion-label></ion-label>
-            <ion-select (ionChange)="onSelected()"  [(ngModel)]="planAmount">
-              <ion-option value="10" (click)="onSelected()" clear>10</ion-option>
-              <ion-option value="30" (click)="onSelected()" clear>30</ion-option>
-              <ion-option value="50" (click)="onSelected()" clear>50</ion-option>
+            <ion-select  (ionChange)="onSelected()"  [(ngModel)]="planAmount">
+              <ion-option value="10" clear>10</ion-option>
+              <ion-option value="30" clear>30</ion-option>
+              <ion-option value="50" clear>50</ion-option>
             </ion-select>
           </ion-item>
         <div class="not-active" style="text-align: center; padding: 20px;">
@@ -53,7 +53,7 @@
 
   <ion-card class="chart-card">
     <ion-card-header>
-      Stacks Progress
+      Stack Progress
     </ion-card-header>
     <ion-card-content>
         <canvas #barCanvas></canvas>
