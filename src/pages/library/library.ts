@@ -45,12 +45,12 @@ export class LibraryPage {
       this.cardService.cubes = data
       if (!this.cardService.cubes) {
         this.cardService.cubes = this.cardService.defaultCubes()
-        console.log('[S1.5]:Library:loadCubeDb:defaultStack: ', this.cardService.cubeStacks)
+      //  console.log('[S1.5]:Library:loadCubeDb:defaultStack: ', this.cardService.cubeStacks)
       }
-      console.log('[S2]:Library:cubes: ', this.cardService.cubes)
+     // console.log('[S2]:Library:cubes: ', this.cardService.cubes)
     }).then(() => {
       this.cardService.cubeStackBuilder(this.cardService.cubeStacks, this.cardService.cubes)
-      console.log('[S3]:Library:cubeStackBuilder:CubeStacks: ', this.cardService.cubeStacks)
+     // console.log('[S3]:Library:cubeStackBuilder:CubeStacks: ', this.cardService.cubeStacks)
     })
   }
 
@@ -60,7 +60,7 @@ export class LibraryPage {
       if (!this.cardService.cubeStacks) {
         this.cardService.cubeStacks = this.cardService.defaultCubeStack()
       }
-      console.log('[S1]:Library:cubeStacks: ', this.cardService.cubeStacks)
+    //  console.log('[S1]:Library:cubeStacks: ', this.cardService.cubeStacks)
     }).then(() => {
       this.loadCubeDb()
     })

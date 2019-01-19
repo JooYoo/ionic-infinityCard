@@ -7,6 +7,7 @@ import { CubeStack } from '../../app/Model/CubeStack';
 import { Cube } from '../../app/Model/Cube';
 import { StorageServiceProvider } from '../storage-service/storage-service';
 import { DbServiceProvider, TABLES } from '../db-service/db-service';
+import { Study } from '../../app/Model/Study';
 
 @Injectable()
 export class CardServiceProvider {
@@ -16,6 +17,7 @@ export class CardServiceProvider {
   cubeStacks: any = []
   cubes: Cube[] = []
   failedCardBag: CardStack
+  studys: Study[]=[]
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider,
@@ -23,6 +25,21 @@ export class CardServiceProvider {
     this.getFailedCardBag()
     // this.mockCardStacks()
     //this.mockCubeStack()
+  }
+
+  defaultStudys(){
+    return[
+      new Study(1,this.getDateNow(),10,0,"No Record",0),
+      new Study(2,this.getDateNow(),10,0,"No Record",0),
+      new Study(3,this.getDateNow(),10,0,"No Record",0),
+      new Study(4,this.getDateNow(),10,0,"No Record",0),
+      new Study(5,this.getDateNow(),10,0,"No Record",0),
+      new Study(6,this.getDateNow(),10,0,"No Record",0),
+      new Study(7,this.getDateNow(),10,0,"No Record",0),
+      new Study(8,this.getDateNow(),10,0,"No Record",0),
+      new Study(9,this.getDateNow(),10,0,"No Record",0),
+      new Study(10,this.getDateNow(),10,0,"No Record",0),
+    ]
   }
 
 
@@ -103,6 +120,28 @@ export class CardServiceProvider {
   getFailedCardBag() {
     let failedcards = []
     this.failedCardBag = new CardStack(0, '不记得', 'Failed Bag', failedcards, 'iconX', 0)
+  }
+
+  // Studys: all, add, remove, edit
+  addStudy(stackTitle: string, stackProgress: any){
+
+    console.log('cardService:addStudy: in addStudy!!!')
+    let existStudy = this.studys.find(x=>x.date == this.getDateNow())
+
+    if (existStudy) { // update
+      existStudy.stackProgress = stackProgress
+      existStudy.actualAmount++
+      console.log('cardService:addStudy:existStudy: ', existStudy)
+      this.dbService.update(existStudy,TABLES.Study)
+    }else{ // insert
+      let id = this.studys.length
+      let newStudy = new Study(id, this.getDateNow(),10,0,stackTitle,stackProgress)
+      newStudy.actualAmount++
+      this.studys.push(newStudy)
+      this.dbService.insert(newStudy, TABLES.Study)
+      console.log('cardService:addStudy:insertStudy: ', newStudy)
+    }
+    
   }
 
   // CardStack Builder

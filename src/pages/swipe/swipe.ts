@@ -73,6 +73,8 @@ export class SwipePage {
     this.swipeService.addToFailedCardStack(event.like, currentCard)
     this.failedCardLength = this.cardService.failedCardBag.cards.length
 
+    // write to StudyDb
+    this.cardService.addStudy(this.cardStack.titleCn, this.cardStack.progress)
     
   }
 

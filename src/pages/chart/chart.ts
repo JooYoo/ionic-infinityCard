@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
+import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
+import { CardServiceProvider } from '../../providers/card-service/card-service';
 
 
 @Component({
@@ -9,8 +11,12 @@ import { Chart } from 'chart.js';
 })
 export class ChartPage {
 
-  test: string = "85"
+  studys: any
+  currentStudy: any
+
   planAmount: any
+  actualAmount: any
+  circleDisplay: any
 
   barChart: any;
   @ViewChild('barCanvas') barCanvas;
@@ -19,13 +25,41 @@ export class ChartPage {
   @ViewChild('lineCanvas') lineCanvas;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private dbService: DbServiceProvider,
+    private cardService: CardServiceProvider) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
 
-    this.planAmount = "10"
+    // load DB 
+    this.getStudys()
 
+    // charts
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+        labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+        datasets: [{
+          label: "test",
+          backgroundColor: 'rgb(171, 221, 147,0.3)',
+          borderColor: 'rgb(48, 110, 18,0.3)',
+          data: [12, 19, 3, 5, 2, 3, 30, 10, 4, 18],
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        }
+      }
+    });
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
@@ -63,33 +97,48 @@ export class ChartPage {
       }
 
     });
+  }
 
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-        datasets: [{
-          label: "test",
-          backgroundColor: 'rgb(171, 221, 147,0.3)',
-          borderColor: 'rgb(48, 110, 18,0.3)',
-          data: [12, 19, 3, 5, 2, 3, 30, 10, 4, 18],
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        }
+  onSelected(){ // change planAmount 
+    this.circleDisplay = this.actualAmount / this.planAmount * 100
+    console.log('Chart:onSelected:circleDisplay: ', this.circleDisplay)
+    // update DB
+    this.currentStudy.planAmount = this.planAmount
+    this.dbService.update(this.currentStudy, TABLES.Study)
+  }
+
+  getStudys() {
+    this.dbService.list(TABLES.Study).then(data => {
+      this.cardService.studys = data
+      if (!this.cardService.studys) {
+        this.cardService.studys = this.cardService.defaultStudys()
+        console.log('Chart:DefaultStudys: ', this.cardService.studys)
       }
-    });
+      console.log('Chart:DBStudys: ', this.cardService.studys)
+    }).then(() => {
+      // prepare Data
+      this.getTodayStudy()
+    })
+  }
 
+  getTodayStudy() {
+    var today = this.cardService.getDateNow()
+    var todayStudy = this.cardService.studys.find(x => x.date == today)
+    console.log('Chart:getTodayData:todayStudy: ', todayStudy)
 
+    if (todayStudy) {
+      this.planAmount = todayStudy.planAmount
+      this.actualAmount = todayStudy.actualAmount
+      this.currentStudy = todayStudy
+    } else {
+      this.planAmount = 10
+      this.actualAmount = 0
+    }
+    this.circleDisplay = this.actualAmount / this.planAmount * 100
 
+    console.log('Chart:getTodayData:planAmount: ', this.planAmount)
+    console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
+    console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
 
   }
 
