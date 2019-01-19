@@ -74,14 +74,7 @@ export class SwipePage {
     this.failedCardLength = this.cardService.failedCardBag.cards.length
 
     // write to StudyDb
-    this.dbService.list(TABLES.Study).then((data) => {
-      this.cardService.studys = data
-      if (!this.cardService.studys) {
-        this.cardService.studys = this.cardService.defaultStudys()
-      }
-    }).then(() => {
-      this.cardService.addStudy(this.cardStack)
-    })
+    //this.cardService.addStudy(this.cardStack)
 
   }
 

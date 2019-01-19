@@ -37,6 +37,17 @@ export class LibraryPage {
     this.onDefaultCardStack()
     // load Cubes
     this.onDefaultCubeStack()
+    // load Studys
+    this.onDefaultStudyDb()
+  }
+
+  onDefaultStudyDb(){
+    // this.dbService.list(TABLES.Study).then((data) => {
+    //   this.cardService.studys = data
+    //   if (!this.cardService.studys) {
+    //     this.cardService.studys = this.cardService.defaultStudys()
+    //   }
+    // })
   }
 
   loadCubeDb() {

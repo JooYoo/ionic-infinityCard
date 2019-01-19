@@ -7,7 +7,9 @@ import { CubeStack } from '../../app/Model/CubeStack';
 import { Cube } from '../../app/Model/Cube';
 import { StorageServiceProvider } from '../storage-service/storage-service';
 import { DbServiceProvider, TABLES } from '../db-service/db-service';
-import { Study } from '../../app/Model/Study';
+import { StudyDaily } from '../../app/Model/StudyDaily';
+import { Study } from '../../app/Model/Study'
+import { StackType } from '../../app/Model/StackType';
 
 @Injectable()
 export class CardServiceProvider {
@@ -17,7 +19,9 @@ export class CardServiceProvider {
   cubeStacks: any = []
   cubes: Cube[] = []
   failedCardBag: CardStack
-  studys: Study[] = []
+
+  studyDailys: StudyDaily[] = []
+  studys: Study[]=[]
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider,
@@ -27,22 +31,20 @@ export class CardServiceProvider {
     //this.mockCubeStack()
   }
 
-  defaultStudys() {
+  defaultStudyDailys() {
     return [
-      new Study(1, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(2, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(3, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(4, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(5, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(6, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(7, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(8, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(9, this.getDateNow(), 10, 0, "No Record", 0),
-      new Study(10, this.getDateNow(), 10, 0, "No Record", 0),
+      new StudyDaily(0, this.defaultStudys(), this.getDateNow(), 10, 0)
+    ]
+  }
+  defaultStudys(){
+    return[
+      new Study(0,0,StackType.card,0),
+      new Study(1,0,StackType.card,0),
+      new Study(2,0,StackType.cube,0),
     ]
   }
 
-
+  
   // defaultData: mocakCards, mockCubes
   defaultCardStack() {
     return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
@@ -123,36 +125,36 @@ export class CardServiceProvider {
   }
 
   // Studys: all, add, remove, edit
-  addStudy(stack: CardStack) {
+  // addStudy(stack: CardStack) {
 
 
-    console.log('CardService:addStudy:studys: ', this.studys)
-    let existStudy = this.studys.find(x => x.stackTitle == stack.titleCn)
-    console.log('CardService:addStudy:existStudy: ', existStudy)
+  //   console.log('CardService:addStudy:studys: ', this.studys)
+  //   let existStudy = this.studys.find(x => x.stackTitle == stack.titleCn)
+  //   console.log('CardService:addStudy:existStudy: ', existStudy)
 
 
-    if (existStudy) { // update
-      existStudy.stackProgress = stack.progress
-      existStudy.actualAmount++
-      this.dbService.update(existStudy, TABLES.Study)
-    } else { // insert
-      let id = this.studys.length
-      let planAmount = 10
-      let actualAmount = 0
+  //   if (existStudy) { // update
+  //     existStudy.stackProgress = stack.progress
+  //     existStudy.actualAmount++
+  //     this.dbService.update(existStudy, TABLES.Study)
+  //   } else { // insert
+  //     let id = this.studys.length
+  //     let planAmount = 10
+  //     let actualAmount = 0
 
-      if (this.studys.length > 0) { // 继承之前的planAmount 和 actualAmount
-        planAmount = this.studys[id - 1].planAmount
-        actualAmount = this.studys[id - 1].actualAmount
-      }
-      let newStudy = new Study(id, this.getDateNow(), planAmount, actualAmount, stack.titleCn, stack.progress)
+  //     if (this.studys.length > 0) { // 继承之前的planAmount 和 actualAmount
+  //       planAmount = this.studys[id - 1].planAmount
+  //       actualAmount = this.studys[id - 1].actualAmount
+  //     }
+  //     let newStudy = new Study(id, this.getDateNow(), planAmount, actualAmount, stack.titleCn, stack.progress)
 
-      newStudy.actualAmount++
-      this.studys.push(newStudy)
-      this.dbService.insert(newStudy, TABLES.Study)
-      console.log('cardService:addStudy:insertStudy: ', newStudy)
-    }
+  //     newStudy.actualAmount++
+  //     this.studys.push(newStudy)
+  //     this.dbService.insert(newStudy, TABLES.Study)
+  //     console.log('cardService:addStudy:insertStudy: ', newStudy)
+  //   }
 
-  }
+  // }
 
   // CardStack Builder
   cardStackBuilder(cardStacks: CardStack[], cards: Card[]) {
