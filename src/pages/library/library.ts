@@ -41,15 +41,26 @@ export class LibraryPage {
     this.onDefaultStudyDb()
   }
 
+  // load Studys Data
   onDefaultStudyDb(){
-    // this.dbService.list(TABLES.Study).then((data) => {
-    //   this.cardService.studys = data
-    //   if (!this.cardService.studys) {
-    //     this.cardService.studys = this.cardService.defaultStudys()
-    //   }
-    // })
+    this.dbService.list(TABLES.StudyDaily).then((data) => {
+      this.cardService.studyDailys = data
+      if (!this.cardService.studyDailys) {
+        this.cardService.studyDailys = this.cardService.defaultStudyDailys()
+        this.dbService.insert(this.cardService.defaultStudyDailys()[0],TABLES.StudyDaily)
+      }
+    }).then(()=>{
+      this.dbService.list(TABLES.Study).then((data)=>{
+        this.cardService.studys = data
+        if (!this.cardService.studys) {
+          this.cardService.studys = this.cardService.defaultStudys()
+          this.dbService.insert(this.cardService.defaultStudys()[0],TABLES.Study)
+        }
+      })
+    })
   }
 
+  // load Cubes Data
   loadCubeDb() {
     //  this.dbService.list()
     this.dbService.list(TABLES.Cube).then(data => {
@@ -64,7 +75,6 @@ export class LibraryPage {
      // console.log('[S3]:Library:cubeStackBuilder:CubeStacks: ', this.cardService.cubeStacks)
     })
   }
-
   onDefaultCubeStack() {
     this.dbService.list(TABLES.CubeStack).then(data => {
       this.cardService.cubeStacks = data

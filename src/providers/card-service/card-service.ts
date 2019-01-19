@@ -33,12 +33,12 @@ export class CardServiceProvider {
 
   defaultStudyDailys() {
     return [
-      new StudyDaily(0, this.defaultStudys(), this.getDateNow(), 10, 0)
+      new StudyDaily(1, this.defaultStudys(), this.getDateNow(), 10, 0)
     ]
   }
   defaultStudys(){
     return[
-      new Study(0,0,StackType.card,0),
+      new Study(0,1,StackType.card,0),
       new Study(1,0,StackType.card,0),
       new Study(2,0,StackType.cube,0),
     ]
@@ -125,36 +125,49 @@ export class CardServiceProvider {
   }
 
   // Studys: all, add, remove, edit
-  // addStudy(stack: CardStack) {
+  addStudy(stack: any, stackType: StackType) {
 
+    // console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
+    let existStudyDaily = this.studyDailys.find(x => x.date == this.getDateNow())
+    // console.log('CardService:addStudy:existDaily: ', existStudyDaily)
 
-  //   console.log('CardService:addStudy:studys: ', this.studys)
-  //   let existStudy = this.studys.find(x => x.stackTitle == stack.titleCn)
-  //   console.log('CardService:addStudy:existStudy: ', existStudy)
+    if (!existStudyDaily) { // insert
+      console.log('CardService:addStudy: !existDaily')
+      let idStudyDaily = this.studyDailys.length
+      let planAmount = 10
+      let actualAmount = 0
+      
+      let idStudy = this.studys.length;
+      let newStudy = new Study(idStudy, idStudyDaily, stackType, stack.id)
+      this.studys.push(newStudy)
+      this.dbService.insert(newStudy, TABLES.Study)
+      
+      actualAmount++
+      let newStudyDaily = new StudyDaily(idStudyDaily, 
+        this.studys, 
+        this.getDateNow(), 
+        planAmount, 
+        actualAmount)
+      this.studyDailys.push(newStudyDaily)
+      this.dbService.insert(newStudyDaily, TABLES.StudyDaily)
 
+    } else { //  update
+      console.log('CardService:addStudy:existDaily')
+      existStudyDaily.actualAmount++
+      this.dbService.update(existStudyDaily, TABLES.StudyDaily)
+     
+      console.log('CardService:addStudy:stack.id: ', stack.id)
+      let existStudy = this.studys.find(x=>x.stackId == stack.id)
+      console.log('CardService:addStudy:existStudy: ', existStudy)
+      if (!existStudy) { // 学新的Stack 就算是一个新的Study
+        let idStudy = this.studys.length;
+        let newStudy = new Study(idStudy, existStudyDaily.id, stackType, stack.id)
+        this.studys.push(newStudy)
+        this.dbService.insert(newStudy, TABLES.Study)
+      }
+    }
 
-  //   if (existStudy) { // update
-  //     existStudy.stackProgress = stack.progress
-  //     existStudy.actualAmount++
-  //     this.dbService.update(existStudy, TABLES.Study)
-  //   } else { // insert
-  //     let id = this.studys.length
-  //     let planAmount = 10
-  //     let actualAmount = 0
-
-  //     if (this.studys.length > 0) { // 继承之前的planAmount 和 actualAmount
-  //       planAmount = this.studys[id - 1].planAmount
-  //       actualAmount = this.studys[id - 1].actualAmount
-  //     }
-  //     let newStudy = new Study(id, this.getDateNow(), planAmount, actualAmount, stack.titleCn, stack.progress)
-
-  //     newStudy.actualAmount++
-  //     this.studys.push(newStudy)
-  //     this.dbService.insert(newStudy, TABLES.Study)
-  //     console.log('cardService:addStudy:insertStudy: ', newStudy)
-  //   }
-
-  // }
+  }
 
   // CardStack Builder
   cardStackBuilder(cardStacks: CardStack[], cards: Card[]) {

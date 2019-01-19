@@ -4,6 +4,7 @@ import { CardServiceProvider } from '../../providers/card-service/card-service';
 import { SwipeServiceProvider } from '../../providers/swipe-service/swipe-service';
 import { MistakePage } from '../swipe/mistake/mistake';
 import { DbServiceProvider, TABLES } from '../../providers/db-service/db-service';
+import { StackType } from '../../app/Model/StackType';
 
 @Component({
   selector: 'page-swipe',
@@ -74,7 +75,7 @@ export class SwipePage {
     this.failedCardLength = this.cardService.failedCardBag.cards.length
 
     // write to StudyDb
-    //this.cardService.addStudy(this.cardStack)
+    this.cardService.addStudy(this.cardStack, StackType.card)
 
   }
 

@@ -122,7 +122,7 @@ export class DbServiceProvider {
     this.query(`
       CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.StudyDaily] + ` (
                       id integer primary key,
-                      studys text
+                      studys text,
                       date text,
                       planAmount integer,
                       actualAmount integer
@@ -136,7 +136,7 @@ export class DbServiceProvider {
       CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.Study] + ` (
                       id integer primary key,
                       studyDailyId integer,
-                      studyType text,
+                      stackType text,
                       stackId integer,
                       FOREIGN KEY(studyDailyId) REFERENCES StudyDaily(id)
                      )

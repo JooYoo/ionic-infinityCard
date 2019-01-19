@@ -35,6 +35,10 @@ export class ChartPage {
   }
 
   ionViewDidEnter() {
+
+     // Chart: StudyToday
+    // this.getStudys()
+    this.getTodayStudy()
    
     // Chart: StudyTrend
 
@@ -107,8 +111,7 @@ export class ChartPage {
   }
 
   ionViewWillEnter(){
-     // Chart: StudyToday
-    // this.getStudys()
+    
 
   }
 
@@ -132,26 +135,17 @@ export class ChartPage {
   //   })
   // }
 
-  // getTodayStudy() {
-  //   var today = this.cardService.getDateNow()
-  //   let todayStudys = this.cardService.studys.filter(x => x.date == today)
-  //   console.log('Chart:getTodayData:todayStudy: ', todayStudys)
+  getTodayStudy() {
+    let todayStudy = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateNow())
+    console.log('Chart:getTodayData:todayStudy: ', todayStudy)
 
-  //   if (todayStudys) {
-  //     todayStudys.forEach(x => {
-  //       this.actualAmount += x.actualAmount
-  //     });
-  //     this.planAmount = todayStudys[todayStudys.length-1].planAmount
-  //     this.currentStudy = todayStudys[todayStudys.length-1]
-  //   } else {
-  //     this.planAmount = 10
-  //     this.actualAmount = 0
-  //   }
-  //   this.circleDisplay = this.actualAmount / this.planAmount * 100
+    this.planAmount = todayStudy.planAmount
+    this.actualAmount = todayStudy.actualAmount
+    this.circleDisplay = this.actualAmount / this.planAmount * 100
 
-  //    console.log('Chart:getTodayData:planAmount: ', this.planAmount)
-  //    console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
-  //    console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
-  // }
+     console.log('Chart:getTodayData:planAmount: ', this.planAmount)
+     console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
+     console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
+  }
 
 }
