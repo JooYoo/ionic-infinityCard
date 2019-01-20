@@ -1,36 +1,50 @@
 page-chart {
-    #chart-title{
-        // text-align: left;
-    }
+  #chart-title {
+    // text-align: left;
+  }
 
-    #chart-circle-progress{
-        //margin-top: 50px;
-    }
+  #chart-circle-progress {
+    //margin-top: 50px;
+  }
 
-    button{
-       outline: 0 !important;
-    }
+  button {
+    outline: 0 !important;
+  }
 
-    #chart-todaystudy-header{
-        background: rgba(1, 1, 1, 0);
-        color: rgba(1, 1, 1, 0.5);;
-    }
-    .chart-card{
-        margin-top:10px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-    }
-    #chart-card1{
-        margin-top:10px;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        border-radius: 10px;
-    }
+  #chart-todaystudy-header {
+    background: rgba(1, 1, 1, 0);
+    color: rgba(1, 1, 1, 0.5);
+    ;
+  }
 
-    .not-active {
-        pointer-events: none;
-        cursor: default;
-        text-decoration: none;
-        color: black;
-      }
+  .chart-card {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  #chart-card1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+  }
+
+  #chart-bar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  #chart-line {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+  }
 }

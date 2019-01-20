@@ -17,17 +17,18 @@ export class ChartPage {
 
   todayStudy: any
 
-  // Chart: StudyToday
+  // Chart[1]: StudyToday
   planAmount: any
   actualAmount: any = 0
   circleDisplay: any
 
-  // Chart: StudyTrend
+  // Chart[2]: StudyTrend
   dateHub: any = []
   actualAmounts: any = []
 
-  // Chart: StackProgress
-  stackProgressHub: any
+  // Chart[3]: StackProgress
+  stackTitles: any = []
+  stackProgress: any = []
 
 
   constructor(public navCtrl: NavController,
@@ -41,14 +42,12 @@ export class ChartPage {
     // Chart[1]: StudyToday
     this.getTodayStudy()
 
-    // Chart: StudyTrend
+    // Chart[2]: StudyTrend
     this.getLineChartDates()
     this.getLineChartActualAmounts()
 
-    // Chart: StackProgress
-    // let studys = this.cardService.studys
-    //console.log('Chart:ionViewDidEnter:studys: ', studys)
-
+    // Chart[3]: StackProgress
+    this.getBarChartData()
 
     // charts layout
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
@@ -77,17 +76,18 @@ export class ChartPage {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: []=this.stackTitles,
         datasets: [{
-          label: 'Stack Status',
-          data: [12, 19, 3, 5, 9, 3],
+          label: 'progress',
+          data: [] = this.stackProgress,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 99, 132, 0.2)'
           ],
           borderColor: [
             'rgba(255,99,132,1)',
@@ -95,7 +95,8 @@ export class ChartPage {
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgba(255, 159, 64, 1)',
+            'rgba(255,99,132,1)'
           ],
           borderWidth: 1
         }]
@@ -120,6 +121,33 @@ export class ChartPage {
     this.dbService.update(this.todayStudy, TABLES.StudyDaily)
   }
 
+  //Chart[3]
+  getBarChartData() {
+    let studyLength = this.cardService.studys.length
+    for (let i = 1; i < 6; i++) {
+      let study = this.cardService.studys[studyLength - i]
+
+      if (study && study.stackId !=0) { // exist // stack0 是初始化stack没有存储
+        if (study.stackType == 0) { //card
+          this.stackTitles.push(this.cardService.cardStacks.find(x=>x.id == study.stackId).titleDe)
+          this.stackProgress.push(this.cardService.cardStacks.find(x=>x.id == study.stackId).progress)
+        } else { // cube
+          this.stackTitles.push(this.cardService.cubeStacks.find(x=>x.id == study.stackId).titleDe)
+          this.stackProgress.push(this.cardService.cubeStacks.find(x=>x.id == study.stackId).progress)
+        }
+
+      } else { // !exist
+        this.stackTitles.push('empty')
+        this.stackProgress.push(0)
+      }
+
+    }
+            
+    console.log('ChartBar:getBarChartData:stackTitles: ',this.stackTitles)
+    console.log('ChartBar:getBarChartData:stackProgress: ',this.stackProgress)
+
+  }
+
   //Chart[2]
   getLineChartDates() {
     for (let i = 9; i > -1; i--) {
@@ -127,7 +155,7 @@ export class ChartPage {
     }
   }
   getLineChartActualAmounts() {
-    console.log('Chart:getLineChartActualAmounts:studyDailys: ',this.cardService.studyDailys)
+   // console.log('Chart:getLineChartActualAmounts:studyDailys: ', this.cardService.studyDailys)
     for (let i = 9; i > -1; i--) {
       let studyDaily = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateAny(-i))
       if (studyDaily) {
@@ -136,13 +164,13 @@ export class ChartPage {
         this.actualAmounts.push(0)
       }
     }
-    console.log('Chart:getLineChartActualAmounts:actualAmounts: ',this.actualAmounts)
+   // console.log('Chart:getLineChartActualAmounts:actualAmounts: ', this.actualAmounts)
   }
 
   //Chart[1]
   getTodayStudy() {
     this.todayStudy = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateNow())
-   // console.log('Chart:getTodayStudy:todayStudy: ', this.todayStudy)
+    // console.log('Chart:getTodayStudy:todayStudy: ', this.todayStudy)
 
     if (!this.todayStudy) { // today no Study yet
       let yesterdayStudy = this.cardService.studyDailys[this.cardService.studyDailys.length - 1] // get the last item, inherit PlanAmount
