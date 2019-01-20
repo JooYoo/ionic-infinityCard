@@ -366,8 +366,6 @@ export class CardServiceProvider {
       mm = rawMm.toString()
     }
 
-    console.log("CardService:getDateAny: ", yyyy.toString() + '/' + mm.toString() + '/' + dd.toString())
-
     return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
   }
 
@@ -393,8 +391,6 @@ export class CardServiceProvider {
     else {
       mm = rawMm.toString()
     }
-
-    console.log("CardService:getDateAny: ", yyyy.toString() + '/' + mm.toString() + '/' + dd.toString())
 
     return mm.toString() + '/' + dd.toString()
   }

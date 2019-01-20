@@ -23,6 +23,8 @@ export class ChartPage {
   circleDisplay: any
 
   // Chart: StudyTrend
+  dateHub: any = []
+  actualAmounts: any = []
 
   // Chart: StackProgress
   stackProgressHub: any
@@ -40,6 +42,8 @@ export class ChartPage {
     this.getTodayStudy()
 
     // Chart: StudyTrend
+    this.getLineChartDates()
+    this.getLineChartActualAmounts()
 
     // Chart: StackProgress
     // let studys = this.cardService.studys
@@ -50,21 +54,12 @@ export class ChartPage {
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
       data: {
-        labels: [this.cardService.getDateAnySimple(-9), 
-          this.cardService.getDateAnySimple(-8), 
-          this.cardService.getDateAnySimple(-7), 
-          this.cardService.getDateAnySimple(-6), 
-          this.cardService.getDateAnySimple(-5), 
-          this.cardService.getDateAnySimple(-4), 
-          this.cardService.getDateAnySimple(-3), 
-          this.cardService.getDateAnySimple(-2), 
-          this.cardService.getDateAnySimple(-1), 
-          this.cardService.getDateAnySimple(0)],
+        labels: [] = this.dateHub,
         datasets: [{
-          label: "Trend",
+          label: "Study Amount",
           backgroundColor: 'rgb(171, 221, 147,0.3)',
           borderColor: 'rgb(48, 110, 18,0.3)',
-          data: [12, 19, 3, 5, 2, 3, 30, 10, 4, 18],
+          data: [] = this.actualAmounts,
         }]
       },
       options: {
@@ -125,9 +120,29 @@ export class ChartPage {
     this.dbService.update(this.todayStudy, TABLES.StudyDaily)
   }
 
+  //Chart[2]
+  getLineChartDates() {
+    for (let i = 9; i > -1; i--) {
+      this.dateHub.push(this.cardService.getDateAnySimple(-i))
+    }
+  }
+  getLineChartActualAmounts() {
+    console.log('Chart:getLineChartActualAmounts:studyDailys: ',this.cardService.studyDailys)
+    for (let i = 9; i > -1; i--) {
+      let studyDaily = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateAny(-i))
+      if (studyDaily) {
+        this.actualAmounts.push(studyDaily.actualAmount)
+      } else {
+        this.actualAmounts.push(0)
+      }
+    }
+    console.log('Chart:getLineChartActualAmounts:actualAmounts: ',this.actualAmounts)
+  }
+
+  //Chart[1]
   getTodayStudy() {
     this.todayStudy = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateNow())
-    console.log('Chart:getTodayStudy:todayStudy: ', this.todayStudy)
+   // console.log('Chart:getTodayStudy:todayStudy: ', this.todayStudy)
 
     if (!this.todayStudy) { // today no Study yet
       let yesterdayStudy = this.cardService.studyDailys[this.cardService.studyDailys.length - 1] // get the last item, inherit PlanAmount
@@ -142,9 +157,9 @@ export class ChartPage {
     this.actualAmount = this.todayStudy.actualAmount
     this.circleDisplay = this.actualAmount / this.planAmount * 100
 
-    console.log('Chart:getTodayData:planAmount: ', this.planAmount)
-    console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
-    console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
+    //console.log('Chart:getTodayData:planAmount: ', this.planAmount)
+    //console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
+    //console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
   }
 
 }
