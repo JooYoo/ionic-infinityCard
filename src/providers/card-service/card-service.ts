@@ -33,14 +33,14 @@ export class CardServiceProvider {
 
   defaultStudyDailys() {
     return [
-      new StudyDaily(1, this.defaultStudys(), this.getDateNow(), 10, 0)
+      new StudyDaily(1, this.defaultStudys(), this.getDateAny(-1), 10, 0)
     ]
   }
   defaultStudys(){
     return[
-      new Study(0,1,StackType.card,0),
-      new Study(1,0,StackType.card,0),
-      new Study(2,0,StackType.cube,0),
+      new Study(1,1,StackType.card,0),
+      new Study(2,1,StackType.card,0),
+      new Study(3,1,StackType.cube,0),
     ]
   }
 
@@ -129,12 +129,12 @@ export class CardServiceProvider {
 
     // console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
     let existStudyDaily = this.studyDailys.find(x => x.date == this.getDateNow())
-    // console.log('CardService:addStudy:existDaily: ', existStudyDaily)
+     console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
 
     if (!existStudyDaily) { // insert
       console.log('CardService:addStudy: !existDaily')
-      let idStudyDaily = this.studyDailys.length
-      let planAmount = 10
+      let idStudyDaily = this.studyDailys.length +1
+      let planAmount = this.studyDailys[this.studyDailys.length-1].planAmount
       let actualAmount = 0
       
       let idStudy = this.studys.length;
@@ -152,13 +152,13 @@ export class CardServiceProvider {
       this.dbService.insert(newStudyDaily, TABLES.StudyDaily)
 
     } else { //  update
-      console.log('CardService:addStudy:existDaily')
       existStudyDaily.actualAmount++
       this.dbService.update(existStudyDaily, TABLES.StudyDaily)
+      console.log('CardService:addStudy:existDaily: ',existStudyDaily)
      
-      console.log('CardService:addStudy:stack.id: ', stack.id)
+     // console.log('CardService:addStudy:stack.id: ', stack.id)
       let existStudy = this.studys.find(x=>x.stackId == stack.id)
-      console.log('CardService:addStudy:existStudy: ', existStudy)
+     // console.log('CardService:addStudy:existStudy: ', existStudy)
       if (!existStudy) { // 学新的Stack 就算是一个新的Study
         let idStudy = this.studys.length;
         let newStudy = new Study(idStudy, existStudyDaily.id, stackType, stack.id)
@@ -322,7 +322,7 @@ export class CardServiceProvider {
     let dd
     let mm
 
-    let rawDd = date.getDate()
+    let rawDd = date.getDate() //TODO: 1 delete
     let rawMm = date.getMonth() + 1
     let yyyy = date.getFullYear()
 
@@ -341,5 +341,61 @@ export class CardServiceProvider {
     }
 
     return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
+  }
+
+  getDateAny(dayOffset:number): string{
+    let date = new Date()
+    let dd
+    let mm
+
+    let rawDd = date.getDate()+dayOffset
+    let rawMm = date.getMonth() + 1
+    let yyyy = date.getFullYear()
+
+    // number always two digits
+    if (rawDd < 10) {
+      dd = '0' + rawDd.toString()
+    }
+    else {
+      dd = rawDd.toString()
+    }
+    if (rawMm < 10) {
+      mm = '0' + rawMm.toString()
+    }
+    else {
+      mm = rawMm.toString()
+    }
+
+    console.log("CardService:getDateAny: ", yyyy.toString() + '/' + mm.toString() + '/' + dd.toString())
+
+    return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
+  }
+
+  getDateAnySimple(dayOffset:number): string{ // display only month and day
+    let date = new Date()
+    let dd
+    let mm
+
+    let rawDd = date.getDate()+dayOffset
+    let rawMm = date.getMonth() + 1
+    let yyyy = date.getFullYear()
+
+    // number always two digits
+    if (rawDd < 10) {
+      dd = '0' + rawDd.toString()
+    }
+    else {
+      dd = rawDd.toString()
+    }
+    if (rawMm < 10) {
+      mm = '0' + rawMm.toString()
+    }
+    else {
+      mm = rawMm.toString()
+    }
+
+    console.log("CardService:getDateAny: ", yyyy.toString() + '/' + mm.toString() + '/' + dd.toString())
+
+    return mm.toString() + '/' + dd.toString()
   }
 }

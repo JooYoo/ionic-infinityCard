@@ -15,11 +15,11 @@ export class ChartPage {
   lineChart: any
   @ViewChild('lineCanvas') lineCanvas;
 
-  currentStudy: any
+  todayStudy: any
 
   // Chart: StudyToday
   planAmount: any
-  actualAmount: any =0
+  actualAmount: any = 0
   circleDisplay: any
 
   // Chart: StudyTrend
@@ -36,24 +36,32 @@ export class ChartPage {
 
   ionViewDidEnter() {
 
-     // Chart: StudyToday
-    // this.getStudys()
+    // Chart[1]: StudyToday
     this.getTodayStudy()
-   
+
     // Chart: StudyTrend
 
     // Chart: StackProgress
-   // let studys = this.cardService.studys
+    // let studys = this.cardService.studys
     //console.log('Chart:ionViewDidEnter:studys: ', studys)
 
 
-    // charts
+    // charts layout
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
       data: {
-        labels: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+        labels: [this.cardService.getDateAnySimple(-9), 
+          this.cardService.getDateAnySimple(-8), 
+          this.cardService.getDateAnySimple(-7), 
+          this.cardService.getDateAnySimple(-6), 
+          this.cardService.getDateAnySimple(-5), 
+          this.cardService.getDateAnySimple(-4), 
+          this.cardService.getDateAnySimple(-3), 
+          this.cardService.getDateAnySimple(-2), 
+          this.cardService.getDateAnySimple(-1), 
+          this.cardService.getDateAnySimple(0)],
         datasets: [{
-          label: "test",
+          label: "Trend",
           backgroundColor: 'rgb(171, 221, 147,0.3)',
           borderColor: 'rgb(48, 110, 18,0.3)',
           data: [12, 19, 3, 5, 2, 3, 30, 10, 4, 18],
@@ -110,42 +118,33 @@ export class ChartPage {
     });
   }
 
-  ionViewWillEnter(){
-    
-
-  }
-
-  onSelected(){ // change planAmount 
+  onSelected() { // change planAmount 
     this.circleDisplay = this.actualAmount / this.planAmount * 100
     // update DB
-    this.currentStudy.planAmount = this.planAmount
-  //  this.dbService.update(this.currentStudy, TABLES.Study)
+    this.todayStudy.planAmount = this.planAmount
+    this.dbService.update(this.todayStudy, TABLES.StudyDaily)
   }
 
-  // getStudys() {
-  //   this.dbService.list(TABLES.Study).then(data => {
-  //     this.cardService.studys = data
-  //     if (!this.cardService.studys) {
-  //       this.cardService.studys = this.cardService.defaultStudys()
-  //      // console.log('Chart:DefaultStudys: ', this.cardService.studys)
-  //     }
-  //    // console.log('Chart:DBStudys: ', this.cardService.studys)
-  //   }).then(() => {
-  //     this.getTodayStudy()
-  //   })
-  // }
-
   getTodayStudy() {
-    let todayStudy = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateNow())
-    console.log('Chart:getTodayData:todayStudy: ', todayStudy)
+    this.todayStudy = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateNow())
+    console.log('Chart:getTodayStudy:todayStudy: ', this.todayStudy)
 
-    this.planAmount = todayStudy.planAmount
-    this.actualAmount = todayStudy.actualAmount
+    if (!this.todayStudy) { // today no Study yet
+      let yesterdayStudy = this.cardService.studyDailys[this.cardService.studyDailys.length - 1] // get the last item, inherit PlanAmount
+      // console.log("Chart:getTodayStudy:yesterdayStudy: ", yesterdayStudy)
+      this.planAmount = yesterdayStudy.planAmount
+      this.actualAmount = 0
+      this.circleDisplay = this.actualAmount / this.planAmount * 100
+      return
+    }
+
+    this.planAmount = this.todayStudy.planAmount
+    this.actualAmount = this.todayStudy.actualAmount
     this.circleDisplay = this.actualAmount / this.planAmount * 100
 
-     console.log('Chart:getTodayData:planAmount: ', this.planAmount)
-     console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
-     console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
+    console.log('Chart:getTodayData:planAmount: ', this.planAmount)
+    console.log('Chart:getTodayData:actualAmount: ', this.actualAmount)
+    console.log('Chart:getTodayData:circleDisplay: ', this.circleDisplay)
   }
 
 }
