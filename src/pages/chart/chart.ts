@@ -42,13 +42,6 @@ export class ChartPage {
     // Chart[1]: StudyToday
     this.getTodayStudy()
 
-    // Chart[2]: StudyTrend
-    this.getLineChartDates()
-    this.getLineChartActualAmounts()
-
-    // Chart[3]: StackProgress
-    this.getBarChartData()
-
     // charts layout
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
@@ -56,9 +49,10 @@ export class ChartPage {
         labels: [] = this.dateHub,
         datasets: [{
           label: "Study Amount",
-          backgroundColor: 'rgb(171, 221, 147,0.3)',
-          borderColor: 'rgb(48, 110, 18,0.3)',
           data: [] = this.actualAmounts,
+          backgroundColor: 'rgb(200, 230, 201)',
+          borderColor: 'rgb(0, 151, 167)',
+          borderWidth: 1
         }]
       },
       options: {
@@ -76,7 +70,7 @@ export class ChartPage {
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'horizontalBar',
       data: {
-        labels: []=this.stackTitles,
+        labels: [] = this.stackTitles,
         datasets: [{
           label: 'progress',
           data: [] = this.stackProgress,
@@ -112,8 +106,21 @@ export class ChartPage {
       }
 
     });
+
+
   }
 
+  ionViewDidLoad() {
+    // Chart[2]: StudyTrend
+    this.getLineChartDates()
+    this.getLineChartActualAmounts()
+
+    // Chart[3]: StackProgress
+    this.getBarChartData()
+
+
+
+  }
   onSelected() { // change planAmount 
     this.circleDisplay = this.actualAmount / this.planAmount * 100
     // update DB
@@ -127,13 +134,13 @@ export class ChartPage {
     for (let i = 1; i < 6; i++) {
       let study = this.cardService.studys[studyLength - i]
 
-      if (study && study.stackId !=0) { // exist // stack0 是初始化stack没有存储
+      if (study && study.stackId != 0) { // exist // stack0 是初始化stack没有存储
         if (study.stackType == 0) { //card
-          this.stackTitles.push(this.cardService.cardStacks.find(x=>x.id == study.stackId).titleDe)
-          this.stackProgress.push(this.cardService.cardStacks.find(x=>x.id == study.stackId).progress)
+          this.stackTitles.push(this.cardService.cardStacks.find(x => x.id == study.stackId).titleDe)
+          this.stackProgress.push(this.cardService.cardStacks.find(x => x.id == study.stackId).progress)
         } else { // cube
-          this.stackTitles.push(this.cardService.cubeStacks.find(x=>x.id == study.stackId).titleDe)
-          this.stackProgress.push(this.cardService.cubeStacks.find(x=>x.id == study.stackId).progress)
+          this.stackTitles.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).titleDe)
+          this.stackProgress.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).progress)
         }
 
       } else { // !exist
@@ -142,10 +149,8 @@ export class ChartPage {
       }
 
     }
-            
-    console.log('ChartBar:getBarChartData:stackTitles: ',this.stackTitles)
-    console.log('ChartBar:getBarChartData:stackProgress: ',this.stackProgress)
-
+    // console.log('ChartBar:getBarChartData:stackTitles: ',this.stackTitles)
+    // console.log('ChartBar:getBarChartData:stackProgress: ',this.stackProgress)
   }
 
   //Chart[2]
@@ -155,7 +160,7 @@ export class ChartPage {
     }
   }
   getLineChartActualAmounts() {
-   // console.log('Chart:getLineChartActualAmounts:studyDailys: ', this.cardService.studyDailys)
+    // console.log('Chart:getLineChartActualAmounts:studyDailys: ', this.cardService.studyDailys)
     for (let i = 9; i > -1; i--) {
       let studyDaily = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateAny(-i))
       if (studyDaily) {
@@ -164,7 +169,7 @@ export class ChartPage {
         this.actualAmounts.push(0)
       }
     }
-   // console.log('Chart:getLineChartActualAmounts:actualAmounts: ', this.actualAmounts)
+    // console.log('Chart:getLineChartActualAmounts:actualAmounts: ', this.actualAmounts)
   }
 
   //Chart[1]
