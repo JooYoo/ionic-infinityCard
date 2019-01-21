@@ -41,7 +41,13 @@ export class ChartPage {
 
     // Chart[1]: StudyToday
     this.getTodayStudy()
+    // Chart[2]: StudyTrend
+    this.getLineChartDates()
+    this.getLineChartActualAmounts()
 
+
+
+    console.log("lineChart:actualAmounts: ", this.actualAmounts)
     // charts layout
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
       type: 'line',
@@ -108,12 +114,11 @@ export class ChartPage {
     });
 
 
+
   }
 
   ionViewDidLoad() {
     // Chart[2]: StudyTrend
-    this.getLineChartDates()
-    this.getLineChartActualAmounts()
 
     // Chart[3]: StackProgress
     this.getBarChartData()
@@ -155,19 +160,29 @@ export class ChartPage {
 
   //Chart[2]
   getLineChartDates() {
-    for (let i = 9; i > -1; i--) {
-      this.dateHub.push(this.cardService.getDateAnySimple(-i))
+    if (this.dateHub.length === 0) {
+      for (let i = 9; i > -1; i--) {
+        this.dateHub.push(this.cardService.getDateAnySimple(-i))
+      }
     }
   }
   getLineChartActualAmounts() {
-    // console.log('Chart:getLineChartActualAmounts:studyDailys: ', this.cardService.studyDailys)
-    for (let i = 9; i > -1; i--) {
-      let studyDaily = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateAny(-i))
-      if (studyDaily) {
-        this.actualAmounts.push(studyDaily.actualAmount)
-      } else {
-        this.actualAmounts.push(0)
+    if (this.actualAmounts.length < 10) { // 第一次加载把所有数据都从studyDaily推到actualAmounts里
+      for (let i = 9; i > -1; i--) {
+        let studyDaily = this.cardService.studyDailys.find(x => x.date == this.cardService.getDateAny(-i))
+
+        if (studyDaily) {
+          this.actualAmounts.push(studyDaily.actualAmount)
+        } else {
+          this.actualAmounts.push(0)
+        }
+
       }
+    } else { // 再次加载只更新最后一个数值
+      let lastDailyStudyIndex = this.cardService.studyDailys.length-1
+      let lastActualAmountsIndex = this.actualAmounts.length-1
+       this.actualAmounts[lastActualAmountsIndex] = this.cardService.studyDailys[lastDailyStudyIndex].actualAmount 
+      //console.log('Chart:getLineChartActualAmounts:studyDailys: ', this.cardService.studyDailys)
     }
     // console.log('Chart:getLineChartActualAmounts:actualAmounts: ', this.actualAmounts)
   }
