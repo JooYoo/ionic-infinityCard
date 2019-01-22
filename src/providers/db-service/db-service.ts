@@ -136,8 +136,8 @@ export class DbServiceProvider {
       CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.Study] + ` (
                       id integer primary key,
                       studyDailyId integer,
-                      stackType text,
-                      stackId integer,
+                      stackTitle text,
+                      stackProgress integer,
                       FOREIGN KEY(studyDailyId) REFERENCES StudyDaily(id)
                      )
     `).catch(err => {

@@ -21,7 +21,7 @@ export class CardServiceProvider {
   failedCardBag: CardStack
 
   studyDailys: StudyDaily[] = []
-  studys: Study[]=[]
+  studys: Study[] = []
 
   constructor(public http: HttpModule,
     public storageService: StorageServiceProvider,
@@ -36,15 +36,17 @@ export class CardServiceProvider {
       new StudyDaily(1, this.defaultStudys(), this.getDateAny(-1), 10, 0)
     ]
   }
-  defaultStudys(){
-    return[
-      new Study(1,1,StackType.card,0),
-      new Study(2,1,StackType.card,0),
-      new Study(3,1,StackType.cube,0),
+  defaultStudys() {
+    return [
+      new Study(1, 1, "Fruit", 20),
+      new Study(2, 1, "Book", 40),
+      new Study(3, 1, "People", 80),
+      new Study(3, 1, "Color", 10),
+      new Study(3, 1, "Number", 100)
     ]
   }
 
-  
+
   // defaultData: mocakCards, mockCubes
   defaultCardStack() {
     return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
@@ -129,24 +131,24 @@ export class CardServiceProvider {
 
     // console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
     let existStudyDaily = this.studyDailys.find(x => x.date == this.getDateNow())
-     console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
+    console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
 
     if (!existStudyDaily) { // insert
       console.log('CardService:addStudy: !existDaily')
-      let idStudyDaily = this.studyDailys.length +1
-      let planAmount = this.studyDailys[this.studyDailys.length-1].planAmount
+      let idStudyDaily = this.studyDailys.length + 1
+      let planAmount = this.studyDailys[this.studyDailys.length - 1].planAmount
       let actualAmount = 0
-      
+
       let idStudy = this.studys.length;
-      let newStudy = new Study(idStudy, idStudyDaily, stackType, stack.id)
+      let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stack.progress)
       this.studys.push(newStudy)
       this.dbService.insert(newStudy, TABLES.Study)
-      
+
       actualAmount++
-      let newStudyDaily = new StudyDaily(idStudyDaily, 
-        this.studys, 
-        this.getDateNow(), 
-        planAmount, 
+      let newStudyDaily = new StudyDaily(idStudyDaily,
+        this.studys,
+        this.getDateNow(),
+        planAmount,
         actualAmount)
       this.studyDailys.push(newStudyDaily)
       this.dbService.insert(newStudyDaily, TABLES.StudyDaily)
@@ -154,14 +156,14 @@ export class CardServiceProvider {
     } else { //  update
       existStudyDaily.actualAmount++
       this.dbService.update(existStudyDaily, TABLES.StudyDaily)
-      console.log('CardService:addStudy:existDaily: ',existStudyDaily)
-     
-     // console.log('CardService:addStudy:stack.id: ', stack.id)
-      let existStudy = this.studys.find(x=>x.stackId == stack.id)
-     // console.log('CardService:addStudy:existStudy: ', existStudy)
+      console.log('CardService:addStudy:existDaily: ', existStudyDaily)
+
+      // console.log('CardService:addStudy:stack.id: ', stack.id)
+      let existStudy = this.studys.find(x => x.stackTitle == stack.titleDe)
+      // console.log('CardService:addStudy:existStudy: ', existStudy)
       if (!existStudy) { // 学新的Stack 就算是一个新的Study
         let idStudy = this.studys.length;
-        let newStudy = new Study(idStudy, existStudyDaily.id, stackType, stack.id)
+        let newStudy = new Study(idStudy, existStudyDaily.id, stack.titleDe, stack.progress)
         this.studys.push(newStudy)
         this.dbService.insert(newStudy, TABLES.Study)
       }
@@ -343,12 +345,12 @@ export class CardServiceProvider {
     return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
   }
 
-  getDateAny(dayOffset:number): string{
+  getDateAny(dayOffset: number): string {
     let date = new Date()
     let dd
     let mm
 
-    let rawDd = date.getDate()+dayOffset
+    let rawDd = date.getDate() + dayOffset
     let rawMm = date.getMonth() + 1
     let yyyy = date.getFullYear()
 
@@ -369,12 +371,12 @@ export class CardServiceProvider {
     return yyyy.toString() + '/' + mm.toString() + '/' + dd.toString()
   }
 
-  getDateAnySimple(dayOffset:number): string{ // display only month and day
+  getDateAnySimple(dayOffset: number): string { // display only month and day
     let date = new Date()
     let dd
     let mm
 
-    let rawDd = date.getDate()+dayOffset
+    let rawDd = date.getDate() + dayOffset
     let rawMm = date.getMonth() + 1
     let yyyy = date.getFullYear()
 

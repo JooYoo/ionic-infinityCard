@@ -121,7 +121,7 @@ export class ChartPage {
     // Chart[2]: StudyTrend
 
     // Chart[3]: StackProgress
-    this.getBarChartData()
+    //this.getBarChartData()
 
 
 
@@ -134,29 +134,29 @@ export class ChartPage {
   }
 
   //Chart[3]
-  getBarChartData() {
-    let studyLength = this.cardService.studys.length
-    for (let i = 1; i < 6; i++) {
-      let study = this.cardService.studys[studyLength - i]
+  // getBarChartData() {
+  //   let studyLength = this.cardService.studys.length
+  //   for (let i = 1; i < 6; i++) {
+  //     let study = this.cardService.studys[studyLength - i]
 
-      if (study && study.stackId != 0) { // exist // stack0 是初始化stack没有存储
-        if (study.stackType == 0) { //card
-          this.stackTitles.push(this.cardService.cardStacks.find(x => x.id == study.stackId).titleDe)
-          this.stackProgress.push(this.cardService.cardStacks.find(x => x.id == study.stackId).progress)
-        } else { // cube
-          this.stackTitles.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).titleDe)
-          this.stackProgress.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).progress)
-        }
+  //     if (study && study.stackId != 0) { // exist // stack0 是初始化stack没有存储
+  //       if (study.stackType == 0) { //card
+  //         this.stackTitles.push(this.cardService.cardStacks.find(x => x.id == study.stackId).titleDe)
+  //         this.stackProgress.push(this.cardService.cardStacks.find(x => x.id == study.stackId).progress)
+  //       } else { // cube
+  //         this.stackTitles.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).titleDe)
+  //         this.stackProgress.push(this.cardService.cubeStacks.find(x => x.id == study.stackId).progress)
+  //       }
 
-      } else { // !exist
-        this.stackTitles.push('empty')
-        this.stackProgress.push(0)
-      }
+  //     } else { // !exist
+  //       this.stackTitles.push('empty')
+  //       this.stackProgress.push(0)
+  //     }
 
-    }
-    // console.log('ChartBar:getBarChartData:stackTitles: ',this.stackTitles)
-    // console.log('ChartBar:getBarChartData:stackProgress: ',this.stackProgress)
-  }
+  //   }
+  //   // console.log('ChartBar:getBarChartData:stackTitles: ',this.stackTitles)
+  //   // console.log('ChartBar:getBarChartData:stackProgress: ',this.stackProgress)
+  // }
 
   //Chart[2]
   getLineChartDates() {
