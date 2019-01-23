@@ -128,7 +128,7 @@ export class CardServiceProvider {
 
   // Studys: all, add, remove, edit
   addStudy(stack: any, stackType: StackType) {
-
+    let stackAmount = 0
     // console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
     let existStudyDaily = this.studyDailys.find(x => x.date == this.getDateNow())
     console.log('CardService:addStudy:studyDailys: ', this.studyDailys)
@@ -139,10 +139,22 @@ export class CardServiceProvider {
       let planAmount = this.studyDailys[this.studyDailys.length - 1].planAmount
       let actualAmount = 0
 
-      let idStudy = this.studys.length;
-      let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stack.progress)
-      this.studys.push(newStudy)
-      this.dbService.insert(newStudy, TABLES.Study)
+   
+      let existStudy = this.studys.find(x => x.stackTitle == stack.titleDe)
+      if (!existStudy) {
+        let idStudy = this.studys.length;
+        stackAmount++
+        let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stackAmount)
+        this.studys.push(newStudy)
+        this.dbService.insert(newStudy, TABLES.Study)
+      }else{
+        existStudy.stackProgress++
+        this.dbService.update(existStudy, TABLES.Study)
+      }
+      // let idStudy = this.studys.length;
+      // let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stack.progress)
+      // this.studys.push(newStudy)
+      // this.dbService.insert(newStudy, TABLES.Study)
 
       actualAmount++
       let newStudyDaily = new StudyDaily(idStudyDaily,
@@ -163,9 +175,13 @@ export class CardServiceProvider {
       // console.log('CardService:addStudy:existStudy: ', existStudy)
       if (!existStudy) { // 学新的Stack 就算是一个新的Study
         let idStudy = this.studys.length;
-        let newStudy = new Study(idStudy, existStudyDaily.id, stack.titleDe, stack.progress)
+        stackAmount++
+        let newStudy = new Study(idStudy, existStudyDaily.id, stack.titleDe, stackAmount)
         this.studys.push(newStudy)
         this.dbService.insert(newStudy, TABLES.Study)
+      }else{
+        existStudy.stackProgress++
+        this.dbService.update(existStudy, TABLES.Study)
       }
     }
 
