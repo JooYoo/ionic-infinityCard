@@ -57,14 +57,14 @@ export class CardServiceProvider {
     ]
   }
   defaultCubeStack() {
-    return [new CubeStack(0, '你好方块', 'HelloCube', this.defaultCubes(), this.getDateNow(), 0)]
+    return [new CubeStack(1, '你好方块', 'HelloCube', this.defaultCubes(), this.getDateNow(), 0)]
   }
   defaultCubes() {
     return [
-      new Cube(0, 0, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
-      new Cube(1, 0, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
-      new Cube(2, 0, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
-      new Cube(3, 0, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
+      new Cube(1, 1, this.getDateNow(), '问好', 'Greeting', 'hello', 'hallo', 'hey', 'hi'),
+      new Cube(2, 1, this.getDateNow(), '告别', 'farewell', 'bye', 'byebye', 'see you', 'good bye'),
+      new Cube(3, 1, this.getDateNow(), '抱歉', 'apology', 'sorry', 'really sorry', 'Im sorry', 'my bad'),
+      new Cube(4, 1, this.getDateNow(), '感激', 'appreciate', 'thanks', 'thank you', 'thank you very much', 'thanks a lot'),
     ]
   }
 
@@ -135,7 +135,7 @@ export class CardServiceProvider {
       let planAmount = this.studyDailys[this.studyDailys.length - 1].planAmount
       let actualAmount = 0
 
-   
+
       let existStudy = this.studys.find(x => x.stackTitle == stack.titleDe)
       if (!existStudy) {
         let idStudy = this.studys.length;
@@ -143,7 +143,7 @@ export class CardServiceProvider {
         let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stackAmount)
         this.studys.push(newStudy)
         this.dbService.insert(newStudy, TABLES.Study)
-      }else{
+      } else {
         existStudy.stackProgress++
         this.dbService.update(existStudy, TABLES.Study)
       }
@@ -175,7 +175,7 @@ export class CardServiceProvider {
         let newStudy = new Study(idStudy, existStudyDaily.id, stack.titleDe, stackAmount)
         this.studys.push(newStudy)
         this.dbService.insert(newStudy, TABLES.Study)
-      }else{
+      } else {
         existStudy.stackProgress++
         this.dbService.update(existStudy, TABLES.Study)
       }
@@ -192,7 +192,7 @@ export class CardServiceProvider {
   }
   // CardStack: all, add, remove, edit
   addCardStack(titleCn: string, titleDe: string, progress: number) {
-    let id = this.cardStacks.length
+    let id = this.cardStacks.length + 1
     let newCards = []
     let title_Cn = titleCn
     let title_De = titleDe
@@ -223,18 +223,12 @@ export class CardServiceProvider {
   }
   // Card: add, remove, edit
   addCard(cardStack: CardStack, textCn: string, textDe: string) {
-    let _id
-    this.dbService.list(TABLES.Card).then(data => {
-      if (!data) {
-        _id = 0
-        cardStack.cards = new Array()
-      }
-      let newCard = new Card(_id, cardStack.id, this.getDateNow(), textCn, textDe, CardStatus.failed)
-      cardStack.cards.push(newCard)
-      this.dbService.insert(newCard, TABLES.Card)
-      console.log('cardService:addCard:cardId:', _id)
-    })
-    console.log('cardService:addCard:cardStack.cards: ', cardStack.cards)
+
+    let id = this.cards.length + 1;
+    let newCard = new Card(id, cardStack.id, this.getDateNow(), textCn, textDe, CardStatus.failed)
+    cardStack.cards.push(newCard)
+    this.dbService.insert(newCard, TABLES.Card)
+    // console.log('cardService:addCard:cardStack.cards: ', cardStack.cards)
   }
   removeCard(card: any, cardStack: any) {
     let targetcardStack = this.cardStacks.find(x => x == cardStack)
@@ -259,7 +253,7 @@ export class CardServiceProvider {
   }
   //CubeBag: add, remove, edit
   addCubeStack(titleCn: string, titleDe: string) {
-    let id = this.cubeStacks.length
+    let id = this.cubeStacks.length + 1
     let defaultCube = []
     let newCubeStack = new CubeStack(id, titleCn, titleDe, defaultCube, this.getDateNow(), 0)
     this.cubeStacks.push(newCubeStack)
@@ -284,7 +278,7 @@ export class CardServiceProvider {
   }
   // Cube: add, remove, edit 
   addCube(cubeStack: CubeStack, title_Cn: string, title_De: string, cubeSide1: string, cubeSide2: string, cubeSide3: string, cubeSide4: string) {
-    let _id = cubeStack.cubes.length;
+    let _id = cubeStack.cubes.length + 1
     let newCube = new Cube(_id, cubeStack.id, this.getDateNow(), title_Cn, title_De, cubeSide1, cubeSide2, cubeSide3, cubeSide4)
     cubeStack.cubes.push(newCube)
 
