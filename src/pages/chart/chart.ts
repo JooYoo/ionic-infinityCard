@@ -100,6 +100,11 @@ export class ChartPage {
             ticks: {
               beginAtZero: true
             }
+          }],
+          xAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
           }]
         }
       }
@@ -134,8 +139,7 @@ export class ChartPage {
         if (findItem) {// exist
           theIndex++;
           continue;
-        } else {
-          // not exist
+        } else { // not exist
           if (study.stackTitle == "Fruit") {
             theIndex++
             continue
@@ -148,6 +152,7 @@ export class ChartPage {
       }
       //console.log("resultObjs: ", resultObjs);
     }
+
     for (var i = 0; i < this.resultObjs.length; i++) {
       this.stackTitles.push(this.resultObjs[i].stackTitle);
       this.stackProgress.push(this.resultObjs[i].stackProgress);

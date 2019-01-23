@@ -38,26 +38,22 @@ export class CardServiceProvider {
   }
   defaultStudys() {
     return [
-      new Study(1, 1, "Fruit", 20),
-      new Study(2, 1, "Book", 40),
-      new Study(3, 1, "People", 80),
-      new Study(3, 1, "Color", 10),
-      new Study(3, 1, "Number", 100)
+      new Study(1, 1, "Fruit", 20)
     ]
   }
 
 
   // defaultData: mocakCards, mockCubes
   defaultCardStack() {
-    return [new CardStack(0, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
+    return [new CardStack(1, '你好世界', 'HelloWorld', this.defaultCards(), this.getDateNow(), 0)]
   }
   defaultCards() {
     return [
-      new Card(0, 0, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
-      new Card(1, 0, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
-      new Card(2, 0, this.getDateNow(), '再见', 'bye', CardStatus.failed),
-      new Card(3, 0, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
-      new Card(4, 0, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
+      new Card(1, 1, this.getDateNow(), '你好', 'hallo', CardStatus.failed),
+      new Card(2, 1, this.getDateNow(), '谢谢', 'danke', CardStatus.failed),
+      new Card(3, 1, this.getDateNow(), '再见', 'bye', CardStatus.failed),
+      new Card(4, 1, this.getDateNow(), '对不起', 'entschuldigung', CardStatus.notSure),
+      new Card(5, 1, this.getDateNow(), '没关系', 'kein Problem', CardStatus.success)
     ]
   }
   defaultCubeStack() {
