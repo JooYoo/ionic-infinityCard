@@ -125,6 +125,10 @@ export class ChartPage {
     this.todayStudy.planAmount = this.planAmount
     this.dbService.update(this.todayStudy, TABLES.StudyDaily)
   }
+
+  removeDefaultData(){
+    let defaultData = this.cardService.studys
+  }
   //Chart[3]
   getBarChartData() {
     let studysLength = this.cardService.studys.length

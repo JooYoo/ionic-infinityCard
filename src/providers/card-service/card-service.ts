@@ -33,12 +33,12 @@ export class CardServiceProvider {
 
   defaultStudyDailys() {
     return [
-      new StudyDaily(1, this.defaultStudys(), this.getDateAny(-1), 10, 0)
+      new StudyDaily(1, this.defaultStudys(), this.getDateNow(), 10, 0)
     ]
   }
   defaultStudys() {
     return [
-      new Study(1, 1, "Fruit", 20)
+      new Study(1, 1, "HelloWorld", 0)
     ]
   }
 
@@ -138,7 +138,7 @@ export class CardServiceProvider {
 
       let existStudy = this.studys.find(x => x.stackTitle == stack.titleDe)
       if (!existStudy) {
-        let idStudy = this.studys.length;
+        let idStudy = this.studys.length +1;
         stackAmount++
         let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stackAmount)
         this.studys.push(newStudy)
@@ -147,11 +147,7 @@ export class CardServiceProvider {
         existStudy.stackProgress++
         this.dbService.update(existStudy, TABLES.Study)
       }
-      // let idStudy = this.studys.length;
-      // let newStudy = new Study(idStudy, idStudyDaily, stack.titleDe, stack.progress)
-      // this.studys.push(newStudy)
-      // this.dbService.insert(newStudy, TABLES.Study)
-
+   
       actualAmount++
       let newStudyDaily = new StudyDaily(idStudyDaily,
         this.studys,
@@ -167,10 +163,10 @@ export class CardServiceProvider {
       console.log('CardService:addStudy:existDaily: ', existStudyDaily)
 
       // console.log('CardService:addStudy:stack.id: ', stack.id)
-      let existStudy = this.studys.find(x => x.stackTitle == stack.titleDe)
+      let existStudy = this.studys.find(x => x.id == stack.id)
       // console.log('CardService:addStudy:existStudy: ', existStudy)
       if (!existStudy) { // 学新的Stack 就算是一个新的Study
-        let idStudy = this.studys.length;
+        let idStudy = this.studys.length+1;
         stackAmount++
         let newStudy = new Study(idStudy, existStudyDaily.id, stack.titleDe, stackAmount)
         this.studys.push(newStudy)
