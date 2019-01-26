@@ -42,18 +42,21 @@
 
   <div id="anim-cube" [@myTrigger]='animState' class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background: darkslategrey; color: white; font-weight: bold;">
-        <ion-grid id="cube-begin-titles">
-          <ion-row id="cube-begin-titles-cn">{{cube.titleCn}}</ion-row>
-          <ion-row id="cube-begin-titles-de">{{cube.titleDe}}</ion-row>
-          <ion-row id="cube-begin-titles-date">{{cube.date}}</ion-row>
-        </ion-grid>
+      <div class="swiper-slide" style="background: black; color: white; font-weight: bold;">
+        <div style="text-align:center;">
+
+          <ion-grid id="cube-begin-titles">
+            <ion-row id="cube-begin-titles-cn">{{cube.titleCn}}</ion-row>
+            <ion-row id="cube-begin-titles-de">{{cube.titleDe}}</ion-row>
+            <ion-row id="cube-begin-titles-date">{{cube.date}}</ion-row>
+          </ion-grid>
+        </div>
       </div>
 
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide1}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide2}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide3}}</div>
-      <div class="swiper-slide" style="background: lightgray;">{{cube.cubeSide4}}</div>
+      <div class="swiper-slide" style="background: whitesmoke;">{{cube.cubeSide1}}</div>
+      <div class="swiper-slide" style="background: whitesmoke;">{{cube.cubeSide2}}</div>
+      <div class="swiper-slide" style="background: whitesmoke;">{{cube.cubeSide3}}</div>
+      <div class="swiper-slide" style="background: whitesmoke;">{{cube.cubeSide4}}</div>
     </div>
     <!--  Pagination -->
     <div class="swiper-pagination"></div>

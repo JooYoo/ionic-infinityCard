@@ -38,7 +38,11 @@ export class ChartPage {
     this.getLineChartDates()
     this.getLineChartActualAmounts()
     // Chart[3]: StackProgress
-    this.getBarChartData()
+    //this.getBarChartData()
+
+    this.getTop5()
+    //console.log('ChartBar:getBarChartData:stackTitles: ', this.stackTitles)
+    //console.log('ChartBar:getBarChartData:stackProgress: ', this.stackProgress)
 
     // console.log("lineChart:actualAmounts: ", this.actualAmounts)
     // charts layout
@@ -126,7 +130,7 @@ export class ChartPage {
     this.dbService.update(this.todayStudy, TABLES.StudyDaily)
   }
 
-  removeDefaultData(){
+  removeDefaultData() {
     let defaultData = this.cardService.studys
   }
   //Chart[3]
@@ -144,10 +148,6 @@ export class ChartPage {
           theIndex++;
           continue;
         } else { // not exist
-          if (study.stackTitle == "Fruit") {
-            theIndex++
-            continue
-          }
           this.resultObjs.push(study);
           theIndex++;
         }
@@ -156,15 +156,48 @@ export class ChartPage {
       }
       //console.log("resultObjs: ", resultObjs);
     }
-
     for (var i = 0; i < this.resultObjs.length; i++) {
       this.stackTitles.push(this.resultObjs[i].stackTitle);
       this.stackProgress.push(this.resultObjs[i].stackProgress);
     }
-
-    console.log('ChartBar:getBarChartData:stackTitles: ', this.stackTitles)
-    console.log('ChartBar:getBarChartData:stackProgress: ', this.stackProgress)
   }
+
+  getTop5() {
+    let scoreByPattern = [];
+
+    this.cardService.studys.forEach(study => {
+      scoreByPattern.push(study.stackProgress)
+      this.resultObjs.push(study)
+    });
+
+    function findIndicesOfMax(inp, count) {
+      var outp = [];
+      for (var i = 0; i < inp.length; i++) {
+        outp.push(i); // add index to output array
+        if (outp.length > count) {
+          outp.sort(function (a, b) { return inp[b] - inp[a]; }); // descending sort the output array
+          outp.pop(); // remove the last index (index of smallest element in output array)
+        }
+      }
+      return outp;
+    }
+
+    // 本来的数据样本
+    // console.log('original array: ', scoreByPattern);
+
+    // 抽取出来的top5项的序号
+    var indices = findIndicesOfMax(scoreByPattern, 5);
+    // console.log('indices: ', indices);
+
+    // 罗列top5项的值
+    for (var i = 0; i < indices.length; i++) {
+      this.stackTitles.push(this.resultObjs[indices[i]].stackTitle)
+      this.stackProgress.push(this.resultObjs[indices[i]].stackProgress)
+    }
+    //console.log('greatest scroe *3: ', scoreByPattern[indices[i]]);
+  }
+
+
   //Chart[2]
   getLineChartDates() {
     if (this.dateHub.length === 0) {

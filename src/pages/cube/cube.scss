@@ -51,6 +51,7 @@ page-cube {
     .swiper-slide {
         background-position: center;
         background-size: cover;
+        font-size: 25px;
     }
     #cube-fab {
         margin: 10px;
@@ -69,25 +70,25 @@ page-cube {
     }
 
     #cube-begin-titles{
-      text-align: center;
-      margin-left: 110px;
+      //text-align: center;
+      //margin-left: 100px;
     }
 
     #cube-begin-titles-cn{
-      text-align: center;
+     // text-align: center;
       font-weight: bolder;
       font-size: 40px;
     }
 
     #cube-begin-titles-de{
-      text-align: center;
+      //text-align: center;
       margin-top: 5px;
       margin-top: 50px;
       //margin-left: 15px;
     }
 
     #cube-begin-titles-date{
-      text-align: center;
+      //text-align: center;
       
       //margin-left: 10px;
       font-weight: lighter;

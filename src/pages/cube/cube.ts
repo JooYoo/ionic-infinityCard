@@ -146,8 +146,6 @@ export class CubePage {
 
     console.log('cube:studyCubeSwitch:cubesLength: ', this.cubes.length)
     console.log('cube:studyCubeSwitch:cubeIndex: ', this.cubeIndex)
-
-
   }
 
 
