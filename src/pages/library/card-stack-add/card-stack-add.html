@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="light">
     <ion-title>
-      New CardStack
+      New Stack
     </ion-title>
     <ion-buttons end>
       <button ion-button (click)="dismiss()">
@@ -13,6 +13,17 @@
 
 <ion-content>
   <ion-list>
+    <ion-item>
+      <ion-row justify-content-center>
+        <div class="wrapper">
+          <div class="card">
+            <img class="back-img" src="https://farm8.staticflickr.com/7878/45968858365_c38a983ab6.jpg">
+            <div class="card-title">{{titleCn}}</div>
+            <div class="card-subtitle">{{titleDe}}</div>
+          </div>
+        </div>
+      </ion-row>
+    </ion-item>
 
     <ion-item>
       <ion-input placeholder="Title" clearInput [(ngModel)]='titleCn'></ion-input>
