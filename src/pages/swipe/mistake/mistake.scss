@@ -8,7 +8,7 @@ page-mistake {
         left: 50%;
         top: 50%;
         cursor: pointer;
-        margin-top: -140px;
+        margin-top: -130px;
         -webkit-perspective: 1000px;
         perspective: 1000px;
         -webkit-transform-style: preserve-3d;
@@ -70,7 +70,8 @@ page-mistake {
         border: none;
     }
     .progress {
-        margin-top: 80px;
+        margin-top: 20px;
+        margin-right: 15px;
         border-radius: 200px;
     }
     .progress-bar {
@@ -82,7 +83,7 @@ page-mistake {
     }
     #mistake-filing {
         text-align: center;
-        margin-top: 60px;
+        margin-top: 0px;
         font-size: 40px;
         background: transparent;
     }
