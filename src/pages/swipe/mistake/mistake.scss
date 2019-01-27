@@ -42,9 +42,10 @@ page-mistake {
     #card-front {
         background: white;
         color: black;
+        border: 5px solid transparent;
         width: 330px;
         height: 230px;
-        font-size: 30px;
+        font-size: 20px;
         font-family: Arial, Helvetica, sans-serif;
     }
     .theCard #card-back {
@@ -52,7 +53,8 @@ page-mistake {
         color: black;
         width: 330px;
         height: 230px;
-        font-size: 30px;
+        font-size: 20px;
+        border: 5px solid black;
         border-radius: 20px;
         transform: rotateY(180deg);
         -webkit-transform: rotateY(180deg);

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="light">
     <ion-title>
-      NewCard
+      New Card
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -12,29 +12,50 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
 
+  <ion-row justify-content-center>
+    <ion-card class="card-front">
+      <ion-card-content>
+        <!-- <textarea class="card-textarea" placeholder="Front..." clearInput [(ngModel)]='textCn'></textarea> -->
+        <input class="card-textarea" placeholder="Front..." [(ngModel)]='textCn'>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+  <hr>
+
+  <ion-row justify-content-center>
+    <ion-card class="card-back">
+      <ion-card-content>
+        <input class="card-textarea" placeholder="Back..." clearInput [(ngModel)]='textDe'>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+
+  <hr>
+
+  <ion-item>
+    <ion-label color="primary" style="margin-left:10px;">Date:</ion-label>
+    <ion-datetime [(ngModel)]="currentDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
+  </ion-item>
+
+
+  <!-- TODO: 这里是Form风格-->
+  <!-- <ion-list>
     <ion-item>
-      <!-- <ion-label color="primary" stacked>Chinese</ion-label> -->
       <ion-input placeholder="Front..." clearInput [(ngModel)]='textCn'></ion-input>
     </ion-item>
-
     <ion-item>
-      <!-- <ion-label color="primary" stacked>Deutsch</ion-label> -->
       <ion-input placeholder="Back..." clearInput [(ngModel)]='textDe'></ion-input>
     </ion-item>
-
-    <!-- TODO: DatePicker default current time -->
     <ion-item>
       <ion-label color="primary" style="margin-left:10px;">Date:</ion-label>
       <ion-datetime [(ngModel)]="currentDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"></ion-datetime>
     </ion-item>
-
     <ion-item>
-      
     </ion-item>
+  </ion-list> -->
 
-  </ion-list>
 </ion-content>
 
 <ion-footer no-border>
