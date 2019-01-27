@@ -1,0 +1,63 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title id="chart-title">Chart</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-card id="chart-card1">
+    <ion-card-header>
+      Today
+    </ion-card-header>
+    <ion-card-content>
+        <ion-item id="chart-todaystudy-header">
+            <ion-label></ion-label>
+            <ion-select  (ionChange)="onSelected()"  [(ngModel)]="planAmount">
+              <ion-option value="10" clear>10</ion-option>
+              <ion-option value="30" clear>30</ion-option>
+              <ion-option value="50" clear>50</ion-option>
+            </ion-select>
+          </ion-item>
+        <div class="not-active" style="text-align: center; padding: 20px;">
+            <circle-progress id="chart-circle-progress"
+            [percent]="circleDisplay"
+            [radius]="100"
+            [outerStrokeWidth]="16"
+            [innerStrokeWidth]="8"
+            [outerStrokeColor]="'#0097A7'"
+            [innerStrokeColor]="'#C8E6C9'"
+            [animation]="true"
+            [animationDuration]="300"
+            [titleColor]="'#2e3131'"
+            [titleFontSize]="45"
+            [showSubtitle]="false"
+            [unitsColor]="'#2e3131'"
+            [unitsFontSize]="45"
+         ></circle-progress>
+        </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card class="chart-card">
+    <ion-card-header>
+      Trend 
+    </ion-card-header>
+    <ion-card-content id="chart-line">
+        <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="chart-card">
+    <ion-card-header>
+      Top Study
+    </ion-card-header>
+    <ion-card-content id="chart-bar">
+        <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

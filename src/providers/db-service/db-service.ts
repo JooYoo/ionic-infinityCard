@@ -5,7 +5,7 @@ import { Platform } from "ionic-angular";
 
 const DB_NAME: string = 'infinityDB';
 const win: any = window;
-export enum TABLES { CardStack, Card, CubeStack, Cube };
+export enum TABLES { CardStack, Card, CubeStack, Cube, StudyDaily, Study };
 
 @Injectable()
 export class DbServiceProvider {
@@ -46,6 +46,8 @@ export class DbServiceProvider {
     this.createCardTable()
     this.createCubeStackTable()
     this.createCubeTable()
+    this.createStudyDailyTable()
+    this.createStudyTable()
   }
   private dropTable(table: TABLES) {
     this.query("DROP TABLE " + TABLES[table]
@@ -116,6 +118,33 @@ export class DbServiceProvider {
       console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
     });
   }
+  private createStudyDailyTable(){
+    this.query(`
+      CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.StudyDaily] + ` (
+                      id integer primary key,
+                      studys text,
+                      date text,
+                      planAmount integer,
+                      actualAmount integer
+                     )
+    `).catch(err => {
+      console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
+    });
+  }
+  private createStudyTable(){
+    this.query(`
+      CREATE TABLE IF NOT EXISTS ` + TABLES[TABLES.Study] + ` (
+                      id integer primary key,
+                      studyDailyId integer,
+                      stackTitle text,
+                      stackProgress integer,
+                      FOREIGN KEY(studyDailyId) REFERENCES StudyDaily(id)
+                     )
+    `).catch(err => {
+      console.error('Storage: Unable to create initial storage Cube table', err.tx, err.err);
+    });
+  }
+  
 
 
   query(query: string, params: any[] = []): Promise<any> {
