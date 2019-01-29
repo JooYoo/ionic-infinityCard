@@ -13,24 +13,20 @@
 </ion-header>
 
 <ion-content>
+  <ion-scroll scrollX="true">
 
-  <ion-row justify-content-center>
     <ion-card class="card-front">
       <ion-card-content>
-        <input class="card-textarea" placeholder="{{card.textCn}}" [(ngModel)]="card.textCn" clearInput>
+        <textarea class="card-textarea" placeholder="{{card.textCn}}" [(ngModel)]="card.textCn" clearInput></textarea>
       </ion-card-content>
     </ion-card>
-  </ion-row>
-
-  <hr>
-
-  <ion-row justify-content-center>
     <ion-card class="card-back">
       <ion-card-content>
-        <input class="card-textarea" placeholder="{{card.textDe}}" [(ngModel)]="card.textDe" clearInput>
+        <textarea class="card-textarea" placeholder="{{card.textDe}}" [(ngModel)]="card.textDe" clearInput></textarea>
       </ion-card-content>
     </ion-card>
-  </ion-row>
+  </ion-scroll>
+
   <hr>
 
   <!-- TODO: Form version -->

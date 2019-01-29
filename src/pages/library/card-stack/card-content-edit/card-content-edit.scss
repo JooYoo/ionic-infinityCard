@@ -9,25 +9,34 @@ page-card-content-edit {
     }
 
     .card-back {
-        margin-top: 10px;
+        margin-top: 20px;
         border: 5px solid black;
-        width: 300px;
         height: 200px;
         border-radius: 20px;
     }
     .card-front {
-        width: 300px;
-        height: 200px;
         margin-top: 20px;
+        border: 5px solid white;
+        height: 200px;
         border-radius: 20px;
     }
-   
     .card-textarea {
-        display: block;
-        max-width: 100%;
         width: 100%;
-        text-align: center;
+        max-width: 100%;
         height: 20vh;
+        // text-align: center;
+        border: none; 
         font-size: 20px;
+    }
+    .scroll-zoom-wrapper {
+        white-space: nowrap;
+    }
+    ion-card {
+        width: 300px !important;
+        display: inline-block !important;
+    }
+    ion-scroll {
+        min-height: 240px;
+        height: auto;
     }
 }
