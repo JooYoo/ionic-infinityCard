@@ -1,8 +1,8 @@
 page-swipe {
     .flipContainer {
         display: block;
-        width: 330px;
-        height: 230px;
+        width: 310px;
+        height: 220px;
         border: none;
         position: relative;
         left: 50%;
@@ -44,9 +44,8 @@ page-swipe {
         color: black;
         border: 5px solid transparent;
         overflow-y: auto !important;
-       
-        width: 330px;
-        height: 230px;
+        width: 310px;
+        height: 220px;
         font-size: 20px;
         font-family: Arial, Helvetica, sans-serif;
     }
@@ -54,8 +53,8 @@ page-swipe {
         background: white;
         color: black;
         border: 5px solid black;
-        width: 330px;
-        height: 230px;
+        width: 310px;
+        height: 220px;
         font-size: 20px;
         border-radius: 20px;
         overflow-y: auto !important;
@@ -91,13 +90,15 @@ page-swipe {
         border-radius: 200px;
     }
     .progress-bar {
-        border-radius: 200px;
+        border-radius: 100px;
     }
     #mistake-filing {
-        text-align: center;
         margin-top: 0px;
         font-size: 40px;
         background: transparent;
+    }
+    .progress-bar {
+        border-radius: 100px;
     }
     #filing-badge {
         font-size: 13px;
