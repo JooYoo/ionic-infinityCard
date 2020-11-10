@@ -3,8 +3,8 @@
 
 <p align="center">
   <strong>
-    <a href="[https://jooyoo.github.io/ionic-infinityCard/](https://jooyoo.github.io/ionic-infinityCard/)">🤹🏻‍♂️ &nbsp; Demo</a>
-    ・ <a href="[https://github.com/JooYoo/js-dailySpinner](https://github.com/JooYoo/ionic-infinityCard)">👨🏻‍💻 &nbsp; Github</a>
+    <a href="https://jooyoo.github.io/ionic-infinityCard">🤹🏻‍♂️ &nbsp; Demo</a>
+    ・ <a href="https://github.com/JooYoo/js-dailySpinner">👨🏻‍💻 &nbsp; Github</a>
   </strong>
 </p>
 
